@@ -12,10 +12,9 @@
 
 ## W2 嵌入式通用套路
 
-- platform_driver
-- Device Tree
-- IRQ
-- regmap
+- Day08：platform_driver + probe/remove + devm_*
+- Day09：Device Tree + of_match_table
+- Day10：IRQ + regmap
 
 ## W3 内核裁剪与移植
 

@@ -29,12 +29,10 @@
 driver-lab/
 ├── kernel-src/
 │   ├── README.md
+│   ├── linux-5.15.10.md
+│   ├── busybox.md
 │   ├── linux-5.15.10/
-│   │   ├── README.md
-│   │   └── .gitkeep
 │   └── busybox-1.36.1/
-│       ├── README.md
-│       └── .gitkeep
 └── linux-driver-lab/
     ├── README.md
     ├── docs/
@@ -44,7 +42,13 @@ driver-lab/
     ├── day04/
     ├── day05/
     ├── day06/
-    └── day07/
+    ├── day07/
+    ├── day08/
+    ├── day09/
+    ├── day10/
+    ├── day11/
+    ├── day12/
+    └── day13/
 ```
 
 ### 目录含义
@@ -66,10 +70,10 @@ driver-lab/
 第一次使用本仓库，建议按下面顺序阅读。
 
 1. `kernel-src/README.md`
-2. `kernel-src/linux-5.15.10/README.md`
-3. `kernel-src/busybox-1.36.1/README.md`
+2. `kernel-src/linux-5.15.10.md`
+3. `kernel-src/busybox.md`
 4. `linux-driver-lab/README.md`
-5. `linux-driver-lab/day01 ~ day07`
+5. `linux-driver-lab/day01 ~ dayN`
 
 这样可以先把环境准备清楚，再看代码和实验内容。
 
@@ -142,8 +146,8 @@ kernel-src/busybox-1.36.1/
 
 详细步骤见：
 
-- `kernel-src/linux-5.15.10/README.md`
-- `kernel-src/busybox-1.36.1/README.md`
+- `kernel-src/linux-5.15.10.md`
+- `kernel-src/busybox.md`
 
 ---
 
@@ -319,8 +323,8 @@ insmod /demo.ko
 
 ### 环境准备
 - `kernel-src/README.md`
-- `kernel-src/linux-5.15.10/README.md`
-- `kernel-src/busybox-1.36.1/README.md`
+- `kernel-src/linux-5.15.10.md`
+- `kernel-src/busybox.md`
 
 ### 过程记录与复盘
 - `linux-driver-lab/docs/PROGRESS.md`
@@ -331,24 +335,6 @@ insmod /demo.ko
 
 ---
 
-## GitHub 提交说明
-
-本仓库推荐提交：
-
-- `kernel-src/` 的目录骨架和 README
-- `linux-driver-lab/` 下的代码、脚本和文档
-
-本仓库不建议提交：
-
-- 完整 Linux 内核源码树
-- 完整 BusyBox 源码树
-- `*.ko`
-- `*.o`
-- `bzImage`
-- `rootfs.cpio.gz`
-- 运行日志、压缩包等构建产物
-
----
 
 ## 适合谁看
 

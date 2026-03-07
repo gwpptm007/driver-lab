@@ -8,7 +8,7 @@ Richer Wong的 Linux 驱动学习实验仓库
 - 可持续扩展的 GitHub 知识库
 - 可用于面试讲解的作品仓库
 
-当前阶段聚焦 **W1：字符设备驱动基础闭环**。
+当前阶段已完成 **W1：字符设备驱动基础闭环**，并开始进入 **W2：platform + DT + IRQ + regmap**。
 
 ---
 
@@ -20,12 +20,10 @@ Richer Wong的 Linux 驱动学习实验仓库
 driver-lab/
 ├── kernel-src/
 │   ├── README.md
+│   ├── linux-5.15.10.md
+│   ├── busybox.md
 │   ├── linux-5.15.10/
-│   │   ├── README.md
-│   │   └── .gitkeep
 │   └── busybox-1.36.1/
-│       ├── README.md
-│       └── .gitkeep
 └── linux-driver-lab/
     ├── README.md
     ├── docs/
@@ -35,7 +33,8 @@ driver-lab/
     ├── day04/
     ├── day05/
     ├── day06/
-    └── day07/
+    ├── day07/
+    └── day08/
 ```
 
 含义很简单：
@@ -129,8 +128,8 @@ sudo apt install -y build-essential libncurses-dev bison flex libssl-dev libelf-
 
 下载与编译的完整步骤已经写入：
 
-- `../kernel-src/linux-5.15.10/README.md`
-- `../kernel-src/busybox-1.36.1/README.md`
+- `../kernel-src/linux-5.15.10.md`
+- `../kernel-src/busybox.md`
 
 准备完成后，应至少能看到这些关键产物：
 
@@ -156,7 +155,7 @@ kernel-src/busybox-1.36.1/_install/bin/busybox
 
 ## 6. build.sh 的默认路径规则
 
-从这版开始，`day01` 到 `day06` 的 `build.sh` 优先按仓库相对路径寻找依赖：
+从这版开始，`day01` 到 `day08` 的 `build.sh` 优先按仓库相对路径寻找依赖：
 
 ```text
 ../kernel-src/linux-5.15.10
@@ -192,21 +191,23 @@ KDIR=/path/to/linux-5.15.10 BUSYBOX_DIR=/path/to/busybox-1.36.1 ./build.sh
 - Day04：debugfs 状态快照与日志开关
 - Day05：waitqueue / workqueue / 上下文
 - Day06：回归脚本与压力测试，已完成 500 次装卸与 300 秒并发压测验收
-
-### 当前收口项
-
 - Day07：README 整理、环境安装文档补齐、W1 复盘
+- Day08：platform_driver + probe/remove + devm 资源管理
+
+### 当前推进项
+
+- Day08：platform_driver + probe/remove + devm 资源管理
 
 ---
 
-## 8. Day07 文档收口
+## 8. Day08 启动 W2
 
-Day07 不再新增驱动能力，重点是把仓库整理成“别人拿到后能照着搭环境并跑通”的形态。当前已经补齐：
+Day08 不再围绕 `/dev` 字符设备继续堆接口，而是开始切到嵌入式常见的 platform 总线模型。当前已经补齐：
 
-- `day07/README.md`
-- `docs/W1_REVIEW.md`
-- `kernel-src/README.md` 及其子目录安装说明
-- build.sh 的相对路径 + 旧路径兼容说明
+- `day08/README.md`
+- `day08/demo_pdrv.c`
+- `day08/build.sh`
+- `docs/ROADMAP.md` 与 `docs/PROGRESS.md` 的 W2 更新
 
 建议先阅读：
 
@@ -214,6 +215,7 @@ Day07 不再新增驱动能力，重点是把仓库整理成“别人拿到后�
 2. `../kernel-src/README.md`
 3. `day07/README.md`
 4. `docs/W1_REVIEW.md`
+5. `day08/README.md`
 
 ## 9. 统一运行方式
 
@@ -253,6 +255,27 @@ chmod +x build.sh
 insmod /demo.ko
 /bin/stress_rw.sh 300
 /bin/check_dmesg.sh
+```
+
+### Day08 推荐验收命令
+
+宿主机：
+
+```bash
+cd day08
+chmod +x build.sh
+./build.sh
+```
+
+进入 guest 后：
+
+```sh
+insmod /demo_pdrv.ko
+dmesg | tail -n 50
+ls /sys/bus/platform/devices
+ls /sys/bus/platform/drivers
+rmmod demo_pdrv
+dmesg | tail -n 50
 ```
 
 ---
