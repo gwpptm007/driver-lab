@@ -53,8 +53,8 @@ linux-driver-lab
 - `docs/` 下的知识总结与路线图
 - 回归脚本
 - `kernel-src/README.md`
-- `kernel-src/linux-5.15.10/README.md`
-- `kernel-src/busybox-1.36.1/README.md`
+- `kernel-src/README.md`
+- `kernel-src/README.md`
 - `.gitkeep`
 
 ## build.sh 路径建议
@@ -62,15 +62,15 @@ linux-driver-lab
 建议所有 `build.sh` 优先支持相对路径：
 
 ```text
-../kernel-src/linux-5.15.10
-../kernel-src/busybox-1.36.1
+../kernel-src/linux-5.15.10/build/x86
+../kernel-src/busybox-1.36.1/output/x86
 ```
 
 同时兼容你历史上的旧路径：
 
 ```text
-/home/wq7/workspace/kernel-src/linux-5.15.10
-/home/wq7/workspace/kernel-src/busybox-1.36.1
+/home/wq7/workspace/kernel-src/linux-5.15.10/build/x86
+/home/wq7/workspace/kernel-src/busybox-1.36.1/output/x86
 ```
 
 这样别人 clone 到任何目录后都更容易复用。

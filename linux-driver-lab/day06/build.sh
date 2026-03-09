@@ -14,35 +14,18 @@ set -e
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 REPO_ROOT=$(cd "$SCRIPT_DIR/.." && pwd)
 
-# 当前推荐目录结构：
-# driver-lab/
-# ├── kernel-src/
-# │   ├── linux-5.15.10/
-# │   └── busybox-1.36.1/
-# └── linux-driver-lab/
-#
-# 所以这里优先走仓库相对路径：
-#   ../kernel-src/linux-5.15.10
-#   ../kernel-src/busybox-1.36.1
-DEFAULT_KERNEL_BASE="$REPO_ROOT/../kernel-src"
-
-# 历史上我自己的环境曾经直接写死在：
-#   /home/wq7/workspace/kernel-src/linux-5.15.10
-#   /home/wq7/workspace/kernel-src/busybox-1.36.1
-# 现在不再默认写死使用，但保留为兼容回退路径，方便理解旧版本脚本。
-LEGACY_KERNEL_BASE="/home/wq7/workspace/kernel-src"
-
-KERNEL_DIR="${KERNEL_DIR:-$DEFAULT_KERNEL_BASE/linux-5.15.10}"
-BUSYBOX_DIR="${BUSYBOX_DIR:-$DEFAULT_KERNEL_BASE/busybox-1.36.1}"
-
-if [ ! -d "$KERNEL_DIR" ] && [ -d "$LEGACY_KERNEL_BASE/linux-5.15.10" ]; then
-    KERNEL_DIR="$LEGACY_KERNEL_BASE/linux-5.15.10"
-fi
-
-if [ ! -d "$BUSYBOX_DIR" ] && [ -d "$LEGACY_KERNEL_BASE/busybox-1.36.1" ]; then
-    BUSYBOX_DIR="$LEGACY_KERNEL_BASE/busybox-1.36.1"
-fi
-KERNEL_IMG="$KERNEL_DIR/arch/x86/boot/bzImage"
+# 新路径：
+#   ../kernel-src/linux-5.15.10/build/x86
+#   ../kernel-src/linux-5.15.10/output/x86/bzImage
+#   ../kernel-src/busybox-1.36.1/output/x86/_install
+# 旧绝对路径示例：
+#   /home/wq7/workspace/kernel-src/linux-5.15.10/build/x86
+#   /home/wq7/workspace/kernel-src/linux-5.15.10/output/x86/bzImage
+#   /home/wq7/workspace/kernel-src/busybox-1.36.1/output/x86/_install
+KERNEL_DIR="${KERNEL_DIR:-$REPO_ROOT/../kernel-src/linux-5.15.10/build/x86}"
+KERNEL_IMG="${KERNEL_IMG:-$REPO_ROOT/../kernel-src/linux-5.15.10/output/x86/bzImage}"
+BUSYBOX_INSTALL="${BUSYBOX_INSTALL:-$REPO_ROOT/../kernel-src/busybox-1.36.1/output/x86/_install}"
+BUSYBOX_DIR="${BUSYBOX_DIR:-$REPO_ROOT/../kernel-src/busybox-1.36.1/output/x86}"
 ROOTFS="./rootfs"
 
 #
@@ -53,7 +36,7 @@ ROOTFS="./rootfs"
 # 按顺序尝试，找到能执行的那个就用它
 #
 BUSYBOX_CANDIDATES=(
-    "$BUSYBOX_DIR/_install/bin/busybox"
+    "$BUSYBOX_INSTALL/bin/busybox"
     "$BUSYBOX_DIR/busybox"
 )
 
@@ -74,6 +57,13 @@ chmod +x build.sh
 
 echo "[INFO] Using kernel : $KERNEL_DIR"
 echo "[INFO] Using busybox: $BUSYBOX_PATH"
+BUSYBOX_FILE_INFO=$(file "$BUSYBOX_PATH" || true)
+echo "$BUSYBOX_FILE_INFO"
+if echo "$BUSYBOX_FILE_INFO" | grep -q "dynamically linked"; then
+    echo "[ERROR] 当前 busybox 是动态链接版，不能直接用于最小 initramfs/rootfs。"
+    echo "[ERROR] 请先在 kernel-src/busybox-1.36.1/src 下重新编译静态链接 BusyBox。"
+    exit 1
+fi
 
 # 编译模块和用户态测试程序。
 # 这里显式把 KDIR 传给 Makefile。
@@ -94,7 +84,7 @@ chmod +x "$ROOTFS/bin/busybox"
 # BusyBox 通过“一个可执行文件 + 多个软链接”的方式复用命令
 # 把实验里常用到的命令都链接出来。
 #
-for cmd in sh ls cat echo mount insmod rmmod dmesg chmod sleep ps mkdir grep date rm touch sync uname poweroff reboot; do
+for cmd in sh ls cat cp echo mount insmod rmmod dmesg chmod sleep ps mkdir grep date rm touch sync uname poweroff reboot tail head; do
     ln -sf busybox "$ROOTFS/bin/$cmd"
 done
 

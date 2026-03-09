@@ -12,9 +12,10 @@
 
 ## W2 嵌入式通用套路
 
-- Day08：platform_driver + probe/remove + devm_*
-- Day09：Device Tree + of_match_table
-- Day10：IRQ + regmap
+- platform_driver
+- Device Tree
+- IRQ
+- regmap
 
 ## W3 内核裁剪与移植
 
@@ -29,3 +30,8 @@
 - DMA
 - mmap
 - perf / ftrace
+
+
+## 后续扩展
+
+- Day08：platform_driver + probe/remove + devm 资源管理

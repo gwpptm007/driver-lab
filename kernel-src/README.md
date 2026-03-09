@@ -1,159 +1,470 @@
-# kernel-src 环境说明
+# kernel-src 环境准备说明
 
-本目录用于放置 `linux-driver-lab` 的实验依赖环境。
+本目录只负责实验环境本身的准备，不讨论任何具体 day 的学习内容。
 
-GitHub 仓库中不会提交完整源码，只保留目录骨架、说明文档和占位文件。实际使用前，请按本文档准备：
+环境目标只有两类：
 
-- Linux 内核源码 `linux-5.15.10`
-- BusyBox 源码 `busybox-1.36.1`
+- **x86 环境**
+- **arm64 环境**
 
-推荐目录：
+两类环境共用同一份仓库目录约定，但各自拥有独立的构建目录和输出目录。
+
+---
+
+## 1. 目录约定
 
 ```text
-driver-lab/
-├── kernel-src/
-│   ├── linux-5.15.10/
-│   └── busybox-1.36.1/
-└── linux-driver-lab/
+kernel-src/
+├── README.md
+├── linux-5.15.10.tar.xz
+├── busybox-1.36.1.tar.bz2
+├── linux-5.15.10/
+│   ├── src/
+│   ├── build/
+│   │   ├── x86/
+│   │   └── arm64/
+│   └── output/
+│       ├── x86/
+│       └── arm64/
+└── busybox-1.36.1/
+    ├── src/
+    ├── build/
+    │   ├── x86/
+    │   └── arm64/
+    └── output/
+        ├── x86/
+        └── arm64/
 ```
+
+### 目录含义
+
+#### `linux-5.15.10.tar.xz`
+Linux 内核源码压缩包，放在 `kernel-src/` 根目录。
+
+#### `busybox-1.36.1.tar.bz2`
+BusyBox 源码压缩包，放在 `kernel-src/` 根目录。
+
+#### `linux-5.15.10/src/`
+Linux 5.15.10 的**纯源码目录**。
+
+建议把压缩包内容解压到这里，而不是直接在 `kernel-src/` 下保留官方解压出来的同名目录。这样可以避免：
+
+- `linux-5.15.10/linux-5.15.10/` 这种套娃目录
+- 在源码根目录里混入构建输出和最终产物
+
+#### `linux-5.15.10/build/x86/`
+Linux 5.15.10 的 x86 构建目录。
+
+这里会生成：
+
+- `.config`
+- `Module.symvers`
+- `vmlinux`
+- 各类中间目标文件
+- `arch/x86/boot/bzImage`
+
+外部模块编译时，通常把这里作为 `KDIR` 使用。
+
+#### `linux-5.15.10/build/arm64/`
+Linux 5.15.10 的 arm64 构建目录。
+
+这里会生成：
+
+- `.config`
+- `Module.symvers`
+- `vmlinux`
+- `arch/arm64/boot/Image`
+- 设备树相关产物
+
+arm64 外部模块编译时，通常把这里作为 `KDIR` 使用。
+
+#### `linux-5.15.10/output/x86/`
+Linux 5.15.10 的 x86 最终产物目录。
+
+建议至少放：
+
+- `bzImage`
+
+#### `linux-5.15.10/output/arm64/`
+Linux 5.15.10 的 arm64 最终产物目录。
+
+建议至少放：
+
+- `Image`
+- 需要的 `dtb`
+
+#### `busybox-1.36.1/src/`
+BusyBox 1.36.1 的**纯源码目录**。
+
+#### `busybox-1.36.1/build/x86/`
+BusyBox 的 x86 构建目录。
+
+#### `busybox-1.36.1/build/arm64/`
+BusyBox 的 arm64 构建目录。
+
+#### `busybox-1.36.1/output/x86/`
+BusyBox 的 x86 最终产物目录。
+
+建议至少放：
+
+- `busybox`
+- `_install/`
+
+#### `busybox-1.36.1/output/arm64/`
+BusyBox 的 arm64 最终产物目录。
+
+建议至少放：
+
+- `busybox`
+- `_install/`
 
 ---
 
-## 1. Windows 宿主机排查
+## 2. 为什么有些实验依赖 BusyBox
 
-如果你的开发环境是 **Windows -> VMware -> Ubuntu -> QEMU**，而且宿主机 CPU 支持虚拟化却仍然很慢，通常要优先检查 Hyper-V 相关功能是否占用了硬件虚拟化。
+很多驱动实验不是只编一个 `.ko` 文件，而是要顺手准备一个最小 rootfs，再用 QEMU 启动测试环境。
 
-### 现象
+在这种场景里，BusyBox 的作用是提供最小用户空间，包括：
 
-常见现象包括：
+- `/bin/sh`
+- `mount`
+- `insmod`
+- `rmmod`
+- `dmesg`
+- `ls`
+- `cat`
+- `mkdir`
+- 其他常用命令
 
-- VMware 提示虚拟化加速不可用
-- Ubuntu 能启动，但 QEMU 明显很慢
-- 驱动实验启动和调试时间非常长
+也就是说，BusyBox 不是“可有可无的附加项”，而是最小实验环境的基础组件之一。
 
-### Ubuntu 安装前的 VMware 设置
+如果某个实验需要：
 
-如果你的链路是 **Windows -> VMware -> Ubuntu -> QEMU/KVM**，那么 Ubuntu 这台虚拟机不仅是日常开发机，还是后面运行 QEMU 的“宿主机”。
+- 打包 initramfs
+- 进入最小 shell
+- 在 guest 内加载模块
+- 观察 `/proc`、`/sys`、`dmesg`
 
-因此在 VMware 里要进入：
-
-- **虚拟机设置 -> 处理器**
-- 勾选 **虚拟化 Intel VT-x/EPT 或 AMD-V/RVI(V)**
-
-原因很简单：
-
-- 这一步是在给 Ubuntu 打开 **嵌套虚拟化** 能力
-- 没勾选时，Ubuntu 里即使安装了 QEMU/KVM，也很可能拿不到硬件虚拟化加速
-- 结果就是 QEMU 退回软件模拟，启动内核、跑 rootfs、调试驱动都会明显变慢
-
-对应界面如下：
-
-![VMware 处理器页面勾选虚拟化引擎](images/vmware-processor-virtualization-engine.png)
-
-如果这个勾选框是灰的，或者你明明开了 BIOS 虚拟化还是无法勾选，通常不是硬件不支持，而是 **Windows 把虚拟化权限占住了**。这时就回到下面的 Hyper-V 排查步骤。
-
-
-### 建议排查顺序
-
-#### 第一步：关闭“内核隔离 / 内存完整性”
-
-1. 在 Windows 搜索框输入“内核隔离”并打开
-2. 找到“内存完整性”
-3. 设置为关闭
-4. 重启物理机
-
-#### 第二步：关闭 Hyper-V 相关功能
-
-按 `Win + R` 输入 `optionalfeatures`，取消勾选：
-
-- Hyper-V
-- 虚拟机平台
-- Windows 虚拟机监控程序平台
-
-然后重启物理机。
-
-#### 第三步：禁用 Hyper-V 启动项
-
-以管理员身份打开终端或 PowerShell，执行：
-
-```powershell
-bcdedit /set hypervisorlaunchtype off
-```
-
-执行后重启物理机。
-
-说明：
-
-- 如果你关闭了这些功能，VMware 和后续的 Ubuntu/QEMU 通常会明显更顺畅
-- 如果必须保留 Hyper-V 生态，就要接受 VMware 和嵌套虚拟化性能下降
+那它通常就会依赖 BusyBox 提供最小命令集。
 
 ---
 
-## 2. Ubuntu 依赖安装
+## 3. Ubuntu 宿主机依赖安装
 
-进入 Ubuntu 后，先安装构建和实验所需依赖：
+建议在 Ubuntu 上先安装下面这些基础依赖：
 
 ```bash
 sudo apt update
-sudo apt install -y build-essential libncurses-dev bison flex libssl-dev libelf-dev cpio qemu-system-x86 wget xz-utils git
+sudo apt install -y \
+    build-essential bc bison flex libssl-dev libelf-dev libncurses-dev \
+    cpio xz-utils bzip2 wget curl git file rsync \
+    qemu-system-x86 qemu-system-arm qemu-utils \
+    gcc-aarch64-linux-gnu device-tree-compiler
 ```
 
-依赖说明：
+### 依赖说明
 
-- `build-essential`：gcc、make 等基础编译工具
-- `libncurses-dev`：`make menuconfig` 需要
-- `bison`、`flex`：编译内核配置/解析相关代码时需要
-- `libssl-dev`、`libelf-dev`：内核构建常见依赖
-- `cpio`：打包 initramfs
-- `qemu-system-x86`：启动实验内核
-- `wget`、`xz-utils`：下载和解压源码
+- `build-essential`：gcc、make 等基础构建工具
+- `bc`：内核构建时常用
+- `bison`、`flex`：内核构建依赖
+- `libssl-dev`、`libelf-dev`、`libncurses-dev`：内核配置与构建依赖
+- `cpio`：打包 initramfs 时使用
+- `xz-utils`、`bzip2`：解压源码包
+- `wget`、`curl`：下载源码
+- `file`：检查生成的二进制架构
+- `rsync`：拷贝产物时常用
+- `qemu-system-x86`：x86 QEMU
+- `qemu-system-arm`：arm/arm64 QEMU，通常包含 `qemu-system-aarch64`
+- `qemu-utils`：镜像相关工具
+- `gcc-aarch64-linux-gnu`：arm64 交叉编译器
+- `device-tree-compiler`：处理 `dts/dtb`
+
+安装完成后，建议确认下面两个命令可用：
+
+```bash
+qemu-system-x86_64 --version
+aarch64-linux-gnu-gcc --version
+```
+
+如果需要 arm64 QEMU，再确认：
+
+```bash
+qemu-system-aarch64 --version
+```
 
 ---
 
-## 3. Linux 内核源码准备
+## 4. 源码下载方式
 
-请继续阅读：
+### Linux 5.15.10
 
-- `linux-5.15.10/README.md`
+可以直接在 `kernel-src/` 根目录下载：
+
+```bash
+cd kernel-src
+wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.15.10.tar.xz
+```
+
+### BusyBox 1.36.1
+
+```bash
+cd kernel-src
+wget https://busybox.net/downloads/busybox-1.36.1.tar.bz2
+```
+
+如果你已经手动下载好了压缩包，也可以直接把它们放到 `kernel-src/` 根目录。
 
 ---
 
-## 4. BusyBox 准备
+## 5. 源码安装与解压
 
-请继续阅读：
+建议使用 `--strip-components=1` 把源码直接解压到 `src/` 目录，避免多一层同名目录。
 
-- `busybox-1.36.1/README.md`
+### 解压 Linux 5.15.10
 
----
+```bash
+cd kernel-src
+mkdir -p linux-5.15.10/src
+rm -rf linux-5.15.10/src/*
+tar -xf linux-5.15.10.tar.xz --strip-components=1 -C linux-5.15.10/src
+```
 
-## 5. 环境准备完成后的最小检查
+### 解压 BusyBox 1.36.1
 
-至少确认下面两个关键产物存在：
+```bash
+cd kernel-src
+mkdir -p busybox-1.36.1/src
+rm -rf busybox-1.36.1/src/*
+tar -xf busybox-1.36.1.tar.bz2 --strip-components=1 -C busybox-1.36.1/src
+```
+
+解压完成后，应至少能看到：
 
 ```text
-kernel-src/linux-5.15.10/arch/x86/boot/bzImage
-kernel-src/busybox-1.36.1/busybox
+kernel-src/linux-5.15.10/src/Makefile
+kernel-src/busybox-1.36.1/src/Makefile
 ```
-
-如果 BusyBox 执行过 `make install`，还可能有：
-
-```text
-kernel-src/busybox-1.36.1/_install/bin/busybox
-```
-
-这些路径准备好后，`linux-driver-lab/day01~day06/build.sh` 就可以直接使用。
 
 ---
 
-## 6. 推荐的完整准备顺序
+## 6. x86 环境编译
 
-建议按下面顺序做，一次成功率更高：
+### 6.1 编译 x86 Linux 内核
 
-1. 先在 Windows 宿主机关闭 Hyper-V 相关功能
-2. 在 VMware 里确认 Ubuntu 的处理器页面已勾选虚拟化引擎
-3. 进入 Ubuntu 安装编译依赖和 QEMU
-4. 下载并编译 `linux-5.15.10`
-5. 下载并编译 `busybox-1.36.1`
-6. 回到 `linux-driver-lab/day01~day06` 执行 `./build.sh`
+```bash
+cd kernel-src/linux-5.15.10/src
+make O=../build/x86 x86_64_defconfig
+make O=../build/x86 -j$(nproc)
+```
 
-这样可以把“宿主机虚拟化问题”和“Linux 编译环境问题”分层排查，不容易混在一起。
+常用产物：
+
+```text
+kernel-src/linux-5.15.10/build/x86/arch/x86/boot/bzImage
+kernel-src/linux-5.15.10/build/x86/Module.symvers
+```
+
+建议把 `bzImage` 拷贝到输出目录：
+
+```bash
+cp ../build/x86/arch/x86/boot/bzImage ../output/x86/
+```
+
+### 6.2 编译 x86 BusyBox
+
+很多最小 rootfs / initramfs 实验要求 BusyBox 使用**静态链接**。
+如果 BusyBox 是动态链接版，拷进 rootfs 后常会因为缺少 `/lib64/ld-linux-x86-64.so.2` 和 glibc 依赖而导致 `/init`、`/bin/sh` 无法执行。
+
+建议按下面步骤编译：
+
+```bash
+cd kernel-src/busybox-1.36.1/src
+make O=../build/x86 defconfig
+sed -i 's/^# CONFIG_STATIC is not set/CONFIG_STATIC=y/' ../build/x86/.config
+make O=../build/x86 oldconfig
+make O=../build/x86 -j$(nproc)
+cp ../build/x86/busybox ../output/x86/
+make O=../build/x86 CONFIG_PREFIX=$(pwd)/../output/x86/_install install
+```
+
+编译完成后建议立刻检查：
+
+```bash
+file kernel-src/busybox-1.36.1/output/x86/_install/bin/busybox
+```
+
+期望输出中包含：
+
+```text
+statically linked
+```
+
+常用产物：
+
+```text
+kernel-src/busybox-1.36.1/output/x86/busybox
+kernel-src/busybox-1.36.1/output/x86/_install/bin/busybox
+```
+
+---
+
+## 7. arm64 环境编译
+
+### 7.1 编译 arm64 Linux 内核
+
+```bash
+cd kernel-src/linux-5.15.10/src
+make O=../build/arm64 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig
+make O=../build/arm64 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc)
+make O=../build/arm64 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- dtbs -j$(nproc)
+```
+
+常用产物：
+
+```text
+kernel-src/linux-5.15.10/build/arm64/arch/arm64/boot/Image
+kernel-src/linux-5.15.10/build/arm64/Module.symvers
+kernel-src/linux-5.15.10/build/arm64/arch/arm64/boot/dts/
+```
+
+建议把常用产物拷贝到输出目录：
+
+```bash
+cp ../build/arm64/arch/arm64/boot/Image ../output/arm64/
+```
+
+如果后面需要某个 dtb，也可按需拷贝：
+
+```bash
+cp ../build/arm64/arch/arm64/boot/dts/<your-board>.dtb ../output/arm64/
+```
+
+### 7.2 编译 arm64 BusyBox
+
+arm64 最小 rootfs 同样建议使用静态链接 BusyBox。
+
+```bash
+cd kernel-src/busybox-1.36.1/src
+make O=../build/arm64 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig
+sed -i 's/^# CONFIG_STATIC is not set/CONFIG_STATIC=y/' ../build/arm64/.config
+make O=../build/arm64 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- oldconfig
+make O=../build/arm64 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j$(nproc)
+cp ../build/arm64/busybox ../output/arm64/
+make O=../build/arm64 ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CONFIG_PREFIX=$(pwd)/../output/arm64/_install install
+```
+
+编译完成后建议检查：
+
+```bash
+file kernel-src/busybox-1.36.1/output/arm64/_install/bin/busybox
+```
+
+期望输出中包含：
+
+```text
+statically linked
+```
+
+常用产物：
+
+```text
+kernel-src/busybox-1.36.1/output/arm64/busybox
+kernel-src/busybox-1.36.1/output/arm64/_install/bin/busybox
+```
+
+---
+
+## 8. 外部模块和实验脚本应该使用哪些路径
+
+### x86 环境常用路径
+
+#### 内核构建目录
+
+```text
+kernel-src/linux-5.15.10/build/x86
+```
+
+这个目录通常作为外部模块编译时的 `KDIR`。
+
+#### 内核镜像
+
+```text
+kernel-src/linux-5.15.10/output/x86/bzImage
+```
+
+#### BusyBox 安装目录
+
+```text
+kernel-src/busybox-1.36.1/output/x86/_install
+```
+
+#### BusyBox 可执行文件
+
+```text
+kernel-src/busybox-1.36.1/output/x86/_install/bin/busybox
+```
+
+### arm64 环境常用路径
+
+#### 内核构建目录
+
+```text
+kernel-src/linux-5.15.10/build/arm64
+```
+
+#### 内核镜像
+
+```text
+kernel-src/linux-5.15.10/output/arm64/Image
+```
+
+#### BusyBox 安装目录
+
+```text
+kernel-src/busybox-1.36.1/output/arm64/_install
+```
+
+#### BusyBox 可执行文件
+
+```text
+kernel-src/busybox-1.36.1/output/arm64/_install/bin/busybox
+```
+
+---
+
+## 9. 最小检查项
+
+### x86 检查
+
+```bash
+file kernel-src/linux-5.15.10/output/x86/bzImage
+file kernel-src/busybox-1.36.1/output/x86/_install/bin/busybox
+```
+
+期望 BusyBox 输出同时体现：
+
+- `x86-64`
+- `statically linked`
+
+### arm64 检查
+
+```bash
+file kernel-src/linux-5.15.10/output/arm64/Image
+file kernel-src/busybox-1.36.1/output/arm64/_install/bin/busybox
+```
+
+期望 arm64 BusyBox 输出同时体现：
+
+- `ARM aarch64`
+- `statically linked`
+
+---
+
+## 10. 使用建议
+
+- 压缩包放在 `kernel-src/` 根目录
+- 解压内容进入各版本目录下的 `src/`
+- 构建输出始终放 `build/`
+- 最终给实验直接使用的文件放 `output/`
+- 外部模块编译优先使用 `build/<arch>` 作为 `KDIR`
+- QEMU 启动优先使用 `output/<arch>` 下的镜像

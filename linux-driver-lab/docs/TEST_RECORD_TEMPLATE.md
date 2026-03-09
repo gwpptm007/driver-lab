@@ -6,8 +6,8 @@
 实验日期：
 实验目录：dayXX
 宿主机环境：Ubuntu 22.04.5 / VMware
-实验内核：../kernel-src/linux-5.15.10（或实际 KDIR）
-BusyBox：../kernel-src/busybox-1.36.1（或实际 BUSYBOX_DIR）
+实验内核：../kernel-src/linux-5.15.10/build/x86（或实际 KDIR）
+BusyBox：../kernel-src/busybox-1.36.1/output/x86（或实际 BUSYBOX_DIR）
 
 学习目标：
 

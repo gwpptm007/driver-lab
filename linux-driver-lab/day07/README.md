@@ -32,8 +32,8 @@
 新增并整理：
 
 - `../kernel-src/README.md`
-- `../kernel-src/linux-5.15.10/README.md`
-- `../kernel-src/busybox-1.36.1/README.md`
+- `../kernel-src/README.md`
+- `../kernel-src/README.md`
 
 重点回答两个问题：
 
@@ -84,8 +84,8 @@
 
 先准备：
 
-- `../kernel-src/linux-5.15.10`
-- `../kernel-src/busybox-1.36.1`
+- `../kernel-src/linux-5.15.10/build/x86`
+- `../kernel-src/busybox-1.36.1/output/x86`
 
 然后进入任意一个 day 目录，例如：
 

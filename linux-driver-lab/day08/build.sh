@@ -15,25 +15,22 @@ set -e
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 REPO_ROOT=$(cd "$SCRIPT_DIR/.." && pwd)
 
-DEFAULT_KERNEL_BASE="$REPO_ROOT/../kernel-src"
-LEGACY_KERNEL_BASE="/home/wq7/workspace/kernel-src"
-
-KERNEL_DIR="${KERNEL_DIR:-$DEFAULT_KERNEL_BASE/linux-5.15.10}"
-BUSYBOX_DIR="${BUSYBOX_DIR:-$DEFAULT_KERNEL_BASE/busybox-1.36.1}"
-
-if [ ! -d "$KERNEL_DIR" ] && [ -d "$LEGACY_KERNEL_BASE/linux-5.15.10" ]; then
-    KERNEL_DIR="$LEGACY_KERNEL_BASE/linux-5.15.10"
-fi
-
-if [ ! -d "$BUSYBOX_DIR" ] && [ -d "$LEGACY_KERNEL_BASE/busybox-1.36.1" ]; then
-    BUSYBOX_DIR="$LEGACY_KERNEL_BASE/busybox-1.36.1"
-fi
-
-KERNEL_IMG="$KERNEL_DIR/arch/x86/boot/bzImage"
+# 新路径：
+#   ../kernel-src/linux-5.15.10/build/x86
+#   ../kernel-src/linux-5.15.10/output/x86/bzImage
+#   ../kernel-src/busybox-1.36.1/output/x86/_install
+# 旧绝对路径示例：
+#   /home/wq7/workspace/kernel-src/linux-5.15.10/build/x86
+#   /home/wq7/workspace/kernel-src/linux-5.15.10/output/x86/bzImage
+#   /home/wq7/workspace/kernel-src/busybox-1.36.1/output/x86/_install
+KERNEL_DIR="${KERNEL_DIR:-$REPO_ROOT/../kernel-src/linux-5.15.10/build/x86}"
+KERNEL_IMG="${KERNEL_IMG:-$REPO_ROOT/../kernel-src/linux-5.15.10/output/x86/bzImage}"
+BUSYBOX_INSTALL="${BUSYBOX_INSTALL:-$REPO_ROOT/../kernel-src/busybox-1.36.1/output/x86/_install}"
+BUSYBOX_DIR="${BUSYBOX_DIR:-$REPO_ROOT/../kernel-src/busybox-1.36.1/output/x86}"
 ROOTFS="./rootfs"
 
 BUSYBOX_CANDIDATES=(
-    "$BUSYBOX_DIR/_install/bin/busybox"
+    "$BUSYBOX_INSTALL/bin/busybox"
     "$BUSYBOX_DIR/busybox"
 )
 
@@ -45,13 +42,32 @@ for p in "${BUSYBOX_CANDIDATES[@]}"; do
     fi
 done
 
-if [ -z "$BUSYBOX_PATH" ]; then
-    echo "[ERROR] busybox not found in: $BUSYBOX_DIR"
+if [ ! -d "$KERNEL_DIR" ]; then
+    echo "[ERROR] kernel build dir not found: $KERNEL_DIR"
     exit 1
 fi
 
-echo "[INFO] Using kernel : $KERNEL_DIR"
-echo "[INFO] Using busybox: $BUSYBOX_PATH"
+if [ ! -f "$KERNEL_IMG" ]; then
+    echo "[ERROR] kernel image not found: $KERNEL_IMG"
+    exit 1
+fi
+
+if [ -z "$BUSYBOX_PATH" ]; then
+    echo "[ERROR] busybox not found in: $BUSYBOX_INSTALL or $BUSYBOX_DIR"
+    exit 1
+fi
+
+echo "[INFO] Using kernel build dir : $KERNEL_DIR"
+echo "[INFO] Using kernel image     : $KERNEL_IMG"
+echo "[INFO] Using busybox          : $BUSYBOX_PATH"
+BUSYBOX_FILE_INFO=$(file "$BUSYBOX_PATH" || true)
+echo "$BUSYBOX_FILE_INFO"
+if echo "$BUSYBOX_FILE_INFO" | grep -q "dynamically linked"; then
+    echo "[ERROR] 当前 busybox 是动态链接版，不能直接用于最小 initramfs/rootfs。"
+    echo "[ERROR] 请先在 kernel-src/busybox-1.36.1/src 下重新编译静态链接 BusyBox。"
+    exit 1
+fi
+
 
 make KDIR="$KERNEL_DIR" clean
 make KDIR="$KERNEL_DIR"
@@ -62,7 +78,7 @@ mkdir -p "$ROOTFS"/{bin,dev,proc,sys,sbin,etc,tmp}
 cp "$BUSYBOX_PATH" "$ROOTFS/bin/busybox"
 chmod +x "$ROOTFS/bin/busybox"
 
-for cmd in sh ls cat echo mount insmod rmmod dmesg chmod sleep ps mkdir grep date rm touch sync uname tail poweroff reboot; do
+for cmd in sh ls cat echo mount insmod rmmod dmesg chmod sleep ps mkdir grep date rm touch sync uname poweroff reboot tail head; do
     ln -sf busybox "$ROOTFS/bin/$cmd"
 done
 

@@ -35,7 +35,7 @@
 
 ```make
 obj-m += demo.o
-KDIR ?= ../../kernel-src/linux-5.15.10   # 示例，实际以 build.sh/环境变量为准
+KDIR ?= ../../kernel-src/linux-5.15.10/build/x86   # 示例，实际以 build.sh/环境变量为准
 ```
 
 可以把它理解成：
@@ -158,7 +158,7 @@ QEMU 提供一个轻量实验机。
 
 在这个仓库里，QEMU 启动时通常加载：
 
-- 内核：`../kernel-src/linux-5.15.10/arch/x86/boot/bzImage` 或兼容旧路径
+- 内核：`../kernel-src/linux-5.15.10/build/x86/arch/x86/boot/bzImage` 或兼容旧路径
 - initramfs：`rootfs.img`
 
 ---

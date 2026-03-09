@@ -1,7 +1,7 @@
 # 强制指定内核源码路径
-# 当前推荐相对路径：../../kernel-src/linux-5.15.10
-# 旧版本常直接写死为：/home/wq7/workspace/kernel-src/linux-5.15.10
-KDIR ?= ../../kernel-src/linux-5.15.10
+# 新路径：../../kernel-src/linux-5.15.10/build/x86
+# 旧绝对路径示例：/home/wq7/workspace/kernel-src/linux-5.15.10/build/x86
+KDIR ?= ../../kernel-src/linux-5.15.10/build/x86
 PWD  := $(shell pwd)
 
 obj-m := demo.o

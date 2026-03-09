@@ -1,0 +1,22 @@
+/*
+ * Day09 DT 片段
+ *
+ * 这个片段会被插入到 QEMU virt 导出的基础 DTS 中
+ * 驱动匹配依赖 compatible
+ * reg / interrupts 则是本课要解析的重点
+ *
+ * reg 使用 4 个 cells
+ *   <addr_hi addr_lo size_hi size_lo>
+ *
+ * interrupts 使用 3 个 cells
+ *   <type irq flags>
+ * 这里的 <0 42 4> 可以理解成一个 SPI 中断描述
+ */
+
+demo_dt@10000000 {
+    compatible = "demo,day09-pdrv";
+    reg = <0x0 0x10000000 0x0 0x1000>;
+    interrupts = <0x0 0x64 0x4>;
+    status = "okay";
+    demo,label = "from-qemu-dt";
+};

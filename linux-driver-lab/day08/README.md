@@ -291,7 +291,7 @@ Day08 只保留最核心的前几步：
 
 ---
 
-## 9. `devm_*` 
+## 9. `devm_*` 到底解决什么问题
 
 `devm` 可以理解成 **device managed resource**。
 
@@ -362,7 +362,7 @@ chmod +x build.sh
 ./build.sh
 ```
 
-进入 QEMU 后，命令验证：
+进入 QEMU 后，主要用下面这些命令验证：
 
 ```sh
 insmod /demo_pdrv.ko
@@ -372,9 +372,9 @@ ls /sys/bus/platform/devices
 ls /sys/bus/platform/drivers
 ```
 
-### 10.2 实验观察
+### 10.2 实验观察点
 
-重点观察：
+这一天重点不是功能读写，而是观察：
 
 - 模块加载后 `probe()` 是否进入
 - 资源是否打印正确
@@ -385,7 +385,7 @@ ls /sys/bus/platform/drivers
 
 ## 11. 实际测试过程记录
 
-实际测试过程整理
+下面是本次 Day08 的实际测试过程整理。
 
 ### 11.1 加载模块并观察 `probe`
 
@@ -407,6 +407,8 @@ dmesg | tail -n 50
 [   23.103533] demo_pdrv demo_pdrv: platform_data: version=1 label=w2-day08-platform-lab
 [   23.104067] demo_pdrv: module init ok
 ```
+
+#### 这一步说明了什么
 
 说明 `module_init()` 执行后：
 
@@ -445,13 +447,15 @@ acpi-fan      alarmtimer    demo_pdrv     i8042
 acpi-ged      clk-pmc-atom  gpio-clk      serial8250
 ```
 
+#### 这一步说明了什么
+
 说明：
 
 - `demo_pdrv` 已经作为一个 **platform_device** 挂到了 `/sys/bus/platform/devices`
 - `demo_pdrv` 对应的 **platform_driver** 已经挂到了 `/sys/bus/platform/drivers`
 - 设备对象和驱动对象都确实存在于 platform bus 中
 
-这一点非常关键，因为把“设备对象”和“用户态 `/dev` 节点”区分开了。
+这一点非常关键，因为它把“设备对象”和“用户态 `/dev` 节点”区分开了。
 
 这里看到的是 **内核设备模型里的对象**，不是字符设备接口。
 
@@ -475,8 +479,9 @@ dmesg | tail -n 50
 [  104.801895] demo_pdrv: platform_device release
 ```
 
+#### 这一步说明了什么
 
-日志顺序重点：
+这组日志顺序非常重要：
 
 ```text
 module exit
@@ -485,14 +490,14 @@ module exit
 -> platform_device release
 ```
 
-分别表示：
+它分别表示：
 
 1. 模块退出流程开始
 2. 驱动和设备解绑，进入 `remove()`
 3. `devm_*` 管理的资源开始自动清理
 4. `struct device` 对象生命周期结束，进入 `release()`
 
-说明 Day08 的 **remove 路径完整跑通**
+这说明 Day08 的 **remove 路径也完整跑通了**。
 
 ---
 
@@ -530,7 +535,7 @@ module exit
 
 ### 12.4 本日总体验收
 
-Day08 的任务：
+Day08 的 D7 任务：
 
 - `platform_driver probe/remove`
 - `devm_*` 资源管理
@@ -614,11 +619,11 @@ Day08 还没有进入：
 
 ---
 
-## 15. 学习总结描述 Day08
+## 15. 面试或学习时怎么描述 Day08
 
 可以这样表述：
 
-> 在 W2 的第一天，没有直接做 Device Tree 和真实寄存器访问，而是先把 platform 总线模型单独跑通。在模块里注册了一个教学用 platform_device，再注册一个 platform_driver，通过同名匹配触发 probe。probe 里用 `platform_get_resource()` 读取 MEM 和 IRQ 资源，用 `devm_kzalloc()` 管理私有数据，并通过 `devm_add_action_or_reset()` 显式展示设备解绑时的自动清理顺序。最终通过 `/sys/bus/platform/devices`、`/sys/bus/platform/drivers` 以及 `remove -> devm cleanup -> release` 的日志顺序，验证了平台驱动的绑定、解绑和资源托管机制。
+> 在 W2 的第一天，我先没有直接做 Device Tree 和真实寄存器访问，而是先把 platform 总线模型单独跑通。我在模块里注册了一个教学用 platform_device，再注册一个 platform_driver，通过同名匹配触发 probe。probe 里用 `platform_get_resource()` 读取 MEM 和 IRQ 资源，用 `devm_kzalloc()` 管理私有数据，并通过 `devm_add_action_or_reset()` 显式展示设备解绑时的自动清理顺序。最终通过 `/sys/bus/platform/devices`、`/sys/bus/platform/drivers` 以及 `remove -> devm cleanup -> release` 的日志顺序，验证了平台驱动的绑定、解绑和资源托管机制。
 
 ---
 
@@ -630,7 +635,7 @@ Day09 很自然会接到 Device Tree：
 - 改成 `of_match_table`
 - 让资源从 DT 的 `reg` 和 `interrupts` 里来
 
-到那时会明显感觉到：
+到那时你会明显感觉到：
 
 > 设备描述来源变了，但 `probe()` 的主体思路并没有变
 

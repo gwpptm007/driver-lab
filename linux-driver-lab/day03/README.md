@@ -152,8 +152,8 @@ counter 提供状态观察
 Day03 的 `build.sh` 现在已经统一改成优先使用：
 
 ```text
-/home/wq7/workspace/kernel-src/busybox-1.36.1/_install/bin/busybox
-/home/wq7/workspace/kernel-src/busybox-1.36.1/busybox
+/home/wq7/workspace/kernel-src/busybox-1.36.1/output/x86/_install/bin/busybox
+/home/wq7/workspace/kernel-src/busybox-1.36.1/output/x86/busybox
 ```
 
 目的就是避免误用宿主机动态链接版 busybox，导致 `/init -> /bin/sh -> busybox` 这条执行链断掉。
