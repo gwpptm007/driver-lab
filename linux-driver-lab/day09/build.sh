@@ -14,6 +14,23 @@ set -e
 #   $KERNEL_DIR/output/arm64/Image     arm64 内核镜像
 #   $BUSYBOX_DIR/output/arm64/_install arm64 BusyBox 安装目录
 
+
+###################################################
+# SCRIPT_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/day09
+# KERNEL_BUILD_DIR=/home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/build/arm64
+# KERNEL_IMAGE=/home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/output/arm64/Image
+# BUSYBOX_BIN=/home/wq7/workspace/driver-lab/kernel-src/busybox-1.36.1/output/arm64/_install/bin/busybox
+# QEMU_BIN=qemu-system-aarch64
+#
+# ROOTFS_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/day09/rootfs 
+# ROOTFS_IMG=/home/wq7/workspace/driver-lab/linux-driver-lab/day09/rootfs.img
+# BASE_DTB=/home/wq7/workspace/driver-lab/linux-driver-lab/day09/virt-base.dtb
+# BASE_DTS=/home/wq7/workspace/driver-lab/linux-driver-lab/day09/virt-base.dts
+# OF_DTS=/home/wq7/workspace/driver-lab/linux-driver-lab/day09/virt-of.dts
+# OF_DTB=/home/wq7/workspace/driver-lab/linux-driver-lab/day09/virt-of.dtb
+#
+###################################################
+
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 REPO_ROOT=$(cd "$SCRIPT_DIR/.." && pwd)
 
@@ -160,6 +177,7 @@ chmod +x "$ROOTFS/init"
     find . | cpio -o -H newc | gzip -9 > ../rootfs.img
 )
 
+# qemu-system-aarch64 -machine virt,dumpdtb=/home/wq7/workspace/driver-lab/linux-driver-lab/day09/virt-base.dtb -cpu cortex-a57 -m 512M -nographic -nodefaults
 "$QEMU_BIN"     -machine virt,dumpdtb=virt-base.dtb     -cpu cortex-a57     -m 512     -nographic     >/dev/null 2>&1 || true
 
 if [ ! -f virt-base.dtb ]; then
@@ -167,10 +185,14 @@ if [ ! -f virt-base.dtb ]; then
     exit 1
 fi
 
+# dtc -I dtb -O dts -o /home/wq7/workspace/driver-lab/linux-driver-lab/day09/virt-base.dts /home/wq7/workspace/driver-lab/linux-driver-lab/day09/virt-base.dtb
 "$DTC_BIN" -I dtb -O dts -o virt-base.dts virt-base.dtb
 
+# python3 /home/wq7/workspace/driver-lab/linux-driver-lab/day09/inject_virt_dt.py --input /home/wq7/workspace/driver-lab/linux-driver-lab/day09/virt-base.dts --fragment /home/wq7/workspace/driver-lab/linux-driver-lab/day09/demo_day09.fragment.dtsi --output /home/wq7/workspace/driver-lab/linux-driver-lab/day09/virt-of.dts
 "$PYTHON_BIN" ./inject_virt_dt.py     --input virt-base.dts     --fragment demo_day09.fragment.dtsi     --output virt-day09.dts
 
+# dtc -I dts -O dtb -o /home/wq7/workspace/driver-lab/linux-driver-lab/day09/virt-of.dtb /home/wq7/workspace/driver-lab/linux-driver-lab/day09/virt-of.dts
 "$DTC_BIN" -I dts -O dtb -o virt-day09.dtb virt-day09.dts
 
+# exec qemu-system-aarch64 -machine virt -cpu cortex-a57 -m 512M -nographic -kernel /home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/output/arm64/Image -initrd /home/wq7/workspace/driver-lab/linux-driver-lab/day09/rootfs.img -dtb /home/wq7/workspace/driver-lab/linux-driver-lab/day09/virt-of.dtb -append 'console=ttyAMA0 rdinit=/init'
 "$QEMU_BIN"     -machine virt     -cpu cortex-a57     -m 1024     -nographic     -kernel "$KERNEL_IMG"     -dtb virt-day09.dtb     -initrd rootfs.img     -append "console=ttyAMA0 root=/dev/ram0 rw rdinit=/init"

@@ -192,3 +192,10 @@ demo.c
 
 不建议每次都用 `kill -9` 杀掉 `build.sh`，除非 QEMU 确实无响应。
 
+
+
+## day10
+
+- `day10/demo_irqcnt.c`：Day10 中断计数驱动
+- `day10/demo_day10.fragment.dtsi`：Day10 测试 DT 片段
+- `day10/build.sh`：Day10 arm64 QEMU 启动脚本

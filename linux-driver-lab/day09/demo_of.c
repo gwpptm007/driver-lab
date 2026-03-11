@@ -121,11 +121,9 @@ static void demo_of_dump_raw_irq(struct device *dev,
              priv->raw_irq[2]);
 }
 
-/*
- * of_match_table 的 data 字段只是教学辅助
- *
- * 这样你在 probe 里不仅能知道 compatible 匹配成功了
- * 还能顺便看到一份和 match 项关联的数据
+/* 实现设备树下的驱动与设备匹配
+ * 在 probe 里能知道 compatible 匹配成功
+ * 还能看到一份和 match 项关联的数据
  */
 static const struct of_device_id demo_of_match[] = {
     {
@@ -165,6 +163,7 @@ static int demo_of_probe(struct platform_device *pdev)
         return -ENODEV;
     }
 
+    /* devm_前缀 （Managed Resource）托管资源，驱动卸载，内核会自动释放内存*/
     priv = devm_kzalloc(dev, sizeof(*priv), GFP_KERNEL);
     if (!priv)
         return -ENOMEM;
@@ -172,14 +171,14 @@ static int demo_of_probe(struct platform_device *pdev)
     priv->dev = dev;
     /*
      * Linux 5.15 上优先使用通用的 device_get_match_data，
-     * 这样对 OF 匹配和后续扩展都更稳妥。
+     * 从驱动的 of_device_id 匹配表中获取驱动定义的私有数据（通常是一个字符串或结构体指针）
      */
     //priv->match_name = of_device_get_match_data(dev);
     priv->match_name = (const char *)device_get_match_data(dev);
 
     /*
-     * 读取一个自定义字符串属性
-     * 这样你能看到 probe 不只会解析 reg / interrupts
+     * 读取自定义字符串属性，读取设备树
+     * 能看到 probe 不只会解析 reg / interrupts
      * 也能顺手取普通 DT 属性
      */
     ret = of_property_read_string(np, "demo,label", &priv->label);
@@ -195,10 +194,11 @@ static int demo_of_probe(struct platform_device *pdev)
 
     /*
      * platform_get_resource 的使用方式并没有因为上了 DT 就改变
-     *
      * 差别在于：
      * Day08 的 resource 来自手工 platform_device
      * Day09 的 resource 来自 DT 中的 reg，经内核翻译后挂到 pdev 上
+     * platform_get_resource：解析设备树中的 reg 属性。索引 0 表示获取第一个内存区域
+     * 将获取到的资源信息保存到私有数据 priv 中，以便后续使用（如 ioremap）
      */
     mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
     if (!mem) {
@@ -214,7 +214,7 @@ static int demo_of_probe(struct platform_device *pdev)
              (unsigned long long)priv->mem.end,
              (unsigned long long)resource_size(&priv->mem));
 
-    /*
+    /* 获取中断资源
      * platform_get_irq 会在 DT 中解析 interrupts 属性
      * 再走 irq domain 映射，返回 Linux IRQ 号
      *
@@ -230,12 +230,13 @@ static int demo_of_probe(struct platform_device *pdev)
     priv->linux_irq = irq;
     dev_info(dev, "parsed Linux IRQ: %d\n", priv->linux_irq);
 
+    // 保存私有数据 priv挂载到pdev上
     platform_set_drvdata(pdev, priv);
 
     return devm_add_action_or_reset(dev, demo_of_devm_cleanup, priv);
 }
 
-/*
+/*  rmmod
  * remove 依然很简单
  * 因为当前并没有申请真实 IRQ，也没有 ioremap 寄存器
  * 重点仍然是看解绑和 devm 自动清理顺序

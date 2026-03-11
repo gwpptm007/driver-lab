@@ -1,0 +1,38 @@
+/*
+ * Day10 Device Tree 片段
+ *
+ * 这个节点会被注入到 QEMU virt 导出的基础 DTS 中，最终作为一个教学用的
+ * fake platform 设备出现。
+ *
+ * 节点属性说明：
+ *
+ * 1. compatible
+ *    用来和 demo_irq.c 里的 of_match_table 做匹配。
+ *
+ * 2. reg
+ *    提供一段教学用寄存器地址范围。
+ *    本课里并不会真的去访问这段寄存器，而是主要用来练习：
+ *      - DT 原始 reg cells
+ *      - platform_get_resource() 解析结果
+ *
+ * 3. interrupts
+ *    提供一组中断描述信息，让内核能够为该设备解析出一条 Linux virq。
+ *
+ *    注意：
+ *    这里的属性只负责“描述”，并不意味着 QEMU 真会为这个 fake 节点产生
+ *    真实中断事件。
+ *
+ * 4. demo,label
+ *    这是教学自定义属性，方便在驱动日志和 /proc 输出中做标识。
+ *
+ * 因为没有真实硬件事件源，所以 day10 额外通过 /proc/demo_irq_trigger
+ * 软件注入中断，来观察 request_irq() -> top-half 的完整路径。
+ */
+
+demo_irq@10000000 {
+    compatible = "demo,irq-pdrv";
+    reg = <0x0 0x10000000 0x0 0x1000>;
+    interrupts = <0x0 0x78 0x4>; /* SPI 120, level-high */
+    status = "okay";
+    demo,label = "irq-soft-trigger-demo";
+};

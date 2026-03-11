@@ -28,3 +28,5 @@ W1：字符设备驱动基础闭环
 ## 后续补充
 
 - Day08：platform_driver + probe/remove + devm 资源管理
+- Day09：Device Tree 匹配、reg/irq 解析
+- Day10：request_irq + top-half + /proc/interrupts 验证

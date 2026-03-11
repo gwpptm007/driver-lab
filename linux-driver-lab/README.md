@@ -73,3 +73,7 @@ platform_driver + probe/remove + devm 资源管理
 
 ### day09
 Device Tree + of_match_table + reg/irq 解析
+
+
+### day10
+中断计数实现（request_irq + /proc 导出）
