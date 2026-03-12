@@ -17,6 +17,8 @@
 - Day10：request_irq + /proc/interrupts 中断计数实现
 - Day11：bottom-half(workqueue) + 把重活下沉 + 延迟统计
 - Day12：regmap 封装寄存器 + debugfs 输出寄存器快照
+- Day13：ftrace function_graph 跟踪一次 IRQ 路径 + 截图归档
+- Day14：bring-up checklist（1页）：拿寄存器表如何推进联调
 
 ## W3 内核裁剪与移植
 

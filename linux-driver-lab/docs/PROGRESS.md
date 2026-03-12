@@ -31,3 +31,5 @@ W1：字符设备驱动基础闭环
 - Day10：request_irq + top-half + /proc/interrupts 验证
 - Day11：top-half + workqueue bottom-half + 粗略延迟统计
 - Day12：regmap 封装寄存器 + debugfs 快照 + regmap 读写路径验证
+- Day13：ftrace function_graph 跟踪一次 IRQ 路径 + trace 归档与截图留存
+- Day14：bring-up checklist（1页）：拿寄存器表如何推进联调

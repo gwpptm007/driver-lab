@@ -26,7 +26,9 @@ linux-driver-lab/
 ├── day09/
 ├── day10/
 ├── day11/
-└── day12/
+├── day12/
+├── day13/
+└── day14/
 ```
 
 ---
@@ -84,3 +86,10 @@ bottom-half(workqueue) + 把重活下沉 + 粗略延迟统计
 
 ### day12
 regmap 封装寄存器 + debugfs 寄存器快照 + regmap 读写路径验证
+
+### day13
+ftrace function_graph 跟踪一次 IRQ 路径 + trace 文本/截图归档
+
+
+### day14
+bring-up checklist（1页）：拿寄存器表如何推进联调
