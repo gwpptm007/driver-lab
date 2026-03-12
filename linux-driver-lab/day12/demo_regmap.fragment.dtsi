@@ -1,0 +1,19 @@
+/*
+ * Day12 DT 片段
+ *
+ * 继续沿用 day09/day10/day11 的 fake platform 设备思路：
+ * - compatible 用来匹配 platform_driver
+ * - reg / interrupts 用来练习资源解析
+ * - 真正的“寄存器空间”这次不走真实 MMIO，而是由驱动内部 shadow regs[] + regmap 封装
+ *
+ * 所以这里的 reg 主要还是为了延续 DT / platform 资源解析链路；
+ * regmap 的后端由 demo_regmap.c 内部软件实现提供。
+ */
+
+demo_regmap@10002000 {
+    compatible = "demo,regmap-pdrv";
+    reg = <0x0 0x10002000 0x0 0x1000>;
+    interrupts = <0x0 0x7a 0x4>; /* SPI 122 level-high */
+    status = "okay";
+    demo,label = "regmap-demo";
+};

@@ -12,9 +12,11 @@
 
 ## W2 嵌入式通用套路
 
-- Day08：platform_driver + probe/remove + devm
+- Day08：platform_driver + probe/remove + devm 资源管理
 - Day09：Device Tree + reg/irq 解析
-- Day10：request_irq + top-half + /proc/interrupts
+- Day10：request_irq + /proc/interrupts 中断计数实现
+- Day11：bottom-half(workqueue) + 把重活下沉 + 延迟统计
+- Day12：regmap 封装寄存器 + debugfs 输出寄存器快照
 
 ## W3 内核裁剪与移植
 
@@ -30,6 +32,4 @@
 - mmap
 - perf / ftrace
 
-
 ## 后续扩展
-

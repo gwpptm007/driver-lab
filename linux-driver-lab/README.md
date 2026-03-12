@@ -23,7 +23,10 @@ linux-driver-lab/
 ├── day06/
 ├── day07/
 ├── day08/
-└── day09/
+├── day09/
+├── day10/
+├── day11/
+└── day12/
 ```
 
 ---
@@ -70,10 +73,14 @@ linux-driver-lab/
 ### day08
 platform_driver + probe/remove + devm 资源管理
 
-
 ### day09
 Device Tree + of_match_table + reg/irq 解析
 
-
 ### day10
 中断计数实现（request_irq + /proc 导出）
+
+### day11
+bottom-half(workqueue) + 把重活下沉 + 粗略延迟统计
+
+### day12
+regmap 封装寄存器 + debugfs 寄存器快照 + regmap 读写路径验证

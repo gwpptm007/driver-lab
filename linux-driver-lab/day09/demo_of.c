@@ -28,24 +28,24 @@
  * 目标是先把“DT -> platform_device -> platform_driver -> probe”这条链跑顺
  * Day10 再继续接 request_irq 和 regmap
  */
-
 #define DRV_NAME "demo_of_pdrv"
 
 /*
  * 私有数据仍然保留
- *
  * 前面 Day08 你已经看过 platform_set_drvdata 和 platform_get_drvdata
  * Day09 继续沿用这套结构
  * 只是数据来源从“手工资源数组”换成了“DT 节点里的属性”
  */
 struct demo_of_priv {
-    struct device *dev;
-    struct resource mem;
-    int linux_irq;
-    u32 raw_reg[4];
-    u32 raw_irq[3];
-    const char *label;
-    const char *match_name;
+    struct device *dev;      /* 关联到当前 platform_device 的 device 对象，便于输出 dev_* 日志 */
+    struct resource mem;     /* 由 reg 解析得到的内存资源，代表设备的 MMIO 地址范围 */
+    int linux_irq;           /* 由 interrupts 解析得到的 Linux IRQ 号（当前课只观察，不真正申请） */
+
+    u32 raw_reg[4];          /* DT 中 reg 属性的原始 cells，便于对照“原始描述”和“解析结果” */
+    u32 raw_irq[3];          /* DT 中 interrupts 属性的原始 cells，便于理解 GIC 中断三元组 */
+
+    const char *label;       /* 自定义教学属性 demo,label，对应设备的人类可读标签 */
+    const char *match_name;  /* of_match_table 里 .data 携带的匹配信息，用于说明匹配来源 */
 };
 
 /*
@@ -125,13 +125,22 @@ static void demo_of_dump_raw_irq(struct device *dev,
  * 在 probe 里能知道 compatible 匹配成功
  * 还能看到一份和 match 项关联的数据
  */
+/*
+ * 设备树匹配表。
+ *
+ * 只要 DT 节点里的 compatible = "demo,day09-pdrv"，
+ * 内核就会尝试把这个节点生成出来的 platform_device 交给本驱动匹配。
+ *
+ * .data 是驱动自己附带的“匹配私有信息”，probe 里可以通过
+ * device_get_match_data() 取出来，常用于区分不同型号设备或不同变体。
+ */
 static const struct of_device_id demo_of_match[] = {
     {
-        .compatible = "demo,day09-pdrv",
-        .data = "day09-of-match",
+        .compatible = "demo,day09-pdrv", /* 与 DT 节点 compatible 进行匹配 */
+        .data = "day09-of-match",        /* 匹配成功后可被 probe 读取的教学字符串 */
     },
     {
-        /* sentinel */
+        /* sentinel：数组结束标记，内核据此知道匹配表到这里结束 */
     }
 };
 MODULE_DEVICE_TABLE(of, demo_of_match);
@@ -144,7 +153,6 @@ MODULE_DEVICE_TABLE(of, demo_of_match);
  *   2. 获取资源
  *   3. 打印资源
  *   4. 保存 drvdata
- *
  * 只是资源来源变成了 DT 节点
  */
 static int demo_of_probe(struct platform_device *pdev)
@@ -262,29 +270,32 @@ static int demo_of_remove(struct platform_device *pdev)
  * Day09 的匹配依据主要是 DT compatible 和 of_match_table
  */
 static struct platform_driver demo_of_driver = {
-    .probe = demo_of_probe,
-    .remove = demo_of_remove,
+    .probe = demo_of_probe,      /* 匹配成功后的入口：完成 DT 解析、资源提取、drvdata 保存 */
+    .remove = demo_of_remove,    /* 设备解绑/模块卸载时的出口：打印状态并观察 devm 自动清理 */
     .driver = {
-        .name = DRV_NAME,
+        .name = DRV_NAME,        /* 驱动名字，供内核驱动模型和日志系统使用 */
         .of_match_table = demo_of_match,
+                                 /* OF 匹配表：决定哪些 compatible 的 DT 节点会交给本驱动 */
     },
 };
 
 static int __init demo_of_init(void)
 {
-    pr_info(DRV_NAME ": module init\n");
+    pr_info(DRV_NAME ": module init\n"); /* 模块加载入口：此时只是把驱动注册到 platform 总线 */
     return platform_driver_register(&demo_of_driver);
+    /* 注册完成后，如果系统里已有匹配节点，就会继续进入 demo_of_probe() */
 }
 
 static void __exit demo_of_exit(void)
 {
-    pr_info(DRV_NAME ": module exit\n");
+    pr_info(DRV_NAME ": module exit\n"); /* 模块卸载入口：准备把驱动从 platform 总线移除 */
     platform_driver_unregister(&demo_of_driver);
+    /* 注销驱动；若设备仍绑定，会先进入 remove() */
 }
 
-module_init(demo_of_init);
-module_exit(demo_of_exit);
+module_init(demo_of_init); 
+module_exit(demo_of_exit); 
 
-MODULE_LICENSE("GPL");
+MODULE_LICENSE("GPL");  
 MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day09 Device Tree reg/irq parse demo");

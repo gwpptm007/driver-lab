@@ -1,0 +1,19 @@
+/*
+ * Day11 DT 片段
+ *
+ * 继续沿用 day09/day10 的 fake platform 设备思路：
+ * - compatible 用来匹配 platform_driver
+ * - reg / interrupts 用来练习资源解析
+ * - QEMU virt 不会真的给这个教学节点产生硬件中断
+ *
+ * 所以 day11 仍然通过 /proc/demo_irq_wq_trigger 做软件注入，
+ * 用来观察：request_irq -> top-half -> queue_work -> worker 的完整链路。
+ */
+
+demo_irq_wq@10001000 {
+    compatible = "demo,irq-wq-pdrv";
+    reg = <0x0 0x10001000 0x0 0x1000>;
+    interrupts = <0x0 0x79 0x4>; /* SPI 121 level-high */
+    status = "okay";
+    demo,label = "irq-workqueue-demo";
+};
