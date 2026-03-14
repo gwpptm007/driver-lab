@@ -1,0 +1,36 @@
+# Day15 tracing / baseline fragment
+# ---------------------------------
+# 这份 fragment 的目标不是把系统调到“最大调试内核”，
+# 而是给 W3 Day15 提供“最小但够用”的 tracing / function_graph / perf 基线能力。
+#
+# 你可以把它理解成：
+# - D15：先把可观测性能力补齐，建立 baseline
+# - D16 / D18：再在这个基础上做裁剪与分类
+#
+# 分组说明：
+# 1) debug / symbol
+#    没有这些，很多 tracing 输出和符号解释都会很难看。
+# 2) tracing / ftrace / function_graph
+#    这是 Day15 当前真正关心的主链路。
+# 3) perf
+#    先保留内核侧能力，用户态 perf 工具后面 D17 再补。
+
+# debug / symbol
+CONFIG_DEBUG_FS=y
+CONFIG_KALLSYMS=y
+CONFIG_KALLSYMS_ALL=y
+
+# tracing / ftrace / function_graph
+CONFIG_TRACEPOINTS=y
+CONFIG_TRACING=y
+CONFIG_FTRACE=y
+CONFIG_FUNCTION_TRACER=y
+CONFIG_FUNCTION_GRAPH_TRACER=y
+CONFIG_DYNAMIC_FTRACE=y
+CONFIG_TRACEFS_FS=y
+CONFIG_IRQSOFF_TRACER=y
+CONFIG_SCHED_TRACER=y
+
+# perf
+CONFIG_PERF_EVENTS=y
+CONFIG_HW_PERF_EVENTS=y

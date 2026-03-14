@@ -1,0 +1,33 @@
+# Day17 function_graph 目标函数集合
+# ----------------------------------
+# 这个文件不是给内核直接读的，而是给 guest_trace_irq_path.sh 逐行写入
+# /sys/kernel/debug/tracing/set_graph_function。
+#
+# 这样做的好处：
+# 1. 你可以很直观地维护“本轮最关心的函数名单”；
+# 2. 不用把函数列表硬编码死在脚本里；
+# 3. 后面扩展实验时，只改这个文件即可。
+#
+# 分组理解：
+# - trigger 入口
+# - IRQ core 派发链
+# - 顶半部 handler
+# - workqueue 路径
+
+# trigger 入口：软件写 debugfs trigger 的总入口
+demo_regmap_trigger_write
+
+# IRQ core 派发链：观察 generic_handle_irq() 是如何把事件送进 handler 的
+generic_handle_irq
+handle_fasteoi_irq
+handle_irq_event
+__handle_irq_event_percpu
+
+# top-half handler
+demo_regmap_handler
+queue_work_on
+
+# bottom-half / worker 路径
+worker_thread
+process_one_work
+demo_regmap_workfn

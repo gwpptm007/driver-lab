@@ -1,0 +1,6 @@
+none on / type rootfs (rw)
+proc on /proc type proc (rw,relatime)
+sysfs on /sys type sysfs (rw,relatime)
+devtmpfs on /dev type devtmpfs (rw,relatime,size=476188k,nr_inodes=119047,mode=755)
+debugfs on /sys/kernel/debug type debugfs (rw,relatime)
+tracefs on /sys/kernel/tracing type tracefs (rw,relatime)

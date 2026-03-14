@@ -1,0 +1,2 @@
+/home/wq7/workspace/driver-lab/linux-driver-lab/day17/config/trace_baseline.fragment
+/home/wq7/workspace/driver-lab/linux-driver-lab/day17/config/trim_round1.fragment

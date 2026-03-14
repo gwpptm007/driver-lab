@@ -1,0 +1,17 @@
+# Day17 trim_round2b.fragment
+# --------------------------
+# 这一版 round2b 在 round1 基础上继续关闭整个 NET 子系统。
+#
+# 原因：
+# 1. 当前 Day17 实验路径不依赖网络：host_collect 走串口，guest 不需要 SSH / DHCP / TCP/IP；
+# 2. perf / ftrace / debugfs / demo_regmap / initramfs 启动链都不依赖 NET；
+# 3. CONFIG_NET=y 在 baseline 里是明确开启的，关闭它可以保证 round1_vs_round2b 至少出现
+#    真实的 .config 差异，而不是继续命中“本来就是 n”的无效裁剪。
+#
+# 预期：
+# - round1_vs_round2b 的 kernel.config 一定发生变化；
+# - kernel_image_sha256 应当再次变化；
+# - 若当前实验环境确实不依赖网络，则功能链继续 PASS。
+
+# 关闭整个网络子系统。
+# CONFIG_NET is not set

@@ -1,0 +1,25 @@
+# Day17 trim_round1.fragment
+# -------------------------
+# 这一版 round1 不再尝试继续关闭“当前 baseline 里本来就是 n 的 SoC 子驱动”，
+# 而是直接关闭当前 baseline 中确认仍然为 y 的顶层总开关：PCI / SCSI。
+#
+# 原因：
+# 1. 前几版 evidence 已经证明，USB/HID/I2C/NVME/BTRFS 这一类候选项在 baseline 中
+#    大量本来就是 n，所以叠 round1/round2b 后最终 .config 不变；
+# 2. QEMU arm64 virt + initramfs + demo_regmap + tracing/perf 这条链在当前实验中不依赖
+#    PCI 和 SCSI 子系统；
+# 3. 先在 round1 上做“肯定能改到最终 .config”的裁剪，便于验证 profile 差异链。
+#
+# 预期：
+# - baseline_vs_round1 的 kernel.config 一定发生变化；
+# - kernel_image_sha256 应当变化；
+# - 若实验环境确实不依赖 PCI/SCSI，则功能链继续 PASS。
+
+# 关闭整个 PCI 子系统。
+# QEMU virt 当前实验不挂 PCI 设备、不走 virtio-pci，guest shell / tracing / perf / demo_regmap
+# 都不依赖 PCI 枚举。
+# CONFIG_PCI is not set
+
+# 关闭整个 SCSI 子系统。
+# 当前使用 initramfs 启动，没有依赖 SCSI 磁盘；virtio-mmio + initramfs 不需要它。
+# CONFIG_SCSI is not set

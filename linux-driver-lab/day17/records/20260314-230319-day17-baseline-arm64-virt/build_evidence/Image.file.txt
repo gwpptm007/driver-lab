@@ -1,0 +1,1 @@
+/home/wq7/workspace/driver-lab/linux-driver-lab/../kernel-src/linux-5.15.10/output/arm64/Image: Linux kernel ARM64 boot executable Image, little-endian, 4K pages
