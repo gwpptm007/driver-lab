@@ -144,8 +144,12 @@ done
 cp demo_regmap.ko "$ROOTFS/"
 cp guest_trace_irq_path.sh "$ROOTFS/bin/day13_trace_irq_path.sh"
 cp guest_archive_trace.sh "$ROOTFS/bin/day13_archive_trace.sh"
+# Day15 的 guest_collect.sh 也一起打进 rootfs。这样后面做 baseline 采样时，
+# 宿主机脚本就可以通过串口直接调用 /bin/day15_guest_collect.sh，
+# 不需要你在 guest 里再手工拷脚本。
+cp ../day15/collect/guest_collect.sh "$ROOTFS/bin/day15_guest_collect.sh"
 cp function_graph_targets.txt "$ROOTFS/etc/day13_function_graph_targets.txt"
-chmod +x "$ROOTFS/bin/day13_trace_irq_path.sh" "$ROOTFS/bin/day13_archive_trace.sh"
+chmod +x "$ROOTFS/bin/day13_trace_irq_path.sh" "$ROOTFS/bin/day13_archive_trace.sh" "$ROOTFS/bin/day15_guest_collect.sh"
 
 cat > "$ROOTFS/init" <<'EOT'
 #!/bin/sh
@@ -162,6 +166,7 @@ echo "2) cat /sys/kernel/debug/demo_regmap/snapshot"
 echo "3) /bin/day13_trace_irq_path.sh 1"
 echo "4) cat /tmp/day13_irq_function_graph.txt"
 echo "5) /bin/day13_archive_trace.sh"
+echo "6) /bin/day15_guest_collect.sh   # Day15 baseline 采样"
 echo "==============================================================="
 exec /bin/sh
 EOT

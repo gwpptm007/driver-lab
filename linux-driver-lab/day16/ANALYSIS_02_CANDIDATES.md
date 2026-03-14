@@ -1,0 +1,57 @@
+# Day16 ANALYSIS_02_CANDIDATES
+
+## 1. round1 第一批候选项
+
+### 网络驱动
+
+- `CONFIG_THUNDER_NIC_PF`
+- `CONFIG_THUNDER_NIC_BGX`
+- `CONFIG_HNS3`
+- `CONFIG_HNS3_ENET`
+- `CONFIG_E1000`
+- `CONFIG_E1000E`
+- `CONFIG_IGB`
+- `CONFIG_IGBVF`
+- `CONFIG_SKY2`
+
+### USB / HID / Storage
+
+- `CONFIG_USB_STORAGE`
+- `CONFIG_USB_EHCI_HCD`
+- `CONFIG_USB_EHCI_HCD_PLATFORM`
+- `CONFIG_USB_OHCI_HCD`
+- `CONFIG_USB_OHCI_HCD_PLATFORM`
+- `CONFIG_USB_HID`
+
+### 声音
+
+- `CONFIG_SOUND`
+- `CONFIG_SND`
+
+### 第二梯队（round1 先缓）
+
+- `CONFIG_I2C_CHARDEV`
+- `CONFIG_MMC`
+- `CONFIG_MMC_SDHCI`
+- `CONFIG_MMC_SDHCI_PLTFM`
+- `CONFIG_LEDS_TRIGGER_CPU`
+- `CONFIG_BLK_DEV_LOOP`
+
+---
+
+## 2. round2 候选方向
+
+在 round1 之后，编译日志仍然暴露出这些残余大块：
+
+- DRM / bridge / HDMI / display 平台驱动
+- SoundWire
+- I2C bit-banging / GPIO I2C
+- USB ChipIdea
+
+因此 round2 主要转向：
+
+- `DRM_*` 平台和 bridge 驱动
+- `SOUNDWIRE`
+- `I2C_ALGOBIT`
+- `I2C_GPIO`
+- `USB_CHIPIDEA*`

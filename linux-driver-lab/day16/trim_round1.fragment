@@ -1,0 +1,25 @@
+# Day16 trim_round1.fragment
+# 第一轮已验证通过的候选关闭项
+
+# network drivers
+# CONFIG_THUNDER_NIC_PF is not set
+# CONFIG_THUNDER_NIC_BGX is not set
+# CONFIG_HNS3 is not set
+# CONFIG_HNS3_ENET is not set
+# CONFIG_E1000 is not set
+# CONFIG_E1000E is not set
+# CONFIG_IGB is not set
+# CONFIG_IGBVF is not set
+# CONFIG_SKY2 is not set
+
+# sound
+# CONFIG_SOUND is not set
+# CONFIG_SND is not set
+
+# usb / storage / host controller (round1 conservative)
+# CONFIG_USB_STORAGE is not set
+# CONFIG_USB_EHCI_HCD is not set
+# CONFIG_USB_EHCI_HCD_PLATFORM is not set
+# CONFIG_USB_OHCI_HCD is not set
+# CONFIG_USB_OHCI_HCD_PLATFORM is not set
+# CONFIG_USB_HID is not set

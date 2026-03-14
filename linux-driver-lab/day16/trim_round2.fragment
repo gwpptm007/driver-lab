@@ -1,0 +1,29 @@
+# Day16 trim_round2.fragment
+# 第二轮候选关闭项（基于 round1 之上）
+
+# drm / display platform drivers
+# CONFIG_DRM_NOUVEAU is not set
+# CONFIG_DRM_EXYNOS is not set
+# CONFIG_DRM_ROCKCHIP is not set
+# CONFIG_DRM_RCAR_DW_HDMI is not set
+# CONFIG_DRM_MSM is not set
+# CONFIG_DRM_LONTIUM_LT9611 is not set
+# CONFIG_DRM_LONTIUM_LT9611UXC is not set
+# CONFIG_DRM_SII902X is not set
+# CONFIG_DRM_I2C_ADV7511 is not set
+# CONFIG_DRM_DW_HDMI is not set
+# CONFIG_DRM_DW_HDMI_CEC is not set
+# CONFIG_DRM_HISI_HIBMC is not set
+# CONFIG_DRM_MEDIATEK is not set
+# CONFIG_DRM_MESON is not set
+
+# soundwire
+# CONFIG_SOUNDWIRE is not set
+
+# i2c helper drivers
+# CONFIG_I2C_ALGOBIT is not set
+# CONFIG_I2C_GPIO is not set
+
+# usb chipidea platform drivers
+# CONFIG_USB_CHIPIDEA is not set
+# CONFIG_USB_CHIPIDEA_TEGRA is not set
