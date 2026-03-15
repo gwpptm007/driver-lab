@@ -1,0 +1,14 @@
+Day19 summary
+=============
+
+baseline : D15 baseline  image=38867 KiB  boot=2008 ms  memfree=968564 KiB
+trim1    : D16 trim1 (round1)  image=37237 KiB  boot=2021 ms  memfree=969716 KiB
+trim2    : D18 trim2 (classified)  image=27417 KiB  boot=2054 ms  memfree=961808 KiB
+
+D15 -> D16 image delta : -1630 KiB
+D15 -> D16 boot delta  : +13 ms
+D15 -> D16 mem delta   : +1152 KiB
+
+Interpretation:
+- D15 -> D16 is the most stable same-context comparison.
+- D18 can be included in the table, but boot/rootfs must be read with a perf-cycle caveat.

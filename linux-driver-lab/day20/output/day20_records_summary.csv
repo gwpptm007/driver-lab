@@ -1,0 +1,2 @@
+record_dir,mode,regression_pass,fail_keys,missing_keys,dry_run_ready,missing_artifacts,debugfs_ok,demo_insmod_ok,snapshot_ok,trigger_ok,rmmod_ok,tracing_ok,fgraph_ok,perf_ok,stress_ok,dmesg_clean
+20260315-121428-day20-all-arm64-virt,all,,,,0,"image,rootfs,dtb",,,,,,,,,,

@@ -1,0 +1,16 @@
+# Day18 10_required.fragment
+# --------------------------
+# 分类：必须项（系统启动与最小运行环境）
+# 目标：显式表达“哪些不是为了 demo 功能，而是为了系统活着”。
+
+CONFIG_BINFMT_ELF=y
+CONFIG_BLK_DEV_INITRD=y
+CONFIG_DEVTMPFS=y
+CONFIG_DEVTMPFS_MOUNT=y
+CONFIG_PROC_FS=y
+CONFIG_SYSFS=y
+CONFIG_TMPFS=y
+CONFIG_TMPFS_POSIX_ACL=y
+CONFIG_PRINTK=y
+CONFIG_MODULES=y
+CONFIG_UNIX=y

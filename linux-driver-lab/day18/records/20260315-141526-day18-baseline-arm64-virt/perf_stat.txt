@@ -1,0 +1,11 @@
+
+ Performance counter stats for '/bin/true':
+
+              2.22 msec task-clock                #    0.525 CPUs utilized          
+
+       0.004228752 seconds time elapsed
+
+       0.004810000 seconds user
+       0.000000000 seconds sys
+
+

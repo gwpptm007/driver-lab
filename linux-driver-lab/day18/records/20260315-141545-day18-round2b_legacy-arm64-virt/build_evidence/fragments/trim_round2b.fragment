@@ -1,0 +1,8 @@
+# Day18 legacy trim_round2b.fragment
+# ----------------------------------
+# 在 trim_round1 的基础上继续关闭整个网络子系统。
+# Day18 中保留它，主要用于：
+# 1. 和 day17 的 round2b 逻辑保持连续性
+# 2. 给 classified profile 提供一个“legacy 对照组”
+
+# CONFIG_NET is not set

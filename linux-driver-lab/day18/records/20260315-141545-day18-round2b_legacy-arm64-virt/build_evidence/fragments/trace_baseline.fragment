@@ -1,0 +1,25 @@
+# Day18 trace_baseline.fragment
+# -----------------------------
+# Day18 仍然沿用 W3 的最小可观测性 baseline：
+# 不是开成“调试大满贯”，而是保证 baseline / legacy / classified 三条链
+# 都有一致的 tracing / function_graph / perf 内核能力。
+
+# debug / symbol
+CONFIG_DEBUG_FS=y
+CONFIG_KALLSYMS=y
+CONFIG_KALLSYMS_ALL=y
+
+# tracing / ftrace / function_graph
+CONFIG_TRACEPOINTS=y
+CONFIG_TRACING=y
+CONFIG_FTRACE=y
+CONFIG_FUNCTION_TRACER=y
+CONFIG_FUNCTION_GRAPH_TRACER=y
+CONFIG_DYNAMIC_FTRACE=y
+CONFIG_TRACEFS_FS=y
+CONFIG_IRQSOFF_TRACER=y
+CONFIG_SCHED_TRACER=y
+
+# perf
+CONFIG_PERF_EVENTS=y
+CONFIG_HW_PERF_EVENTS=y

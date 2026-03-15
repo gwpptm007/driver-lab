@@ -1,0 +1,1 @@
+qemu-system-aarch64 -machine virt -cpu cortex-a57 -m 1024 -nographic -kernel None -dtb None -initrd None -append 'console=ttyAMA0 root=/dev/ram0 rw rdinit=/init'

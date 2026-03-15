@@ -1,0 +1,14 @@
+# Day18 90_trim_day18.fragment
+# ----------------------------
+# 这是 day18 的“分类裁剪结果表达”。
+# 它和 round2b_legacy 的最终目标保持一致：
+#   - 去掉 PCI
+#   - 去掉 SCSI
+#   - 去掉 NET
+# 但不同点在于：
+#   - legacy: 你只能看到“删了什么”
+#   - classified: 你既能看到“删了什么”，也能看到“为什么其余项必须保留”
+
+# CONFIG_PCI is not set
+# CONFIG_SCSI is not set
+# CONFIG_NET is not set

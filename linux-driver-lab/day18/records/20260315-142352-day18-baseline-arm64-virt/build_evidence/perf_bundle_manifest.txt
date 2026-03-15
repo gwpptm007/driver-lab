@@ -1,0 +1,10 @@
+perf /home/wq7/workspace/driver-lab/linux-driver-lab/day18/output/perf/perf
+perf_lib_dirs /usr/lib/gcc-cross/aarch64-linux-gnu/11/}:/usr/lib/gcc-cross/aarch64-linux-gnu/11/../../../../aarch64-linux-gnu/lib/../lib/}:/lib/aarch64-linux-gnu/}:/lib/../lib/}:/usr/lib/aarch64-linux-gnu/}:/usr/lib/../lib/}:/usr/lib/gcc-cross/aarch64-linux-gnu/11/../../../../aarch64-linux-gnu/lib/}:/lib/}:/usr/lib/
+interp /lib/ld-linux-aarch64.so.1 -> /usr/lib/gcc-cross/aarch64-linux-gnu/11/../../../../aarch64-linux-gnu/lib/../lib/ld-linux-aarch64.so.1 (target /lib/ld-linux-aarch64.so.1)
+needed libm.so.6 -> /usr/lib/gcc-cross/aarch64-linux-gnu/11/../../../../aarch64-linux-gnu/lib/../lib/libm.so.6 (target /lib/libm.so.6)
+needed libc.so.6 -> /usr/lib/gcc-cross/aarch64-linux-gnu/11/../../../../aarch64-linux-gnu/lib/../lib/libc.so.6 (target /lib/libc.so.6)
+interp /lib/ld-linux-aarch64.so.1 -> /usr/lib/gcc-cross/aarch64-linux-gnu/11/../../../../aarch64-linux-gnu/lib/../lib/ld-linux-aarch64.so.1 (target /lib/ld-linux-aarch64.so.1)
+needed ld-linux-aarch64.so.1 -> /usr/lib/gcc-cross/aarch64-linux-gnu/11/../../../../aarch64-linux-gnu/lib/../lib/ld-linux-aarch64.so.1 (target /lib/ld-linux-aarch64.so.1)
+needed ld-linux-aarch64.so.1 -> /usr/lib/gcc-cross/aarch64-linux-gnu/11/../../../../aarch64-linux-gnu/lib/../lib/ld-linux-aarch64.so.1 (target /lib/ld-linux-aarch64.so.1)
+needed libc.so.6 -> /usr/lib/gcc-cross/aarch64-linux-gnu/11/../../../../aarch64-linux-gnu/lib/../lib/libc.so.6 (target /lib/libc.so.6)
+needed ld-linux-aarch64.so.1 -> /usr/lib/gcc-cross/aarch64-linux-gnu/11/../../../../aarch64-linux-gnu/lib/../lib/ld-linux-aarch64.so.1 (target /lib/ld-linux-aarch64.so.1)

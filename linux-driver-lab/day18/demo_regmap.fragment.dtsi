@@ -1,0 +1,32 @@
+/*
+ * Day18 设备树片段说明
+ * ---------------------
+ * 这个节点继续沿用 day09/day10/day11/day12 的 fake platform 设备思路：
+ *
+ * - compatible : 决定由哪个 platform_driver 接管
+ * - reg        : 让我们继续练习平台资源解析(platform_get_resource)
+ * - interrupts : 让我们继续练习 IRQ 解析(platform_get_irq/request_irq)
+ *
+ * 需要特别注意：
+ * 这里的 reg 主要用于“教学上的资源解析链路”，而不是要求你去真的 ioremap 一段
+ * QEMU 已实现的寄存器空间。day12/day13 的“寄存器访问”核心在于：
+ *
+ *   shadow regs[] + regmap
+ *
+ * 也就是说：
+ * - DT 节点依然像一个普通 platform 设备
+ * - 但寄存器后端是驱动内部的软件实现
+ *
+ * interrupts = <0x0 0x7a 0x4> 的教学意义：
+ * - 让你既能看到 raw IRQ cells
+ * - 也能看到 platform_get_irq() 解析出来的 Linux IRQ 号
+ * - 后续再配合 trigger + function_graph 观察 IRQ core 派发路径
+ */
+
+demo_regmap@10002000 {
+    compatible = "demo,regmap-pdrv";   /* 和 demo_regmap_match[].compatible 对应 */
+    reg = <0x0 0x10002000 0x0 0x1000>;  /* 教学用 MEM 资源：继续保留 DT 资源解析链路 */
+    interrupts = <0x0 0x7a 0x4>;        /* GIC SPI 122, level-high */
+    status = "okay";                   /* 允许该节点被内核枚举并匹配到驱动 */
+    demo,label = "regmap-demo";        /* 额外教学标签：便于日志与 snapshot 输出辨识 */
+};

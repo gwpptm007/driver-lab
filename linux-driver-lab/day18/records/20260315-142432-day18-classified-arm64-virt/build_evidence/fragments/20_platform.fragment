@@ -1,0 +1,17 @@
+# Day18 20_platform.fragment
+# --------------------------
+# 分类：平台项（arm64 + QEMU virt + DT + IRQ + regmap）
+# 目标：把“当前实验为什么能在 virt 上启动、probe、收中断”说清楚。
+
+CONFIG_OF=y
+CONFIG_OF_ADDRESS=y
+CONFIG_OF_IRQ=y
+CONFIG_OF_RESERVED_MEM=y
+CONFIG_SERIAL_AMBA_PL011=y
+CONFIG_SERIAL_AMBA_PL011_CONSOLE=y
+CONFIG_ARM_GIC=y
+CONFIG_ARM_GIC_V3=y
+CONFIG_IRQ_DOMAIN=y
+CONFIG_REGMAP=y
+CONFIG_REGMAP_MMIO=y
+CONFIG_COMMON_CLK=y

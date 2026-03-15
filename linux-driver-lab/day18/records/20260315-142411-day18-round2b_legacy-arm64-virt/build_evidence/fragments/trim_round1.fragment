@@ -1,0 +1,8 @@
+# Day18 legacy trim_round1.fragment
+# ---------------------------------
+# 兼容 day17 的 legacy 表达：先关闭 PCI 与 SCSI。
+# 这份 fragment 不是 day18 的推荐最终表达，只是保留连续性，
+# 便于和 round2b_legacy 做对照。
+
+# CONFIG_PCI is not set
+# CONFIG_SCSI is not set

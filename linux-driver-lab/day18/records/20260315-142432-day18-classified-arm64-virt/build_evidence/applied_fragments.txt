@@ -1,0 +1,6 @@
+/home/wq7/workspace/driver-lab/linux-driver-lab/day18/config/trace_baseline.fragment
+/home/wq7/workspace/driver-lab/linux-driver-lab/day18/config/10_required.fragment
+/home/wq7/workspace/driver-lab/linux-driver-lab/day18/config/20_platform.fragment
+/home/wq7/workspace/driver-lab/linux-driver-lab/day18/config/30_debug.fragment
+/home/wq7/workspace/driver-lab/linux-driver-lab/day18/config/40_perf.fragment
+/home/wq7/workspace/driver-lab/linux-driver-lab/day18/config/90_trim_day18.fragment

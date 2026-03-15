@@ -1,0 +1,9 @@
+# Day18 40_perf.fragment
+# ----------------------
+# 分类：性能项（perf/profile）
+# 目标：明确保留 perf 侧必需能力，而不是把 perf 混在大杂烩 baseline 里。
+
+CONFIG_PERF_EVENTS=y
+CONFIG_HW_PERF_EVENTS=y
+CONFIG_HAVE_PERF_EVENTS=y
+CONFIG_CONTEXT_SWITCH_TRACER=y

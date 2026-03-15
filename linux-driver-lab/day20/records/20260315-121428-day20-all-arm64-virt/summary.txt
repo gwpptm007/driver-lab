@@ -1,0 +1,9 @@
+Day20 dry-run only.
+Detected artifacts:
+- image: MISSING
+- rootfs: MISSING
+- dtb: MISSING
+- module: /mnt/data/day20_work/linux-driver-lab/day18/records/20260315-142432-day18-classified-arm64-virt/build_evidence/demo_regmap.ko
+
+DRY_RUN_READY=0
+MISSING_ARTIFACTS=image,rootfs,dtb

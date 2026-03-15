@@ -1,0 +1,63 @@
+category,key,value,note
+stage,baseline.stage_label,D15 baseline,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.image_kib,38867,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.delta_image_kib_vs_baseline,0,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.rootfs_kib,1181,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.delta_rootfs_kib_vs_baseline,0,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.boot_ms,2008,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.delta_boot_ms_vs_baseline,0,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.memfree_kib,968564,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.delta_memfree_kib_vs_baseline,0,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.slab_kib,12252,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.delta_slab_kib_vs_baseline,0,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.modules_built_count,,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.modules_loaded_count,1,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.function_graph_ok,yes,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.perf_ok,no,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.pass_status,PASS,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.risk_note,可作为 Day19 的起点基线；perf 用户态尚未进入 rootfs。,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,baseline.source_primary,day15/RESULTS.md,与 D16 round1 基本同口径；和 D18 仅可作阶段性参考。
+stage,trim1.stage_label,D16 trim1 (round1),与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.image_kib,37237,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.delta_image_kib_vs_baseline,-1630,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.rootfs_kib,1181,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.delta_rootfs_kib_vs_baseline,0,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.boot_ms,2021,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.delta_boot_ms_vs_baseline,+13,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.memfree_kib,969716,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.delta_memfree_kib_vs_baseline,+1152,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.slab_kib,12108,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.delta_slab_kib_vs_baseline,-144,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.modules_built_count,,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.modules_loaded_count,1,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.function_graph_ok,yes,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.perf_ok,"kernel-side-kept,userland-not-shown",与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.pass_status,PASS,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.risk_note,D16 内部还有 round2b 增强版，但 Day19 对外口径先把 round1 作为 trim1。,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim1.source_primary,day16/RESULTS_ROUND1.md,与 D15 baseline 同一轮粗裁语境下可直接比较。
+stage,trim2.stage_label,D18 trim2 (classified),D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.image_kib,27417,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.delta_image_kib_vs_baseline,-11450,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.rootfs_kib,8128,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.delta_rootfs_kib_vs_baseline,+6947,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.boot_ms,2054,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.delta_boot_ms_vs_baseline,+46,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.memfree_kib,961808,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.delta_memfree_kib_vs_baseline,-6756,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.slab_kib,8236,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.delta_slab_kib_vs_baseline,-4016,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.modules_built_count,2,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.modules_loaded_count,1,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.function_graph_ok,yes,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.perf_ok,yes/yes,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.pass_status,PASS,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.risk_note,rootfs 已含 perf，boot 与 rootfs 体积都受 D17/D18 周期变化影响；更适合作为当前最终形态和方法旁证。,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+stage,trim2.source_primary,day18/records/compare-20260315-142441.csv,D18 已进入 perf/rootfs 新周期；数字可入表，但跨 D15/D16 只能作阶段参考，不能直接下纯收益结论。
+day20,SUITE_READY,1,from day20 delivery status
+day20,DELIVERY_READY,1,from day20 delivery status
+day20,RUNTIME_READY,0,from day20 delivery status
+day20,REGRESSION_PASS,0,from day20 delivery status
+day20,LATEST_RECORD,20260315-121428-day20-all-arm64-virt,from day20 delivery status
+day20,LATEST_MODE,all,from day20 delivery status
+day20,LATEST_VERDICT,MISSING_INPUTS,from day20 delivery status
+day20,MISSING_ARTIFACTS,"image,rootfs,dtb",from day20 delivery status

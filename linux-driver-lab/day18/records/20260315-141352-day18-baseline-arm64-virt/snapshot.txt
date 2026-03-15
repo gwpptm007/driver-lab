@@ -1,0 +1,19 @@
+module=demo_regmap
+label=regmap-demo
+match_name=demo,regmap-pdrv
+linux_irq=49
+raw_reg=<0x0 0x10002000 0x0 0x1000>
+raw_irq=<0x0 0x7a 0x4>
+----------------------------------------
+CTRL             reg=0x00 val=0x00000001 (1)
+STATUS           reg=0x04 val=0x00000004 (4)
+IRQ_COUNT        reg=0x08 val=0x00000000 (0)
+WORK_RUNS        reg=0x0c val=0x00000000 (0)
+WORK_ITEMS       reg=0x10 val=0x00000000 (0)
+PENDING_EVENTS   reg=0x14 val=0x00000000 (0)
+LAST_BATCH       reg=0x18 val=0x00000000 (0)
+LAST_LATENCY_US  reg=0x1c val=0x00000000 (0)
+MAX_LATENCY_US   reg=0x20 val=0x00000000 (0)
+AVG_LATENCY_US   reg=0x24 val=0x00000000 (0)
+WORK_MS          reg=0x28 val=0x00000014 (20)
+VERSION          reg=0x2c val=0x00001300 (4864)

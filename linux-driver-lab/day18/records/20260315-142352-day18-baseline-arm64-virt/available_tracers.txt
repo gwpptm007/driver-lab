@@ -1,0 +1,1 @@
+function_graph wakeup_dl wakeup_rt wakeup irqsoff function nop

@@ -1,0 +1,9 @@
+source_path,role,used_for,notes
+docs/W3_REVIEW.md,background,Day21 report background and method framing,D21 original requirement and recommended report structure
+day15/RESULTS.md,baseline evidence,D15 baseline narrative and key metrics,baseline frozen environment and Day15 context
+day16/RESULTS_ROUND1.md,trim1 evidence,D16 trim1 metrics and narrative,first-round trim result
+day18/records/compare-20260315-142441.csv,trim2 evidence,D18 trim2 metrics and pass state,classified vs legacy compare input
+day19/output/day19_compare_table.csv,primary data table,core baseline/trim1/trim2 numbers,Day21 reuses Day19 unified table instead of recomputing
+day19/output/day19_compare_report_final.md,interpretation,quantitative wording and caveats,source of stable-vs-caveat framing
+day20/output/day20_delivery_status.env,regression status,SUITE_READY/DELIVERY_READY/RUNTIME_READY/REGRESSION_PASS,Day21 uses this for current runtime posture
+day20/FINAL_SUMMARY.md,regression narrative,Day20 positioning and current conclusion,used in final recommendation and rollback wording

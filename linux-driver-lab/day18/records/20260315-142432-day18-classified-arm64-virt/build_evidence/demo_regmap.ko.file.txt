@@ -1,0 +1,1 @@
+/home/wq7/workspace/driver-lab/linux-driver-lab/day18/demo_regmap.ko: ELF 64-bit LSB relocatable, ARM aarch64, version 1 (SYSV), BuildID[sha1]=7f6612382fcf96cfe8949dad6eefdd7d99f60bec, with debug_info, not stripped

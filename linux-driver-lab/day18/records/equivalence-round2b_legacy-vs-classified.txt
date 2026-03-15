@@ -1,0 +1,13 @@
+A profile : round2b_legacy
+B profile : classified
+A record  : /home/wq7/workspace/driver-lab/linux-driver-lab/day18/records/20260315-141545-day18-round2b_legacy-arm64-virt
+B record  : /home/wq7/workspace/driver-lab/linux-driver-lab/day18/records/20260315-141604-day18-classified-arm64-virt
+
+kernel.config : identical
+savedefconfig : skipped (missing one side)
+
+sha256 summary
+kernel.config  A: 22533047ca91fb26a0c683a68a22bb75faeb72a31e1304fdbc23ea574bfca8c7
+kernel.config  B: 22533047ca91fb26a0c683a68a22bb75faeb72a31e1304fdbc23ea574bfca8c7
+
+done -> /home/wq7/workspace/driver-lab/linux-driver-lab/day18/records/equivalence-round2b_legacy-vs-classified.txt
