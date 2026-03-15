@@ -15,20 +15,10 @@ Linux 驱动学习实验目录。
 linux-driver-lab/
 ├── README.md
 ├── docs/
-├── day01/
-├── day02/
-├── day03/
-├── day04/
-├── day05/
-├── day06/
-├── day07/
-├── day08/
-├── day09/
-├── day10/
-├── day11/
-├── day12/
-├── day13/
-└── day14/
+├── day01/ ~ day14/   字符设备 / platform_driver / DT / regmap / irq / ftrace 基础线
+├── day15/ ~ day18/   配置裁剪 / profile / perf 能力收口
+├── day19/ ~ day21/   回归套件 / 总结 / 最终交付文档线
+└── day22/ ~ day35/   PCIe 作品线（W4-W5）
 ```
 
 ---
@@ -51,45 +41,48 @@ linux-driver-lab/
 
 ## 当前内容
 
-### day01
-基础字符设备驱动框架
+### day01 ~ day07
+字符设备基础、ioctl/sysfs/debugfs、waitqueue/workqueue、回归脚本与阶段总结。
 
-### day02
-加入 ioctl 和用户态测试
+### day08 ~ day14
+platform_driver、Device Tree、request_irq、中断计数、bottom half、regmap、ftrace 和 bring-up checklist。
 
-### day03
-加入 sysfs
+### day15 ~ day18
+裁剪、profile、perf/tracing 能力保持、结果比对与交付收口。
 
-### day04
-加入 debugfs
+### day19 ~ day21
+回归方案、总结文档、最终提交版报告与脚本化输出。
 
-### day05
-加入 waitqueue / workqueue
+### day22 ~ day28（W4）
+PCIe 基本功学习线：  
+QEMU PCI 设备选型（ivshmem-doorbell）→ `pci_driver` 骨架 → BAR/MMIO/共享内存协议 → 消息中断向量 → 用户态工具 → remove/循环卸载 → 证据归档。
 
-### day06
-加入回归和压力测试脚本
+### day29 ~ day35（W5）
+DMA/性能分析学习线：  
+DMA-capable 设备（QEMU EDU）→ `dma_alloc_coherent` → `mmap` 零拷贝 → bench → perf → ftrace → 稳定性 → 性能与风险报告。
 
-### day07
-整理 README 和阶段总结
+---
 
-### day08
-platform_driver + probe/remove + devm 资源管理
+## W4-W5 当前推荐路线
 
-### day09
-Device Tree + of_match_table + reg/irq 解析
+- **W4 使用 ivshmem-doorbell**
+  - 先把 PCI 设备发现、BAR、MMIO、共享内存、消息中断、用户态接口、remove 对称释放这套基本功学透。
+- **W5 使用 DMA-capable 设备（推荐 QEMU EDU）**
+  - 再把 `dma_alloc_coherent`、DMA 校验、`mmap`、bench、perf、ftrace、并发与稳定性做成“真闭环”。
 
-### day10
-中断计数实现（request_irq + /proc 导出）
+也就是说：
+- W4 是 PCI 基本功线；
+- W5 是 DMA/性能分析线；
+- 两段组合成最终的 PCIe 作品。
 
-### day11
-bottom-half(workqueue) + 把重活下沉 + 粗略延迟统计
+---
 
-### day12
-regmap 封装寄存器 + debugfs 寄存器快照 + regmap 读写路径验证
+## 建议阅读顺序
 
-### day13
-ftrace function_graph 跟踪一次 IRQ 路径 + trace 文本/截图归档
-
-
-### day14
-bring-up checklist（1页）：拿寄存器表如何推进联调
+1. `docs/W3_REVIEW.md`
+2. `docs/W3_BASELINE_AND_REGRESSION_GUIDE.md`
+3. `docs/W4_PCIE_PLAN.md`
+4. `docs/W5_DMA_PERF_PLAN.md`
+5. `day22/START_HERE.md`
+6. `day29/START_HERE.md`
+7. 之后按 day22 → day35 顺序推进

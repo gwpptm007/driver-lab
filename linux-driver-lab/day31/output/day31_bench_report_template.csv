@@ -1,0 +1,4 @@
+path,mode,payload_bytes,iterations,warmup,p50_us,p99_us,throughput_mbps,cpu_user_pct,cpu_sys_pct,notes
+ioctl,baseline,4096,10000,1000,,,,,,
+mmap,baseline,4096,10000,1000,,,,,,
+dma,baseline,4096,10000,1000,,,,,,

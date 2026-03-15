@@ -1,0 +1,56 @@
+#!/bin/sh
+# day22 guest init
+#
+# 目标：
+#   1. guest 启动后自动完成 day22 的检查动作。
+#   2. 通过明确的 BEGIN/END marker 让主机侧能够从 serial.log 自动切分出 records。
+#   3. 执行完成后自动关机，便于 QEMU 非交互回归。
+
+PATH=/bin:/sbin
+export PATH
+
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev || true
+mkdir -p /sys/kernel/debug
+mount -t debugfs debugfs /sys/kernel/debug || true
+
+echo '===DAY22:BOOT:BEGIN===' 
+echo "day22 guest booted, run-id=__DAY22_RUN_ID__"
+uname -a || true
+echo '===DAY22:BOOT:END===' 
+
+# 先打印 PCI 设备简表，验证 guest 至少看到了总线上的设备。
+echo '===DAY22:LSPCI_NN:BEGIN===' 
+/bin/lspci -nn || echo '[day22-guest] lspci -nn failed'
+echo '===DAY22:LSPCI_NN:END===' 
+
+# 再打印更详细的 -vv 输出，这是 day22 的主验收证据。
+echo '===DAY22:LSPCI_VV_NN:BEGIN===' 
+/bin/lspci -vv -nn || echo '[day22-guest] lspci -vv -nn failed'
+echo '===DAY22:LSPCI_VV_NN:END===' 
+
+# 只抓和 PCI 强相关的 dmesg，避免 serial.log 噪音过大。
+echo '===DAY22:DMESG_PCI:BEGIN===' 
+dmesg | grep -i pci || true
+echo '===DAY22:DMESG_PCI:END===' 
+
+# sysfs 里的 PCI 设备目录，是 day22 的第二条证据链。
+echo '===DAY22:SYSFS_PCI_DEVICES:BEGIN===' 
+ls -l /sys/bus/pci/devices || true
+/bin/pci_sysfs_dump || echo '[day22-guest] pci_sysfs_dump failed'
+echo '===DAY22:SYSFS_PCI_DEVICES:END===' 
+
+# 取一个最简单的 config 空间可见性证据。
+echo '===DAY22:PCI_CONFIG_DUMP:BEGIN===' 
+for dev in /sys/bus/pci/devices/*; do
+    [ -e "$dev/config" ] || continue
+    echo "[config] $dev"
+    hexdump -C "$dev/config" | head -n 8 || true
+done
+echo '===DAY22:PCI_CONFIG_DUMP:END===' 
+
+sync
+sleep 1
+echo '===DAY22:COMPLETE===' 
+poweroff -f
