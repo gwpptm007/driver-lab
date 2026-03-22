@@ -1,0 +1,1 @@
+shm-read ok: read=19 text=hello_day24_ivshmem

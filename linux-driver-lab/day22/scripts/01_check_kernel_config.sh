@@ -3,6 +3,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # shellcheck source=/dev/null
 source "${SCRIPT_DIR}/common.sh"
+auto_fill_platform_paths
 
 # day22 的目的不是替你编译内核，而是尽早发现“平台能力压根没打开”的问题。
 # 所以这里只做检查，不做自动改 config。

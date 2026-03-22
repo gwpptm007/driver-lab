@@ -1,28 +1,37 @@
 # day22 Makefile
 #
-# 目标：把 day22 变成一个“目录内自足”的小工程。
-# 说明：
-#   1. 不调用前面 dayXX 的脚本。
-#   2. 通过环境变量接入你本机已有的 Image / BusyBox / QEMU / 内核构建目录。
-#   3. 除“内核编译产物”外，day22 相关代码、脚本、工具、模块骨架全部收口在本目录。
+# 这一版 day22 默认使用 ivshmem-plain：
+#   1. D22 专注 PCI 枚举、BAR 可见性、lspci 证据归档。
+#   2. 不再强依赖 ivshmem-server。
+#   3. D25 再决定 IRQ/MSI 的实验后端。
 
 SHELL := /bin/bash
 DAY22_ROOT := $(CURDIR)
 
-.PHONY: help check build-tools build-lspci rootfs server qemu collect run module clean
+.PHONY: help discover-paths kernel-pci-prep check build-tools build-lspci selftest-tool rootfs backend server qemu collect run module clean
 
 help:
 	@echo "day22 targets:"
-	@echo "  make check        - 检查宿主机工具、路径与内核配置"
-	@echo "  make build-tools  - 构建 guest 侧 C 工具 pci_sysfs_dump"
-	@echo "  make build-lspci  - 尝试构建 guest 侧 aarch64 lspci（可选）"
-	@echo "  make rootfs       - 构建 day22 独立 initramfs"
-	@echo "  make server       - 启动 ivshmem-server"
-	@echo "  make qemu         - 启动 QEMU 并运行 day22 自动检查"
-	@echo "  make collect      - 从最近一次 serial.log 中切分 records"
-	@echo "  make run          - 一键执行 day22 全流程"
-	@echo "  make module       - 构建 day22_ivshmem_stub 内核模块（需 KDIR）"
-	@echo "  make clean        - 清理 workdir 临时文件"
+	@echo "  make discover-paths - 扫描当前仓库中常见的 Image/.config/BusyBox/lspci 路径"
+	@echo "  make kernel-pci-prep - 帮你把 arm64 内核的 PCI/MSI/host 配置打开并生成报告"
+	@echo "  make check         - 检查宿主机工具、路径与内核配置"
+	@echo "  make build-tools   - 构建 guest 侧 C 工具 pci_sysfs_dump"
+	@echo "  make build-lspci   - 尝试构建 guest 侧 aarch64 lspci（可选）"
+	@echo "  make selftest-tool - 对 pci_sysfs_dump 做本地伪 sysfs 自测"
+	@echo "  make rootfs        - 构建 day22 独立 initramfs"
+	@echo "  make backend       - 准备 ivshmem-plain 后端文件"
+	@echo "  make qemu          - 启动 QEMU 并运行 day22 自动检查"
+	@echo "  make collect       - 从最近一次 serial.log 中切分 records"
+	@echo "  make run           - 一键执行 day22 全流程"
+	@echo "  make module        - 构建 day22_ivshmem_stub 内核模块（需 KDIR）"
+	@echo "  make clean         - 清理 workdir 临时文件"
+	@echo "  make server        - 兼容旧入口，内部等价于 make backend"
+
+discover-paths:
+	@$(DAY22_ROOT)/scripts/00_discover_common_paths.sh
+
+kernel-pci-prep:
+	@$(DAY22_ROOT)/scripts/11_prepare_kernel_pci_config.sh
 
 check:
 	@$(DAY22_ROOT)/scripts/00_check_host_tools.sh
@@ -34,8 +43,14 @@ build-tools:
 build-lspci:
 	@$(DAY22_ROOT)/scripts/02_build_guest_lspci.sh
 
+selftest-tool:
+	@$(DAY22_ROOT)/scripts/10_selftest_pci_sysfs_dump.sh
+
 rootfs:
 	@$(DAY22_ROOT)/scripts/03_prepare_rootfs.sh
+
+backend:
+	@$(DAY22_ROOT)/scripts/04_prepare_ivshmem_backend.sh
 
 server:
 	@$(DAY22_ROOT)/scripts/04_start_ivshmem_server.sh

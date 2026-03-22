@@ -1,45 +1,54 @@
-# day22 START_HERE
+# START_HERE
 
-## 先记住一句话
+你现在只需要按这一条线跑，不要在 day22 目录里到处找文档。
 
-**这次的 day22 不再只是平台准备，而是“设备可见性 + C 代码起步”一起做。**
-
-你今天至少会接触到两份真正的代码：
-
-- `tools/pci_sysfs_dump.c`
-- `driver/day22_ivshmem_stub.c`
-
-## 建议按这个顺序走
-
-1. 先读 `README.md`
-2. 读 `tools/pci_sysfs_dump.c`
-3. 读 `driver/day22_ivshmem_stub.c`
-4. 配置 `env/day22.env` 或导出环境变量
-5. 运行 `make check`
-6. 运行 `make build-tools`
-7. 运行 `make rootfs`
-8. 运行 `make run`
-9. 去 `records/<run-id>/` 检查结果
-10. 有内核构建目录时，再运行 `make module`
-
-## 最少需要准备的三个路径
+## 第一步：载入本地环境
 
 ```bash
-export KERNEL_IMAGE=/path/to/arch/arm64/boot/Image
-export BUSYBOX_BIN=/path/to/busybox
-export GUEST_LSPCI_BIN=/path/to/aarch64-static-lspci
+cd ~/workspace/driver-lab/linux-driver-lab/day22
+source env/local.wq7.env
 ```
 
-## 如果你想把 stub 模块也编出来
+如果你不是当前这台机器，先复制模板：
 
 ```bash
-export KDIR=/path/to/kernel/build
-make module
+cp env/local.example.env env/local.wq7.env
+vi env/local.wq7.env
+source env/local.wq7.env
 ```
 
-## 今天别做过头的点
+## 第二步：按固定顺序执行
 
-- 不要抢跑去把 BAR/MMIO/MSI 一次写完
-- 不要把 `shared-memory` 误写成 `DMA`
-- 不要只看屏幕输出，不归档原始证据
-- 不要忽略 `tools/` 和 `driver/` 里的 C 代码
+```bash
+make check
+make build-tools
+make selftest-tool
+sudo -E make rootfs
+sudo chown -R "$USER:$USER" workdir
+make backend
+make run
+```
+
+`make module` 不是 day22 核心验收硬门槛。当前它更适合作为 day23 的前置问题单独处理。
+
+## 第三步：判定 day22 是否通过
+
+先看：
+
+```bash
+cat records/${RUN_ID}/run-summary.md
+```
+
+再看：
+
+```bash
+sed -n '1,120p' records/${RUN_ID}/lspci-nn.txt
+sed -n '1,220p' records/${RUN_ID}/lspci-vv-nn.txt
+grep 'DAY22' records/${RUN_ID}/serial.log
+```
+
+**注意：当前 `run-summary.md` 可能误判。**
+
+最终请以 `serial.log` 中的 marker 和 `lspci` 实际输出为准。详细标准见：
+
+- `docs/02_RESULTS_AND_ACCEPTANCE.md`

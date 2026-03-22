@@ -66,6 +66,116 @@ marker_extract() {
     ' "$input_file" > "$output_file"
 }
 
+
+auto_pick_first() {
+    local pattern="$1"
+    find "${REPO_ROOT}" -path "$pattern" 2>/dev/null | sort | head -n1
+}
+
+auto_pick_busybox() {
+    while IFS= read -r p; do
+        [[ -z "$p" ]] && continue
+        if ${FILE_BIN} "$p" 2>/dev/null | ${GREP_BIN} -qi 'ARM aarch64\|ARM64'; then
+            echo "$p"
+            return 0
+        fi
+    done < <(find "${REPO_ROOT}" -type f -name busybox 2>/dev/null | sort)
+    return 1
+}
+
+auto_pick_lspci() {
+    while IFS= read -r p; do
+        [[ -z "$p" ]] && continue
+        if ${FILE_BIN} "$p" 2>/dev/null | ${GREP_BIN} -qi 'ARM aarch64\|ARM64'; then
+            echo "$p"
+            return 0
+        fi
+    done < <(find "${REPO_ROOT}" -type f -name lspci 2>/dev/null | sort)
+    return 1
+}
+
+auto_pick_pciutils_src() {
+    while IFS= read -r p; do
+        [[ -z "$p" ]] && continue
+        if [[ -f "$p/Makefile" && -f "$p/lspci.c" ]]; then
+            echo "$p"
+            return 0
+        fi
+    done < <(find "${REPO_ROOT}" -type d -name pciutils 2>/dev/null | sort)
+    return 1
+}
+
+auto_fill_platform_paths() {
+    local changed=0
+    if [[ -z "${KERNEL_IMAGE:-}" ]]; then
+        local v
+        v="$(auto_pick_first '*/linux-*/build/arm64/arch/arm64/boot/Image' || true)"
+        if [[ -n "$v" ]]; then
+            export KERNEL_IMAGE="$v"
+            changed=1
+        fi
+    fi
+    if [[ -z "${KERNEL_CONFIG_PATH:-}" ]]; then
+        local v
+        v="$(auto_pick_first '*/linux-*/build/arm64/.config' || true)"
+        if [[ -n "$v" ]]; then
+            export KERNEL_CONFIG_PATH="$v"
+            changed=1
+        fi
+    fi
+    if [[ -z "${BUSYBOX_BIN:-}" ]]; then
+        local v
+        v="$(auto_pick_busybox || true)"
+        if [[ -n "$v" ]]; then
+            export BUSYBOX_BIN="$v"
+            changed=1
+        fi
+    fi
+    if [[ -z "${PCIUTILS_SRC_DIR:-}" || ! -d "${PCIUTILS_SRC_DIR}" ]]; then
+        local v
+        v="$(auto_pick_pciutils_src || true)"
+        if [[ -n "$v" ]]; then
+            export PCIUTILS_SRC_DIR="$v"
+            changed=1
+        fi
+    fi
+    if [[ -z "${GUEST_LSPCI_BIN:-}" || "${GUEST_LSPCI_BIN}" == "${TOOLS_DIR}/aarch64/lspci" || ! -x "${GUEST_LSPCI_BIN}" ]]; then
+        local v
+        if [[ -n "${PCIUTILS_SRC_DIR:-}" && -x "${PCIUTILS_SRC_DIR}/lspci" ]]; then
+            v="${PCIUTILS_SRC_DIR}/lspci"
+        else
+            v="$(auto_pick_lspci || true)"
+        fi
+        if [[ -n "$v" ]]; then
+            export GUEST_LSPCI_BIN="$v"
+            changed=1
+        fi
+    fi
+    if [[ $changed -eq 1 ]]; then
+        log "已根据当前仓库自动补全部分路径；建议执行 make discover-paths 查看完整推荐值。"
+    fi
+}
+
+require_nonempty_var() {
+    local name="$1"
+    local value="${2:-}"
+    [[ -n "$value" ]] || die "变量 ${name} 未设置；先执行 make discover-paths 并 export，或查看 docs/02_PREPARE_ENV_AND_LSPCI.md"
+}
+
+require_file_named() {
+    local name="$1"
+    local path="$2"
+    require_nonempty_var "$name" "$path"
+    [[ -f "$path" ]] || die "${name} 指向的文件不存在：${path}"
+}
+
+require_executable_named() {
+    local name="$1"
+    local path="$2"
+    require_nonempty_var "$name" "$path"
+    [[ -x "$path" ]] || die "${name} 指向的可执行文件不存在或不可执行：${path}"
+}
+
 is_elf_aarch64_static() {
     local path="$1"
     local out

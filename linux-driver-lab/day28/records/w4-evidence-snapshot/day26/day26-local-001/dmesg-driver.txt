@@ -1,0 +1,13 @@
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.333963] io scheduler mq-deadline registered
+[    0.334085] io scheduler kyber registered
+[    0.664299] day26_edu_tool: loading out-of-tree module taints kernel.
+[    0.670486] day26_edu_tool 0000:00:02.0: probe enter: 1234:11e8
+[    0.670977] day26_edu_tool 0000:00:02.0: enabling device (0000 -> 0002)
+[    0.673594] day26_edu_tool 0000:00:02.0: BAR0: start=0x10000000 len=0x100000
+[    0.673773] day26_edu_tool 0000:00:02.0: identity=0x010000ed liveness=0x00000000 inverted=0xffffffff
+[    0.673943] day26_edu_tool 0000:00:02.0: MSI vector=50
+[    0.674326] day26_edu_tool 0000:00:02.0: probe success
+[    0.674720] day26_edu_tool: module init
+[    2.739604] day26_edu_tool 0000:00:02.0: write trigger: value=0x00000001
+[    2.740038] day26_edu_tool 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1

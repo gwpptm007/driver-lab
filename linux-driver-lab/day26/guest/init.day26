@@ -1,0 +1,111 @@
+#!/bin/sh
+set -eu
+
+# Day26 guest 自动流程说明：
+# 1. 挂载 proc/sysfs/devtmpfs，准备基础运行环境；
+# 2. 输出 lspci -nn / -vv -nn 作为设备可见性证据；
+# 3. insmod day26_edu_tool.ko；
+# 4. 确保 /dev/day26_edu0 存在；
+# 5. 依次运行 info / read-state / count / status / trigger / reset-stats；
+# 6. 输出带 marker 的日志块，供 records 提取脚本切分；
+# 7. 最后 rmmod 并打印 COMPLETE。
+
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev || true
+mount -t debugfs debugfs /sys/kernel/debug || true
+
+echo "===DAY26:BOOT:BEGIN==="
+uname -a || true
+echo "===DAY26:BOOT:END==="
+
+echo "===DAY26:LSPCI_NN:BEGIN==="
+lspci -nn || true
+echo "===DAY26:LSPCI_NN:END==="
+
+echo "===DAY26:LSPCI_VV_NN:BEGIN==="
+lspci -vv -nn || true
+echo "===DAY26:LSPCI_VV_NN:END==="
+
+insmod /root/day26_edu_tool.ko
+sleep 1
+
+# 正常情况下 class_create + device_create 后，devtmpfs 会自动生成 /dev/day26_edu0。
+# 如果没有自动出现，就退回到从 sysfs 读取 major:minor 再手工 mknod。
+if [ ! -e /dev/day26_edu0 ] && [ -r /sys/class/day26_edu/day26_edu0/dev ]; then
+    devnums=$(cat /sys/class/day26_edu/day26_edu0/dev)
+    major=$(echo "$devnums" | cut -d: -f1)
+    minor=$(echo "$devnums" | cut -d: -f2)
+    mknod /dev/day26_edu0 c "$major" "$minor"
+    chmod 666 /dev/day26_edu0 || true
+fi
+
+sleep 1
+
+echo "===DAY26:INFO_BEFORE:BEGIN==="
+/bin/day26_edu_tool /dev/day26_edu0 info || true
+echo "===DAY26:INFO_BEFORE:END==="
+
+echo "===DAY26:READ_STATE_BEFORE:BEGIN==="
+/bin/day26_edu_tool /dev/day26_edu0 read-state || true
+echo "===DAY26:READ_STATE_BEFORE:END==="
+
+echo "===DAY26:IRQ_COUNT_BEFORE:BEGIN==="
+/bin/day26_edu_tool /dev/day26_edu0 count || true
+echo "===DAY26:IRQ_COUNT_BEFORE:END==="
+
+echo "===DAY26:IRQ_STATUS_BEFORE:BEGIN==="
+/bin/day26_edu_tool /dev/day26_edu0 status || true
+echo "===DAY26:IRQ_STATUS_BEFORE:END==="
+
+echo "===DAY26:PROC_INTERRUPTS_BEFORE:BEGIN==="
+grep day26_edu_tool /proc/interrupts || true
+echo "===DAY26:PROC_INTERRUPTS_BEFORE:END==="
+
+echo "===DAY26:TRIGGER:BEGIN==="
+/bin/day26_edu_tool /dev/day26_edu0 trigger 0x1 || true
+echo "===DAY26:TRIGGER:END==="
+
+sleep 1
+
+echo "===DAY26:IRQ_COUNT_AFTER:BEGIN==="
+/bin/day26_edu_tool /dev/day26_edu0 count || true
+echo "===DAY26:IRQ_COUNT_AFTER:END==="
+
+echo "===DAY26:IRQ_STATUS_AFTER:BEGIN==="
+/bin/day26_edu_tool /dev/day26_edu0 status || true
+echo "===DAY26:IRQ_STATUS_AFTER:END==="
+
+echo "===DAY26:READ_STATE_AFTER:BEGIN==="
+/bin/day26_edu_tool /dev/day26_edu0 read-state || true
+echo "===DAY26:READ_STATE_AFTER:END==="
+
+echo "===DAY26:PROC_INTERRUPTS_AFTER:BEGIN==="
+grep day26_edu_tool /proc/interrupts || true
+echo "===DAY26:PROC_INTERRUPTS_AFTER:END==="
+
+# 负向路径：trigger 0 应走到驱动 write() 的 -EINVAL，并在工具侧表现为 rc=5。
+echo "===DAY26:INVALID_TRIGGER_ZERO:BEGIN==="
+if /bin/day26_edu_tool /dev/day26_edu0 trigger 0 > /tmp/day26_invalid.out 2>&1; then
+    cat /tmp/day26_invalid.out
+    echo "rc=0"
+else
+    rc=$?
+    cat /tmp/day26_invalid.out
+    echo "rc=$rc"
+fi
+echo "===DAY26:INVALID_TRIGGER_ZERO:END==="
+
+echo "===DAY26:RESET_STATS:BEGIN==="
+/bin/day26_edu_tool /dev/day26_edu0 reset-stats || true
+/bin/day26_edu_tool /dev/day26_edu0 count || true
+echo "===DAY26:RESET_STATS:END==="
+
+echo "===DAY26:DMESG_DRIVER:BEGIN==="
+dmesg | grep -E 'day26_edu_tool|edu|irq handler|probe|remove' || true
+echo "===DAY26:DMESG_DRIVER:END==="
+
+rmmod day26_edu_tool || true
+
+echo "===DAY26:COMPLETE==="
+poweroff -f

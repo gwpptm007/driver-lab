@@ -1,0 +1,13 @@
+# day24 kernel config check
+# file: /home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/build/arm64/.config
+
+[OK] CONFIG_PCI=y
+[OK] CONFIG_PCI_MSI=y
+[OK] CONFIG_PCI_HOST_GENERIC=y
+[OK] CONFIG_MODULES=y
+[OK] CONFIG_MODULE_UNLOAD=y
+[OK] CONFIG_PCI_DOMAINS=y
+[OK] CONFIG_VFIO=y
+
+提示：day24 重点是 MMIO/共享内存协议验证。
+但前提仍然是 PCI 与模块树已经正确就绪。

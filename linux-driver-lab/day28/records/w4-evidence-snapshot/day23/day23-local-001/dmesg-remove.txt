@@ -1,0 +1,38 @@
+[    0.280942] PCI: CLS 0 bytes, default 64
+[    0.407893] pci-host-generic 4010000000.pcie: host bridge /pcie@10000000 ranges:
+[    0.408497] pci-host-generic 4010000000.pcie:       IO 0x003eff0000..0x003effffff -> 0x0000000000
+[    0.408980] pci-host-generic 4010000000.pcie:      MEM 0x0010000000..0x003efeffff -> 0x0010000000
+[    0.409246] pci-host-generic 4010000000.pcie:      MEM 0x8000000000..0xffffffffff -> 0x8000000000
+[    0.409724] pci-host-generic 4010000000.pcie: Memory resource size exceeds max for 32 bits
+[    0.410198] pci-host-generic 4010000000.pcie: ECAM at [mem 0x4010000000-0x401fffffff] for [bus 00-ff]
+[    0.410941] pci-host-generic 4010000000.pcie: PCI host bridge to bus 0000:00
+[    0.411217] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    0.411539] pci_bus 0000:00: root bus resource [io  0x0000-0xffff]
+[    0.411709] pci_bus 0000:00: root bus resource [mem 0x10000000-0x3efeffff]
+[    0.411829] pci_bus 0000:00: root bus resource [mem 0x8000000000-0xffffffffff]
+[    0.412916] pci 0000:00:00.0: [1b36:0008] type 00 class 0x060000
+[    0.415036] pci 0000:00:01.0: [1af4:1000] type 00 class 0x020000
+[    0.415478] pci 0000:00:01.0: reg 0x10: [io  0x0000-0x001f]
+[    0.415618] pci 0000:00:01.0: reg 0x14: [mem 0x00000000-0x00000fff]
+[    0.415805] pci 0000:00:01.0: reg 0x20: [mem 0x00000000-0x00003fff 64bit pref]
+[    0.415987] pci 0000:00:01.0: reg 0x30: [mem 0x00000000-0x0007ffff pref]
+[    0.416464] pci 0000:00:02.0: [1af4:1110] type 00 class 0x050000
+[    0.416604] pci 0000:00:02.0: reg 0x10: [mem 0x00000000-0x000000ff]
+[    0.416753] pci 0000:00:02.0: reg 0x18: [mem 0x00000000-0x003fffff 64bit pref]
+[    0.418363] pci 0000:00:02.0: BAR 2: assigned [mem 0x8000000000-0x80003fffff 64bit pref]
+[    0.418672] pci 0000:00:01.0: BAR 6: assigned [mem 0x10000000-0x1007ffff pref]
+[    0.418859] pci 0000:00:01.0: BAR 4: assigned [mem 0x8000400000-0x8000403fff 64bit pref]
+[    0.419017] pci 0000:00:01.0: BAR 1: assigned [mem 0x10080000-0x10080fff]
+[    0.419163] pci 0000:00:02.0: BAR 0: assigned [mem 0x10081000-0x100810ff]
+[    0.419502] pci 0000:00:01.0: BAR 0: assigned [io  0x1000-0x101f]
+[    0.752913] day23_ivshmem_probe: loading out-of-tree module taints kernel.
+[    0.758114] day23_ivshmem_probe 0000:00:02.0: probe enter: vendor=1af4 device=1110 class=0x050000 irq=0
+[    0.758587] day23_ivshmem_probe 0000:00:02.0: enabling device (0000 -> 0002)
+[    0.759357] day23_ivshmem_probe 0000:00:02.0: BAR0: start=0x0000000010081000 end=0x00000000100810ff len=0x0000000000000100 flags=0x40200
+[    0.759840] day23_ivshmem_probe 0000:00:02.0: BAR2: start=0x0000008000000000 end=0x00000080003fffff len=0x0000000000400000 flags=0x14220c
+[    0.760158] day23_ivshmem_probe 0000:00:02.0: BAR0 mapped: vaddr=(____ptrval____)
+[    0.768152] day23_ivshmem_probe 0000:00:02.0: BAR2 mapped: vaddr=(____ptrval____)
+[    0.768320] day23_ivshmem_probe 0000:00:02.0: BAR0 first dword=0x00000000
+[    0.768441] day23_ivshmem_probe 0000:00:02.0: probe success
+[    1.810878] day23_ivshmem_probe 0000:00:02.0: remove enter
+[    1.811814] day23_ivshmem_probe 0000:00:02.0: remove leave

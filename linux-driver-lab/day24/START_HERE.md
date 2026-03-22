@@ -1,19 +1,46 @@
-# day24 START_HERE
+# START_HERE
 
-建议按下面顺序阅读和执行：
+按下面顺序执行，不要跳步骤。
 
-1. 先看 `README.md`，确认今天要收什么
-2. 再看 `docs/01_plan.md`，理解实施路线
-3. 执行当天命令/编码/验证
-4. 把原始证据放进 `records/`
-5. 最后把结论和模板输出到 `output/`
+## 1. 进入 day24 并载入环境
 
-## 今天最重要的一句话
+```bash
+cd ~/workspace/driver-lab/linux-driver-lab/day24
+source env/local.wq7.env
+```
 
-完成 `readl/writel` 练习，并定义最小共享内存/寄存器协议，支持用户态可验证读写。
+## 2. 准备当前 day 自己的 pciutils 源码与 arm64 静态 lspci
 
-## 今天不要做过头的点
+```bash
+mkdir -p third_party
+# 能联网时：
+git clone https://github.com/pciutils/pciutils.git third_party/pciutils
+# 不能联网时：把其它机器上的 pciutils 源码离线拷到 third_party/pciutils
 
-- 先把当天主链路做通，不要抢跑到后面几天
-- 先留证据，再写总结
-- 所有“通过”都要能落到 `records/` 中的原始输出
+chmod +x third_party/pciutils/lib/configure
+chmod +x third_party/pciutils/configure 2>/dev/null || true
+
+make build-lspci
+file third_party/pciutils/lspci
+```
+
+## 3. 执行 day24 主流程
+
+```bash
+make check
+make kernel-module-tree
+make build-tools
+make module
+sudo -E make rootfs
+sudo chown -R "$USER:$USER" workdir
+make backend
+sudo -E make run
+```
+
+## 4. 看结果
+
+```bash
+cat records/${RUN_ID}/run-summary.md
+```
+
+详细解释与通过标准见 `docs/02_RESULTS_AND_ACCEPTANCE.md`。构建或运行异常先看 `docs/03_TROUBLESHOOTING.md`。

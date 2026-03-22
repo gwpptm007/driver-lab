@@ -1,0 +1,103 @@
+#!/bin/sh
+# Day25 guest init:
+# 1. 挂载最小运行时文件系统（proc/sysfs/devtmpfs）
+# 2. 打印 lspci 证据，证明 EDU 设备已被枚举到
+# 3. insmod day25_edu_irq.ko，让驱动完成 probe / MSI 申请 / 字符设备创建
+# 4. 通过 day25_irq_tool 读取 info/count/status，随后触发一次中断
+# 5. 对比触发前后 irq_count 与 /proc/interrupts，最后输出 dmesg 驱动日志并 rmmod
+#
+# 注意：这份 init 不依赖其他 day 目录，所有逻辑只围绕 day25 当前目录的驱动和工具展开。
+
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+
+# 这三个挂载点是最小 initramfs 环境里最常用的运行时支撑：
+# - /proc：查看进程、/proc/interrupts、/proc/devices 等
+# - /sys：查看 sysfs 设备节点，例如 /sys/class/day25_edu/day25_edu0/dev
+# - /dev：挂载 devtmpfs 后，device_create() 创建的字符设备节点可以自动出现
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev 2>/dev/null || true
+mkdir -p /dev
+
+# 等待 /dev/day25_edu0 出现；如果内核未启用 devtmpfs 自动创建设备节点，
+# 就从 sysfs 中读取真正的 major:minor，再用 mknod 手工补一个正确节点。
+wait_for_day25_dev() {
+    local i=0
+    while [ $i -lt 20 ]; do
+        [ -e /dev/day25_edu0 ] && return 0
+        if [ -r /sys/class/day25_edu/day25_edu0/dev ]; then
+            devnum=$(cat /sys/class/day25_edu/day25_edu0/dev)
+            major=${devnum%%:*}
+            minor=${devnum##*:}
+            rm -f /dev/day25_edu0
+            mknod /dev/day25_edu0 c "$major" "$minor" 2>/dev/null || true
+        fi
+        [ -e /dev/day25_edu0 ] && return 0
+        sleep 1
+        i=$((i+1))
+    done
+    return 1
+}
+
+echo "===DAY25:LSPCI_NN:BEGIN==="
+/bin/lspci -nn || echo "[day25-guest] lspci -nn failed"
+echo "===DAY25:LSPCI_NN:END==="
+
+echo "===DAY25:LSPCI_VV_NN:BEGIN==="
+/bin/lspci -vv -nn || echo "[day25-guest] lspci -vv -nn failed"
+echo "===DAY25:LSPCI_VV_NN:END==="
+
+insmod /root/day25_edu_irq.ko || {
+  echo "[day25-guest] insmod failed"
+  poweroff -f
+}
+
+if ! wait_for_day25_dev; then
+  echo "[day25-guest] /dev/day25_edu0 did not appear"
+fi
+
+sleep 1
+
+echo "===DAY25:IRQ_INFO_BEFORE:BEGIN==="
+/bin/day25_irq_tool /dev/day25_edu0 info || echo "[day25-guest] info failed"
+echo "===DAY25:IRQ_INFO_BEFORE:END==="
+
+echo "===DAY25:IRQ_COUNT_BEFORE:BEGIN==="
+/bin/day25_irq_tool /dev/day25_edu0 count || echo "[day25-guest] count before failed"
+echo "===DAY25:IRQ_COUNT_BEFORE:END==="
+
+echo "===DAY25:IRQ_STATUS_BEFORE:BEGIN==="
+/bin/day25_irq_tool /dev/day25_edu0 status || echo "[day25-guest] status before failed"
+echo "===DAY25:IRQ_STATUS_BEFORE:END==="
+
+echo "===DAY25:PROC_INTERRUPTS_BEFORE:BEGIN==="
+grep -iE 'day25|edu|PCI-MSI|GIC' /proc/interrupts || cat /proc/interrupts
+echo "===DAY25:PROC_INTERRUPTS_BEFORE:END==="
+
+echo "===DAY25:TRIGGER:BEGIN==="
+/bin/day25_irq_tool /dev/day25_edu0 trigger 0x1 || echo "[day25-guest] trigger failed"
+echo "===DAY25:TRIGGER:END==="
+
+sleep 1
+
+echo "===DAY25:IRQ_COUNT_AFTER:BEGIN==="
+/bin/day25_irq_tool /dev/day25_edu0 count || echo "[day25-guest] count after failed"
+echo "===DAY25:IRQ_COUNT_AFTER:END==="
+
+echo "===DAY25:IRQ_STATUS_AFTER:BEGIN==="
+/bin/day25_irq_tool /dev/day25_edu0 status || echo "[day25-guest] status after failed"
+echo "===DAY25:IRQ_STATUS_AFTER:END==="
+
+echo "===DAY25:PROC_INTERRUPTS_AFTER:BEGIN==="
+grep -iE 'day25|edu|PCI-MSI|GIC' /proc/interrupts || cat /proc/interrupts
+echo "===DAY25:PROC_INTERRUPTS_AFTER:END==="
+
+echo "===DAY25:DMESG_DRIVER:BEGIN==="
+dmesg | grep -i 'day25\|edu\|irq handler' || true
+echo "===DAY25:DMESG_DRIVER:END==="
+
+rmmod day25_edu_irq || echo "[day25-guest] rmmod failed"
+sleep 1
+
+echo "===DAY25:COMPLETE==="
+poweroff -f

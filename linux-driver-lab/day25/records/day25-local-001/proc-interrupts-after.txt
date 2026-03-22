@@ -1,0 +1,6 @@
+ 11:        176     GIC-0  27 Level     arch_timer
+ 46:          0     GIC-0  34 Level     rtc-pl031
+ 47:          0     GIC-0  33 Level     uart-pl011
+ 48:          0     GIC-0  23 Level     arm-pmu
+ 50:          1       MSI 32768 Edge      day25_edu_irq
+IPI0:         0       Rescheduling interrupts

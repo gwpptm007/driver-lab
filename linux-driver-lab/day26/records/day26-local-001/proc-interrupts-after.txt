@@ -1,0 +1,1 @@
+ 50:          1       MSI 32768 Edge      day26_edu_tool

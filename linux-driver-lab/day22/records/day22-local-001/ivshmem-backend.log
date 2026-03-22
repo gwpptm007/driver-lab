@@ -1,0 +1,4 @@
+# day22 ivshmem plain backend
+run-id=day22-local-001
+backend-file=/home/wq7/workspace/driver-lab/linux-driver-lab/day22/workdir/runs/day22-local-001/ivshmem-day22.bin
+size=4M

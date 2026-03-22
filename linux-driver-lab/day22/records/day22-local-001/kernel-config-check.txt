@@ -1,0 +1,11 @@
+# day22 kernel config check
+# file: /home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/build/arm64/.config
+
+[OK] CONFIG_PCI=y
+[OK] CONFIG_PCI_MSI=y
+[OK] CONFIG_PCI_HOST_GENERIC=y
+[OK] CONFIG_PCI_DOMAINS=y
+[OK] CONFIG_VFIO=y
+
+提示：day22 只要求 PCI 设备能被枚举到。
+其中最关键的是 CONFIG_PCI / CONFIG_PCI_MSI / CONFIG_PCI_HOST_GENERIC。

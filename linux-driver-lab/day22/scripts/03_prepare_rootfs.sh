@@ -5,18 +5,31 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 source "${SCRIPT_DIR}/common.sh"
 
 log "开始构建 day22 独立 initramfs"
-require_file "${BUSYBOX_BIN}"
+auto_fill_platform_paths
+require_file_named "BUSYBOX_BIN" "${BUSYBOX_BIN}"
 
 # 先构建 day22 自己的 guest 侧 C 工具。
 "${SCRIPT_DIR}/02_build_guest_tools.sh"
-require_executable_file "${GUEST_PCI_SYSFS_DUMP_BIN}"
+require_executable_named "GUEST_PCI_SYSFS_DUMP_BIN" "${GUEST_PCI_SYSFS_DUMP_BIN}"
+
+# 如果当前 shell 没有显式 export GUEST_LSPCI_BIN，但 pciutils 源码目录里已经有编好的 lspci，
+# 就直接使用它，避免把“已编好的第三方工具”又绕丢。
+if [[ ! -x "${GUEST_LSPCI_BIN}" && -n "${PCIUTILS_SRC_DIR:-}" && -x "${PCIUTILS_SRC_DIR}/lspci" ]]; then
+    export GUEST_LSPCI_BIN="${PCIUTILS_SRC_DIR}/lspci"
+    log "复用已存在的第三方 arm64 lspci：${GUEST_LSPCI_BIN}"
+fi
 
 # 如果没有 guest lspci，就尝试自动构建一次。
 if [[ ! -x "${GUEST_LSPCI_BIN}" ]]; then
     warn "未发现 guest lspci，尝试自动构建。"
+    if [[ ! -d "${PCIUTILS_SRC_DIR}" ]]; then
+        warn "当前包默认不会内置完整 pciutils 源码目录。"
+        warn "如果你之前已经在别的 day22 目录编过 lspci，请重新 export GUEST_LSPCI_BIN=/path/to/lspci。"
+        warn "否则请重新 git clone pciutils 到 ${PCIUTILS_SRC_DIR}，或执行 make discover-paths 查看推荐路径。"
+    fi
     "${SCRIPT_DIR}/02_build_guest_lspci.sh"
 fi
-require_executable_file "${GUEST_LSPCI_BIN}"
+require_executable_named "GUEST_LSPCI_BIN" "${GUEST_LSPCI_BIN}"
 
 ensure_dir "${ROOTFS_DIR}"
 rm -rf "${ROOTFS_DIR}"
@@ -51,7 +64,7 @@ mknod -m 666 "${ROOTFS_DIR}/dev/null" c 1 3
 rm -f "${ROOTFS_IMAGE}"
 (
     cd "${ROOTFS_DIR}"
-    find . -print0 | sort -z | xargs -0 ${CPIO_BIN} -o -H newc | ${GZIP_BIN} -9 > "${ROOTFS_IMAGE}"
+    find . -print0 | sort -z | ${CPIO_BIN} --null -o -H newc | ${GZIP_BIN} -9 > "${ROOTFS_IMAGE}"
 )
 
 log "day22 initramfs 构建完成：${ROOTFS_IMAGE}"

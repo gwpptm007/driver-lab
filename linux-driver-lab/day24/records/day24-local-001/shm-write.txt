@@ -1,0 +1,2 @@
+[    1.713045] day24_ivshmem_mmio 0000:00:02.0: payload write: count=19 new_len=19 seq=2
+shm-write ok: wrote=19 text=hello_day24_ivshmem

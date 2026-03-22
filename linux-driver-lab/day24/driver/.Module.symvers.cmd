@@ -1,0 +1,1 @@
+cmd_/home/wq7/workspace/driver-lab/linux-driver-lab/day24/driver/Module.symvers := sed 's/\.ko$$/\.o/' /home/wq7/workspace/driver-lab/linux-driver-lab/day24/driver/modules.order | scripts/mod/modpost    -o /home/wq7/workspace/driver-lab/linux-driver-lab/day24/driver/Module.symvers -e -i Module.symvers   -T -

@@ -1,0 +1,14 @@
+# day24 kernel module tree check
+# source root : /home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/src
+# build dir   : /home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/build/arm64
+
+-rw-rw-r-- 1 wq7 wq7 597605  3月 21 16:15 /home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/build/arm64/Module.symvers
+0x00000000	pci_unregister_driver	vmlinux	EXPORT_SYMBOL	
+0x00000000	pci_enable_device_mem	vmlinux	EXPORT_SYMBOL	
+0x00000000	pci_iomap_wc	vmlinux	EXPORT_SYMBOL_GPL	
+0x00000000	pci_iomap	vmlinux	EXPORT_SYMBOL	
+0x00000000	__pci_register_driver	vmlinux	EXPORT_SYMBOL	
+0x00000000	pci_iomap_range	vmlinux	EXPORT_SYMBOL	
+0x00000000	pci_iomap_wc_range	vmlinux	EXPORT_SYMBOL_GPL	
+0x00000000	pci_enable_device	vmlinux	EXPORT_SYMBOL	
+0x00000000	pci_enable_device_io	vmlinux	EXPORT_SYMBOL	

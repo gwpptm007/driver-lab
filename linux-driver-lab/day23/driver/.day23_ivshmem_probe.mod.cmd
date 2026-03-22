@@ -1,0 +1,1 @@
+cmd_/home/wq7/workspace/driver-lab/linux-driver-lab/day23/driver/day23_ivshmem_probe.mod := { echo  /home/wq7/workspace/driver-lab/linux-driver-lab/day23/driver/day23_ivshmem_probe.o;  echo; } > /home/wq7/workspace/driver-lab/linux-driver-lab/day23/driver/day23_ivshmem_probe.mod

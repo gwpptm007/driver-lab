@@ -1,0 +1,1942 @@
+[   13.184232] day27_edu_loop 0000:00:02.0: remove leave
+[   13.184518] day27_edu_loop: unloaded
+[   13.200191] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   13.200560] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   13.201099] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   13.201542] day27_edu_loop 0000:00:02.0: probe success
+[   13.201860] day27_edu_loop: loaded
+[   14.219110] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   14.219509] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   15.259091] day27_edu_loop 0000:00:02.0: remove enter
+[   15.260131] day27_edu_loop 0000:00:02.0: remove leave
+[   15.260423] day27_edu_loop: unloaded
+[   15.278578] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   15.279024] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   15.279568] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   15.280022] day27_edu_loop 0000:00:02.0: probe success
+[   15.280315] day27_edu_loop: loaded
+[   16.301491] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   16.301933] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   17.342720] day27_edu_loop 0000:00:02.0: remove enter
+[   17.343672] day27_edu_loop 0000:00:02.0: remove leave
+[   17.343958] day27_edu_loop: unloaded
+[   17.358276] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   17.358691] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   17.359252] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   17.359709] day27_edu_loop 0000:00:02.0: probe success
+[   17.360000] day27_edu_loop: loaded
+[   18.378546] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   18.378879] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   19.417377] day27_edu_loop 0000:00:02.0: remove enter
+[   19.418358] day27_edu_loop 0000:00:02.0: remove leave
+[   19.418649] day27_edu_loop: unloaded
+[   19.433141] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   19.433526] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   19.434071] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   19.434514] day27_edu_loop 0000:00:02.0: probe success
+[   19.434807] day27_edu_loop: loaded
+[   20.451773] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   20.452176] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   21.491788] day27_edu_loop 0000:00:02.0: remove enter
+[   21.492746] day27_edu_loop 0000:00:02.0: remove leave
+[   21.493033] day27_edu_loop: unloaded
+[   21.507073] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   21.507476] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   21.508026] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   21.508475] day27_edu_loop 0000:00:02.0: probe success
+[   21.508766] day27_edu_loop: loaded
+[   22.523019] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   22.523821] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   23.561747] day27_edu_loop 0000:00:02.0: remove enter
+[   23.562723] day27_edu_loop 0000:00:02.0: remove leave
+[   23.563014] day27_edu_loop: unloaded
+[   23.578204] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   23.578626] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   23.579202] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   23.579652] day27_edu_loop 0000:00:02.0: probe success
+[   23.579941] day27_edu_loop: loaded
+[   24.594515] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   24.594818] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   25.632872] day27_edu_loop 0000:00:02.0: remove enter
+[   25.633848] day27_edu_loop 0000:00:02.0: remove leave
+[   25.634134] day27_edu_loop: unloaded
+[   25.649170] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   25.649584] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   25.650146] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   25.650598] day27_edu_loop 0000:00:02.0: probe success
+[   25.650895] day27_edu_loop: loaded
+[   26.667991] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   26.668395] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   27.707838] day27_edu_loop 0000:00:02.0: remove enter
+[   27.708898] day27_edu_loop 0000:00:02.0: remove leave
+[   27.709187] day27_edu_loop: unloaded
+[   27.724534] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   27.724956] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   27.725531] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   27.725988] day27_edu_loop 0000:00:02.0: probe success
+[   27.726282] day27_edu_loop: loaded
+[   28.744556] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   28.744851] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   29.783291] day27_edu_loop 0000:00:02.0: remove enter
+[   29.784279] day27_edu_loop 0000:00:02.0: remove leave
+[   29.784573] day27_edu_loop: unloaded
+[   29.798705] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   29.799150] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   29.799704] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   29.800165] day27_edu_loop 0000:00:02.0: probe success
+[   29.800457] day27_edu_loop: loaded
+[   30.818100] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   30.818475] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   31.858487] day27_edu_loop 0000:00:02.0: remove enter
+[   31.859449] day27_edu_loop 0000:00:02.0: remove leave
+[   31.859740] day27_edu_loop: unloaded
+[   31.878218] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   31.878601] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   31.879160] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   31.879651] day27_edu_loop 0000:00:02.0: probe success
+[   31.879956] day27_edu_loop: loaded
+[   32.898463] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   32.898880] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   33.950703] day27_edu_loop 0000:00:02.0: remove enter
+[   33.951731] day27_edu_loop 0000:00:02.0: remove leave
+[   33.952294] day27_edu_loop: unloaded
+[   33.969052] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   33.969432] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   33.970044] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   33.970573] day27_edu_loop 0000:00:02.0: probe success
+[   33.970870] day27_edu_loop: loaded
+[   34.988608] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   34.988954] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   36.028082] day27_edu_loop 0000:00:02.0: remove enter
+[   36.029122] day27_edu_loop 0000:00:02.0: remove leave
+[   36.029487] day27_edu_loop: unloaded
+[   36.044186] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   36.044719] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   36.045390] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   36.045933] day27_edu_loop 0000:00:02.0: probe success
+[   36.046336] day27_edu_loop: loaded
+[   37.064504] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   37.064885] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   38.102370] day27_edu_loop 0000:00:02.0: remove enter
+[   38.103457] day27_edu_loop 0000:00:02.0: remove leave
+[   38.103853] day27_edu_loop: unloaded
+[   38.123435] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   38.123946] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   38.124635] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   38.125182] day27_edu_loop 0000:00:02.0: probe success
+[   38.125555] day27_edu_loop: loaded
+[   39.142333] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   39.143999] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   40.193880] day27_edu_loop 0000:00:02.0: remove enter
+[   40.195369] day27_edu_loop 0000:00:02.0: remove leave
+[   40.195896] day27_edu_loop: unloaded
+[   40.216184] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   40.216868] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   40.217701] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   40.218874] day27_edu_loop 0000:00:02.0: probe success
+[   40.219343] day27_edu_loop: loaded
+[   41.235301] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   41.235696] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   42.273380] day27_edu_loop 0000:00:02.0: remove enter
+[   42.274462] day27_edu_loop 0000:00:02.0: remove leave
+[   42.274827] day27_edu_loop: unloaded
+[   42.290037] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   42.290513] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   42.291169] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   42.291756] day27_edu_loop 0000:00:02.0: probe success
+[   42.292137] day27_edu_loop: loaded
+[   43.308424] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   43.308847] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   44.361839] day27_edu_loop 0000:00:02.0: remove enter
+[   44.363304] day27_edu_loop 0000:00:02.0: remove leave
+[   44.364159] day27_edu_loop: unloaded
+[   44.380407] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   44.380854] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   44.381419] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   44.381872] day27_edu_loop 0000:00:02.0: probe success
+[   44.382168] day27_edu_loop: loaded
+[   45.396093] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   45.396430] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   46.436623] day27_edu_loop 0000:00:02.0: remove enter
+[   46.437584] day27_edu_loop 0000:00:02.0: remove leave
+[   46.437891] day27_edu_loop: unloaded
+[   46.455675] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   46.456122] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   46.456690] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   46.457146] day27_edu_loop 0000:00:02.0: probe success
+[   46.457437] day27_edu_loop: loaded
+[   47.471020] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   47.471426] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   48.510426] day27_edu_loop 0000:00:02.0: remove enter
+[   48.511417] day27_edu_loop 0000:00:02.0: remove leave
+[   48.511711] day27_edu_loop: unloaded
+[   48.523080] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   48.523496] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   48.524038] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   48.524502] day27_edu_loop 0000:00:02.0: probe success
+[   48.524797] day27_edu_loop: loaded
+[   49.541505] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   49.541793] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   50.582653] day27_edu_loop 0000:00:02.0: remove enter
+[   50.583611] day27_edu_loop 0000:00:02.0: remove leave
+[   50.583945] day27_edu_loop: unloaded
+[   50.601416] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   50.601861] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   50.602411] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   50.602858] day27_edu_loop 0000:00:02.0: probe success
+[   50.603155] day27_edu_loop: loaded
+[   51.620997] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   51.621718] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   52.673534] day27_edu_loop 0000:00:02.0: remove enter
+[   52.674537] day27_edu_loop 0000:00:02.0: remove leave
+[   52.674867] day27_edu_loop: unloaded
+[   52.693247] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   52.693647] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   52.694262] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   52.694732] day27_edu_loop 0000:00:02.0: probe success
+[   52.695036] day27_edu_loop: loaded
+[   53.713091] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   53.713377] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   54.757387] day27_edu_loop 0000:00:02.0: remove enter
+[   54.759444] day27_edu_loop 0000:00:02.0: remove leave
+[   54.759761] day27_edu_loop: unloaded
+[   54.776277] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   54.776658] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   54.777200] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   54.777700] day27_edu_loop 0000:00:02.0: probe success
+[   54.778010] day27_edu_loop: loaded
+[   55.797671] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   55.797969] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   56.835350] day27_edu_loop 0000:00:02.0: remove enter
+[   56.836369] day27_edu_loop 0000:00:02.0: remove leave
+[   56.836658] day27_edu_loop: unloaded
+[   56.851285] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   56.851675] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   56.852218] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   56.852660] day27_edu_loop 0000:00:02.0: probe success
+[   56.852952] day27_edu_loop: loaded
+[   57.871223] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   57.871516] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   58.909461] day27_edu_loop 0000:00:02.0: remove enter
+[   58.910413] day27_edu_loop 0000:00:02.0: remove leave
+[   58.910724] day27_edu_loop: unloaded
+[   58.925746] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   58.926203] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   58.926751] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   58.927203] day27_edu_loop 0000:00:02.0: probe success
+[   58.927500] day27_edu_loop: loaded
+[   59.945288] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   59.946251] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   60.984828] day27_edu_loop 0000:00:02.0: remove enter
+[   60.985785] day27_edu_loop 0000:00:02.0: remove leave
+[   60.986072] day27_edu_loop: unloaded
+[   61.000240] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   61.000619] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   61.001210] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   61.001693] day27_edu_loop 0000:00:02.0: probe success
+[   61.001985] day27_edu_loop: loaded
+[   62.015558] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   62.015848] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   63.054739] day27_edu_loop 0000:00:02.0: remove enter
+[   63.055748] day27_edu_loop 0000:00:02.0: remove leave
+[   63.056037] day27_edu_loop: unloaded
+[   63.075447] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   63.075833] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   63.076427] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   63.076934] day27_edu_loop 0000:00:02.0: probe success
+[   63.077238] day27_edu_loop: loaded
+[   64.094696] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   64.095016] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   65.134222] day27_edu_loop 0000:00:02.0: remove enter
+[   65.135196] day27_edu_loop 0000:00:02.0: remove leave
+[   65.135485] day27_edu_loop: unloaded
+[   65.150357] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   65.150731] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   65.151349] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   65.151805] day27_edu_loop 0000:00:02.0: probe success
+[   65.152102] day27_edu_loop: loaded
+[   66.170392] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   66.170712] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   67.208396] day27_edu_loop 0000:00:02.0: remove enter
+[   67.209428] day27_edu_loop 0000:00:02.0: remove leave
+[   67.209716] day27_edu_loop: unloaded
+[   67.225226] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   67.225662] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   67.226207] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   67.226665] day27_edu_loop 0000:00:02.0: probe success
+[   67.226957] day27_edu_loop: loaded
+[   68.252866] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   68.253177] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   69.292676] day27_edu_loop 0000:00:02.0: remove enter
+[   69.293676] day27_edu_loop 0000:00:02.0: remove leave
+[   69.293964] day27_edu_loop: unloaded
+[   69.308277] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   69.308646] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   69.309318] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   69.309773] day27_edu_loop 0000:00:02.0: probe success
+[   69.310071] day27_edu_loop: loaded
+[   70.327331] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   70.327613] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   71.367704] day27_edu_loop 0000:00:02.0: remove enter
+[   71.368807] day27_edu_loop 0000:00:02.0: remove leave
+[   71.369165] day27_edu_loop: unloaded
+[   71.387448] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   71.387938] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   71.388599] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   71.389134] day27_edu_loop 0000:00:02.0: probe success
+[   71.389533] day27_edu_loop: loaded
+[   72.407169] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   72.408034] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   73.447473] day27_edu_loop 0000:00:02.0: remove enter
+[   73.448629] day27_edu_loop 0000:00:02.0: remove leave
+[   73.449534] day27_edu_loop: unloaded
+[   73.466014] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   73.466479] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   73.467219] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   73.467774] day27_edu_loop 0000:00:02.0: probe success
+[   73.468140] day27_edu_loop: loaded
+[   74.481128] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   74.481510] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   75.522014] day27_edu_loop 0000:00:02.0: remove enter
+[   75.523085] day27_edu_loop 0000:00:02.0: remove leave
+[   75.523496] day27_edu_loop: unloaded
+[   75.545637] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   75.546130] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   75.546804] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   75.547339] day27_edu_loop 0000:00:02.0: probe success
+[   75.547707] day27_edu_loop: loaded
+[   76.564371] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   76.564783] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   77.605053] day27_edu_loop 0000:00:02.0: remove enter
+[   77.606524] day27_edu_loop 0000:00:02.0: remove leave
+[   77.607468] day27_edu_loop: unloaded
+[   77.628671] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   77.629125] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   77.629855] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   77.630404] day27_edu_loop 0000:00:02.0: probe success
+[   77.630776] day27_edu_loop: loaded
+[   78.647914] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   78.648372] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   79.687865] day27_edu_loop 0000:00:02.0: remove enter
+[   79.688993] day27_edu_loop 0000:00:02.0: remove leave
+[   79.689405] day27_edu_loop: unloaded
+[   79.705061] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   79.705520] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   79.706180] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   79.707162] day27_edu_loop 0000:00:02.0: probe success
+[   79.707548] day27_edu_loop: loaded
+[   80.723586] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   80.723993] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   81.762997] day27_edu_loop 0000:00:02.0: remove enter
+[   81.763959] day27_edu_loop 0000:00:02.0: remove leave
+[   81.764247] day27_edu_loop: unloaded
+[   81.778658] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   81.779033] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   81.779582] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   81.780033] day27_edu_loop 0000:00:02.0: probe success
+[   81.780324] day27_edu_loop: loaded
+[   82.797779] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   82.798161] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   83.837250] day27_edu_loop 0000:00:02.0: remove enter
+[   83.838261] day27_edu_loop 0000:00:02.0: remove leave
+[   83.838550] day27_edu_loop: unloaded
+[   83.854166] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   83.854540] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   83.855123] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   83.855593] day27_edu_loop 0000:00:02.0: probe success
+[   83.855888] day27_edu_loop: loaded
+[   84.872340] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   84.872663] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   85.911517] day27_edu_loop 0000:00:02.0: remove enter
+[   85.912520] day27_edu_loop 0000:00:02.0: remove leave
+[   85.912812] day27_edu_loop: unloaded
+[   85.929874] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   85.930279] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   85.930888] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   85.932231] day27_edu_loop 0000:00:02.0: probe success
+[   85.932558] day27_edu_loop: loaded
+[   86.947271] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   86.948755] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   87.994555] day27_edu_loop 0000:00:02.0: remove enter
+[   87.995590] day27_edu_loop 0000:00:02.0: remove leave
+[   87.995883] day27_edu_loop: unloaded
+[   88.015194] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   88.015598] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   88.016145] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   88.016595] day27_edu_loop 0000:00:02.0: probe success
+[   88.016888] day27_edu_loop: loaded
+[   89.032693] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   89.033064] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   90.070223] day27_edu_loop 0000:00:02.0: remove enter
+[   90.071200] day27_edu_loop 0000:00:02.0: remove leave
+[   90.071535] day27_edu_loop: unloaded
+[   90.086550] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   90.086930] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   90.087465] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   90.087962] day27_edu_loop 0000:00:02.0: probe success
+[   90.088266] day27_edu_loop: loaded
+[   91.106282] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   91.106566] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   92.145284] day27_edu_loop 0000:00:02.0: remove enter
+[   92.147006] day27_edu_loop 0000:00:02.0: remove leave
+[   92.147359] day27_edu_loop: unloaded
+[   92.168969] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   92.169417] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   92.169973] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   92.170427] day27_edu_loop 0000:00:02.0: probe success
+[   92.170733] day27_edu_loop: loaded
+[   93.184339] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   93.184656] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   94.223619] day27_edu_loop 0000:00:02.0: remove enter
+[   94.224571] day27_edu_loop 0000:00:02.0: remove leave
+[   94.224859] day27_edu_loop: unloaded
+[   94.239893] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   94.240332] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   94.240953] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   94.241397] day27_edu_loop 0000:00:02.0: probe success
+[   94.241697] day27_edu_loop: loaded
+[   95.259053] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   95.259360] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   96.306205] day27_edu_loop 0000:00:02.0: remove enter
+[   96.307420] day27_edu_loop 0000:00:02.0: remove leave
+[   96.307780] day27_edu_loop: unloaded
+[   96.324382] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   96.324929] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   96.325564] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   96.326202] day27_edu_loop 0000:00:02.0: probe success
+[   96.326897] day27_edu_loop: loaded
+[   97.342155] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   97.342625] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[   98.382637] day27_edu_loop 0000:00:02.0: remove enter
+[   98.383636] day27_edu_loop 0000:00:02.0: remove leave
+[   98.383929] day27_edu_loop: unloaded
+[   98.397901] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[   98.398286] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[   98.398827] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[   98.399278] day27_edu_loop 0000:00:02.0: probe success
+[   98.399604] day27_edu_loop: loaded
+[   99.417158] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[   99.417477] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  100.458353] day27_edu_loop 0000:00:02.0: remove enter
+[  100.459430] day27_edu_loop 0000:00:02.0: remove leave
+[  100.460247] day27_edu_loop: unloaded
+[  100.477040] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  100.477414] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  100.477962] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  100.478407] day27_edu_loop 0000:00:02.0: probe success
+[  100.478742] day27_edu_loop: loaded
+[  101.496291] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  101.496680] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  102.534747] day27_edu_loop 0000:00:02.0: remove enter
+[  102.535973] day27_edu_loop 0000:00:02.0: remove leave
+[  102.536336] day27_edu_loop: unloaded
+[  102.555819] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  102.556285] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  102.556996] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  102.557543] day27_edu_loop 0000:00:02.0: probe success
+[  102.557913] day27_edu_loop: loaded
+[  103.575232] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  103.575691] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  104.627291] day27_edu_loop 0000:00:02.0: remove enter
+[  104.628361] day27_edu_loop 0000:00:02.0: remove leave
+[  104.628721] day27_edu_loop: unloaded
+[  104.643600] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  104.644077] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  104.644735] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  104.645274] day27_edu_loop 0000:00:02.0: probe success
+[  104.645694] day27_edu_loop: loaded
+[  105.662385] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  105.662727] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  106.701982] day27_edu_loop 0000:00:02.0: remove enter
+[  106.702941] day27_edu_loop 0000:00:02.0: remove leave
+[  106.703250] day27_edu_loop: unloaded
+[  106.717553] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  106.717941] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  106.718493] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  106.718981] day27_edu_loop 0000:00:02.0: probe success
+[  106.719281] day27_edu_loop: loaded
+[  107.733356] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  107.733738] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  108.773062] day27_edu_loop 0000:00:02.0: remove enter
+[  108.774054] day27_edu_loop 0000:00:02.0: remove leave
+[  108.774344] day27_edu_loop: unloaded
+[  108.787792] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  108.788528] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  108.789083] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  108.789611] day27_edu_loop 0000:00:02.0: probe success
+[  108.789917] day27_edu_loop: loaded
+[  109.803963] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  109.804342] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  110.843355] day27_edu_loop 0000:00:02.0: remove enter
+[  110.844321] day27_edu_loop 0000:00:02.0: remove leave
+[  110.844630] day27_edu_loop: unloaded
+[  110.859731] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  110.860125] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  110.860740] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  110.861209] day27_edu_loop 0000:00:02.0: probe success
+[  110.861507] day27_edu_loop: loaded
+[  111.878453] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  111.878774] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  112.918223] day27_edu_loop 0000:00:02.0: remove enter
+[  112.919220] day27_edu_loop 0000:00:02.0: remove leave
+[  112.919510] day27_edu_loop: unloaded
+[  112.934458] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  112.934846] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  112.935397] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  112.935844] day27_edu_loop 0000:00:02.0: probe success
+[  112.936135] day27_edu_loop: loaded
+[  113.953173] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  113.953582] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  114.997919] day27_edu_loop 0000:00:02.0: remove enter
+[  114.998952] day27_edu_loop 0000:00:02.0: remove leave
+[  114.999244] day27_edu_loop: unloaded
+[  115.013501] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  115.013890] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  115.014475] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  115.014936] day27_edu_loop 0000:00:02.0: probe success
+[  115.015226] day27_edu_loop: loaded
+[  116.028454] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  116.028762] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  117.068668] day27_edu_loop 0000:00:02.0: remove enter
+[  117.069645] day27_edu_loop 0000:00:02.0: remove leave
+[  117.069937] day27_edu_loop: unloaded
+[  117.084314] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  117.084771] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  117.085317] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  117.085779] day27_edu_loop 0000:00:02.0: probe success
+[  117.086072] day27_edu_loop: loaded
+[  118.103266] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  118.103595] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  119.143784] day27_edu_loop 0000:00:02.0: remove enter
+[  119.144818] day27_edu_loop 0000:00:02.0: remove leave
+[  119.145113] day27_edu_loop: unloaded
+[  119.167287] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  119.167710] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  119.168262] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  119.168711] day27_edu_loop 0000:00:02.0: probe success
+[  119.169000] day27_edu_loop: loaded
+[  120.188533] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  120.188932] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  121.226562] day27_edu_loop 0000:00:02.0: remove enter
+[  121.227545] day27_edu_loop 0000:00:02.0: remove leave
+[  121.227844] day27_edu_loop: unloaded
+[  121.242364] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  121.242747] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  121.243284] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  121.243769] day27_edu_loop 0000:00:02.0: probe success
+[  121.244073] day27_edu_loop: loaded
+[  122.262611] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  122.262901] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  123.310438] day27_edu_loop 0000:00:02.0: remove enter
+[  123.311835] day27_edu_loop 0000:00:02.0: remove leave
+[  123.312948] day27_edu_loop: unloaded
+[  123.334894] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  123.335302] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  123.335855] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  123.336365] day27_edu_loop 0000:00:02.0: probe success
+[  123.336849] day27_edu_loop: loaded
+[  124.360136] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  124.360600] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  125.399718] day27_edu_loop 0000:00:02.0: remove enter
+[  125.400778] day27_edu_loop 0000:00:02.0: remove leave
+[  125.401068] day27_edu_loop: unloaded
+[  125.416958] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  125.417397] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  125.417950] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  125.418393] day27_edu_loop 0000:00:02.0: probe success
+[  125.418681] day27_edu_loop: loaded
+[  126.436067] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  126.436383] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  127.475322] day27_edu_loop 0000:00:02.0: remove enter
+[  127.476504] day27_edu_loop 0000:00:02.0: remove leave
+[  127.476789] day27_edu_loop: unloaded
+[  127.496585] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  127.496979] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  127.497523] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  127.497981] day27_edu_loop 0000:00:02.0: probe success
+[  127.498275] day27_edu_loop: loaded
+[  128.515189] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  128.515556] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  129.554247] day27_edu_loop 0000:00:02.0: remove enter
+[  129.555529] day27_edu_loop 0000:00:02.0: remove leave
+[  129.555833] day27_edu_loop: unloaded
+[  129.579115] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  129.579511] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  129.580062] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  129.580515] day27_edu_loop 0000:00:02.0: probe success
+[  129.580805] day27_edu_loop: loaded
+[  130.597780] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  130.598087] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  131.637640] day27_edu_loop 0000:00:02.0: remove enter
+[  131.639280] day27_edu_loop 0000:00:02.0: remove leave
+[  131.639603] day27_edu_loop: unloaded
+[  131.661855] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  131.662800] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  131.663370] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  131.663810] day27_edu_loop 0000:00:02.0: probe success
+[  131.664103] day27_edu_loop: loaded
+[  132.680857] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  132.681146] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  133.720678] day27_edu_loop 0000:00:02.0: remove enter
+[  133.721636] day27_edu_loop 0000:00:02.0: remove leave
+[  133.721925] day27_edu_loop: unloaded
+[  133.737147] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  133.737549] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  133.738090] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  133.738544] day27_edu_loop 0000:00:02.0: probe success
+[  133.738836] day27_edu_loop: loaded
+[  134.756457] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  134.756823] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  135.795129] day27_edu_loop 0000:00:02.0: remove enter
+[  135.796107] day27_edu_loop 0000:00:02.0: remove leave
+[  135.796397] day27_edu_loop: unloaded
+[  135.811499] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  135.811889] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  135.812430] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  135.812972] day27_edu_loop 0000:00:02.0: probe success
+[  135.813281] day27_edu_loop: loaded
+[  136.827271] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  136.828055] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  137.867996] day27_edu_loop 0000:00:02.0: remove enter
+[  137.869104] day27_edu_loop 0000:00:02.0: remove leave
+[  137.870158] day27_edu_loop: unloaded
+[  137.886846] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  137.887428] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  137.888103] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  137.888646] day27_edu_loop 0000:00:02.0: probe success
+[  137.889030] day27_edu_loop: loaded
+[  138.906982] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  138.907379] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  139.945531] day27_edu_loop 0000:00:02.0: remove enter
+[  139.946561] day27_edu_loop 0000:00:02.0: remove leave
+[  139.946930] day27_edu_loop: unloaded
+[  139.961811] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  139.962280] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  139.962939] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  139.963521] day27_edu_loop 0000:00:02.0: probe success
+[  139.963899] day27_edu_loop: loaded
+[  140.984774] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  140.985203] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  142.025025] day27_edu_loop 0000:00:02.0: remove enter
+[  142.026120] day27_edu_loop 0000:00:02.0: remove leave
+[  142.026473] day27_edu_loop: unloaded
+[  142.043163] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  142.043747] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  142.044621] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  142.045327] day27_edu_loop 0000:00:02.0: probe success
+[  142.045792] day27_edu_loop: loaded
+[  143.058946] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  143.059362] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  144.100506] day27_edu_loop 0000:00:02.0: remove enter
+[  144.101472] day27_edu_loop 0000:00:02.0: remove leave
+[  144.101772] day27_edu_loop: unloaded
+[  144.119670] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  144.120038] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  144.120630] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  144.121086] day27_edu_loop 0000:00:02.0: probe success
+[  144.121378] day27_edu_loop: loaded
+[  145.139035] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  145.139417] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  146.178600] day27_edu_loop 0000:00:02.0: remove enter
+[  146.179907] day27_edu_loop 0000:00:02.0: remove leave
+[  146.180200] day27_edu_loop: unloaded
+[  146.199198] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  146.199571] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  146.200115] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  146.200578] day27_edu_loop 0000:00:02.0: probe success
+[  146.200904] day27_edu_loop: loaded
+[  147.217934] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  147.218219] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  148.270115] day27_edu_loop 0000:00:02.0: remove enter
+[  148.271460] day27_edu_loop 0000:00:02.0: remove leave
+[  148.271753] day27_edu_loop: unloaded
+[  148.290458] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  148.290830] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  148.291370] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  148.291824] day27_edu_loop 0000:00:02.0: probe success
+[  148.292201] day27_edu_loop: loaded
+[  149.309432] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  149.309735] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  150.356732] day27_edu_loop 0000:00:02.0: remove enter
+[  150.357760] day27_edu_loop 0000:00:02.0: remove leave
+[  150.358048] day27_edu_loop: unloaded
+[  150.377216] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  150.377587] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  150.378183] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  150.378635] day27_edu_loop 0000:00:02.0: probe success
+[  150.378930] day27_edu_loop: loaded
+[  151.392805] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  151.393186] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  152.432587] day27_edu_loop 0000:00:02.0: remove enter
+[  152.433547] day27_edu_loop 0000:00:02.0: remove leave
+[  152.433841] day27_edu_loop: unloaded
+[  152.448400] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  152.448782] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  152.449361] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  152.449814] day27_edu_loop 0000:00:02.0: probe success
+[  152.450108] day27_edu_loop: loaded
+[  153.467929] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  153.468793] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  154.507677] day27_edu_loop 0000:00:02.0: remove enter
+[  154.508659] day27_edu_loop 0000:00:02.0: remove leave
+[  154.508947] day27_edu_loop: unloaded
+[  154.531388] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  154.531822] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  154.532384] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  154.532846] day27_edu_loop 0000:00:02.0: probe success
+[  154.533140] day27_edu_loop: loaded
+[  155.546475] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  155.546758] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  156.586677] day27_edu_loop 0000:00:02.0: remove enter
+[  156.587630] day27_edu_loop 0000:00:02.0: remove leave
+[  156.587944] day27_edu_loop: unloaded
+[  156.602396] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  156.602785] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  156.603434] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  156.603914] day27_edu_loop 0000:00:02.0: probe success
+[  156.604254] day27_edu_loop: loaded
+[  157.621500] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  157.621847] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  158.661561] day27_edu_loop 0000:00:02.0: remove enter
+[  158.662603] day27_edu_loop 0000:00:02.0: remove leave
+[  158.662893] day27_edu_loop: unloaded
+[  158.676614] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  158.677002] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  158.677540] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  158.678077] day27_edu_loop 0000:00:02.0: probe success
+[  158.678372] day27_edu_loop: loaded
+[  159.691998] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  159.692336] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  160.730666] day27_edu_loop 0000:00:02.0: remove enter
+[  160.731658] day27_edu_loop 0000:00:02.0: remove leave
+[  160.731969] day27_edu_loop: unloaded
+[  160.760652] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  160.761036] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  160.761577] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  160.762032] day27_edu_loop 0000:00:02.0: probe success
+[  160.762365] day27_edu_loop: loaded
+[  161.779587] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  161.780032] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  162.819586] day27_edu_loop 0000:00:02.0: remove enter
+[  162.820579] day27_edu_loop 0000:00:02.0: remove leave
+[  162.820875] day27_edu_loop: unloaded
+[  162.838915] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  162.839300] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  162.839912] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  162.840382] day27_edu_loop 0000:00:02.0: probe success
+[  162.840676] day27_edu_loop: loaded
+[  163.854935] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  163.855655] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  164.893180] day27_edu_loop 0000:00:02.0: remove enter
+[  164.894426] day27_edu_loop 0000:00:02.0: remove leave
+[  164.895092] day27_edu_loop: unloaded
+[  164.930767] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  164.931163] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  164.931706] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  164.932161] day27_edu_loop 0000:00:02.0: probe success
+[  164.932455] day27_edu_loop: loaded
+[  165.946389] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  165.947302] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  166.985967] day27_edu_loop 0000:00:02.0: remove enter
+[  166.986930] day27_edu_loop 0000:00:02.0: remove leave
+[  166.987219] day27_edu_loop: unloaded
+[  167.001403] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  167.001850] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  167.002396] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  167.002845] day27_edu_loop 0000:00:02.0: probe success
+[  167.003150] day27_edu_loop: loaded
+[  168.022337] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  168.022634] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  169.060226] day27_edu_loop 0000:00:02.0: remove enter
+[  169.061325] day27_edu_loop 0000:00:02.0: remove leave
+[  169.061694] day27_edu_loop: unloaded
+[  169.076547] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  169.077016] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  169.077681] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  169.078250] day27_edu_loop 0000:00:02.0: probe success
+[  169.078626] day27_edu_loop: loaded
+[  170.096075] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  170.096962] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  171.135786] day27_edu_loop 0000:00:02.0: remove enter
+[  171.136987] day27_edu_loop 0000:00:02.0: remove leave
+[  171.137349] day27_edu_loop: unloaded
+[  171.155381] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  171.167365] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  171.168061] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  171.168710] day27_edu_loop 0000:00:02.0: probe success
+[  171.169084] day27_edu_loop: loaded
+[  172.184107] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  172.184520] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  173.223785] day27_edu_loop 0000:00:02.0: remove enter
+[  173.224876] day27_edu_loop 0000:00:02.0: remove leave
+[  173.225275] day27_edu_loop: unloaded
+[  173.247065] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  173.247600] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  173.248285] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  173.248832] day27_edu_loop 0000:00:02.0: probe success
+[  173.249270] day27_edu_loop: loaded
+[  174.267379] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  174.267858] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  175.306014] day27_edu_loop 0000:00:02.0: remove enter
+[  175.308063] day27_edu_loop 0000:00:02.0: remove leave
+[  175.308488] day27_edu_loop: unloaded
+[  175.330724] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  175.331211] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  175.331933] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  175.332476] day27_edu_loop 0000:00:02.0: probe success
+[  175.332850] day27_edu_loop: loaded
+[  176.349823] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  176.350285] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  177.390062] day27_edu_loop 0000:00:02.0: remove enter
+[  177.391093] day27_edu_loop 0000:00:02.0: remove leave
+[  177.392069] day27_edu_loop: unloaded
+[  177.408873] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  177.409405] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  177.410084] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  177.410624] day27_edu_loop 0000:00:02.0: probe success
+[  177.410992] day27_edu_loop: loaded
+[  178.428806] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  178.429513] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  179.470305] day27_edu_loop 0000:00:02.0: remove enter
+[  179.471719] day27_edu_loop 0000:00:02.0: remove leave
+[  179.472082] day27_edu_loop: unloaded
+[  179.487730] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  179.488246] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  179.488925] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  179.489462] day27_edu_loop 0000:00:02.0: probe success
+[  179.489785] day27_edu_loop: loaded
+[  180.503625] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  180.504105] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  181.544005] day27_edu_loop 0000:00:02.0: remove enter
+[  181.545073] day27_edu_loop 0000:00:02.0: remove leave
+[  181.545790] day27_edu_loop: unloaded
+[  181.567030] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  181.567484] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  181.568039] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  181.568483] day27_edu_loop 0000:00:02.0: probe success
+[  181.568773] day27_edu_loop: loaded
+[  182.583523] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  182.583810] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  183.622423] day27_edu_loop 0000:00:02.0: remove enter
+[  183.623391] day27_edu_loop 0000:00:02.0: remove leave
+[  183.623681] day27_edu_loop: unloaded
+[  183.638177] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  183.638632] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  183.639267] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  183.639741] day27_edu_loop 0000:00:02.0: probe success
+[  183.640037] day27_edu_loop: loaded
+[  184.658572] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  184.658871] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  185.696653] day27_edu_loop 0000:00:02.0: remove enter
+[  185.697690] day27_edu_loop 0000:00:02.0: remove leave
+[  185.697984] day27_edu_loop: unloaded
+[  185.712941] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  185.713414] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  185.713960] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  185.714755] day27_edu_loop 0000:00:02.0: probe success
+[  185.715065] day27_edu_loop: loaded
+[  186.732970] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  186.733647] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  187.770839] day27_edu_loop 0000:00:02.0: remove enter
+[  187.771798] day27_edu_loop 0000:00:02.0: remove leave
+[  187.772085] day27_edu_loop: unloaded
+[  187.793170] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  187.793563] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  187.794150] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  187.794616] day27_edu_loop 0000:00:02.0: probe success
+[  187.795316] day27_edu_loop: loaded
+[  188.811378] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  188.811765] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  189.850573] day27_edu_loop 0000:00:02.0: remove enter
+[  189.851531] day27_edu_loop 0000:00:02.0: remove leave
+[  189.851821] day27_edu_loop: unloaded
+[  189.866803] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  189.867170] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  189.867753] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  189.868212] day27_edu_loop 0000:00:02.0: probe success
+[  189.868504] day27_edu_loop: loaded
+[  190.884625] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  190.884916] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  191.925253] day27_edu_loop 0000:00:02.0: remove enter
+[  191.926631] day27_edu_loop 0000:00:02.0: remove leave
+[  191.926926] day27_edu_loop: unloaded
+[  191.941711] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  191.942185] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  191.942768] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  191.943229] day27_edu_loop 0000:00:02.0: probe success
+[  191.943535] day27_edu_loop: loaded
+[  192.962738] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  192.963040] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  194.000152] day27_edu_loop 0000:00:02.0: remove enter
+[  194.001099] day27_edu_loop 0000:00:02.0: remove leave
+[  194.001387] day27_edu_loop: unloaded
+[  194.016586] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  194.016957] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  194.017500] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  194.017942] day27_edu_loop 0000:00:02.0: probe success
+[  194.018265] day27_edu_loop: loaded
+[  195.035569] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  195.035899] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  196.075855] day27_edu_loop 0000:00:02.0: remove enter
+[  196.076820] day27_edu_loop 0000:00:02.0: remove leave
+[  196.077107] day27_edu_loop: unloaded
+[  196.091062] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  196.091431] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  196.092044] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  196.092511] day27_edu_loop 0000:00:02.0: probe success
+[  196.092802] day27_edu_loop: loaded
+[  197.106421] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  197.106872] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  198.146285] day27_edu_loop 0000:00:02.0: remove enter
+[  198.147275] day27_edu_loop 0000:00:02.0: remove leave
+[  198.147568] day27_edu_loop: unloaded
+[  198.161477] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  198.161952] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  198.162510] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  198.162961] day27_edu_loop 0000:00:02.0: probe success
+[  198.163249] day27_edu_loop: loaded
+[  199.177034] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  199.177403] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  200.234418] day27_edu_loop 0000:00:02.0: remove enter
+[  200.236353] day27_edu_loop 0000:00:02.0: remove leave
+[  200.236805] day27_edu_loop: unloaded
+[  200.260256] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  200.261274] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  200.262209] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  200.262899] day27_edu_loop 0000:00:02.0: probe success
+[  200.263397] day27_edu_loop: loaded
+[  201.280898] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  201.281199] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  202.321302] day27_edu_loop 0000:00:02.0: remove enter
+[  202.322290] day27_edu_loop 0000:00:02.0: remove leave
+[  202.322584] day27_edu_loop: unloaded
+[  202.336190] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  202.336580] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  202.337216] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  202.337712] day27_edu_loop 0000:00:02.0: probe success
+[  202.338010] day27_edu_loop: loaded
+[  203.352119] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  203.352912] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  204.391112] day27_edu_loop 0000:00:02.0: remove enter
+[  204.392178] day27_edu_loop 0000:00:02.0: remove leave
+[  204.392541] day27_edu_loop: unloaded
+[  204.407564] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  204.408047] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  204.408701] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  204.409295] day27_edu_loop 0000:00:02.0: probe success
+[  204.409592] day27_edu_loop: loaded
+[  205.426792] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  205.427418] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  206.466458] day27_edu_loop 0000:00:02.0: remove enter
+[  206.467479] day27_edu_loop 0000:00:02.0: remove leave
+[  206.467771] day27_edu_loop: unloaded
+[  206.482173] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  206.482625] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  206.483176] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  206.483619] day27_edu_loop 0000:00:02.0: probe success
+[  206.483912] day27_edu_loop: loaded
+[  207.501262] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  207.501592] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  208.541250] day27_edu_loop 0000:00:02.0: remove enter
+[  208.542664] day27_edu_loop 0000:00:02.0: remove leave
+[  208.542951] day27_edu_loop: unloaded
+[  208.557083] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  208.557576] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  208.558136] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  208.558595] day27_edu_loop 0000:00:02.0: probe success
+[  208.558887] day27_edu_loop: loaded
+[  209.576476] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  209.576976] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  210.615645] day27_edu_loop 0000:00:02.0: remove enter
+[  210.616684] day27_edu_loop 0000:00:02.0: remove leave
+[  210.616974] day27_edu_loop: unloaded
+[  210.632068] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  210.632453] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  210.632999] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  210.633452] day27_edu_loop 0000:00:02.0: probe success
+[  210.633784] day27_edu_loop: loaded
+[  211.651394] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  211.652303] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  212.693970] day27_edu_loop 0000:00:02.0: remove enter
+[  212.694937] day27_edu_loop 0000:00:02.0: remove leave
+[  212.695229] day27_edu_loop: unloaded
+[  212.710657] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  212.711057] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  212.711684] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  212.712136] day27_edu_loop 0000:00:02.0: probe success
+[  212.712433] day27_edu_loop: loaded
+[  213.726250] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  213.726851] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  214.765384] day27_edu_loop 0000:00:02.0: remove enter
+[  214.766446] day27_edu_loop 0000:00:02.0: remove leave
+[  214.766741] day27_edu_loop: unloaded
+[  214.782176] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  214.782557] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  214.783102] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  214.783555] day27_edu_loop 0000:00:02.0: probe success
+[  214.783890] day27_edu_loop: loaded
+[  215.802151] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  215.802441] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  216.841956] day27_edu_loop 0000:00:02.0: remove enter
+[  216.843213] day27_edu_loop 0000:00:02.0: remove leave
+[  216.843954] day27_edu_loop: unloaded
+[  216.860410] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  216.860800] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  216.861356] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  216.861810] day27_edu_loop 0000:00:02.0: probe success
+[  216.862101] day27_edu_loop: loaded
+[  217.876971] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  217.877304] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  218.915315] day27_edu_loop 0000:00:02.0: remove enter
+[  218.916539] day27_edu_loop 0000:00:02.0: remove leave
+[  218.916991] day27_edu_loop: unloaded
+[  218.931296] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  218.931694] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  218.932243] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  218.932688] day27_edu_loop 0000:00:02.0: probe success
+[  218.933032] day27_edu_loop: loaded
+[  219.946537] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  219.946988] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  220.987214] day27_edu_loop 0000:00:02.0: remove enter
+[  220.988230] day27_edu_loop 0000:00:02.0: remove leave
+[  220.988565] day27_edu_loop: unloaded
+[  221.006862] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  221.007248] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  221.007786] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  221.008277] day27_edu_loop 0000:00:02.0: probe success
+[  221.008584] day27_edu_loop: loaded
+[  222.025580] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  222.025967] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  223.065251] day27_edu_loop 0000:00:02.0: remove enter
+[  223.066222] day27_edu_loop 0000:00:02.0: remove leave
+[  223.066519] day27_edu_loop: unloaded
+[  223.082261] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  223.082644] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  223.083221] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  223.083688] day27_edu_loop 0000:00:02.0: probe success
+[  223.084014] day27_edu_loop: loaded
+[  224.100049] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  224.100783] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  225.140104] day27_edu_loop 0000:00:02.0: remove enter
+[  225.141094] day27_edu_loop 0000:00:02.0: remove leave
+[  225.141389] day27_edu_loop: unloaded
+[  225.156448] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  225.156820] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  225.157365] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  225.157810] day27_edu_loop 0000:00:02.0: probe success
+[  225.158154] day27_edu_loop: loaded
+[  226.176179] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  226.176489] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  227.214267] day27_edu_loop 0000:00:02.0: remove enter
+[  227.215224] day27_edu_loop 0000:00:02.0: remove leave
+[  227.215514] day27_edu_loop: unloaded
+[  227.230406] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  227.230808] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  227.231358] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  227.231814] day27_edu_loop 0000:00:02.0: probe success
+[  227.232105] day27_edu_loop: loaded
+[  228.245525] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  228.245849] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  229.284480] day27_edu_loop 0000:00:02.0: remove enter
+[  229.285647] day27_edu_loop 0000:00:02.0: remove leave
+[  229.285937] day27_edu_loop: unloaded
+[  229.301037] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  229.301400] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  229.301997] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  229.302455] day27_edu_loop 0000:00:02.0: probe success
+[  229.302747] day27_edu_loop: loaded
+[  230.316540] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  230.316895] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  231.355974] day27_edu_loop 0000:00:02.0: remove enter
+[  231.356954] day27_edu_loop 0000:00:02.0: remove leave
+[  231.357266] day27_edu_loop: unloaded
+[  231.372197] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  231.372627] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  231.373187] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  231.373635] day27_edu_loop 0000:00:02.0: probe success
+[  231.373928] day27_edu_loop: loaded
+[  232.391897] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  232.392675] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  233.430856] day27_edu_loop 0000:00:02.0: remove enter
+[  233.431844] day27_edu_loop 0000:00:02.0: remove leave
+[  233.432135] day27_edu_loop: unloaded
+[  233.456110] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  233.456479] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  233.457015] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  233.457525] day27_edu_loop 0000:00:02.0: probe success
+[  233.457854] day27_edu_loop: loaded
+[  234.475706] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  234.476130] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  235.514717] day27_edu_loop 0000:00:02.0: remove enter
+[  235.515751] day27_edu_loop 0000:00:02.0: remove leave
+[  235.516133] day27_edu_loop: unloaded
+[  235.530128] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  235.530582] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  235.531284] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  235.531827] day27_edu_loop 0000:00:02.0: probe success
+[  235.532192] day27_edu_loop: loaded
+[  236.548884] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  236.549271] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  237.590501] day27_edu_loop 0000:00:02.0: remove enter
+[  237.591999] day27_edu_loop 0000:00:02.0: remove leave
+[  237.592368] day27_edu_loop: unloaded
+[  237.609051] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  237.609579] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  237.610261] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  237.610792] day27_edu_loop 0000:00:02.0: probe success
+[  237.611160] day27_edu_loop: loaded
+[  238.630254] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  238.630800] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  239.668300] day27_edu_loop 0000:00:02.0: remove enter
+[  239.681627] day27_edu_loop 0000:00:02.0: remove leave
+[  239.682015] day27_edu_loop: unloaded
+[  239.701644] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  239.702121] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  239.702812] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  239.703372] day27_edu_loop 0000:00:02.0: probe success
+[  239.703813] day27_edu_loop: loaded
+[  240.720175] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  240.720831] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  241.760114] day27_edu_loop 0000:00:02.0: remove enter
+[  241.761156] day27_edu_loop 0000:00:02.0: remove leave
+[  241.761525] day27_edu_loop: unloaded
+[  241.780230] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  241.780768] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  241.781403] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  241.781860] day27_edu_loop 0000:00:02.0: probe success
+[  241.782206] day27_edu_loop: loaded
+[  242.798854] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  242.799142] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  243.838985] day27_edu_loop 0000:00:02.0: remove enter
+[  243.840006] day27_edu_loop 0000:00:02.0: remove leave
+[  243.840297] day27_edu_loop: unloaded
+[  243.854385] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  243.854790] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  243.855337] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  243.855779] day27_edu_loop 0000:00:02.0: probe success
+[  243.856072] day27_edu_loop: loaded
+[  244.869743] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  244.870146] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  245.909386] day27_edu_loop 0000:00:02.0: remove enter
+[  245.910337] day27_edu_loop 0000:00:02.0: remove leave
+[  245.910625] day27_edu_loop: unloaded
+[  245.925352] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  245.925734] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  245.926315] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  245.926774] day27_edu_loop 0000:00:02.0: probe success
+[  245.927065] day27_edu_loop: loaded
+[  246.944743] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  246.945226] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  247.984766] day27_edu_loop 0000:00:02.0: remove enter
+[  247.985801] day27_edu_loop 0000:00:02.0: remove leave
+[  247.986093] day27_edu_loop: unloaded
+[  248.000309] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  248.000696] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  248.001233] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  248.001685] day27_edu_loop 0000:00:02.0: probe success
+[  248.002017] day27_edu_loop: loaded
+[  249.020004] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  249.020641] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  250.059730] day27_edu_loop 0000:00:02.0: remove enter
+[  250.060704] day27_edu_loop 0000:00:02.0: remove leave
+[  250.060995] day27_edu_loop: unloaded
+[  250.080735] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  250.081120] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  250.081707] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  250.082181] day27_edu_loop 0000:00:02.0: probe success
+[  250.082864] day27_edu_loop: loaded
+[  251.098473] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  251.098917] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  252.137870] day27_edu_loop 0000:00:02.0: remove enter
+[  252.138835] day27_edu_loop 0000:00:02.0: remove leave
+[  252.139135] day27_edu_loop: unloaded
+[  252.154674] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  252.155062] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  252.155606] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  252.156139] day27_edu_loop 0000:00:02.0: probe success
+[  252.156448] day27_edu_loop: loaded
+[  253.173283] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  253.173579] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  254.212280] day27_edu_loop 0000:00:02.0: remove enter
+[  254.213237] day27_edu_loop 0000:00:02.0: remove leave
+[  254.213527] day27_edu_loop: unloaded
+[  254.228805] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  254.229198] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  254.229846] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  254.230320] day27_edu_loop 0000:00:02.0: probe success
+[  254.230618] day27_edu_loop: loaded
+[  255.244375] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  255.244872] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  256.288588] day27_edu_loop 0000:00:02.0: remove enter
+[  256.289829] day27_edu_loop 0000:00:02.0: remove leave
+[  256.290179] day27_edu_loop: unloaded
+[  256.314259] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  256.314778] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  256.315978] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  256.316591] day27_edu_loop 0000:00:02.0: probe success
+[  256.316980] day27_edu_loop: loaded
+[  257.332770] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  257.333066] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  258.373112] day27_edu_loop 0000:00:02.0: remove enter
+[  258.374620] day27_edu_loop 0000:00:02.0: remove leave
+[  258.374913] day27_edu_loop: unloaded
+[  258.395757] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  258.396211] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  258.396773] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  258.397231] day27_edu_loop 0000:00:02.0: probe success
+[  258.397525] day27_edu_loop: loaded
+[  259.414690] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  259.415020] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  260.454565] day27_edu_loop 0000:00:02.0: remove enter
+[  260.455518] day27_edu_loop 0000:00:02.0: remove leave
+[  260.455808] day27_edu_loop: unloaded
+[  260.470230] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  260.470619] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  260.471239] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  260.471705] day27_edu_loop 0000:00:02.0: probe success
+[  260.472007] day27_edu_loop: loaded
+[  261.485216] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  261.485515] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  262.524892] day27_edu_loop 0000:00:02.0: remove enter
+[  262.525860] day27_edu_loop 0000:00:02.0: remove leave
+[  262.526170] day27_edu_loop: unloaded
+[  262.541756] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  262.542152] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  262.542708] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  262.543210] day27_edu_loop 0000:00:02.0: probe success
+[  262.543506] day27_edu_loop: loaded
+[  263.562879] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  263.563177] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  264.605929] day27_edu_loop 0000:00:02.0: remove enter
+[  264.607407] day27_edu_loop 0000:00:02.0: remove leave
+[  264.607698] day27_edu_loop: unloaded
+[  264.624196] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  264.624685] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  264.625252] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  264.625708] day27_edu_loop 0000:00:02.0: probe success
+[  264.626005] day27_edu_loop: loaded
+[  265.644512] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  265.644956] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  266.683165] day27_edu_loop 0000:00:02.0: remove enter
+[  266.684204] day27_edu_loop 0000:00:02.0: remove leave
+[  266.684569] day27_edu_loop: unloaded
+[  266.698427] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  266.698895] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  266.699441] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  266.699982] day27_edu_loop 0000:00:02.0: probe success
+[  266.700275] day27_edu_loop: loaded
+[  267.714603] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  267.715382] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  268.755579] day27_edu_loop 0000:00:02.0: remove enter
+[  268.758088] day27_edu_loop 0000:00:02.0: remove leave
+[  268.758775] day27_edu_loop: unloaded
+[  268.778420] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  268.779005] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  268.779753] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  268.780394] day27_edu_loop 0000:00:02.0: probe success
+[  268.780847] day27_edu_loop: loaded
+[  269.799174] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  269.799768] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  270.838011] day27_edu_loop 0000:00:02.0: remove enter
+[  270.839172] day27_edu_loop 0000:00:02.0: remove leave
+[  270.840149] day27_edu_loop: unloaded
+[  270.857153] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  270.857789] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  270.858873] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  270.859507] day27_edu_loop 0000:00:02.0: probe success
+[  270.859999] day27_edu_loop: loaded
+[  271.878475] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  271.878932] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  272.916124] day27_edu_loop 0000:00:02.0: remove enter
+[  272.917285] day27_edu_loop 0000:00:02.0: remove leave
+[  272.917727] day27_edu_loop: unloaded
+[  272.933218] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  272.933799] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  272.934807] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  272.935980] day27_edu_loop 0000:00:02.0: probe success
+[  272.936515] day27_edu_loop: loaded
+[  273.950932] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  273.951446] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  274.992267] day27_edu_loop 0000:00:02.0: remove enter
+[  274.993902] day27_edu_loop 0000:00:02.0: remove leave
+[  274.994313] day27_edu_loop: unloaded
+[  275.010717] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  275.011262] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  275.012019] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  275.012713] day27_edu_loop 0000:00:02.0: probe success
+[  275.013149] day27_edu_loop: loaded
+[  276.030578] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  276.031403] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  277.070414] day27_edu_loop 0000:00:02.0: remove enter
+[  277.073025] day27_edu_loop 0000:00:02.0: remove leave
+[  277.073461] day27_edu_loop: unloaded
+[  277.094635] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  277.095185] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  277.096002] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  277.096637] day27_edu_loop 0000:00:02.0: probe success
+[  277.097138] day27_edu_loop: loaded
+[  278.125587] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  278.126069] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  279.165834] day27_edu_loop 0000:00:02.0: remove enter
+[  279.166965] day27_edu_loop 0000:00:02.0: remove leave
+[  279.167391] day27_edu_loop: unloaded
+[  279.183311] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  279.183895] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  279.184788] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  279.185809] day27_edu_loop 0000:00:02.0: probe success
+[  279.186298] day27_edu_loop: loaded
+[  280.207541] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  280.208055] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  281.248187] day27_edu_loop 0000:00:02.0: remove enter
+[  281.249309] day27_edu_loop 0000:00:02.0: remove leave
+[  281.249686] day27_edu_loop: unloaded
+[  281.273438] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  281.273981] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  281.274719] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  281.275387] day27_edu_loop 0000:00:02.0: probe success
+[  281.275834] day27_edu_loop: loaded
+[  282.291791] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  282.292251] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  283.331494] day27_edu_loop 0000:00:02.0: remove enter
+[  283.332663] day27_edu_loop 0000:00:02.0: remove leave
+[  283.333082] day27_edu_loop: unloaded
+[  283.348274] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  283.348856] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  283.349627] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  283.350275] day27_edu_loop 0000:00:02.0: probe success
+[  283.350724] day27_edu_loop: loaded
+[  284.367211] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  284.367733] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  285.407661] day27_edu_loop 0000:00:02.0: remove enter
+[  285.408795] day27_edu_loop 0000:00:02.0: remove leave
+[  285.409284] day27_edu_loop: unloaded
+[  285.435274] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  285.435840] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  285.436581] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  285.437209] day27_edu_loop 0000:00:02.0: probe success
+[  285.437671] day27_edu_loop: loaded
+[  286.455068] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  286.455910] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  287.492842] day27_edu_loop 0000:00:02.0: remove enter
+[  287.494326] day27_edu_loop 0000:00:02.0: remove leave
+[  287.495085] day27_edu_loop: unloaded
+[  287.523392] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  287.523935] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  287.524708] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  287.525354] day27_edu_loop 0000:00:02.0: probe success
+[  287.525838] day27_edu_loop: loaded
+[  288.541676] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  288.542183] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  289.581364] day27_edu_loop 0000:00:02.0: remove enter
+[  289.582931] day27_edu_loop 0000:00:02.0: remove leave
+[  289.583684] day27_edu_loop: unloaded
+[  289.607526] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  289.608089] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  289.608807] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  289.609844] day27_edu_loop 0000:00:02.0: probe success
+[  289.610713] day27_edu_loop: loaded
+[  290.626006] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  290.626464] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  291.664742] day27_edu_loop 0000:00:02.0: remove enter
+[  291.665874] day27_edu_loop 0000:00:02.0: remove leave
+[  291.666294] day27_edu_loop: unloaded
+[  291.689454] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  291.690016] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  291.690754] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  291.691701] day27_edu_loop 0000:00:02.0: probe success
+[  291.692372] day27_edu_loop: loaded
+[  292.708352] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  292.708880] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  293.747444] day27_edu_loop 0000:00:02.0: remove enter
+[  293.748570] day27_edu_loop 0000:00:02.0: remove leave
+[  293.748973] day27_edu_loop: unloaded
+[  293.764667] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  293.765245] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  293.765975] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  293.766980] day27_edu_loop 0000:00:02.0: probe success
+[  293.767461] day27_edu_loop: loaded
+[  294.782646] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  294.783109] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  295.821796] day27_edu_loop 0000:00:02.0: remove enter
+[  295.823000] day27_edu_loop 0000:00:02.0: remove leave
+[  295.823946] day27_edu_loop: unloaded
+[  295.852387] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  295.852957] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  295.853744] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  295.854421] day27_edu_loop 0000:00:02.0: probe success
+[  295.855219] day27_edu_loop: loaded
+[  296.870591] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  296.871189] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  297.908284] day27_edu_loop 0000:00:02.0: remove enter
+[  297.911212] day27_edu_loop 0000:00:02.0: remove leave
+[  297.911757] day27_edu_loop: unloaded
+[  297.935348] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  297.936074] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  297.936990] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  297.937811] day27_edu_loop 0000:00:02.0: probe success
+[  297.938362] day27_edu_loop: loaded
+[  298.953703] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  298.954290] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  299.993456] day27_edu_loop 0000:00:02.0: remove enter
+[  299.994686] day27_edu_loop 0000:00:02.0: remove leave
+[  299.995193] day27_edu_loop: unloaded
+[  300.017849] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  300.018840] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  300.019761] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  300.020478] day27_edu_loop 0000:00:02.0: probe success
+[  300.021008] day27_edu_loop: loaded
+[  301.037116] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  301.037794] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  302.075731] day27_edu_loop 0000:00:02.0: remove enter
+[  302.076971] day27_edu_loop 0000:00:02.0: remove leave
+[  302.077492] day27_edu_loop: unloaded
+[  302.093047] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  302.093699] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  302.094609] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  302.095340] day27_edu_loop 0000:00:02.0: probe success
+[  302.096532] day27_edu_loop: loaded
+[  303.111801] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  303.113548] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  304.158007] day27_edu_loop 0000:00:02.0: remove enter
+[  304.160321] day27_edu_loop 0000:00:02.0: remove leave
+[  304.160936] day27_edu_loop: unloaded
+[  304.184062] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  304.184882] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  304.185919] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  304.186840] day27_edu_loop 0000:00:02.0: probe success
+[  304.187729] day27_edu_loop: loaded
+[  305.203419] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  305.203901] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  306.243557] day27_edu_loop 0000:00:02.0: remove enter
+[  306.244706] day27_edu_loop 0000:00:02.0: remove leave
+[  306.245850] day27_edu_loop: unloaded
+[  306.271563] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  306.272160] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  306.272893] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  306.273539] day27_edu_loop 0000:00:02.0: probe success
+[  306.273991] day27_edu_loop: loaded
+[  307.323145] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  307.323603] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  308.362816] day27_edu_loop 0000:00:02.0: remove enter
+[  308.364021] day27_edu_loop 0000:00:02.0: remove leave
+[  308.364459] day27_edu_loop: unloaded
+[  308.384524] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  308.385089] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  308.385839] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  308.387033] day27_edu_loop 0000:00:02.0: probe success
+[  308.387537] day27_edu_loop: loaded
+[  309.402856] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  309.403308] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  310.442655] day27_edu_loop 0000:00:02.0: remove enter
+[  310.443802] day27_edu_loop 0000:00:02.0: remove leave
+[  310.444214] day27_edu_loop: unloaded
+[  310.467103] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  310.467664] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  310.468431] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  310.469124] day27_edu_loop 0000:00:02.0: probe success
+[  310.469586] day27_edu_loop: loaded
+[  311.486280] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  311.486798] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  312.525459] day27_edu_loop 0000:00:02.0: remove enter
+[  312.526599] day27_edu_loop 0000:00:02.0: remove leave
+[  312.527068] day27_edu_loop: unloaded
+[  312.542803] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  312.543341] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  312.544121] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  312.544744] day27_edu_loop 0000:00:02.0: probe success
+[  312.545541] day27_edu_loop: loaded
+[  313.560756] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  313.561233] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  314.602353] day27_edu_loop 0000:00:02.0: remove enter
+[  314.604099] day27_edu_loop 0000:00:02.0: remove leave
+[  314.604515] day27_edu_loop: unloaded
+[  314.625635] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  314.626159] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  314.627270] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  314.628133] day27_edu_loop 0000:00:02.0: probe success
+[  314.628742] day27_edu_loop: loaded
+[  315.644377] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  315.644904] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  316.684701] day27_edu_loop 0000:00:02.0: remove enter
+[  316.685871] day27_edu_loop 0000:00:02.0: remove leave
+[  316.686354] day27_edu_loop: unloaded
+[  316.709043] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  316.709593] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  316.710344] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  316.711313] day27_edu_loop 0000:00:02.0: probe success
+[  316.711786] day27_edu_loop: loaded
+[  317.728466] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  317.728917] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  318.767867] day27_edu_loop 0000:00:02.0: remove enter
+[  318.769203] day27_edu_loop 0000:00:02.0: remove leave
+[  318.769628] day27_edu_loop: unloaded
+[  318.791703] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  318.792223] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  318.792992] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  318.793759] day27_edu_loop 0000:00:02.0: probe success
+[  318.794230] day27_edu_loop: loaded
+[  319.810615] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  319.811104] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  320.852370] day27_edu_loop 0000:00:02.0: remove enter
+[  320.854640] day27_edu_loop 0000:00:02.0: remove leave
+[  320.855053] day27_edu_loop: unloaded
+[  320.880101] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  320.880688] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  320.881476] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  320.882208] day27_edu_loop 0000:00:02.0: probe success
+[  320.883103] day27_edu_loop: loaded
+[  321.898263] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  321.898757] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  322.937406] day27_edu_loop 0000:00:02.0: remove enter
+[  322.938589] day27_edu_loop 0000:00:02.0: remove leave
+[  322.939035] day27_edu_loop: unloaded
+[  322.957999] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  322.959117] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  322.960009] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  322.960679] day27_edu_loop 0000:00:02.0: probe success
+[  322.961202] day27_edu_loop: loaded
+[  323.977275] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  323.977745] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  325.017118] day27_edu_loop 0000:00:02.0: remove enter
+[  325.018286] day27_edu_loop 0000:00:02.0: remove leave
+[  325.018695] day27_edu_loop: unloaded
+[  325.045473] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  325.046058] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  325.046823] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  325.047473] day27_edu_loop 0000:00:02.0: probe success
+[  325.048311] day27_edu_loop: loaded
+[  326.064398] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  326.064856] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  327.104246] day27_edu_loop 0000:00:02.0: remove enter
+[  327.105540] day27_edu_loop 0000:00:02.0: remove leave
+[  327.106059] day27_edu_loop: unloaded
+[  327.120466] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  327.121178] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  327.122478] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  327.123469] day27_edu_loop 0000:00:02.0: probe success
+[  327.124264] day27_edu_loop: loaded
+[  328.144929] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  328.145544] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  329.183877] day27_edu_loop 0000:00:02.0: remove enter
+[  329.185872] day27_edu_loop 0000:00:02.0: remove leave
+[  329.186361] day27_edu_loop: unloaded
+[  329.207575] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  329.208128] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  329.208912] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  329.209767] day27_edu_loop 0000:00:02.0: probe success
+[  329.210330] day27_edu_loop: loaded
+[  330.226296] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  330.227049] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  331.266497] day27_edu_loop 0000:00:02.0: remove enter
+[  331.267995] day27_edu_loop 0000:00:02.0: remove leave
+[  331.268409] day27_edu_loop: unloaded
+[  331.286457] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  331.287360] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  331.288125] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  331.288842] day27_edu_loop 0000:00:02.0: probe success
+[  331.289302] day27_edu_loop: loaded
+[  332.305682] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  332.306189] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  333.344714] day27_edu_loop 0000:00:02.0: remove enter
+[  333.345867] day27_edu_loop 0000:00:02.0: remove leave
+[  333.346287] day27_edu_loop: unloaded
+[  333.361532] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  333.362078] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  333.362811] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  333.363853] day27_edu_loop 0000:00:02.0: probe success
+[  333.364318] day27_edu_loop: loaded
+[  334.380576] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  334.381871] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  335.421378] day27_edu_loop 0000:00:02.0: remove enter
+[  335.422503] day27_edu_loop 0000:00:02.0: remove leave
+[  335.423464] day27_edu_loop: unloaded
+[  335.453892] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  335.454444] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  335.455196] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  335.456274] day27_edu_loop 0000:00:02.0: probe success
+[  335.456753] day27_edu_loop: loaded
+[  336.472258] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  336.472741] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  337.511650] day27_edu_loop 0000:00:02.0: remove enter
+[  337.512795] day27_edu_loop 0000:00:02.0: remove leave
+[  337.513213] day27_edu_loop: unloaded
+[  337.528250] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  337.528817] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  337.529587] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  337.530952] day27_edu_loop 0000:00:02.0: probe success
+[  337.531503] day27_edu_loop: loaded
+[  338.547204] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  338.547651] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  339.599739] day27_edu_loop 0000:00:02.0: remove enter
+[  339.602238] day27_edu_loop 0000:00:02.0: remove leave
+[  339.603074] day27_edu_loop: unloaded
+[  339.623340] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  339.623904] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  339.624714] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  339.625379] day27_edu_loop 0000:00:02.0: probe success
+[  339.625823] day27_edu_loop: loaded
+[  340.642134] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  340.642559] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  341.683176] day27_edu_loop 0000:00:02.0: remove enter
+[  341.684285] day27_edu_loop 0000:00:02.0: remove leave
+[  341.685346] day27_edu_loop: unloaded
+[  341.703705] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  341.704256] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  341.705046] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  341.705726] day27_edu_loop 0000:00:02.0: probe success
+[  341.706194] day27_edu_loop: loaded
+[  342.721846] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  342.722319] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  343.761597] day27_edu_loop 0000:00:02.0: remove enter
+[  343.762731] day27_edu_loop 0000:00:02.0: remove leave
+[  343.763239] day27_edu_loop: unloaded
+[  343.778017] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  343.779206] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  343.780067] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  343.780750] day27_edu_loop 0000:00:02.0: probe success
+[  343.781304] day27_edu_loop: loaded
+[  344.797647] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  344.798405] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  345.901213] day27_edu_loop 0000:00:02.0: remove enter
+[  345.902631] day27_edu_loop 0000:00:02.0: remove leave
+[  345.903044] day27_edu_loop: unloaded
+[  345.923607] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  345.924160] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  345.924928] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  345.925568] day27_edu_loop 0000:00:02.0: probe success
+[  345.926081] day27_edu_loop: loaded
+[  346.942705] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  346.943561] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  347.984450] day27_edu_loop 0000:00:02.0: remove enter
+[  347.986299] day27_edu_loop 0000:00:02.0: remove leave
+[  347.986720] day27_edu_loop: unloaded
+[  348.010518] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  348.011342] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  348.012104] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  348.012915] day27_edu_loop 0000:00:02.0: probe success
+[  348.013515] day27_edu_loop: loaded
+[  349.029530] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  349.030323] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  350.070390] day27_edu_loop 0000:00:02.0: remove enter
+[  350.072303] day27_edu_loop 0000:00:02.0: remove leave
+[  350.072737] day27_edu_loop: unloaded
+[  350.094755] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  350.095627] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  350.096495] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  350.097580] day27_edu_loop 0000:00:02.0: probe success
+[  350.098446] day27_edu_loop: loaded
+[  351.115657] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  351.116257] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  352.163108] day27_edu_loop 0000:00:02.0: remove enter
+[  352.164750] day27_edu_loop 0000:00:02.0: remove leave
+[  352.165184] day27_edu_loop: unloaded
+[  352.184184] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  352.185190] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  352.186192] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  352.187199] day27_edu_loop 0000:00:02.0: probe success
+[  352.187706] day27_edu_loop: loaded
+[  353.204525] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  353.204986] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  354.243857] day27_edu_loop 0000:00:02.0: remove enter
+[  354.245168] day27_edu_loop 0000:00:02.0: remove leave
+[  354.245576] day27_edu_loop: unloaded
+[  354.261778] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  354.262348] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  354.263665] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  354.264349] day27_edu_loop 0000:00:02.0: probe success
+[  354.264815] day27_edu_loop: loaded
+[  355.279996] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  355.281107] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  356.321862] day27_edu_loop 0000:00:02.0: remove enter
+[  356.323002] day27_edu_loop 0000:00:02.0: remove leave
+[  356.323417] day27_edu_loop: unloaded
+[  356.348189] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  356.348792] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  356.349603] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  356.350276] day27_edu_loop 0000:00:02.0: probe success
+[  356.351077] day27_edu_loop: loaded
+[  357.369327] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  357.369798] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  358.414174] day27_edu_loop 0000:00:02.0: remove enter
+[  358.415473] day27_edu_loop 0000:00:02.0: remove leave
+[  358.415988] day27_edu_loop: unloaded
+[  358.431651] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  358.432386] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  358.433359] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  358.434145] day27_edu_loop 0000:00:02.0: probe success
+[  358.434831] day27_edu_loop: loaded
+[  359.449488] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  359.450058] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  360.491762] day27_edu_loop 0000:00:02.0: remove enter
+[  360.493743] day27_edu_loop 0000:00:02.0: remove leave
+[  360.494292] day27_edu_loop: unloaded
+[  360.520276] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  360.521179] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  360.522643] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  360.523435] day27_edu_loop 0000:00:02.0: probe success
+[  360.524016] day27_edu_loop: loaded
+[  361.542949] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  361.543545] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  362.581772] day27_edu_loop 0000:00:02.0: remove enter
+[  362.583118] day27_edu_loop 0000:00:02.0: remove leave
+[  362.583684] day27_edu_loop: unloaded
+[  362.603736] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  362.604469] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  362.605744] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  362.606536] day27_edu_loop 0000:00:02.0: probe success
+[  362.607101] day27_edu_loop: loaded
+[  363.624541] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  363.625106] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  364.666104] day27_edu_loop 0000:00:02.0: remove enter
+[  364.667840] day27_edu_loop 0000:00:02.0: remove leave
+[  364.668330] day27_edu_loop: unloaded
+[  364.685215] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  364.685880] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  364.686858] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  364.687972] day27_edu_loop 0000:00:02.0: probe success
+[  364.688567] day27_edu_loop: loaded
+[  365.703343] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  365.703958] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  366.744810] day27_edu_loop 0000:00:02.0: remove enter
+[  366.746460] day27_edu_loop 0000:00:02.0: remove leave
+[  366.746934] day27_edu_loop: unloaded
+[  366.763896] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  366.764477] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  366.765284] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  366.766193] day27_edu_loop 0000:00:02.0: probe success
+[  366.767233] day27_edu_loop: loaded
+[  367.782674] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  367.783147] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  368.824320] day27_edu_loop 0000:00:02.0: remove enter
+[  368.825982] day27_edu_loop 0000:00:02.0: remove leave
+[  368.826396] day27_edu_loop: unloaded
+[  368.843920] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  368.844528] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  368.845309] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  368.846174] day27_edu_loop 0000:00:02.0: probe success
+[  368.846672] day27_edu_loop: loaded
+[  369.863091] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  369.863542] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  370.907024] day27_edu_loop 0000:00:02.0: remove enter
+[  370.909731] day27_edu_loop 0000:00:02.0: remove leave
+[  370.910200] day27_edu_loop: unloaded
+[  370.935226] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  370.936189] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  370.937054] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  370.937795] day27_edu_loop 0000:00:02.0: probe success
+[  370.938536] day27_edu_loop: loaded
+[  371.953317] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  371.953771] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  372.993503] day27_edu_loop 0000:00:02.0: remove enter
+[  372.995155] day27_edu_loop 0000:00:02.0: remove leave
+[  372.995614] day27_edu_loop: unloaded
+[  373.017588] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  373.018511] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  373.019295] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  373.020024] day27_edu_loop 0000:00:02.0: probe success
+[  373.020519] day27_edu_loop: loaded
+[  374.039424] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  374.040030] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  375.085338] day27_edu_loop 0000:00:02.0: remove enter
+[  375.105228] day27_edu_loop 0000:00:02.0: remove leave
+[  375.105702] day27_edu_loop: unloaded
+[  375.126312] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  375.126915] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  375.127731] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  375.128405] day27_edu_loop 0000:00:02.0: probe success
+[  375.129361] day27_edu_loop: loaded
+[  376.148533] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  376.149157] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  377.189502] day27_edu_loop 0000:00:02.0: remove enter
+[  377.190680] day27_edu_loop 0000:00:02.0: remove leave
+[  377.191698] day27_edu_loop: unloaded
+[  377.208739] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  377.209494] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  377.210428] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  377.211193] day27_edu_loop 0000:00:02.0: probe success
+[  377.211695] day27_edu_loop: loaded
+[  378.227805] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  378.228284] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  379.268259] day27_edu_loop 0000:00:02.0: remove enter
+[  379.269641] day27_edu_loop 0000:00:02.0: remove leave
+[  379.270101] day27_edu_loop: unloaded
+[  379.292478] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  379.293071] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  379.293896] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  379.294603] day27_edu_loop 0000:00:02.0: probe success
+[  379.295649] day27_edu_loop: loaded
+[  380.311221] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  380.311657] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  381.351755] day27_edu_loop 0000:00:02.0: remove enter
+[  381.354316] day27_edu_loop 0000:00:02.0: remove leave
+[  381.354776] day27_edu_loop: unloaded
+[  381.380403] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  381.381083] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  381.381965] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  381.382950] day27_edu_loop 0000:00:02.0: probe success
+[  381.383446] day27_edu_loop: loaded
+[  382.400068] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  382.400511] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  383.452215] day27_edu_loop 0000:00:02.0: remove enter
+[  383.453640] day27_edu_loop 0000:00:02.0: remove leave
+[  383.454515] day27_edu_loop: unloaded
+[  383.475300] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  383.475874] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  383.476808] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  383.477599] day27_edu_loop 0000:00:02.0: probe success
+[  383.478159] day27_edu_loop: loaded
+[  384.495323] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  384.495844] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  385.541906] day27_edu_loop 0000:00:02.0: remove enter
+[  385.543584] day27_edu_loop 0000:00:02.0: remove leave
+[  385.544036] day27_edu_loop: unloaded
+[  385.588126] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  385.588703] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  385.589490] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  385.590185] day27_edu_loop 0000:00:02.0: probe success
+[  385.590980] day27_edu_loop: loaded
+[  386.606290] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  386.607802] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  387.646362] day27_edu_loop 0000:00:02.0: remove enter
+[  387.648050] day27_edu_loop 0000:00:02.0: remove leave
+[  387.648537] day27_edu_loop: unloaded
+[  387.670592] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  387.671512] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  387.672347] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  387.673068] day27_edu_loop 0000:00:02.0: probe success
+[  387.673539] day27_edu_loop: loaded
+[  388.690886] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  388.691469] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  389.730088] day27_edu_loop 0000:00:02.0: remove enter
+[  389.732021] day27_edu_loop 0000:00:02.0: remove leave
+[  389.732597] day27_edu_loop: unloaded
+[  389.754243] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  389.755180] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  389.756293] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  389.757445] day27_edu_loop 0000:00:02.0: probe success
+[  389.758063] day27_edu_loop: loaded
+[  390.774622] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  390.775212] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  391.812984] day27_edu_loop 0000:00:02.0: remove enter
+[  391.814291] day27_edu_loop 0000:00:02.0: remove leave
+[  391.816108] day27_edu_loop: unloaded
+[  391.838212] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  391.839154] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  391.840295] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  391.841062] day27_edu_loop 0000:00:02.0: probe success
+[  391.841564] day27_edu_loop: loaded
+[  392.856659] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  392.857541] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  393.896619] day27_edu_loop 0000:00:02.0: remove enter
+[  393.897890] day27_edu_loop 0000:00:02.0: remove leave
+[  393.898934] day27_edu_loop: unloaded
+[  393.916759] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  393.917297] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  393.918116] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  393.919044] day27_edu_loop 0000:00:02.0: probe success
+[  393.919500] day27_edu_loop: loaded
+[  394.935726] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  394.936703] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  395.975925] day27_edu_loop 0000:00:02.0: remove enter
+[  395.977649] day27_edu_loop 0000:00:02.0: remove leave
+[  395.978334] day27_edu_loop: unloaded
+[  396.007790] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  396.008416] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  396.009174] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  396.009880] day27_edu_loop 0000:00:02.0: probe success
+[  396.010666] day27_edu_loop: loaded
+[  397.026560] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  397.027524] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  398.066735] day27_edu_loop 0000:00:02.0: remove enter
+[  398.068521] day27_edu_loop 0000:00:02.0: remove leave
+[  398.069180] day27_edu_loop: unloaded
+[  398.090889] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  398.091643] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  398.092670] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  398.093342] day27_edu_loop 0000:00:02.0: probe success
+[  398.093855] day27_edu_loop: loaded
+[  399.110829] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  399.111275] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  400.158304] day27_edu_loop 0000:00:02.0: remove enter
+[  400.160158] day27_edu_loop 0000:00:02.0: remove leave
+[  400.160646] day27_edu_loop: unloaded
+[  400.185074] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  400.186158] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  400.187319] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  400.188126] day27_edu_loop 0000:00:02.0: probe success
+[  400.188715] day27_edu_loop: loaded
+[  401.206031] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  401.206823] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  402.246354] day27_edu_loop 0000:00:02.0: remove enter
+[  402.248314] day27_edu_loop 0000:00:02.0: remove leave
+[  402.248772] day27_edu_loop: unloaded
+[  402.269675] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  402.270541] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  402.271375] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  402.272066] day27_edu_loop 0000:00:02.0: probe success
+[  402.272530] day27_edu_loop: loaded
+[  403.289175] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  403.289995] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  404.329423] day27_edu_loop 0000:00:02.0: remove enter
+[  404.330582] day27_edu_loop 0000:00:02.0: remove leave
+[  404.331601] day27_edu_loop: unloaded
+[  404.353359] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  404.353922] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  404.354986] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  404.355713] day27_edu_loop 0000:00:02.0: probe success
+[  404.356168] day27_edu_loop: loaded
+[  405.372722] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  405.373506] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  406.411221] day27_edu_loop 0000:00:02.0: remove enter
+[  406.412508] day27_edu_loop 0000:00:02.0: remove leave
+[  406.412956] day27_edu_loop: unloaded
+[  406.428527] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  406.429107] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  406.429892] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  406.431321] day27_edu_loop 0000:00:02.0: probe success
+[  406.431871] day27_edu_loop: loaded
+[  407.446708] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  407.447218] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  408.486961] day27_edu_loop 0000:00:02.0: remove enter
+[  408.488715] day27_edu_loop 0000:00:02.0: remove leave
+[  408.489191] day27_edu_loop: unloaded
+[  408.511043] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  408.511609] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  408.512395] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  408.513081] day27_edu_loop 0000:00:02.0: probe success
+[  408.513546] day27_edu_loop: loaded
+[  409.530106] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  409.530963] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  410.568638] day27_edu_loop 0000:00:02.0: remove enter
+[  410.569856] day27_edu_loop 0000:00:02.0: remove leave
+[  410.570866] day27_edu_loop: unloaded
+[  410.594212] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  410.595222] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  410.596092] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  410.596780] day27_edu_loop 0000:00:02.0: probe success
+[  410.597324] day27_edu_loop: loaded
+[  411.613053] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  411.613545] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  412.708413] day27_edu_loop 0000:00:02.0: remove enter
+[  412.709887] day27_edu_loop 0000:00:02.0: remove leave
+[  412.710734] day27_edu_loop: unloaded
+[  412.807283] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  412.808911] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  412.810661] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  412.811501] day27_edu_loop 0000:00:02.0: probe success
+[  412.812019] day27_edu_loop: loaded
+[  413.825355] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  413.825812] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  414.865949] day27_edu_loop 0000:00:02.0: remove enter
+[  414.867627] day27_edu_loop 0000:00:02.0: remove leave
+[  414.868088] day27_edu_loop: unloaded
+[  414.889866] day27_edu_loop 0000:00:02.0: probe enter: 1234:11e8
+[  414.890743] day27_edu_loop 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[  414.891554] day27_edu_loop 0000:00:02.0: MSI vector=50 enabled=1
+[  414.892323] day27_edu_loop 0000:00:02.0: probe success
+[  414.892930] day27_edu_loop: loaded
+[  415.909211] day27_edu_loop 0000:00:02.0: write trigger: value=0x00000001
+[  415.910374] day27_edu_loop 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+[  416.947794] day27_edu_loop 0000:00:02.0: remove enter
+[  416.948953] day27_edu_loop 0000:00:02.0: remove leave
+[  416.949404] day27_edu_loop: unloaded

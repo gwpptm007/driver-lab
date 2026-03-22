@@ -1,0 +1,2 @@
+Day27 使用 QEMU EDU 设备，不需要额外共享内存后端。
+本目录主要保存 serial.log / qemu.stderr.log / qemu-command.txt 等运行证据。

@@ -1,0 +1,69 @@
+#!/bin/sh
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export PATH
+
+log() {
+    echo "[day23-guest] $*"
+}
+
+section_begin() {
+    echo "===DAY23:$1:BEGIN==="
+}
+
+section_end() {
+    echo "===DAY23:$1:END==="
+}
+
+mkdir -p /proc /sys /dev /tmp
+mount -t proc none /proc
+mount -t sysfs none /sys
+mount -t devtmpfs none /dev 2>/dev/null || true
+
+log "uname: $(uname -a)"
+log "starting automatic probe flow"
+
+section_begin LSPCI_NN
+/bin/lspci -nn 2>&1 || log "lspci -nn failed"
+section_end LSPCI_NN
+
+section_begin LSPCI_VV_NN
+/bin/lspci -vv -nn 2>&1 || log "lspci -vv -nn failed"
+section_end LSPCI_VV_NN
+
+if [ -f /opt/day23/day23_ivshmem_probe.ko ]; then
+    if insmod /opt/day23/day23_ivshmem_probe.ko; then
+        echo "===DAY23:INSMOD:OK==="
+    else
+        echo "===DAY23:INSMOD:FAIL==="
+    fi
+else
+    log "module missing: /opt/day23/day23_ivshmem_probe.ko"
+    echo "===DAY23:INSMOD:FAIL==="
+fi
+
+sleep 1
+
+section_begin DMESG_PROBE
+/bin/dmesg 2>&1 | grep -Ei 'day23|pci|ivshmem' || true
+section_end DMESG_PROBE
+
+if rmmod day23_ivshmem_probe 2>/dev/null; then
+    echo "===DAY23:RMMOD:OK==="
+else
+    echo "===DAY23:RMMOD:FAIL==="
+fi
+
+sleep 1
+
+section_begin DMESG_REMOVE
+/bin/dmesg 2>&1 | grep -Ei 'day23|pci|ivshmem' || true
+section_end DMESG_REMOVE
+
+section_begin SYSFS_DEVICES
+/bin/ls /sys/bus/pci/devices 2>&1 || true
+section_end SYSFS_DEVICES
+
+log "automatic probe flow done"
+echo "===DAY23:COMPLETE==="
+poweroff -f

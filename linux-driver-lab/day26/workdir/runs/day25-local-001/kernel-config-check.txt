@@ -1,0 +1,7 @@
+# day26 kernel config check
+# file: /home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/build/arm64/.config
+
+[OK] CONFIG_PCI=y
+[OK] CONFIG_PCI_MSI=y
+[OK] CONFIG_PCI_HOST_GENERIC=y
+[OK] CONFIG_VFIO=y

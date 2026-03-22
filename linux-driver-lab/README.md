@@ -55,7 +55,7 @@ platform_driver、Device Tree、request_irq、中断计数、bottom half、regma
 
 ### day22 ~ day28（W4）
 PCIe 基本功学习线：  
-QEMU PCI 设备选型（ivshmem-doorbell）→ `pci_driver` 骨架 → BAR/MMIO/共享内存协议 → 消息中断向量 → 用户态工具 → remove/循环卸载 → 证据归档。
+QEMU PCI 设备选型（ivshmem）→ day22 设备可见性 → day23 `pci_driver` 骨架与 BAR 资源接管 → day24 MMIO/共享内存协议 → day25 消息中断向量 → day26 用户态工具 → day27 remove/循环卸载 → day28 证据归档。
 
 ### day29 ~ day35（W5）
 DMA/性能分析学习线：  

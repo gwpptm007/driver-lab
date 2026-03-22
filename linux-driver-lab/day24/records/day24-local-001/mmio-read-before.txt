@@ -1,0 +1,1 @@
+mmio-read ok: offset=0x0000000c value=0x00000001

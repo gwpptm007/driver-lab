@@ -1,19 +1,50 @@
-# day27 START_HERE
+# Day27 Start Here
 
-建议按下面顺序阅读和执行：
+## 1. 先准备本地环境文件
 
-1. 先看 `README.md`，确认今天要收什么
-2. 再看 `docs/01_plan.md`，理解实施路线
-3. 执行当天命令/编码/验证
-4. 把原始证据放进 `records/`
-5. 最后把结论和模板输出到 `output/`
+```bash
+cd ~/workspace/driver-lab/linux-driver-lab/day27
+source env/local.wq7.env
+```
 
-## 今天最重要的一句话
+## 2. 再补执行位
 
-验证资源释放对称性，通过 200 次 `insmod/rmmod` 循环，无崩溃、无残留状态。
+```bash
+chmod +x scripts/*.sh
+chmod +x guest/init.day27
+chmod +x third_party/pciutils/lib/configure
+chmod +x third_party/pciutils/configure 2>/dev/null || true
+```
 
-## 今天不要做过头的点
+## 3. 最短执行顺序
 
-- 先把当天主链路做通，不要抢跑到后面几天
-- 先留证据，再写总结
-- 所有“通过”都要能落到 `records/` 中的原始输出
+```bash
+make build-lspci
+make check
+make kernel-module-tree
+make build-tools
+make module
+sudo -E make rootfs
+sudo chown -R "$USER:$USER" workdir
+make backend
+sudo -E make run
+```
+
+## 4. 最先看哪里
+
+```bash
+cat records/${RUN_ID}/run-summary.md
+sed -n '1,80p' records/${RUN_ID}/lspci-nn.txt
+cat records/${RUN_ID}/loop-summary.txt
+sed -n '1,120p' records/${RUN_ID}/dmesg-driver.txt
+```
+
+## 5. 当前这批测试结果怎么看
+
+如果你看到：
+- `lspci-nn.txt` 中有 `1234:11e8`
+- `loop-summary.txt` 中 `pass=200`、`fail=0`
+- `serial.log` 中有 `===DAY27:COMPLETE===`
+- `dmesg-driver.txt` 中大量出现 `probe success`、`irq handler`、`remove leave`
+
+就可以判定 Day27 通过。

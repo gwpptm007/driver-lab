@@ -1,0 +1,289 @@
+[    0.000000] Booting Linux on physical CPU 0x0000000000 [0x411fd070]
+[    0.000000] Linux version 5.15.10 (wq7@wq7-virtual-machine) (aarch64-linux-gnu-gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #9 SMP PREEMPT Mon Mar 16 23:06:44 CST 2026
+[    0.000000] Machine model: linux,dummy-virt
+[    0.000000] efi: UEFI not found.
+[    0.000000] NUMA: No NUMA configuration found
+[    0.000000] NUMA: Faking a node at [mem 0x0000000040000000-0x000000005fffffff]
+[    0.000000] NUMA: NODE_DATA [mem 0x5fef0c00-0x5fef2fff]
+[    0.000000] Zone ranges:
+[    0.000000]   DMA      [mem 0x0000000040000000-0x000000005fffffff]
+[    0.000000]   DMA32    empty
+[    0.000000]   Normal   empty
+[    0.000000] Movable zone start for each node
+[    0.000000] Early memory node ranges
+[    0.000000]   node   0: [mem 0x0000000040000000-0x000000005fffffff]
+[    0.000000] Initmem setup node 0 [mem 0x0000000040000000-0x000000005fffffff]
+[    0.000000] cma: Reserved 32 MiB at 0x000000005d400000
+[    0.000000] psci: probing for conduit method from DT.
+[    0.000000] psci: PSCIv0.2 detected in firmware.
+[    0.000000] psci: Using standard PSCI v0.2 function IDs
+[    0.000000] psci: Trusted OS migration not required
+[    0.000000] percpu: Embedded 27 pages/cpu s72200 r8192 d30200 u110592
+[    0.000000] Detected PIPT I-cache on CPU0
+[    0.000000] CPU features: detected: Spectre-v2
+[    0.000000] CPU features: detected: Spectre-v3a
+[    0.000000] CPU features: detected: Spectre-v4
+[    0.000000] CPU features: kernel page table isolation forced ON by KASLR
+[    0.000000] CPU features: detected: Kernel page table isolation (KPTI)
+[    0.000000] CPU features: detected: ARM erratum 834220
+[    0.000000] CPU features: detected: ARM erratum 832075
+[    0.000000] CPU features: detected: ARM errata 1165522, 1319367, or 1530923
+[    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 129024
+[    0.000000] Policy zone: DMA
+[    0.000000] Kernel command line: console=ttyAMA0 rdinit=/init
+[    0.000000] Dentry cache hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    0.000000] Inode-cache hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.000000] Memory: 450008K/524288K available (10688K kernel code, 3264K rwdata, 6640K rodata, 7168K init, 444K bss, 41512K reserved, 32768K cma-reserved)
+[    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=1, Nodes=1
+[    0.000000] ftrace: allocating 38233 entries in 150 pages
+[    0.000000] ftrace: allocated 150 pages with 4 groups
+[    0.000000] trace event string verifier disabled
+[    0.000000] rcu: Preemptible hierarchical RCU implementation.
+[    0.000000] rcu: 	RCU event tracing is enabled.
+[    0.000000] rcu: 	RCU restricting CPUs from NR_CPUS=256 to nr_cpu_ids=1.
+[    0.000000] 	Trampoline variant of Tasks RCU enabled.
+[    0.000000] 	Rude variant of Tasks RCU enabled.
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.000000] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=1
+[    0.000000] NR_IRQS: 64, nr_irqs: 64, preallocated irqs: 0
+[    0.000000] Root IRQ handler: gic_handle_irq
+[    0.000000] GICv2m: range[mem 0x08020000-0x08020fff], SPI[80:143]
+[    0.000000] random: get_random_bytes called from start_kernel+0x514/0x700 with crng_init=0
+[    0.000000] arch_timer: cp15 timer(s) running at 62.50MHz (virt).
+[    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0x1cd42e208c, max_idle_ns: 881590405314 ns
+[    0.000074] sched_clock: 56 bits at 62MHz, resolution 16ns, wraps every 4398046511096ns
+[    0.002332] Console: colour dummy device 80x25
+[    0.003633] Calibrating delay loop (skipped), value calculated using timer frequency.. 125.00 BogoMIPS (lpj=250000)
+[    0.003782] pid_max: default: 32768 minimum: 301
+[    0.006197] LSM: Security Framework initializing
+[    0.006842] Mount-cache hash table entries: 1024 (order: 1, 8192 bytes, linear)
+[    0.006874] Mountpoint-cache hash table entries: 1024 (order: 1, 8192 bytes, linear)
+[    0.023940] /cpus/cpu-map: empty cluster
+[    0.028626] rcu: Hierarchical SRCU implementation.
+[    0.031695] EFI services will not be available.
+[    0.032066] smp: Bringing up secondary CPUs ...
+[    0.032126] smp: Brought up 1 node, 1 CPU
+[    0.032146] SMP: Total of 1 processors activated.
+[    0.032193] CPU features: detected: 32-bit EL0 Support
+[    0.032209] CPU features: detected: 32-bit EL1 Support
+[    0.032251] CPU features: detected: CRC32 instructions
+[    0.050650] CPU: All CPU(s) started at EL1
+[    0.051757] alternatives: patching kernel code
+[    0.060749] devtmpfs: initialized
+[    0.066306] KASLR enabled
+[    0.067147] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+[    0.067289] futex hash table entries: 256 (order: 2, 16384 bytes, linear)
+[    0.070202] pinctrl core: initialized pinctrl subsystem
+[    0.077351] DMI not present or invalid.
+[    0.083890] DMA: preallocated 128 KiB GFP_KERNEL pool for atomic allocations
+[    0.084146] DMA: preallocated 128 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+[    0.084352] DMA: preallocated 128 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[    0.086856] thermal_sys: Registered thermal governor 'step_wise'
+[    0.086885] thermal_sys: Registered thermal governor 'power_allocator'
+[    0.087999] cpuidle: using governor menu
+[    0.088587] hw-breakpoint: found 6 breakpoint and 4 watchpoint registers.
+[    0.088842] ASID allocator initialised with 32768 entries
+[    0.091904] Serial: AMBA PL011 UART driver
+[    0.129273] 9000000.pl011: ttyAMA0 at MMIO 0x9000000 (irq = 47, base_baud = 0) is a PL011 rev1
+[    0.139136] printk: console [ttyAMA0] enabled
+[    0.155239] HugeTLB registered 1.00 GiB page size, pre-allocated 0 pages
+[    0.155390] HugeTLB registered 32.0 MiB page size, pre-allocated 0 pages
+[    0.155506] HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.155623] HugeTLB registered 64.0 KiB page size, pre-allocated 0 pages
+[    0.162055] cryptd: max_cpu_qlen set to 1000
+[    0.167518] ACPI: Interpreter disabled.
+[    0.172865] iommu: Default domain type: Translated 
+[    0.172987] iommu: DMA domain TLB invalidation policy: strict mode 
+[    0.173646] vgaarb: loaded
+[    0.174419] SCSI subsystem initialized
+[    0.175982] pps_core: LinuxPPS API ver. 1 registered
+[    0.176086] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.176584] EDAC MC: Ver: 3.0.0
+[    0.179854] FPGA manager framework
+[    0.181630] clocksource: Switched to clocksource arch_sys_counter
+[    0.211023] VFS: Disk quotas dquot_6.6.0
+[    0.211239] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    0.212157] pnp: PnP ACPI: disabled
+[    0.230667] PCI: CLS 0 bytes, default 64
+[    0.234849] Unpacking initramfs...
+[    0.237583] hw perfevents: enabled with armv8_pmuv3 PMU driver, 5 counters available
+[    0.238105] kvm [1]: HYP mode not available
+[    0.289548] Initialise system trusted keyrings
+[    0.290539] workingset: timestamp_bits=42 max_order=17 bucket_order=0
+[    0.302894] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+[    0.316445] Freeing initrd memory: 1920K
+[    0.328016] Key type asymmetric registered
+[    0.328152] Asymmetric key parser 'x509' registered
+[    0.328412] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 246)
+[    0.328614] io scheduler mq-deadline registered
+[    0.328757] io scheduler kyber registered
+[    0.347091] pl061_gpio 9030000.pl061: PL061 GPIO chip registered
+[    0.350066] pci-host-generic 4010000000.pcie: host bridge /pcie@10000000 ranges:
+[    0.350654] pci-host-generic 4010000000.pcie:       IO 0x003eff0000..0x003effffff -> 0x0000000000
+[    0.351100] pci-host-generic 4010000000.pcie:      MEM 0x0010000000..0x003efeffff -> 0x0010000000
+[    0.351295] pci-host-generic 4010000000.pcie:      MEM 0x8000000000..0xffffffffff -> 0x8000000000
+[    0.351765] pci-host-generic 4010000000.pcie: Memory resource size exceeds max for 32 bits
+[    0.352210] pci-host-generic 4010000000.pcie: ECAM at [mem 0x4010000000-0x401fffffff] for [bus 00-ff]
+[    0.352947] pci-host-generic 4010000000.pcie: PCI host bridge to bus 0000:00
+[    0.353168] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    0.353297] pci_bus 0000:00: root bus resource [io  0x0000-0xffff]
+[    0.353436] pci_bus 0000:00: root bus resource [mem 0x10000000-0x3efeffff]
+[    0.353555] pci_bus 0000:00: root bus resource [mem 0x8000000000-0xffffffffff]
+[    0.354636] pci 0000:00:00.0: [1b36:0008] type 00 class 0x060000
+[    0.356913] pci 0000:00:01.0: [1af4:1000] type 00 class 0x020000
+[    0.357180] pci 0000:00:01.0: reg 0x10: [io  0x0000-0x001f]
+[    0.357304] pci 0000:00:01.0: reg 0x14: [mem 0x00000000-0x00000fff]
+[    0.357475] pci 0000:00:01.0: reg 0x20: [mem 0x00000000-0x00003fff 64bit pref]
+[    0.357708] pci 0000:00:01.0: reg 0x30: [mem 0x00000000-0x0007ffff pref]
+[    0.358395] pci 0000:00:02.0: [1234:11e8] type 00 class 0x00ff00
+[    0.358541] pci 0000:00:02.0: reg 0x10: [mem 0x00000000-0x000fffff]
+[    0.360050] pci 0000:00:02.0: BAR 0: assigned [mem 0x10000000-0x100fffff]
+[    0.360323] pci 0000:00:01.0: BAR 6: assigned [mem 0x10100000-0x1017ffff pref]
+[    0.360544] pci 0000:00:01.0: BAR 4: assigned [mem 0x8000000000-0x8000003fff 64bit pref]
+[    0.360731] pci 0000:00:01.0: BAR 1: assigned [mem 0x10180000-0x10180fff]
+[    0.360860] pci 0000:00:01.0: BAR 0: assigned [io  0x1000-0x101f]
+[    0.363080] EINJ: ACPI disabled.
+[    0.396396] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+[    0.401205] SuperH (H)SCI(F) driver initialized
+[    0.402202] msm_serial: driver initialized
+[    0.405506] cacheinfo: Unable to detect cache hierarchy for CPU 0
+[    0.417053] loop: module loaded
+[    0.421916] physmap-flash 0.flash: physmap platform flash device: [mem 0x00000000-0x03ffffff]
+[    0.423162] 0.flash: Found 2 x16 devices at 0x0 in 32-bit bank. Manufacturer ID 0x000000 Chip ID 0x000000
+[    0.423600] Intel/Sharp Extended Query Table at 0x0031
+[    0.424193] Using buffer write method
+[    0.424626] physmap-flash 0.flash: physmap platform flash device: [mem 0x04000000-0x07ffffff]
+[    0.425365] 0.flash: Found 2 x16 devices at 0x0 in 32-bit bank. Manufacturer ID 0x000000 Chip ID 0x000000
+[    0.425574] Intel/Sharp Extended Query Table at 0x0031
+[    0.426034] Using buffer write method
+[    0.426176] Concatenating MTD devices:
+[    0.426258] (0): "0.flash"
+[    0.426316] (1): "0.flash"
+[    0.426371] into device "0.flash"
+[    0.443169] VFIO - User Level meta-driver version: 0.3
+[    0.447056] rtc-pl031 9010000.pl031: registered as rtc0
+[    0.447560] rtc-pl031 9010000.pl031: setting system clock to 2026-03-21T14:52:06 UTC (1774104726)
+[    0.449073] i2c_dev: i2c /dev entries driver
+[    0.457776] sdhci: Secure Digital Host Controller Interface driver
+[    0.457925] sdhci: Copyright(c) Pierre Ossman
+[    0.459523] Synopsys Designware Multimedia Card Interface Driver
+[    0.462585] sdhci-pltfm: SDHCI platform and OF driver helper
+[    0.466757] ledtrig-cpu: registered to indicate activity on CPUs
+[    0.477130] Loading compiled-in X.509 certificates
+[    0.484992] uart-pl011 9000000.pl011: no DMA platform data
+[    0.519254] Freeing unused kernel memory: 7168K
+[    0.519828] Run /init as init process
+===DAY25:LSPCI_NN:BEGIN===
+00:00.0 Class [0600]: Device [1b36:0008]
+00:01.0 Class [0200]: Device [1af4:1000]
+00:02.0 Class [00ff]: Device [1234:11e8] (rev 10)
+===DAY25:LSPCI_NN:END===
+===DAY25:LSPCI_VV_NN:BEGIN===
+00:00.0 Class [0600]: Device [1b36:0008]
+	Subsystem: Device [1af4:1100]
+	Control: I/O- Mem- BusMaster- SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-
+	Status: Cap- 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+
+00:01.0 Class [0200]: Device [1af4:1000]
+	Subsystem: Device [1af4:0001]
+	Control: I/O- Mem- BusMaster- SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-
+	Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+	Interrupt: pin A routed to IRQ 0
+	Region 0: I/O ports at 1000 [disabled] [size=32]
+	Region 1: Memory at 10180000 (32-bit, non-prefetchable) [disabled] [size=4K]
+	Region 4: Memory at 8000000000 (64-bit, prefetchable) [disabled] [size=16K]
+	Expansion ROM at 10100000 [virtual] [disabled] [size=512K]
+	Capabilities: [98] MSI-X: Enable- Count=4 Masked-
+		Vector table: BAR=1 offset=00000000
+		PBA: BAR=1 offset=00000800
+	Capabilities: [84] Vendor Specific Information: VirtIO: <unknown>
+		BAR=0 offset=00000000 size=00000000
+	Capabilities: [70] Vendor Specific Information: VirtIO: Notify
+		BAR=4 offset=00003000 size=00001000 multiplier=00000004
+	Capabilities: [60] Vendor Specific Information: VirtIO: DeviceCfg
+		BAR=4 offset=00002000 size=00001000
+	Capabilities: [50] Vendor Specific Information: VirtIO: ISR
+		BAR=4 offset=00001000 size=00001000
+	Capabilities: [40] Vendor Specific Information: VirtIO: CommonCfg
+		BAR=4 offset=00000000 size=00001000
+
+00:02.0 Class [00ff]: Device [1234:11e8] (rev 10)
+	Subsystem: Device [1af4:1100]
+	Control: I/O- Mem- BusMaster- SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-
+	Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+	Interrupt: pin A routed to IRQ 0
+	Region 0: Memory at 10000000 (32-bit, non-prefetchable) [disabled] [size=1M]
+	Capabilities: [40] MSI: Enable- Count=1/1 Maskable- 64bit+
+		Address: 0000000000000000  Data: 0000
+
+===DAY25:LSPCI_VV_NN:END===
+[    0.645609] day25_edu_irq: loading out-of-tree module taints kernel.
+[    0.651871] day25_edu_irq 0000:00:02.0: probe enter: 1234:11e8
+[    0.652333] day25_edu_irq 0000:00:02.0: enabling device (0000 -> 0002)
+[    0.655229] day25_edu_irq 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[    0.655407] day25_edu_irq 0000:00:02.0: MSI vector=50 ident=0x010000ed liveness=0xa5a55a5a inverted=0x5a5aa5a5
+[    0.655848] day25_edu_irq 0000:00:02.0: probe success
+===DAY25:IRQ_INFO_BEFORE:BEGIN===
+vendor=0x1234 device=0x11e8
+bar0_start=0x10000000 bar0_len=0x100000
+irq_vector=50 irq_count=0 msi_enabled=1
+last_irq_status=0x00000000 last_ack_value=0x00000000
+liveness_value=0xa5a55a5a liveness_inverted=0x5a5aa5a5
+===DAY25:IRQ_INFO_BEFORE:END===
+===DAY25:IRQ_COUNT_BEFORE:BEGIN===
+irq_count=0
+===DAY25:IRQ_COUNT_BEFORE:END===
+===DAY25:IRQ_STATUS_BEFORE:BEGIN===
+irq_status=0x00000000 ack_value=0x00000000
+===DAY25:IRQ_STATUS_BEFORE:END===
+===DAY25:PROC_INTERRUPTS_BEFORE:BEGIN===
+ 11:        162     GIC-0  27 Level     arch_timer
+ 46:          0     GIC-0  34 Level     rtc-pl031
+ 47:          0     GIC-0  33 Level     uart-pl011
+ 48:          0     GIC-0  23 Level     arm-pmu
+ 50:          0       MSI 32768 Edge      day25_edu_irq
+IPI0:         0       Rescheduling interrupts
+===DAY25:PROC_INTERRUPTS_BEFORE:END===
+===DAY25:TRIGGER:BEGIN===
+[    0.656284] day25_edu_irq: module loaded
+[    1.721011] day25_edu_irq 0000:00:02.0: trigger irq: value=0x00000001
+[    1.721394] day25_edu_irq 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+triggered value=0x00000001
+===DAY25:TRIGGER:END===
+===DAY25:IRQ_COUNT_AFTER:BEGIN===
+irq_count=1
+===DAY25:IRQ_COUNT_AFTER:END===
+===DAY25:IRQ_STATUS_AFTER:BEGIN===
+irq_status=0x00000001 ack_value=0x00000001
+===DAY25:IRQ_STATUS_AFTER:END===
+===DAY25:PROC_INTERRUPTS_AFTER:BEGIN===
+ 11:        176     GIC-0  27 Level     arch_timer
+ 46:          0     GIC-0  34 Level     rtc-pl031
+ 47:          0     GIC-0  33 Level     uart-pl011
+ 48:          0     GIC-0  23 Level     arm-pmu
+ 50:          1       MSI 32768 Edge      day25_edu_irq
+IPI0:         0       Rescheduling interrupts
+===DAY25:PROC_INTERRUPTS_AFTER:END===
+===DAY25:DMESG_DRIVER:BEGIN===
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.000000] Root IRQ handler: gic_handle_irq
+[    0.328614] io scheduler mq-deadline registered
+[    0.328757] io scheduler kyber registered
+[    0.645609] day25_edu_irq: loading out-of-tree module taints kernel.
+[    0.651871] day25_edu_irq 0000:00:02.0: probe enter: 1234:11e8
+[    0.652333] day25_edu_irq 0000:00:02.0: enabling device (0000 -> 0002)
+[    0.655229] day25_edu_irq 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[    0.655407] day25_edu_irq 0000:00:02.0: MSI vector=50 ident=0x010000ed liveness=0xa5a55a5a inverted=0x5a5aa5a5
+[    0.655848] day25_edu_irq 0000:00:02.0: probe success
+[    0.656284] day25_edu_irq: module loaded
+[    1.721011] day25_edu_irq 0000:00:02.0: trigger irq: value=0x00000001
+[    1.721394] day25_edu_irq 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+===DAY25:DMESG_DRIVER:END===
+[    2.784162] day25_edu_irq 0000:00:02.0: remove enter
+[    2.788205] day25_edu_irq 0000:00:02.0: remove leave
+===DAY25:COMPLETE===
+[    2.788885] day25_edu_irq: module unloaded
+[    3.816322] Flash device refused suspend due to active operation (state 20)
+[    3.817422] Flash device refused suspend due to active operation (state 20)
+[    3.818064] reboot: Power down

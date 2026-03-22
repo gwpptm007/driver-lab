@@ -1,0 +1,2 @@
+[    1.701842] day24_ivshmem_mmio 0000:00:02.0: MMIO write: offset=0x0000000c value=0x00000003 seq=1
+mmio-write ok: offset=0x0000000c value=0x00000003

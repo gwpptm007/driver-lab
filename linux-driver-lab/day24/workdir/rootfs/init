@@ -1,0 +1,85 @@
+#!/bin/sh
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export PATH
+
+log() {
+    echo "[day24-guest] $*"
+}
+
+section_begin() {
+    echo "===DAY24:$1:BEGIN==="
+}
+
+section_end() {
+    echo "===DAY24:$1:END==="
+}
+
+mkdir -p /proc /sys /dev /tmp
+mount -t proc none /proc
+mount -t sysfs none /sys
+mount -t devtmpfs none /dev 2>/dev/null || true
+
+log "uname: $(uname -a)"
+log "starting automatic MMIO flow"
+
+section_begin LSPCI_NN
+/bin/lspci -nn 2>&1 || log "lspci -nn failed"
+section_end LSPCI_NN
+
+section_begin LSPCI_VV_NN
+/bin/lspci -vv -nn 2>&1 || log "lspci -vv -nn failed"
+section_end LSPCI_VV_NN
+
+if [ -f /opt/day24/day24_ivshmem_mmio.ko ]; then
+    if insmod /opt/day24/day24_ivshmem_mmio.ko; then
+        echo "===DAY24:INSMOD:OK==="
+    else
+        echo "===DAY24:INSMOD:FAIL==="
+    fi
+else
+    log "module missing: /opt/day24/day24_ivshmem_mmio.ko"
+    echo "===DAY24:INSMOD:FAIL==="
+fi
+
+sleep 1
+
+section_begin MMIO_INFO
+/bin/day24_mmio_tool info 2>&1 || log "day24_mmio_tool info failed"
+section_end MMIO_INFO
+
+section_begin MMIO_READ_BEFORE
+/bin/day24_mmio_tool mmio-read 0x0c 2>&1 || log "mmio-read before failed"
+section_end MMIO_READ_BEFORE
+
+section_begin MMIO_WRITE_STATE
+/bin/day24_mmio_tool mmio-write 0x0c 0x00000003 2>&1 || log "mmio-write state failed"
+section_end MMIO_WRITE_STATE
+
+section_begin MMIO_READ_AFTER
+/bin/day24_mmio_tool mmio-read 0x0c 2>&1 || log "mmio-read after failed"
+section_end MMIO_READ_AFTER
+
+section_begin SHM_WRITE
+/bin/day24_mmio_tool shm-write hello_day24_ivshmem 2>&1 || log "shm-write failed"
+section_end SHM_WRITE
+
+section_begin SHM_READ
+/bin/day24_mmio_tool shm-read 2>&1 || log "shm-read failed"
+section_end SHM_READ
+
+section_begin DMESG_DRIVER
+/bin/dmesg 2>&1 | grep -Ei 'day24|pci|ivshmem|payload|MMIO' || true
+section_end DMESG_DRIVER
+
+if rmmod day24_ivshmem_mmio 2>/dev/null; then
+    echo "===DAY24:RMMOD:OK==="
+else
+    echo "===DAY24:RMMOD:FAIL==="
+fi
+
+sleep 1
+
+log "automatic MMIO flow done"
+echo "===DAY24:COMPLETE==="
+poweroff -f

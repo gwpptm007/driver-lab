@@ -1,0 +1,1 @@
+cmd_/home/wq7/workspace/driver-lab/linux-driver-lab/day24/driver/day24_ivshmem_mmio.mod := { echo  /home/wq7/workspace/driver-lab/linux-driver-lab/day24/driver/day24_ivshmem_mmio.o;  echo; } > /home/wq7/workspace/driver-lab/linux-driver-lab/day24/driver/day24_ivshmem_mmio.mod

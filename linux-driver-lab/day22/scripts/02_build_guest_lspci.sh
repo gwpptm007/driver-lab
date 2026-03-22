@@ -28,15 +28,20 @@ ensure_dir "$(dirname "${GUEST_LSPCI_BIN}")"
 log "尝试交叉编译 arm64 静态 lspci"
 log "源码目录：${PCIUTILS_SRC_DIR}"
 log "输出路径：${GUEST_LSPCI_BIN}"
+log "PCIUTILS_HOST：${PCIUTILS_HOST}"
 
 # 这里采用 best-effort 方式构建。
-# 目标是尽量减少额外依赖，因此关闭 DNS / ZLIB 等可选项，并尝试静态链接。
-# 如果你的工具链缺少静态 libc，构建可能失败；这时请直接准备一个预编译的 arm64 静态 lspci。
+# 关键点：pciutils/lib/configure 在 HOST 未指定时会按宿主机 uname -m 探测 CPU。
+# 如果宿主机是 x86_64，就会把 i386-ports 也编进去，交叉到 aarch64 时常见报错是缺少 <sys/io.h>。
+# 因此这里必须显式传 HOST=aarch64-linux-gnu，再配合 CROSS_COMPILE=aarch64-linux-gnu-。
+# 另外尽量关闭 DNS / ZLIB / HWDB 等可选项，并优先尝试静态链接。
+# 如果你的工具链缺少静态 libc，构建可能失败；这时请先去掉静态链接参数，只要求生成 arm64 lspci。
 (
     cd "${PCIUTILS_SRC_DIR}"
     make clean >/dev/null 2>&1 || true
     make \
-        HOST=linux \
+        HOST="${PCIUTILS_HOST}" \
+        CROSS_COMPILE="${CROSS_COMPILE}" \
         CC="${CC}" \
         AR="${AR}" \
         RANLIB="${RANLIB}" \
@@ -45,7 +50,6 @@ log "输出路径：${GUEST_LSPCI_BIN}"
         ZLIB=no \
         SHARED=no \
         HWDB=no \
-        CFLAGS='-O2 -static' \
         LDFLAGS='-static' \
         lspci
 )
@@ -58,3 +62,5 @@ if is_elf_aarch64_static "${GUEST_LSPCI_BIN}"; then
 else
     die "lspci 构建结束，但产物不是预期的 arm64 静态 ELF，请检查工具链或直接提供预编译二进制。"
 fi
+
+log "如果这里仍然失败，请优先查看 docs/02_PREPARE_ENV_AND_LSPCI.md 中的常见报错章节。"

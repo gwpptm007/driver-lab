@@ -1,0 +1,2 @@
+write trigger failed: Invalid argument
+rc=5

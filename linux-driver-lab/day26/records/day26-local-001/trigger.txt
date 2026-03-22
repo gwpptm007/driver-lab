@@ -1,0 +1,3 @@
+[    2.739604] day26_edu_tool 0000:00:02.0: write trigger: value=0x00000001
+[    2.740038] day26_edu_tool 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+triggered value=0x00000001

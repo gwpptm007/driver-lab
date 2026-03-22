@@ -1,73 +1,62 @@
-# day25：消息中断向量与中断统计
+# Day25 - EDU MSI 中断实验（最终版）
 
-## 1. 今日定位
+## 目标
 
-- 周期：W4
-- 后端设备：ivshmem-doorbell
-- 当日目标：使用 `pci_alloc_irq_vectors()` 与 `request_irq()` 打通消息中断路径，验证 `/proc/interrupts` 计数增长。
+Day25 的目标是把 **PCI 驱动 + MSI 中断 + 用户态触发** 三条线接起来：
 
-这一天不追求“大而全”，只追求把当天的关键链路做通，并且把证据沉淀下来。
+1. 在 QEMU `virt` 平台下挂载 EDU PCI 教学设备；
+2. 编写最小 `pci_driver`，完成 `pci_enable_device / pci_request_regions / pci_iomap / pci_alloc_irq_vectors / request_irq`；
+3. 通过用户态工具触发一次中断；
+4. 从 **驱动日志、驱动内部计数、/proc/interrupts** 三条证据链验证结果；
+5. 最后完整执行 `remove`，保证模块可卸载。
 
----
+## 当前上传 records 的最终结论
 
-## 2. 你今天真正要学会什么
+基于 `records/day25-local-001/` 这轮真实输出，可以确认 **day25 已完整通过**：
 
-- 理解 `pci_alloc_irq_vectors()` 的统一入口意义
-- 知道为什么在 ivshmem-doorbell 场景中更常见的是 MSI-X / doorbell 路线
-- 掌握驱动内部计数与 `/proc/interrupts` 双证据验证
+- EDU 设备已经被枚举到：`1234:11e8`
+- 驱动 `probe()` 已成功进入并申请到 MSI vector
+- BAR0 信息、identity/liveness 检查已经通过
+- 用户态工具已经成功打开 `/dev/day25_edu0`
+- 用户态向 EDU IRQ_RAISE 写入 `0x1` 后，IRQ handler 成功进入
+- 驱动内部 `irq_count` 从 `0 -> 1` 增长
+- `/proc/interrupts` 中 `day25_edu_irq` 这一行从 `0 -> 1` 增长
+- `remove()` 正常执行，guest 流程已跑到 `===DAY25:COMPLETE===`
 
----
+因此，day25 的最终结论是：
 
-## 3. 推荐推进顺序
+> **Day25 通过：EDU 设备枚举、MSI 建立、用户态触发中断、驱动内部计数增长、/proc/interrupts 增长、模块卸载 全部闭环完成。**
 
-1. 调用 `pci_alloc_irq_vectors()`，flags 允许 `PCI_IRQ_MSIX | PCI_IRQ_MSI | PCI_IRQ_INTX`。
-2. 使用 `pci_irq_vector()` 获取向量并 `request_irq()`。
-3. 设计一个最小触发路径，让用户态或对端动作能触发中断。
-4. 在 ISR 中更新原子计数并导出状态。
 
----
+## 如何快速验证这轮是否真正通过
 
-## 4. 当日验收
+在 `day25` 目录执行：
 
-- 中断成功注册
-- `/proc/interrupts` 计数增长
-- 驱动内部计数与系统计数方向一致
+```bash
+cd ~/workspace/driver-lab/linux-driver-lab/day25
+source env/local.wq7.env
 
----
-
-## 5. 当日交付物
-
-- `records/<timestamp>/interrupts-before.txt`
-- `records/<timestamp>/interrupts-after.txt`
-- `output/day25_irq_analysis.md`
-
----
-
-## 6. 风险提醒
-
-- 把“MSI 学习目标”和 ivshmem 实际 MSIX 行为混为一谈
-- 中断已触发但 ack/清状态逻辑不完整
-
----
-
-## 7. 目录说明
-
-```text
-day25/
-├── README.md
-├── START_HERE.md
-├── docs/
-├── output/
-└── records/
+cat records/${RUN_ID}/run-summary.md
+cat records/${RUN_ID}/irq-count-before.txt
+cat records/${RUN_ID}/irq-count-after.txt
+cat records/${RUN_ID}/proc-interrupts-before.txt
+cat records/${RUN_ID}/proc-interrupts-after.txt
+grep -n 'probe success\|irq handler\|remove enter\|remove leave\|DAY25:COMPLETE' records/${RUN_ID}/serial.log
 ```
 
-- `docs/`：当天的详细理解、拆解与清单
-- `output/`：当天最终整理出的说明、模板、阶段结论
-- `records/`：运行证据、日志、截图、命令输出
+这轮真实 records 的关键结论是：
 
----
+- `irq_count` 从 `0 -> 1`
+- `/proc/interrupts` 中 `day25_edu_irq` 从 `0 -> 1`
+- `serial.log` 中同时出现 `probe success`、`irq handler`、`remove enter`、`remove leave`、`===DAY25:COMPLETE===`
 
-## 8. 和前后天的关系
+因此，这轮 records 已经足以证明：
+**EDU 枚举成功、MSI 建立成功、用户态触发成功、中断处理函数真实进入、驱动和内核全局计数都增长、模块卸载成功。**
 
-- 前一天：day24 的输出作为今日输入
-- 后一天：day26 基于今天的证据继续推进
+## 入口
+
+- `START_HERE.md`：最快入口
+- `docs/01_LOCAL_RUNBOOK.md`：完整本地执行流程
+- `docs/02_RESULTS_AND_ACCEPTANCE.md`：结合真实输出解释如何判断通过
+- `docs/03_TROUBLESHOOTING.md`：常见问题与定位方法
+- `output/day25_quick_commands.md`：最短命令清单

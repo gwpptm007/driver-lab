@@ -1,0 +1,13 @@
+# day23 kernel config check
+# file: /home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/build/arm64/.config
+
+[OK] CONFIG_PCI=y
+[OK] CONFIG_PCI_MSI=y
+[OK] CONFIG_PCI_HOST_GENERIC=y
+[OK] CONFIG_MODULES=y
+[OK] CONFIG_MODULE_UNLOAD=y
+[OK] CONFIG_PCI_DOMAINS=y
+[OK] CONFIG_VFIO=y
+
+提示：day23 重点是外部模块能成功 probe/remove。
+其中最关键的是 CONFIG_PCI / CONFIG_MODULES / CONFIG_MODULE_UNLOAD。

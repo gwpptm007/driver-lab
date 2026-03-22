@@ -8,6 +8,7 @@
  * 2. 这个工具不依赖 libpci，可以在最小 rootfs 里工作；它直接走 sysfs，
  *    让你看清 Linux 在没有真正 pci_driver 接管设备前，仍然暴露了哪些 PCI 信息。
  * 3. day23 开始写 pci_driver 以后，你可以把这个工具的输出和驱动 probe 日志对照起来看。
+ * 4. 支持通过环境变量 PCI_SYSFS_ROOT 覆盖默认路径，方便 day22 在宿主机做伪 sysfs 自测。
  *
  * 本工具做的事情：
  *   - 遍历 /sys/bus/pci/devices
@@ -31,7 +32,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-#define SYSFS_PCI_DEVICES "/sys/bus/pci/devices"
+#define DEFAULT_SYSFS_PCI_DEVICES "/sys/bus/pci/devices"
 #define CONFIG_PREVIEW_BYTES 64
 
 static int read_first_line(const char *path, char *buf, size_t size)
@@ -119,28 +120,28 @@ static void dump_config_preview(const char *path)
     }
 }
 
-static void dump_one_device(const char *bdf)
+static void dump_one_device(const char *sysfs_root, const char *bdf)
 {
     char path[PATH_MAX];
 
     printf("[device] %s\n", bdf);
 
-    snprintf(path, sizeof(path), "%s/%s/vendor", SYSFS_PCI_DEVICES, bdf);
+    snprintf(path, sizeof(path), "%s/%s/vendor", sysfs_root, bdf);
     dump_file_if_exists("vendor", path);
 
-    snprintf(path, sizeof(path), "%s/%s/device", SYSFS_PCI_DEVICES, bdf);
+    snprintf(path, sizeof(path), "%s/%s/device", sysfs_root, bdf);
     dump_file_if_exists("device", path);
 
-    snprintf(path, sizeof(path), "%s/%s/class", SYSFS_PCI_DEVICES, bdf);
+    snprintf(path, sizeof(path), "%s/%s/class", sysfs_root, bdf);
     dump_file_if_exists("class", path);
 
-    snprintf(path, sizeof(path), "%s/%s/irq", SYSFS_PCI_DEVICES, bdf);
+    snprintf(path, sizeof(path), "%s/%s/irq", sysfs_root, bdf);
     dump_file_if_exists("irq", path);
 
-    snprintf(path, sizeof(path), "%s/%s/resource", SYSFS_PCI_DEVICES, bdf);
+    snprintf(path, sizeof(path), "%s/%s/resource", sysfs_root, bdf);
     dump_resource_table(path);
 
-    snprintf(path, sizeof(path), "%s/%s/config", SYSFS_PCI_DEVICES, bdf);
+    snprintf(path, sizeof(path), "%s/%s/config", sysfs_root, bdf);
     dump_config_preview(path);
 
     putchar('\n');
@@ -151,23 +152,28 @@ int main(void)
     DIR *dir;
     struct dirent *de;
     int count = 0;
+    const char *sysfs_root;
 
-    dir = opendir(SYSFS_PCI_DEVICES);
+    sysfs_root = getenv("PCI_SYSFS_ROOT");
+    if (!sysfs_root || !*sysfs_root)
+        sysfs_root = DEFAULT_SYSFS_PCI_DEVICES;
+
+    dir = opendir(sysfs_root);
     if (!dir) {
         fprintf(stderr, "[pci_sysfs_dump] failed to open %s: %s\n",
-                SYSFS_PCI_DEVICES, strerror(errno));
+                sysfs_root, strerror(errno));
         return 1;
     }
 
     puts("# day22 pci_sysfs_dump");
-    puts("# source: /sys/bus/pci/devices");
+    printf("# source: %s\n", sysfs_root);
     puts("# note  : this is a guest-side helper for day22 enumeration evidence");
     putchar('\n');
 
     while ((de = readdir(dir)) != NULL) {
         if (strcmp(de->d_name, ".") == 0 || strcmp(de->d_name, "..") == 0)
             continue;
-        dump_one_device(de->d_name);
+        dump_one_device(sysfs_root, de->d_name);
         count++;
     }
 

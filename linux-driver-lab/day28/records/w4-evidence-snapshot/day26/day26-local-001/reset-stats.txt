@@ -1,0 +1,2 @@
+stats reset
+irq_count=0

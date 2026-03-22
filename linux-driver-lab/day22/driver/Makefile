@@ -20,11 +20,11 @@ all:
 		echo "[day22-driver] 请指定 KDIR=/path/to/kernel/build"; \
 		exit 1; \
 	fi
-	$(MAKE) -C $(KDIR) M=$(PWD) modules
+	$(MAKE) -C $(KDIR) M=$(PWD) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) modules
 
 clean:
 	@if [ -n "$(KDIR)" ]; then \
-		$(MAKE) -C $(KDIR) M=$(PWD) clean; \
+		$(MAKE) -C $(KDIR) M=$(PWD) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) clean; \
 	else \
 		rm -rf *.o *.ko *.mod *.mod.c *.symvers *.order .*.cmd .tmp_versions Module.symvers modules.order; \
 	fi

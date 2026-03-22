@@ -1,0 +1,2 @@
+qemu-system-aarch64: -object memory-backend-file,size=4M,mem-path=/home/wq7/workspace/driver-lab/linux-driver-lab/day23/workdir/runs/day23-local-001/ivshmem-day23.bin,share,id=hostmem0: warning: short-form boolean option 'share' deprecated
+Please use share=on instead

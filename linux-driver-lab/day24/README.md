@@ -1,72 +1,95 @@
-# day24：MMIO 读写与共享内存协议
+# day24：MMIO 读写与共享内存协议（最终版）
 
-## 1. 今日定位
+## 1. 今日完成了什么
 
-- 周期：W4
-- 后端设备：ivshmem-doorbell
-- 当日目标：完成 `readl/writel` 练习，并定义最小共享内存/寄存器协议，支持用户态可验证读写。
+`day24` 在 `day23`“驱动已成功接住 ivshmem 设备”的基础上，进一步完成了一个**最小但真实可验证的 MMIO + 共享内存协议闭环**：
 
-这一天不追求“大而全”，只追求把当天的关键链路做通，并且把证据沉淀下来。
+- 继续保留 `pci_enable_device / pci_request_regions / pci_iomap`
+- 在 **BAR2 共享内存窗口** 起始位置定义协议头
+- 协议头字段通过 `readl/writel` 访问
+- payload 区域通过 `memcpy_toio / memcpy_fromio` 访问
+- 提供字符设备 `/dev/day24_ivshmem0`
+- 提供用户态工具 `day24_mmio_tool`
+- 在 guest 内自动完成：
+  - 模块加载
+  - `info` 信息读取
+  - `mmio-read`
+  - `mmio-write`
+  - `shm-write`
+  - `shm-read`
+  - 模块卸载
 
----
+## 2. 最终结论
 
-## 2. 你今天真正要学会什么
+**day24 通过。**
 
-- 掌握 MMIO 与普通内存访问的差异
-- 学会设计“可验证”的最小协议而不是只做裸读写
-- 理解设备寄存器区与共享内存区的职责划分
+真实运行输出已经证明：
 
----
+- 设备 `1af4:1110` 被成功枚举
+- 驱动 `probe()` 成功
+- BAR0/BAR2 资源识别正确
+- BAR2 协议头初始化成功
+- `mmio-write` 修改 `state` 字段后，可被 `mmio-read` 读回
+- `shm-write` 写入 payload 后，可被 `shm-read` 原样读回
+- `rmmod` 成功
+- guest 流程运行到 `===DAY24:COMPLETE===`
 
-## 3. 推荐推进顺序
+## 3. day24 的独立构建原则
 
-1. 梳理 ivshmem 的 BAR 结构与共享区访问边界。
-2. 封装 `readl/writel` 或 `ioread32/iowrite32` 访问函数。
-3. 设计一组最小字段：magic、version、state、producer/consumer、payload_len。
-4. 提供内核态自测与用户态校验路径。
+- 只使用 `day24/` 目录内的脚本、文档、工具和环境文件
+- 不依赖 `day22/` 或 `day23/` 的脚本、记录或中间产物
+- `driver-lab/kernel-src/` 不随包提供，视为你本机已有前置
+- `pciutils` 源码也不随包提供；**获取命令、编译命令、验证命令已经写进 day24 主流程**
 
----
+## 4. 本地主流程（从获取 pciutils 源码开始）
 
-## 4. 当日验收
+```bash
+cd ~/workspace/driver-lab/linux-driver-lab/day24
+source env/local.wq7.env
 
-- 用户态可写入一段数据并在另一端读回验证
-- `dmesg` 有明确协议状态日志
-- 边界检查与错误码清晰
+mkdir -p third_party
+# 能联网时：
+git clone https://github.com/pciutils/pciutils.git third_party/pciutils
+# 不能联网时：把其它机器上的 pciutils 源码离线拷到 third_party/pciutils
 
----
+chmod +x third_party/pciutils/lib/configure
+chmod +x third_party/pciutils/configure 2>/dev/null || true
 
-## 5. 当日交付物
+make build-lspci
+file third_party/pciutils/lspci
 
-- `output/day24_protocol_design.md`
-- `records/<timestamp>/mmio_rw_verify.txt`
-
----
-
-## 6. 风险提醒
-
-- 把共享内存当普通缓冲随意访问
-- 没有做 offset/size 校验导致越界
-
----
-
-## 7. 目录说明
-
-```text
-day24/
-├── README.md
-├── START_HERE.md
-├── docs/
-├── output/
-└── records/
+make check
+make kernel-module-tree
+make build-tools
+make module
+sudo -E make rootfs
+sudo chown -R "$USER:$USER" workdir
+make backend
+sudo -E make run
 ```
 
-- `docs/`：当天的详细理解、拆解与清单
-- `output/`：当天最终整理出的说明、模板、阶段结论
-- `records/`：运行证据、日志、截图、命令输出
+## 5. day24 通过后最应该看什么
 
----
+1. `records/<RUN_ID>/run-summary.md`
+2. `records/<RUN_ID>/mmio-info.txt`
+3. `records/<RUN_ID>/mmio-read-before.txt`
+4. `records/<RUN_ID>/mmio-write-state.txt`
+5. `records/<RUN_ID>/mmio-read-after.txt`
+6. `records/<RUN_ID>/shm-write.txt`
+7. `records/<RUN_ID>/shm-read.txt`
+8. `records/<RUN_ID>/dmesg-driver.txt`
+9. `records/<RUN_ID>/lspci-vv-nn.txt`
+10. `records/<RUN_ID>/serial.log`
 
-## 8. 和前后天的关系
+## 6. 只看哪些文档就够了
 
-- 前一天：day23 的输出作为今日输入
-- 后一天：day25 基于今天的证据继续推进
+1. `START_HERE.md`
+2. `env/local.wq7.env`
+3. `docs/01_LOCAL_RUNBOOK.md`
+4. `docs/02_RESULTS_AND_ACCEPTANCE.md`
+5. `docs/03_TROUBLESHOOTING.md`
+6. `output/day24_quick_commands.md`
+
+## 7. 下一步
+
+如果 day24 通过，下一步就是 `day25`：MSI / `pci_alloc_irq_vectors()`。

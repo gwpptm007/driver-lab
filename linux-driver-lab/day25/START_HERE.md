@@ -1,19 +1,54 @@
-# day25 START_HERE
+# Day25 START_HERE
 
-建议按下面顺序阅读和执行：
+## 1. 进入 day25
 
-1. 先看 `README.md`，确认今天要收什么
-2. 再看 `docs/01_plan.md`，理解实施路线
-3. 执行当天命令/编码/验证
-4. 把原始证据放进 `records/`
-5. 最后把结论和模板输出到 `output/`
+```bash
+cd ~/workspace/driver-lab/linux-driver-lab/day25
+source env/local.wq7.env
+```
 
-## 今天最重要的一句话
+## 2. 准备 arm64 lspci（day25 独立目录完成）
 
-使用 `pci_alloc_irq_vectors()` 与 `request_irq()` 打通消息中断路径，验证 `/proc/interrupts` 计数增长。
+```bash
+mkdir -p third_party
 
-## 今天不要做过头的点
+git clone https://github.com/pciutils/pciutils.git third_party/pciutils
+chmod +x third_party/pciutils/lib/configure
+chmod +x third_party/pciutils/configure 2>/dev/null || true
 
-- 先把当天主链路做通，不要抢跑到后面几天
-- 先留证据，再写总结
-- 所有“通过”都要能落到 `records/` 中的原始输出
+make build-lspci
+file third_party/pciutils/lspci
+```
+
+## 3. 构建并运行
+
+```bash
+make check
+make kernel-module-tree
+make build-tools
+make module
+sudo -E make rootfs
+sudo chown -R "$USER:$USER" workdir
+make backend
+sudo -E make run
+```
+
+## 4. 先看什么
+
+```bash
+cat records/${RUN_ID}/run-summary.md
+sed -n '1,200p' records/${RUN_ID}/dmesg-driver.txt
+cat records/${RUN_ID}/irq-count-before.txt
+cat records/${RUN_ID}/irq-count-after.txt
+sed -n '1,200p' records/${RUN_ID}/proc-interrupts-before.txt
+sed -n '1,200p' records/${RUN_ID}/proc-interrupts-after.txt
+```
+
+## 5. 如何理解“通过”
+
+优先看 `docs/02_RESULTS_AND_ACCEPTANCE.md`。这份文档已经结合上传的真实输出解释了：
+- 为什么 `1234:11e8` 证明 EDU 枚举成功
+- 为什么 `probe success + MSI vector` 证明驱动接管成功
+- 为什么 `irq_count 0 -> 1` 证明 IRQ handler 真进入了
+- 为什么 `/proc/interrupts` 中 `day25_edu_irq` 从 `0 -> 1` 增长证明内核全局中断统计也成立
+- 为什么 `remove leave + ===DAY25:COMPLETE===` 说明 guest 自动流程完整结束

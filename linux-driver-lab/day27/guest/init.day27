@@ -1,0 +1,110 @@
+#!/bin/sh
+set -eu
+
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev || true
+
+# 默认循环 200 次，也支持通过内核命令行 day27_loops= 覆盖。
+LOOPS=200
+for x in $(cat /proc/cmdline); do
+    case "$x" in
+        day27_loops=*) LOOPS="${x#day27_loops=}" ;;
+    esac
+done
+
+echo '===DAY27:BOOT:BEGIN==='
+uname -a || true
+echo "loops=$LOOPS"
+echo '===DAY27:BOOT:END==='
+
+echo '===DAY27:LSPCI_NN:BEGIN==='
+lspci -nn || true
+echo '===DAY27:LSPCI_NN:END==='
+
+echo '===DAY27:LSPCI_VV_NN:BEGIN==='
+lspci -vv -nn || true
+echo '===DAY27:LSPCI_VV_NN:END==='
+
+pass=0
+fail=0
+iter=1
+
+# 每轮循环都执行：insmod -> 建节点 -> info -> trigger -> count -> rmmod。
+# 任何一步失败都立即 break，方便第一时间保留现场。
+while [ "$iter" -le "$LOOPS" ]; do
+    echo "[day27-guest] iter=${iter} insmod"
+    if ! insmod /root/day27_edu_loop.ko; then
+        echo "[day27-guest] iter=${iter} insmod failed"
+        fail=$((fail + 1))
+        break
+    fi
+    sleep 1
+
+        # 优先依赖 devtmpfs 自动创建设备节点；如果没有，则从 sysfs 读出 major:minor 后手工 mknod。
+    if [ ! -e /dev/day27_edu0 ] && [ -r /sys/class/day27_edu/day27_edu0/dev ]; then
+        devnums=$(cat /sys/class/day27_edu/day27_edu0/dev)
+        major=$(echo "$devnums" | cut -d: -f1)
+        minor=$(echo "$devnums" | cut -d: -f2)
+        mknod /dev/day27_edu0 c "$major" "$minor"
+        chmod 666 /dev/day27_edu0 || true
+    fi
+
+    if ! /bin/day27_edu_tool /dev/day27_edu0 info >/tmp/day27_info.out 2>&1; then
+        cat /tmp/day27_info.out || true
+        echo "[day27-guest] iter=${iter} info failed"
+        fail=$((fail + 1))
+        rmmod day27_edu_loop || true
+        break
+    fi
+
+    if ! /bin/day27_edu_tool /dev/day27_edu0 trigger 0x1 >/tmp/day27_trigger.out 2>&1; then
+        cat /tmp/day27_trigger.out || true
+        echo "[day27-guest] iter=${iter} trigger failed"
+        fail=$((fail + 1))
+        rmmod day27_edu_loop || true
+        break
+    fi
+    sleep 1
+
+    /bin/day27_edu_tool /dev/day27_edu0 count >/tmp/day27_count.out 2>&1 || true
+    cnt=$(grep 'irq_count=' /tmp/day27_count.out | cut -d= -f2 | tr -d '
+ ')
+    if [ -z "$cnt" ] || [ "$cnt" -lt 1 ]; then
+        cat /tmp/day27_count.out || true
+        echo "[day27-guest] iter=${iter} irq_count invalid"
+        fail=$((fail + 1))
+        rmmod day27_edu_loop || true
+        break
+    fi
+
+    if ! rmmod day27_edu_loop; then
+        echo "[day27-guest] iter=${iter} rmmod failed"
+        fail=$((fail + 1))
+        break
+    fi
+
+    pass=$((pass + 1))
+    # 为了保留可读性，前 3 轮和最后 3 轮打印详细日志；中间只在 25 的倍数打印里程碑。
+    if [ "$iter" -le 3 ] || [ "$iter" -gt $((LOOPS - 3)) ] || [ $((iter % 25)) -eq 0 ]; then
+        echo "[day27-guest] iter=${iter} pass count=${cnt}"
+    fi
+    iter=$((iter + 1))
+done
+
+echo '===DAY27:LOOP_SUMMARY:BEGIN==='
+echo "loop_count=$LOOPS"
+echo "pass=$pass"
+echo "fail=$fail"
+echo '===DAY27:LOOP_SUMMARY:END==='
+
+echo '===DAY27:PROC_INTERRUPTS_FINAL:BEGIN==='
+grep day27_edu_loop /proc/interrupts || true
+echo '===DAY27:PROC_INTERRUPTS_FINAL:END==='
+
+echo '===DAY27:DMESG_DRIVER:BEGIN==='
+dmesg | grep -E 'day27_edu_loop|irq handler|probe|remove' || true
+echo '===DAY27:DMESG_DRIVER:END==='
+
+echo '===DAY27:COMPLETE==='
+poweroff -f

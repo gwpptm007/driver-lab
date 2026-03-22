@@ -1,0 +1,4 @@
+[    0.656284] day25_edu_irq: module loaded
+[    1.721011] day25_edu_irq 0000:00:02.0: trigger irq: value=0x00000001
+[    1.721394] day25_edu_irq 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
+triggered value=0x00000001

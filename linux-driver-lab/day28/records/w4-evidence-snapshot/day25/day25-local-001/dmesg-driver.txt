@@ -1,0 +1,13 @@
+[    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 25 jiffies.
+[    0.000000] Root IRQ handler: gic_handle_irq
+[    0.328614] io scheduler mq-deadline registered
+[    0.328757] io scheduler kyber registered
+[    0.645609] day25_edu_irq: loading out-of-tree module taints kernel.
+[    0.651871] day25_edu_irq 0000:00:02.0: probe enter: 1234:11e8
+[    0.652333] day25_edu_irq 0000:00:02.0: enabling device (0000 -> 0002)
+[    0.655229] day25_edu_irq 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[    0.655407] day25_edu_irq 0000:00:02.0: MSI vector=50 ident=0x010000ed liveness=0xa5a55a5a inverted=0x5a5aa5a5
+[    0.655848] day25_edu_irq 0000:00:02.0: probe success
+[    0.656284] day25_edu_irq: module loaded
+[    1.721011] day25_edu_irq 0000:00:02.0: trigger irq: value=0x00000001
+[    1.721394] day25_edu_irq 0000:00:02.0: irq handler: irq=50 status=0x00000001 count=1
