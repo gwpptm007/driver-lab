@@ -1,0 +1,140 @@
+#!/bin/sh
+set -eu
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export PATH
+
+echo "===DAY32:BOOT==="
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+
+# Day32 guest 通过 /proc/cmdline 接收“本轮 perf workload 配置”。
+# profile_mode 约定：
+# - full:      默认主链路，先跑 baseline，再跑 optimized，并补一轮轻量 DMA 对照；
+# - baseline:  只跑 baseline workload，便于宿主 perf 单独采样；
+# - optimized: 只跑 optimized workload，便于宿主 perf 单独采样。
+get_cmdline_value() {
+    # 不使用复杂 sed/awk 反向引用，直接遍历 token 更稳，
+    # 能减少 busybox/CRLF/转义差异带来的参数解析风险。
+    key="$1"
+    for token in $(cat /proc/cmdline); do
+        case "$token" in
+            "$key"=*)
+                echo "${token#*=}"
+                return 0
+                ;;
+        esac
+    done
+    return 1
+}
+
+VERIFY_LEN="$(get_cmdline_value day32_verify_len || true)"
+VERIFY_SEED="$(get_cmdline_value day32_verify_seed || true)"
+PERF_LEN="$(get_cmdline_value day32_perf_len || true)"
+PERF_SEED="$(get_cmdline_value day32_perf_seed || true)"
+PERF_ITER="$(get_cmdline_value day32_perf_iter || true)"
+PERF_WARMUP="$(get_cmdline_value day32_perf_warmup || true)"
+DMA_LITE_LEN="$(get_cmdline_value day32_dma_lite_len || true)"
+DMA_LITE_ITER="$(get_cmdline_value day32_dma_lite_iter || true)"
+DMA_LITE_WARMUP="$(get_cmdline_value day32_dma_lite_warmup || true)"
+PROFILE_MODE="$(get_cmdline_value day32_profile_mode || true)"
+RUN_DMA_LITE="$(get_cmdline_value day32_run_dma_lite || true)"
+[ -n "$VERIFY_LEN" ] || VERIFY_LEN=256
+[ -n "$VERIFY_SEED" ] || VERIFY_SEED=0x41
+[ -n "$PERF_LEN" ] || PERF_LEN=256
+[ -n "$PERF_SEED" ] || PERF_SEED=0x41
+[ -n "$PERF_ITER" ] || PERF_ITER=1000
+[ -n "$PERF_WARMUP" ] || PERF_WARMUP=100
+[ -n "$DMA_LITE_LEN" ] || DMA_LITE_LEN=64
+[ -n "$DMA_LITE_ITER" ] || DMA_LITE_ITER=32
+[ -n "$DMA_LITE_WARMUP" ] || DMA_LITE_WARMUP=4
+[ -n "$PROFILE_MODE" ] || PROFILE_MODE=full
+[ -n "$RUN_DMA_LITE" ] || RUN_DMA_LITE=1
+
+echo "[day32-guest] verify_len=${VERIFY_LEN} verify_seed=${VERIFY_SEED} perf_len=${PERF_LEN} perf_iter=${PERF_ITER} perf_warmup=${PERF_WARMUP} profile_mode=${PROFILE_MODE} run_dma_lite=${RUN_DMA_LITE}"
+
+echo "===DAY32:LSPCI_NN:BEGIN==="
+/bin/lspci -nn || true
+echo "===DAY32:LSPCI_NN:END==="
+
+echo "===DAY32:LSPCI_VV_NN:BEGIN==="
+/bin/lspci -vv -nn || true
+echo "===DAY32:LSPCI_VV_NN:END==="
+
+insmod /root/day32_edu_perf.ko
+sleep 1
+
+if [ ! -e /dev/day32_edu0 ] && [ -r /sys/class/day32_edu/day32_edu0/dev ]; then
+    major_minor="$(cat /sys/class/day32_edu/day32_edu0/dev)"
+    major="${major_minor%:*}"
+    minor="${major_minor#*:}"
+    mknod /dev/day32_edu0 c "$major" "$minor"
+fi
+
+if [ ! -e /dev/day32_edu0 ]; then
+    echo "[day32-guest][ERROR] /dev/day32_edu0 not found"
+    dmesg || true
+    poweroff -f || reboot -f || exec sh
+fi
+
+echo "===DAY32:TOOL_INFO:BEGIN==="
+/bin/day32_edu_perf_tool /dev/day32_edu0 info || true
+echo "===DAY32:TOOL_INFO:END==="
+
+echo "===DAY32:DEVICE_STATE_BEFORE:BEGIN==="
+cat /dev/day32_edu0 || true
+echo "===DAY32:DEVICE_STATE_BEFORE:END==="
+
+echo "===DAY32:MMAP_VERIFY:BEGIN==="
+/bin/day32_edu_perf_tool /dev/day32_edu0 mmap-verify "$VERIFY_LEN" "$VERIFY_SEED" || true
+echo "===DAY32:MMAP_VERIFY:END==="
+
+if [ "$PROFILE_MODE" = "baseline" ] || [ "$PROFILE_MODE" = "full" ]; then
+    echo "===DAY32:BENCH_MMAP_BASELINE:BEGIN==="
+    /bin/day32_edu_perf_tool /dev/day32_edu0 bench-mmap-baseline "$PERF_LEN" "$PERF_ITER" "$PERF_WARMUP" "$PERF_SEED" || true
+    echo "===DAY32:BENCH_MMAP_BASELINE:END==="
+fi
+
+if [ "$PROFILE_MODE" = "optimized" ] || [ "$PROFILE_MODE" = "full" ]; then
+    echo "===DAY32:BENCH_MMAP_OPTIMIZED:BEGIN==="
+    /bin/day32_edu_perf_tool /dev/day32_edu0 bench-mmap "$PERF_LEN" "$PERF_ITER" "$PERF_WARMUP" "$PERF_SEED" || true
+    echo "===DAY32:BENCH_MMAP_OPTIMIZED:END==="
+fi
+
+if [ "$PROFILE_MODE" = "full" ]; then
+    # compare-mmap 是 day32 最重要的证据块：
+    # 它把 baseline 与 optimized 的结果放到同一份输出里，便于 records 直接归档。
+    echo "===DAY32:COMPARE_MMAP:BEGIN==="
+    /bin/day32_edu_perf_tool /dev/day32_edu0 compare-mmap "$PERF_LEN" "$PERF_ITER" "$PERF_WARMUP" "$PERF_SEED" || true
+    echo "===DAY32:COMPARE_MMAP:END==="
+
+    echo "===DAY32:BENCH_IOCTL:BEGIN==="
+    /bin/day32_edu_perf_tool /dev/day32_edu0 bench-ioctl "$PERF_ITER" "$PERF_WARMUP" || true
+    echo "===DAY32:BENCH_IOCTL:END==="
+
+    if [ "$RUN_DMA_LITE" = "1" ]; then
+        echo "===DAY32:BENCH_DMA_LITE:BEGIN==="
+        /bin/day32_edu_perf_tool /dev/day32_edu0 bench-dma "$DMA_LITE_LEN" "$DMA_LITE_ITER" "$DMA_LITE_WARMUP" "$PERF_SEED" || true
+        echo "===DAY32:BENCH_DMA_LITE:END==="
+    fi
+fi
+
+echo "===DAY32:RUN_RESULT:BEGIN==="
+/bin/day32_edu_perf_tool /dev/day32_edu0 result || true
+echo "===DAY32:RUN_RESULT:END==="
+
+echo "===DAY32:DEVICE_STATE_AFTER:BEGIN==="
+cat /dev/day32_edu0 || true
+echo "===DAY32:DEVICE_STATE_AFTER:END==="
+
+echo "===DAY32:PROC_INTERRUPTS_AFTER:BEGIN==="
+cat /proc/interrupts || true
+echo "===DAY32:PROC_INTERRUPTS_AFTER:END==="
+
+echo "===DAY32:DMESG_DRIVER:BEGIN==="
+dmesg | grep -E 'day32_edu_perf|1234:11e8|dma_alloc_coherent|mmap rejected|mmap ok|probe success|run_dma' || dmesg || true
+echo "===DAY32:DMESG_DRIVER:END==="
+
+echo "===DAY32:COMPLETE==="
+poweroff -f || reboot -f || exec sh

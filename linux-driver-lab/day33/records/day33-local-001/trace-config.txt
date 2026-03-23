@@ -1,0 +1,7 @@
+tracefs=/sys/kernel/tracing
+graph_function=day33_ioctl
+graph_function=day33_do_run_dma
+graph_function=day33_program_dma
+graph_function=day33_wait_dma_idle
+graph_function=day33_irq_handler
+function_graph

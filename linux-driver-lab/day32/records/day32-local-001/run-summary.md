@@ -1,0 +1,26 @@
+# Day32 Run Summary
+
+- run id: day32-local-001
+- edu device visible: yes
+- probe logged: yes
+- dma_alloc_coherent logged: yes
+- mmap verify ok: yes
+- baseline bench present: yes
+- optimized bench present: yes
+- compare mmap present: yes
+- ioctl bench present: yes
+- dma lite bench present: yes
+- host perf baseline present: no
+- host perf optimized present: no
+- guest flow complete: yes
+- qemu timeout hit: no
+- oops/dma-error/hung/panic found: no
+- baseline avg_us: 283.590
+- optimized avg_us: 0.892
+- avg latency gain pct: 99.65
+- baseline p99_us: 641.344
+- optimized p99_us: 0.912
+- p99 latency gain pct: 99.85
+- baseline throughput_mbps: 6.585
+- optimized throughput_mbps: 1575.094
+- throughput gain pct: 24826.37

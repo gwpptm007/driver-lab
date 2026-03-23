@@ -1,0 +1,1523 @@
+[   30.552176] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a5c000 dma_bytes=4096 dma_mask_bits=32
+[   30.552922] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a5c000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.553314] day34_edu_stability: init ok
+[   30.559649] day34_edu_stability 0000:00:02.0: remove complete
+[   30.560034] day34_edu_stability: exit ok
+[   30.573402] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.573763] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.574015] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a21000 dma_bytes=4096 dma_mask_bits=32
+[   30.574917] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a21000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.575303] day34_edu_stability: init ok
+[   30.581054] day34_edu_stability 0000:00:02.0: remove complete
+[   30.581514] day34_edu_stability: exit ok
+[   30.593722] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.594127] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.594353] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a6f000 dma_bytes=4096 dma_mask_bits=32
+[   30.595310] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a6f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.595765] day34_edu_stability: init ok
+[   30.601503] day34_edu_stability 0000:00:02.0: remove complete
+[   30.601877] day34_edu_stability: exit ok
+[   30.613800] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.614470] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.614695] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a68000 dma_bytes=4096 dma_mask_bits=32
+[   30.615412] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a68000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.615801] day34_edu_stability: init ok
+[   30.621753] day34_edu_stability 0000:00:02.0: remove complete
+[   30.622214] day34_edu_stability: exit ok
+[   30.633937] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.634304] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.634815] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a33000 dma_bytes=4096 dma_mask_bits=32
+[   30.635508] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a33000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.635947] day34_edu_stability: init ok
+[   30.641939] day34_edu_stability 0000:00:02.0: remove complete
+[   30.642323] day34_edu_stability: exit ok
+[   30.657419] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.657796] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.658048] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab9000 dma_bytes=4096 dma_mask_bits=32
+[   30.658962] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab9000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.659356] day34_edu_stability: init ok
+[   30.665040] day34_edu_stability 0000:00:02.0: remove complete
+[   30.665418] day34_edu_stability: exit ok
+[   30.678492] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.678878] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.679093] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a6e000 dma_bytes=4096 dma_mask_bits=32
+[   30.679793] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a6e000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.680169] day34_edu_stability: init ok
+[   30.685848] day34_edu_stability 0000:00:02.0: remove complete
+[   30.686297] day34_edu_stability: exit ok
+[   30.706931] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.707427] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.707660] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a5f000 dma_bytes=4096 dma_mask_bits=32
+[   30.708353] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a5f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.708743] day34_edu_stability: init ok
+[   30.715579] day34_edu_stability 0000:00:02.0: remove complete
+[   30.716215] day34_edu_stability: exit ok
+[   30.730094] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.730737] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.731033] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a6e000 dma_bytes=4096 dma_mask_bits=32
+[   30.731854] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a6e000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.732317] day34_edu_stability: init ok
+[   30.738075] day34_edu_stability 0000:00:02.0: remove complete
+[   30.738943] day34_edu_stability: exit ok
+[   30.757619] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.758083] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.758512] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a1f000 dma_bytes=4096 dma_mask_bits=32
+[   30.759264] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a1f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.759651] day34_edu_stability: init ok
+[   30.765650] day34_edu_stability 0000:00:02.0: remove complete
+[   30.766037] day34_edu_stability: exit ok
+[   30.777303] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.777669] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.777874] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abb000 dma_bytes=4096 dma_mask_bits=32
+[   30.778822] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abb000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.779203] day34_edu_stability: init ok
+[   30.784721] day34_edu_stability 0000:00:02.0: remove complete
+[   30.785103] day34_edu_stability: exit ok
+[   30.797882] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.798273] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.798495] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab9000 dma_bytes=4096 dma_mask_bits=32
+[   30.799414] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab9000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.799787] day34_edu_stability: init ok
+[   30.805388] day34_edu_stability 0000:00:02.0: remove complete
+[   30.805783] day34_edu_stability: exit ok
+[   30.816897] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.817315] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.817530] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a21000 dma_bytes=4096 dma_mask_bits=32
+[   30.818254] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a21000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.818816] day34_edu_stability: init ok
+[   30.824557] day34_edu_stability 0000:00:02.0: remove complete
+[   30.824942] day34_edu_stability: exit ok
+[   30.837599] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.837965] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.838210] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a60000 dma_bytes=4096 dma_mask_bits=32
+[   30.839161] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a60000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.839538] day34_edu_stability: init ok
+[   30.845642] day34_edu_stability 0000:00:02.0: remove complete
+[   30.847245] day34_edu_stability: exit ok
+[   30.865994] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.867222] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.867459] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x428f9000 dma_bytes=4096 dma_mask_bits=32
+[   30.868277] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x428f9000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.868679] day34_edu_stability: init ok
+[   30.874843] day34_edu_stability 0000:00:02.0: remove complete
+[   30.875254] day34_edu_stability: exit ok
+[   30.895583] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.896360] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.896686] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a2b000 dma_bytes=4096 dma_mask_bits=32
+[   30.897615] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a2b000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.898097] day34_edu_stability: init ok
+[   30.904108] day34_edu_stability 0000:00:02.0: remove complete
+[   30.904561] day34_edu_stability: exit ok
+[   30.923513] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.924053] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.924296] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a97000 dma_bytes=4096 dma_mask_bits=32
+[   30.925177] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a97000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.925645] day34_edu_stability: init ok
+[   30.932141] day34_edu_stability 0000:00:02.0: remove complete
+[   30.932621] day34_edu_stability: exit ok
+[   30.946221] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.946932] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.947164] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a63000 dma_bytes=4096 dma_mask_bits=32
+[   30.947996] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a63000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.948404] day34_edu_stability: init ok
+[   30.954467] day34_edu_stability 0000:00:02.0: remove complete
+[   30.955340] day34_edu_stability: exit ok
+[   30.969772] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.970149] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.970582] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a97000 dma_bytes=4096 dma_mask_bits=32
+[   30.971355] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a97000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.971765] day34_edu_stability: init ok
+[   30.977483] day34_edu_stability 0000:00:02.0: remove complete
+[   30.977912] day34_edu_stability: exit ok
+[   30.989695] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   30.990120] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   30.990548] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab3000 dma_bytes=4096 dma_mask_bits=32
+[   30.991325] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab3000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   30.991722] day34_edu_stability: init ok
+[   30.997898] day34_edu_stability 0000:00:02.0: remove complete
+[   30.998308] day34_edu_stability: exit ok
+[   31.010636] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.011046] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.011276] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abf000 dma_bytes=4096 dma_mask_bits=32
+[   31.011993] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abf000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.012441] day34_edu_stability: init ok
+[   31.018061] day34_edu_stability 0000:00:02.0: remove complete
+[   31.018739] day34_edu_stability: exit ok
+[   31.033849] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.034289] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.034525] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a93000 dma_bytes=4096 dma_mask_bits=32
+[   31.035484] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a93000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.035895] day34_edu_stability: init ok
+[   31.042032] day34_edu_stability 0000:00:02.0: remove complete
+[   31.042469] day34_edu_stability: exit ok
+[   31.058179] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.058790] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.059031] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a43000 dma_bytes=4096 dma_mask_bits=32
+[   31.059743] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a43000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.060127] day34_edu_stability: init ok
+[   31.067525] day34_edu_stability 0000:00:02.0: remove complete
+[   31.067925] day34_edu_stability: exit ok
+[   31.085716] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.086341] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.086578] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a72000 dma_bytes=4096 dma_mask_bits=32
+[   31.087357] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a72000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.087770] day34_edu_stability: init ok
+[   31.093452] day34_edu_stability 0000:00:02.0: remove complete
+[   31.093860] day34_edu_stability: exit ok
+[   31.114795] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.115265] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.115493] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a34000 dma_bytes=4096 dma_mask_bits=32
+[   31.116237] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a34000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.116631] day34_edu_stability: init ok
+[   31.123273] day34_edu_stability 0000:00:02.0: remove complete
+[   31.123724] day34_edu_stability: exit ok
+[   31.146641] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.147121] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.147372] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a94000 dma_bytes=4096 dma_mask_bits=32
+[   31.148293] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a94000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.148767] day34_edu_stability: init ok
+[   31.155565] day34_edu_stability 0000:00:02.0: remove complete
+[   31.155980] day34_edu_stability: exit ok
+[   31.175327] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.175761] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.175984] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a34000 dma_bytes=4096 dma_mask_bits=32
+[   31.176764] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a34000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.177190] day34_edu_stability: init ok
+[   31.183451] day34_edu_stability 0000:00:02.0: remove complete
+[   31.183915] day34_edu_stability: exit ok
+[   31.198298] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.198919] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.199147] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a94000 dma_bytes=4096 dma_mask_bits=32
+[   31.199853] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a94000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.200308] day34_edu_stability: init ok
+[   31.206258] day34_edu_stability 0000:00:02.0: remove complete
+[   31.207091] day34_edu_stability: exit ok
+[   31.220926] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.221303] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.221514] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a56000 dma_bytes=4096 dma_mask_bits=32
+[   31.222421] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a56000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.222817] day34_edu_stability: init ok
+[   31.228510] day34_edu_stability 0000:00:02.0: remove complete
+[   31.228897] day34_edu_stability: exit ok
+[   31.243352] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.243830] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.244079] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a57000 dma_bytes=4096 dma_mask_bits=32
+[   31.244787] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a57000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.245167] day34_edu_stability: init ok
+[   31.251750] day34_edu_stability 0000:00:02.0: remove complete
+[   31.252166] day34_edu_stability: exit ok
+[   31.266895] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.267272] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.267486] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a56000 dma_bytes=4096 dma_mask_bits=32
+[   31.268315] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a56000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.268744] day34_edu_stability: init ok
+[   31.275660] day34_edu_stability 0000:00:02.0: remove complete
+[   31.276081] day34_edu_stability: exit ok
+[   31.293187] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.293567] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.293840] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a57000 dma_bytes=4096 dma_mask_bits=32
+[   31.294853] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a57000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.295257] day34_edu_stability: init ok
+[   31.301073] day34_edu_stability 0000:00:02.0: remove complete
+[   31.301464] day34_edu_stability: exit ok
+[   31.313131] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.313495] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.313702] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a46000 dma_bytes=4096 dma_mask_bits=32
+[   31.314603] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a46000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.314986] day34_edu_stability: init ok
+[   31.320650] day34_edu_stability 0000:00:02.0: remove complete
+[   31.321078] day34_edu_stability: exit ok
+[   31.333593] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.333952] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.334162] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab0000 dma_bytes=4096 dma_mask_bits=32
+[   31.335120] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab0000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.335520] day34_edu_stability: init ok
+[   31.341181] day34_edu_stability 0000:00:02.0: remove complete
+[   31.341559] day34_edu_stability: exit ok
+[   31.354538] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.354909] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.355120] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a42000 dma_bytes=4096 dma_mask_bits=32
+[   31.355813] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a42000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.356267] day34_edu_stability: init ok
+[   31.361889] day34_edu_stability 0000:00:02.0: remove complete
+[   31.362293] day34_edu_stability: exit ok
+[   31.379673] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.380130] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.380376] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab7000 dma_bytes=4096 dma_mask_bits=32
+[   31.381116] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab7000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.381586] day34_edu_stability: init ok
+[   31.387595] day34_edu_stability 0000:00:02.0: remove complete
+[   31.388085] day34_edu_stability: exit ok
+[   31.401776] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.402261] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.402699] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a1f000 dma_bytes=4096 dma_mask_bits=32
+[   31.403414] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a1f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.403791] day34_edu_stability: init ok
+[   31.409542] day34_edu_stability 0000:00:02.0: remove complete
+[   31.409949] day34_edu_stability: exit ok
+[   31.421554] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.422025] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.422250] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a28000 dma_bytes=4096 dma_mask_bits=32
+[   31.423190] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a28000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.423587] day34_edu_stability: init ok
+[   31.429648] day34_edu_stability 0000:00:02.0: remove complete
+[   31.430130] day34_edu_stability: exit ok
+[   31.441951] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.442592] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.442828] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a5c000 dma_bytes=4096 dma_mask_bits=32
+[   31.443599] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a5c000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.444073] day34_edu_stability: init ok
+[   31.450065] day34_edu_stability 0000:00:02.0: remove complete
+[   31.450987] day34_edu_stability: exit ok
+[   31.470771] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.471262] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.471515] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x428fa000 dma_bytes=4096 dma_mask_bits=32
+[   31.472319] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x428fa000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.472734] day34_edu_stability: init ok
+[   31.478657] day34_edu_stability 0000:00:02.0: remove complete
+[   31.479083] day34_edu_stability: exit ok
+[   31.494158] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.494822] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.495056] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a4b000 dma_bytes=4096 dma_mask_bits=32
+[   31.495875] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a4b000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.496260] day34_edu_stability: init ok
+[   31.501889] day34_edu_stability 0000:00:02.0: remove complete
+[   31.502780] day34_edu_stability: exit ok
+[   31.521414] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.521933] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.522155] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a45000 dma_bytes=4096 dma_mask_bits=32
+[   31.523155] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a45000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.523542] day34_edu_stability: init ok
+[   31.529388] day34_edu_stability 0000:00:02.0: remove complete
+[   31.529781] day34_edu_stability: exit ok
+[   31.541716] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.542078] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.542521] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abf000 dma_bytes=4096 dma_mask_bits=32
+[   31.543246] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abf000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.543694] day34_edu_stability: init ok
+[   31.550770] day34_edu_stability 0000:00:02.0: remove complete
+[   31.551169] day34_edu_stability: exit ok
+[   31.570192] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.570606] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.570823] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a36000 dma_bytes=4096 dma_mask_bits=32
+[   31.571756] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a36000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.572141] day34_edu_stability: init ok
+[   31.577948] day34_edu_stability 0000:00:02.0: remove complete
+[   31.578806] day34_edu_stability: exit ok
+[   31.599311] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.599758] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.599983] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a63000 dma_bytes=4096 dma_mask_bits=32
+[   31.600711] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a63000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.601097] day34_edu_stability: init ok
+[   31.607923] day34_edu_stability 0000:00:02.0: remove complete
+[   31.608343] day34_edu_stability: exit ok
+[   31.621360] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.621774] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.622017] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a41000 dma_bytes=4096 dma_mask_bits=32
+[   31.622944] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a41000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.623323] day34_edu_stability: init ok
+[   31.629221] day34_edu_stability 0000:00:02.0: remove complete
+[   31.629680] day34_edu_stability: exit ok
+[   31.642093] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.642768] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.642990] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a52000 dma_bytes=4096 dma_mask_bits=32
+[   31.643687] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a52000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.644062] day34_edu_stability: init ok
+[   31.649861] day34_edu_stability 0000:00:02.0: remove complete
+[   31.650708] day34_edu_stability: exit ok
+[   31.669977] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.670417] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.670876] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab0000 dma_bytes=4096 dma_mask_bits=32
+[   31.671622] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab0000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.672176] day34_edu_stability: init ok
+[   31.679210] day34_edu_stability 0000:00:02.0: remove complete
+[   31.679679] day34_edu_stability: exit ok
+[   31.697548] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.697967] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.698183] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a56000 dma_bytes=4096 dma_mask_bits=32
+[   31.699267] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a56000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.699665] day34_edu_stability: init ok
+[   31.705648] day34_edu_stability 0000:00:02.0: remove complete
+[   31.706708] day34_edu_stability: exit ok
+[   31.721464] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.721908] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.722197] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a47000 dma_bytes=4096 dma_mask_bits=32
+[   31.723292] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a47000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.723747] day34_edu_stability: init ok
+[   31.729822] day34_edu_stability 0000:00:02.0: remove complete
+[   31.730225] day34_edu_stability: exit ok
+[   31.742031] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.742420] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.742845] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a22000 dma_bytes=4096 dma_mask_bits=32
+[   31.743619] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a22000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.744031] day34_edu_stability: init ok
+[   31.750526] day34_edu_stability 0000:00:02.0: remove complete
+[   31.750907] day34_edu_stability: exit ok
+[   31.769826] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.770260] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.770694] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a2b000 dma_bytes=4096 dma_mask_bits=32
+[   31.771408] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a2b000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.771788] day34_edu_stability: init ok
+[   31.777461] day34_edu_stability 0000:00:02.0: remove complete
+[   31.777875] day34_edu_stability: exit ok
+[   31.791076] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.791437] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.791686] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a25000 dma_bytes=4096 dma_mask_bits=32
+[   31.792393] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a25000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.792771] day34_edu_stability: init ok
+[   31.798842] day34_edu_stability 0000:00:02.0: remove complete
+[   31.799231] day34_edu_stability: exit ok
+[   31.814649] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.815062] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.815276] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a67000 dma_bytes=4096 dma_mask_bits=32
+[   31.816054] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a67000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.816481] day34_edu_stability: init ok
+[   31.822845] day34_edu_stability 0000:00:02.0: remove complete
+[   31.823296] day34_edu_stability: exit ok
+[   31.840986] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.841383] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.841663] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a27000 dma_bytes=4096 dma_mask_bits=32
+[   31.842368] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a27000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.842933] day34_edu_stability: init ok
+[   31.849495] day34_edu_stability 0000:00:02.0: remove complete
+[   31.849902] day34_edu_stability: exit ok
+[   31.871446] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.871869] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.872101] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abb000 dma_bytes=4096 dma_mask_bits=32
+[   31.872886] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abb000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.873350] day34_edu_stability: init ok
+[   31.879879] day34_edu_stability 0000:00:02.0: remove complete
+[   31.880315] day34_edu_stability: exit ok
+[   31.894034] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.894469] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.894989] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a41000 dma_bytes=4096 dma_mask_bits=32
+[   31.895746] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a41000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.896153] day34_edu_stability: init ok
+[   31.902296] day34_edu_stability 0000:00:02.0: remove complete
+[   31.903280] day34_edu_stability: exit ok
+[   31.921535] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.922055] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.922338] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a6f000 dma_bytes=4096 dma_mask_bits=32
+[   31.923249] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a6f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.923634] day34_edu_stability: init ok
+[   31.930145] day34_edu_stability 0000:00:02.0: remove complete
+[   31.931081] day34_edu_stability: exit ok
+[   31.950688] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.951128] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.951352] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a53000 dma_bytes=4096 dma_mask_bits=32
+[   31.952121] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a53000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.952575] day34_edu_stability: init ok
+[   31.958894] day34_edu_stability 0000:00:02.0: remove complete
+[   31.959334] day34_edu_stability: exit ok
+[   31.978297] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   31.978955] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   31.979228] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a6f000 dma_bytes=4096 dma_mask_bits=32
+[   31.979991] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a6f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   31.980387] day34_edu_stability: init ok
+[   31.986240] day34_edu_stability 0000:00:02.0: remove complete
+[   31.987030] day34_edu_stability: exit ok
+[   32.005797] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.006293] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.006512] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a33000 dma_bytes=4096 dma_mask_bits=32
+[   32.007464] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a33000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.007852] day34_edu_stability: init ok
+[   32.013821] day34_edu_stability 0000:00:02.0: remove complete
+[   32.014772] day34_edu_stability: exit ok
+[   32.034927] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.035335] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.035575] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x428f9000 dma_bytes=4096 dma_mask_bits=32
+[   32.036442] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x428f9000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.036821] day34_edu_stability: init ok
+[   32.043462] day34_edu_stability 0000:00:02.0: remove complete
+[   32.043929] day34_edu_stability: exit ok
+[   32.059158] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.059563] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.059778] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a33000 dma_bytes=4096 dma_mask_bits=32
+[   32.060473] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a33000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.060866] day34_edu_stability: init ok
+[   32.067712] day34_edu_stability 0000:00:02.0: remove complete
+[   32.068135] day34_edu_stability: exit ok
+[   32.082892] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.083274] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.083496] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x4200b000 dma_bytes=4096 dma_mask_bits=32
+[   32.084256] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x4200b000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.084644] day34_edu_stability: init ok
+[   32.090775] day34_edu_stability 0000:00:02.0: remove complete
+[   32.091174] day34_edu_stability: exit ok
+[   32.109979] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.110800] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.111301] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a33000 dma_bytes=4096 dma_mask_bits=32
+[   32.112026] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a33000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.112622] day34_edu_stability: init ok
+[   32.120104] day34_edu_stability 0000:00:02.0: remove complete
+[   32.120516] day34_edu_stability: exit ok
+[   32.137781] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.138259] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.138490] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a93000 dma_bytes=4096 dma_mask_bits=32
+[   32.139380] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a93000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.139762] day34_edu_stability: init ok
+[   32.145784] day34_edu_stability 0000:00:02.0: remove complete
+[   32.146264] day34_edu_stability: exit ok
+[   32.159299] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.159723] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.159933] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abd000 dma_bytes=4096 dma_mask_bits=32
+[   32.160669] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abd000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.161055] day34_edu_stability: init ok
+[   32.166949] day34_edu_stability 0000:00:02.0: remove complete
+[   32.167343] day34_edu_stability: exit ok
+[   32.181977] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.182358] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.182798] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a52000 dma_bytes=4096 dma_mask_bits=32
+[   32.183565] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a52000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.183978] day34_edu_stability: init ok
+[   32.189775] day34_edu_stability 0000:00:02.0: remove complete
+[   32.190156] day34_edu_stability: exit ok
+[   32.209643] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.210063] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.210546] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a46000 dma_bytes=4096 dma_mask_bits=32
+[   32.211221] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a46000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.211601] day34_edu_stability: init ok
+[   32.217479] day34_edu_stability 0000:00:02.0: remove complete
+[   32.217858] day34_edu_stability: exit ok
+[   32.229531] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.229884] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.230118] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a2f000 dma_bytes=4096 dma_mask_bits=32
+[   32.231125] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a2f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.231536] day34_edu_stability: init ok
+[   32.237221] day34_edu_stability 0000:00:02.0: remove complete
+[   32.237632] day34_edu_stability: exit ok
+[   32.249878] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.250674] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.250955] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abb000 dma_bytes=4096 dma_mask_bits=32
+[   32.251752] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abb000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.252130] day34_edu_stability: init ok
+[   32.257720] day34_edu_stability 0000:00:02.0: remove complete
+[   32.258114] day34_edu_stability: exit ok
+[   32.269889] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.270552] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.270780] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab1000 dma_bytes=4096 dma_mask_bits=32
+[   32.271526] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab1000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.271907] day34_edu_stability: init ok
+[   32.277673] day34_edu_stability 0000:00:02.0: remove complete
+[   32.278101] day34_edu_stability: exit ok
+[   32.293564] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.293932] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.294185] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab8000 dma_bytes=4096 dma_mask_bits=32
+[   32.295124] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab8000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.295506] day34_edu_stability: init ok
+[   32.301101] day34_edu_stability 0000:00:02.0: remove complete
+[   32.301485] day34_edu_stability: exit ok
+[   32.325949] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.326873] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.327152] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a35000 dma_bytes=4096 dma_mask_bits=32
+[   32.327938] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a35000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.328333] day34_edu_stability: init ok
+[   32.334110] day34_edu_stability 0000:00:02.0: remove complete
+[   32.334951] day34_edu_stability: exit ok
+[   32.353833] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.354487] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.354720] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab3000 dma_bytes=4096 dma_mask_bits=32
+[   32.355464] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab3000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.355876] day34_edu_stability: init ok
+[   32.361733] day34_edu_stability 0000:00:02.0: remove complete
+[   32.362119] day34_edu_stability: exit ok
+[   32.373146] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.373523] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.373745] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a64000 dma_bytes=4096 dma_mask_bits=32
+[   32.374630] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a64000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.375038] day34_edu_stability: init ok
+[   32.380514] day34_edu_stability 0000:00:02.0: remove complete
+[   32.380903] day34_edu_stability: exit ok
+[   32.396730] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.397146] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.397369] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a33000 dma_bytes=4096 dma_mask_bits=32
+[   32.398106] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a33000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.398862] day34_edu_stability: init ok
+[   32.404598] day34_edu_stability 0000:00:02.0: remove complete
+[   32.405027] day34_edu_stability: exit ok
+[   32.421125] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.421488] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.421708] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a64000 dma_bytes=4096 dma_mask_bits=32
+[   32.422603] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a64000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.423018] day34_edu_stability: init ok
+[   32.428646] day34_edu_stability 0000:00:02.0: remove complete
+[   32.429082] day34_edu_stability: exit ok
+[   32.442299] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.443117] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.443451] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a6e000 dma_bytes=4096 dma_mask_bits=32
+[   32.444456] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a6e000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.444968] day34_edu_stability: init ok
+[   32.452553] day34_edu_stability 0000:00:02.0: remove complete
+[   32.452983] day34_edu_stability: exit ok
+[   32.465736] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.466165] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.466390] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a64000 dma_bytes=4096 dma_mask_bits=32
+[   32.467359] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a64000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.467760] day34_edu_stability: init ok
+[   32.474339] day34_edu_stability 0000:00:02.0: remove complete
+[   32.475205] day34_edu_stability: exit ok
+[   32.493261] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.493713] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.493975] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a1f000 dma_bytes=4096 dma_mask_bits=32
+[   32.494930] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a1f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.495332] day34_edu_stability: init ok
+[   32.501012] day34_edu_stability 0000:00:02.0: remove complete
+[   32.501475] day34_edu_stability: exit ok
+[   32.513262] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.513635] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.513846] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a94000 dma_bytes=4096 dma_mask_bits=32
+[   32.514757] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a94000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.515151] day34_edu_stability: init ok
+[   32.520702] day34_edu_stability 0000:00:02.0: remove complete
+[   32.521122] day34_edu_stability: exit ok
+[   32.533887] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.534292] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.534516] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a34000 dma_bytes=4096 dma_mask_bits=32
+[   32.535548] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a34000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.535962] day34_edu_stability: init ok
+[   32.541703] day34_edu_stability 0000:00:02.0: remove complete
+[   32.542136] day34_edu_stability: exit ok
+[   32.553726] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.554095] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.554307] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a70000 dma_bytes=4096 dma_mask_bits=32
+[   32.555186] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a70000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.555601] day34_edu_stability: init ok
+[   32.561639] day34_edu_stability 0000:00:02.0: remove complete
+[   32.562036] day34_edu_stability: exit ok
+[   32.573332] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.573689] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.573917] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a6e000 dma_bytes=4096 dma_mask_bits=32
+[   32.574908] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a6e000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.575311] day34_edu_stability: init ok
+[   32.580981] day34_edu_stability 0000:00:02.0: remove complete
+[   32.581359] day34_edu_stability: exit ok
+[   32.594101] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.594481] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.595548] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a27000 dma_bytes=4096 dma_mask_bits=32
+[   32.596765] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a27000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.597598] day34_edu_stability: init ok
+[   32.603949] day34_edu_stability 0000:00:02.0: remove complete
+[   32.604326] day34_edu_stability: exit ok
+[   32.618198] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.618829] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.619046] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a6e000 dma_bytes=4096 dma_mask_bits=32
+[   32.619813] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a6e000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.620195] day34_edu_stability: init ok
+[   32.626206] day34_edu_stability 0000:00:02.0: remove complete
+[   32.626963] day34_edu_stability: exit ok
+[   32.645064] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.645433] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.645652] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a27000 dma_bytes=4096 dma_mask_bits=32
+[   32.646434] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a27000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.647459] day34_edu_stability: init ok
+[   32.654004] day34_edu_stability 0000:00:02.0: remove complete
+[   32.654462] day34_edu_stability: exit ok
+[   32.666874] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.667241] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.667508] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a37000 dma_bytes=4096 dma_mask_bits=32
+[   32.668217] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a37000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.668602] day34_edu_stability: init ok
+[   32.675161] day34_edu_stability 0000:00:02.0: remove complete
+[   32.675602] day34_edu_stability: exit ok
+[   32.694006] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.694401] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.694843] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a27000 dma_bytes=4096 dma_mask_bits=32
+[   32.695651] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a27000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.696130] day34_edu_stability: init ok
+[   32.703003] day34_edu_stability 0000:00:02.0: remove complete
+[   32.703463] day34_edu_stability: exit ok
+[   32.722280] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.722913] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.723166] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x4200b000 dma_bytes=4096 dma_mask_bits=32
+[   32.723913] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x4200b000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.724322] day34_edu_stability: init ok
+[   32.730564] day34_edu_stability 0000:00:02.0: remove complete
+[   32.730942] day34_edu_stability: exit ok
+[   32.749124] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.749483] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.749692] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a37000 dma_bytes=4096 dma_mask_bits=32
+[   32.750607] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a37000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.750994] day34_edu_stability: init ok
+[   32.757285] day34_edu_stability 0000:00:02.0: remove complete
+[   32.757696] day34_edu_stability: exit ok
+[   32.770768] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.771158] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.771474] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a4f000 dma_bytes=4096 dma_mask_bits=32
+[   32.772223] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a4f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.772622] day34_edu_stability: init ok
+[   32.778727] day34_edu_stability 0000:00:02.0: remove complete
+[   32.779131] day34_edu_stability: exit ok
+[   32.797956] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.798605] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.798849] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a35000 dma_bytes=4096 dma_mask_bits=32
+[   32.799598] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a35000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.799983] day34_edu_stability: init ok
+[   32.806087] day34_edu_stability 0000:00:02.0: remove complete
+[   32.806895] day34_edu_stability: exit ok
+[   32.826021] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.826703] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.826979] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab3000 dma_bytes=4096 dma_mask_bits=32
+[   32.827850] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab3000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.828309] day34_edu_stability: init ok
+[   32.835996] day34_edu_stability 0000:00:02.0: remove complete
+[   32.836503] day34_edu_stability: exit ok
+[   32.853877] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.854270] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.854751] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a67000 dma_bytes=4096 dma_mask_bits=32
+[   32.855511] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a67000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.855897] day34_edu_stability: init ok
+[   32.862115] day34_edu_stability 0000:00:02.0: remove complete
+[   32.863052] day34_edu_stability: exit ok
+[   32.881738] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.882154] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.882577] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a47000 dma_bytes=4096 dma_mask_bits=32
+[   32.883335] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a47000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.883793] day34_edu_stability: init ok
+[   32.889854] day34_edu_stability 0000:00:02.0: remove complete
+[   32.890256] day34_edu_stability: exit ok
+[   32.903199] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.903654] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.903892] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a41000 dma_bytes=4096 dma_mask_bits=32
+[   32.904651] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a41000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.905239] day34_edu_stability: init ok
+[   32.912011] day34_edu_stability 0000:00:02.0: remove complete
+[   32.912478] day34_edu_stability: exit ok
+[   32.930767] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.931469] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.931694] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab9000 dma_bytes=4096 dma_mask_bits=32
+[   32.932430] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab9000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.932812] day34_edu_stability: init ok
+[   32.939136] day34_edu_stability 0000:00:02.0: remove complete
+[   32.939568] day34_edu_stability: exit ok
+[   32.954071] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.954724] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.954949] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a60000 dma_bytes=4096 dma_mask_bits=32
+[   32.955708] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a60000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.956171] day34_edu_stability: init ok
+[   32.962103] day34_edu_stability 0000:00:02.0: remove complete
+[   32.962543] day34_edu_stability: exit ok
+[   32.984907] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   32.985440] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   32.985768] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a65000 dma_bytes=4096 dma_mask_bits=32
+[   32.987213] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a65000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   32.987834] day34_edu_stability: init ok
+[   32.994431] day34_edu_stability 0000:00:02.0: remove complete
+[   32.994829] day34_edu_stability: exit ok
+[   33.009919] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.010507] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.010746] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a60000 dma_bytes=4096 dma_mask_bits=32
+[   33.011538] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a60000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.011954] day34_edu_stability: init ok
+[   33.019868] day34_edu_stability 0000:00:02.0: remove complete
+[   33.020342] day34_edu_stability: exit ok
+[   33.034344] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.035361] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.035658] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a63000 dma_bytes=4096 dma_mask_bits=32
+[   33.036394] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a63000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.036775] day34_edu_stability: init ok
+[   33.042820] day34_edu_stability 0000:00:02.0: remove complete
+[   33.043237] day34_edu_stability: exit ok
+[   33.058328] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.059024] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.059321] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a60000 dma_bytes=4096 dma_mask_bits=32
+[   33.060048] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a60000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.060434] day34_edu_stability: init ok
+[   33.066125] day34_edu_stability 0000:00:02.0: remove complete
+[   33.066960] day34_edu_stability: exit ok
+[   33.081471] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.081872] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.082161] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a63000 dma_bytes=4096 dma_mask_bits=32
+[   33.083052] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a63000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.083438] day34_edu_stability: init ok
+[   33.089107] day34_edu_stability 0000:00:02.0: remove complete
+[   33.089523] day34_edu_stability: exit ok
+[   33.104049] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.104494] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.104715] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a43000 dma_bytes=4096 dma_mask_bits=32
+[   33.105497] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a43000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.105921] day34_edu_stability: init ok
+[   33.112502] day34_edu_stability 0000:00:02.0: remove complete
+[   33.112976] day34_edu_stability: exit ok
+[   33.129427] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.129798] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.130022] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a22000 dma_bytes=4096 dma_mask_bits=32
+[   33.130720] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a22000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.131358] day34_edu_stability: init ok
+[   33.136901] day34_edu_stability 0000:00:02.0: remove complete
+[   33.137316] day34_edu_stability: exit ok
+[   33.150090] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.150669] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.150895] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a53000 dma_bytes=4096 dma_mask_bits=32
+[   33.151582] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a53000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.151955] day34_edu_stability: init ok
+[   33.157557] day34_edu_stability 0000:00:02.0: remove complete
+[   33.157966] day34_edu_stability: exit ok
+[   33.169049] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.169485] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.169702] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a27000 dma_bytes=4096 dma_mask_bits=32
+[   33.170387] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a27000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.171695] day34_edu_stability: init ok
+[   33.180084] day34_edu_stability 0000:00:02.0: remove complete
+[   33.180569] day34_edu_stability: exit ok
+[   33.198051] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.198847] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.199176] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a53000 dma_bytes=4096 dma_mask_bits=32
+[   33.200007] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a53000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.200403] day34_edu_stability: init ok
+[   33.207294] day34_edu_stability 0000:00:02.0: remove complete
+[   33.207727] day34_edu_stability: exit ok
+[   33.227588] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.227992] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.228202] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a61000 dma_bytes=4096 dma_mask_bits=32
+[   33.228996] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a61000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.229421] day34_edu_stability: init ok
+[   33.235333] day34_edu_stability 0000:00:02.0: remove complete
+[   33.235739] day34_edu_stability: exit ok
+[   33.250036] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.250496] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.250718] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abf000 dma_bytes=4096 dma_mask_bits=32
+[   33.251838] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abf000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.252296] day34_edu_stability: init ok
+[   33.258012] day34_edu_stability 0000:00:02.0: remove complete
+[   33.258823] day34_edu_stability: exit ok
+[   33.278815] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.279221] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.279461] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab8000 dma_bytes=4096 dma_mask_bits=32
+[   33.280246] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab8000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.280679] day34_edu_stability: init ok
+[   33.287031] day34_edu_stability 0000:00:02.0: remove complete
+[   33.287501] day34_edu_stability: exit ok
+[   33.302408] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.303234] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.303462] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a6e000 dma_bytes=4096 dma_mask_bits=32
+[   33.304155] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a6e000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.304529] day34_edu_stability: init ok
+[   33.310003] day34_edu_stability 0000:00:02.0: remove complete
+[   33.310666] day34_edu_stability: exit ok
+[   33.324960] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.325377] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.325589] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a61000 dma_bytes=4096 dma_mask_bits=32
+[   33.326478] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a61000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.326868] day34_edu_stability: init ok
+[   33.332660] day34_edu_stability 0000:00:02.0: remove complete
+[   33.333075] day34_edu_stability: exit ok
+[   33.346577] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.347054] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.347279] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a45000 dma_bytes=4096 dma_mask_bits=32
+[   33.348047] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a45000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.348441] day34_edu_stability: init ok
+[   33.354578] day34_edu_stability 0000:00:02.0: remove complete
+[   33.355034] day34_edu_stability: exit ok
+[   33.373771] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.374241] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.374715] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a72000 dma_bytes=4096 dma_mask_bits=32
+[   33.375430] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a72000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.375843] day34_edu_stability: init ok
+[   33.381416] day34_edu_stability 0000:00:02.0: remove complete
+[   33.381875] day34_edu_stability: exit ok
+[   33.393485] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.393912] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.394152] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab5000 dma_bytes=4096 dma_mask_bits=32
+[   33.395049] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab5000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.395440] day34_edu_stability: init ok
+[   33.401037] day34_edu_stability 0000:00:02.0: remove complete
+[   33.401515] day34_edu_stability: exit ok
+[   33.413869] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.414548] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.414788] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a20000 dma_bytes=4096 dma_mask_bits=32
+[   33.415544] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a20000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.415942] day34_edu_stability: init ok
+[   33.421849] day34_edu_stability 0000:00:02.0: remove complete
+[   33.422344] day34_edu_stability: exit ok
+[   33.442656] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.443118] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.443352] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a93000 dma_bytes=4096 dma_mask_bits=32
+[   33.444174] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a93000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.444644] day34_edu_stability: init ok
+[   33.451562] day34_edu_stability 0000:00:02.0: remove complete
+[   33.451980] day34_edu_stability: exit ok
+[   33.470109] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.470825] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.471052] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a2a000 dma_bytes=4096 dma_mask_bits=32
+[   33.471878] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a2a000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.472300] day34_edu_stability: init ok
+[   33.478182] day34_edu_stability 0000:00:02.0: remove complete
+[   33.479006] day34_edu_stability: exit ok
+[   33.498896] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.499348] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.499584] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a57000 dma_bytes=4096 dma_mask_bits=32
+[   33.500359] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a57000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.500761] day34_edu_stability: init ok
+[   33.506917] day34_edu_stability 0000:00:02.0: remove complete
+[   33.507391] day34_edu_stability: exit ok
+[   33.528843] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.529274] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.529497] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a2a000 dma_bytes=4096 dma_mask_bits=32
+[   33.530271] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a2a000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.530659] day34_edu_stability: init ok
+[   33.536763] day34_edu_stability 0000:00:02.0: remove complete
+[   33.537206] day34_edu_stability: exit ok
+[   33.554601] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.555007] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.555221] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a57000 dma_bytes=4096 dma_mask_bits=32
+[   33.555907] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a57000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.556357] day34_edu_stability: init ok
+[   33.562552] day34_edu_stability 0000:00:02.0: remove complete
+[   33.562953] day34_edu_stability: exit ok
+[   33.582828] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.583338] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.583607] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a61000 dma_bytes=4096 dma_mask_bits=32
+[   33.584552] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a61000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.585118] day34_edu_stability: init ok
+[   33.594572] day34_edu_stability 0000:00:02.0: remove complete
+[   33.595742] day34_edu_stability: exit ok
+[   33.613625] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.614129] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.614782] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a2f000 dma_bytes=4096 dma_mask_bits=32
+[   33.615850] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a2f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.616379] day34_edu_stability: init ok
+[   33.625591] day34_edu_stability 0000:00:02.0: remove complete
+[   33.626630] day34_edu_stability: exit ok
+[   33.647964] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.648349] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.648564] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a61000 dma_bytes=4096 dma_mask_bits=32
+[   33.649330] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a61000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.649724] day34_edu_stability: init ok
+[   33.655607] day34_edu_stability 0000:00:02.0: remove complete
+[   33.656107] day34_edu_stability: exit ok
+[   33.670112] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.670481] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.670930] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a67000 dma_bytes=4096 dma_mask_bits=32
+[   33.671744] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a67000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.672120] day34_edu_stability: init ok
+[   33.677773] day34_edu_stability 0000:00:02.0: remove complete
+[   33.678565] day34_edu_stability: exit ok
+[   33.697223] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.697682] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.697983] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a63000 dma_bytes=4096 dma_mask_bits=32
+[   33.698951] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a63000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.699389] day34_edu_stability: init ok
+[   33.704905] day34_edu_stability 0000:00:02.0: remove complete
+[   33.705313] day34_edu_stability: exit ok
+[   33.718641] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.719079] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.719292] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab7000 dma_bytes=4096 dma_mask_bits=32
+[   33.719991] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab7000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.720371] day34_edu_stability: init ok
+[   33.725901] day34_edu_stability 0000:00:02.0: remove complete
+[   33.726333] day34_edu_stability: exit ok
+[   33.741870] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.742306] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.742768] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a45000 dma_bytes=4096 dma_mask_bits=32
+[   33.743518] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a45000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.743936] day34_edu_stability: init ok
+[   33.751466] day34_edu_stability 0000:00:02.0: remove complete
+[   33.751921] day34_edu_stability: exit ok
+[   33.770557] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.771289] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.771583] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a68000 dma_bytes=4096 dma_mask_bits=32
+[   33.772449] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a68000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.772851] day34_edu_stability: init ok
+[   33.780141] day34_edu_stability 0000:00:02.0: remove complete
+[   33.780582] day34_edu_stability: exit ok
+[   33.798084] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.798693] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.798933] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a32000 dma_bytes=4096 dma_mask_bits=32
+[   33.799677] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a32000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.800206] day34_edu_stability: init ok
+[   33.806704] day34_edu_stability 0000:00:02.0: remove complete
+[   33.807096] day34_edu_stability: exit ok
+[   33.825452] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.825899] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.826333] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a56000 dma_bytes=4096 dma_mask_bits=32
+[   33.827073] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a56000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.827458] day34_edu_stability: init ok
+[   33.833370] day34_edu_stability 0000:00:02.0: remove complete
+[   33.833793] day34_edu_stability: exit ok
+[   33.846485] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.846936] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.847217] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a94000 dma_bytes=4096 dma_mask_bits=32
+[   33.847931] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a94000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.848319] day34_edu_stability: init ok
+[   33.854425] day34_edu_stability 0000:00:02.0: remove complete
+[   33.855314] day34_edu_stability: exit ok
+[   33.870664] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.871109] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.871325] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a56000 dma_bytes=4096 dma_mask_bits=32
+[   33.872107] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a56000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.872498] day34_edu_stability: init ok
+[   33.879741] day34_edu_stability 0000:00:02.0: remove complete
+[   33.880240] day34_edu_stability: exit ok
+[   33.898719] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.899127] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.899347] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a33000 dma_bytes=4096 dma_mask_bits=32
+[   33.900067] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a33000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.900453] day34_edu_stability: init ok
+[   33.906817] day34_edu_stability 0000:00:02.0: remove complete
+[   33.907208] day34_edu_stability: exit ok
+[   33.922494] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.923084] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.923351] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a32000 dma_bytes=4096 dma_mask_bits=32
+[   33.924086] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a32000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.924491] day34_edu_stability: init ok
+[   33.931053] day34_edu_stability 0000:00:02.0: remove complete
+[   33.931528] day34_edu_stability: exit ok
+[   33.949072] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.949491] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.949704] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a33000 dma_bytes=4096 dma_mask_bits=32
+[   33.950639] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a33000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.951023] day34_edu_stability: init ok
+[   33.957103] day34_edu_stability 0000:00:02.0: remove complete
+[   33.957512] day34_edu_stability: exit ok
+[   33.974124] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   33.975141] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   33.975495] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a94000 dma_bytes=4096 dma_mask_bits=32
+[   33.976745] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a94000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   33.977345] day34_edu_stability: init ok
+[   33.983974] day34_edu_stability 0000:00:02.0: remove complete
+[   33.984418] day34_edu_stability: exit ok
+[   34.001882] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.002326] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.002549] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a33000 dma_bytes=4096 dma_mask_bits=32
+[   34.003508] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a33000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.003964] day34_edu_stability: init ok
+[   34.010023] day34_edu_stability 0000:00:02.0: remove complete
+[   34.010449] day34_edu_stability: exit ok
+[   34.029534] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.029995] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.030221] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab7000 dma_bytes=4096 dma_mask_bits=32
+[   34.031172] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab7000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.031645] day34_edu_stability: init ok
+[   34.037397] day34_edu_stability 0000:00:02.0: remove complete
+[   34.037785] day34_edu_stability: exit ok
+[   34.049871] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.050244] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.050488] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42009000 dma_bytes=4096 dma_mask_bits=32
+[   34.051465] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42009000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.051851] day34_edu_stability: init ok
+[   34.057982] day34_edu_stability 0000:00:02.0: remove complete
+[   34.058778] day34_edu_stability: exit ok
+[   34.077701] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.078607] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.078830] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x4200b000 dma_bytes=4096 dma_mask_bits=32
+[   34.079515] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x4200b000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.079891] day34_edu_stability: init ok
+[   34.086064] day34_edu_stability 0000:00:02.0: remove complete
+[   34.086534] day34_edu_stability: exit ok
+[   34.105446] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.105860] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.106122] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a64000 dma_bytes=4096 dma_mask_bits=32
+[   34.107064] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a64000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.107448] day34_edu_stability: init ok
+[   34.113164] day34_edu_stability 0000:00:02.0: remove complete
+[   34.113598] day34_edu_stability: exit ok
+[   34.125107] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.125531] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.125743] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a71000 dma_bytes=4096 dma_mask_bits=32
+[   34.126651] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a71000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.127051] day34_edu_stability: init ok
+[   34.132825] day34_edu_stability 0000:00:02.0: remove complete
+[   34.133235] day34_edu_stability: exit ok
+[   34.146514] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.147620] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.147856] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a37000 dma_bytes=4096 dma_mask_bits=32
+[   34.148583] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a37000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.148965] day34_edu_stability: init ok
+[   34.155105] day34_edu_stability 0000:00:02.0: remove complete
+[   34.155482] day34_edu_stability: exit ok
+[   34.169885] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.170280] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.170489] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a71000 dma_bytes=4096 dma_mask_bits=32
+[   34.171363] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a71000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.171775] day34_edu_stability: init ok
+[   34.177551] day34_edu_stability 0000:00:02.0: remove complete
+[   34.178003] day34_edu_stability: exit ok
+[   34.194748] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.195212] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.195522] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab0000 dma_bytes=4096 dma_mask_bits=32
+[   34.196515] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab0000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.196980] day34_edu_stability: init ok
+[   34.203299] day34_edu_stability 0000:00:02.0: remove complete
+[   34.203748] day34_edu_stability: exit ok
+[   34.217036] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.217454] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.217669] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a71000 dma_bytes=4096 dma_mask_bits=32
+[   34.218553] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a71000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.218934] day34_edu_stability: init ok
+[   34.224529] day34_edu_stability 0000:00:02.0: remove complete
+[   34.224949] day34_edu_stability: exit ok
+[   34.237447] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.237822] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.238058] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a64000 dma_bytes=4096 dma_mask_bits=32
+[   34.239182] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a64000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.239709] day34_edu_stability: init ok
+[   34.246397] day34_edu_stability 0000:00:02.0: remove complete
+[   34.247259] day34_edu_stability: exit ok
+[   34.265465] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.265823] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.266033] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a33000 dma_bytes=4096 dma_mask_bits=32
+[   34.266955] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a33000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.267371] day34_edu_stability: init ok
+[   34.274749] day34_edu_stability 0000:00:02.0: remove complete
+[   34.275582] day34_edu_stability: exit ok
+[   34.294112] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.294532] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.294779] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a4f000 dma_bytes=4096 dma_mask_bits=32
+[   34.295985] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a4f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.296588] day34_edu_stability: init ok
+[   34.303244] day34_edu_stability 0000:00:02.0: remove complete
+[   34.303627] day34_edu_stability: exit ok
+[   34.319504] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.319921] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.320136] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a68000 dma_bytes=4096 dma_mask_bits=32
+[   34.320820] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a68000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.321194] day34_edu_stability: init ok
+[   34.326998] day34_edu_stability 0000:00:02.0: remove complete
+[   34.327383] day34_edu_stability: exit ok
+[   34.341331] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.341700] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.341906] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a27000 dma_bytes=4096 dma_mask_bits=32
+[   34.342844] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a27000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.343229] day34_edu_stability: init ok
+[   34.348905] day34_edu_stability 0000:00:02.0: remove complete
+[   34.349287] day34_edu_stability: exit ok
+[   34.361428] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.361811] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.362043] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a22000 dma_bytes=4096 dma_mask_bits=32
+[   34.362986] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a22000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.363381] day34_edu_stability: init ok
+[   34.369215] day34_edu_stability 0000:00:02.0: remove complete
+[   34.369643] day34_edu_stability: exit ok
+[   34.381682] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.382422] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.382898] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a1f000 dma_bytes=4096 dma_mask_bits=32
+[   34.383776] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a1f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.384208] day34_edu_stability: init ok
+[   34.390241] day34_edu_stability 0000:00:02.0: remove complete
+[   34.390619] day34_edu_stability: exit ok
+[   34.402361] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.402760] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.402974] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x4200b000 dma_bytes=4096 dma_mask_bits=32
+[   34.403788] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x4200b000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.404191] day34_edu_stability: init ok
+[   34.410619] day34_edu_stability 0000:00:02.0: remove complete
+[   34.411008] day34_edu_stability: exit ok
+[   34.430059] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.430766] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.431004] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a57000 dma_bytes=4096 dma_mask_bits=32
+[   34.431883] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a57000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.432301] day34_edu_stability: init ok
+[   34.440261] day34_edu_stability 0000:00:02.0: remove complete
+[   34.440692] day34_edu_stability: exit ok
+[   34.458008] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.458649] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.458882] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x4200b000 dma_bytes=4096 dma_mask_bits=32
+[   34.459598] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x4200b000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.459986] day34_edu_stability: init ok
+[   34.465712] day34_edu_stability 0000:00:02.0: remove complete
+[   34.466191] day34_edu_stability: exit ok
+[   34.477644] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.478059] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.478279] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a36000 dma_bytes=4096 dma_mask_bits=32
+[   34.479339] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a36000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.479745] day34_edu_stability: init ok
+[   34.486936] day34_edu_stability 0000:00:02.0: remove complete
+[   34.487349] day34_edu_stability: exit ok
+[   34.505361] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.505759] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.505982] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abd000 dma_bytes=4096 dma_mask_bits=32
+[   34.506996] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abd000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.507439] day34_edu_stability: init ok
+[   34.513830] day34_edu_stability 0000:00:02.0: remove complete
+[   34.514296] day34_edu_stability: exit ok
+[   34.529521] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.529917] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.530134] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab2000 dma_bytes=4096 dma_mask_bits=32
+[   34.531120] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab2000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.531524] day34_edu_stability: init ok
+[   34.537478] day34_edu_stability 0000:00:02.0: remove complete
+[   34.537886] day34_edu_stability: exit ok
+[   34.549375] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.549750] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.549965] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a67000 dma_bytes=4096 dma_mask_bits=32
+[   34.550672] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a67000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.551324] day34_edu_stability: init ok
+[   34.556940] day34_edu_stability 0000:00:02.0: remove complete
+[   34.557367] day34_edu_stability: exit ok
+[   34.571101] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.571633] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.571879] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a36000 dma_bytes=4096 dma_mask_bits=32
+[   34.572720] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a36000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.573111] day34_edu_stability: init ok
+[   34.579386] day34_edu_stability 0000:00:02.0: remove complete
+[   34.579891] day34_edu_stability: exit ok
+[   34.593937] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.595083] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.595438] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a67000 dma_bytes=4096 dma_mask_bits=32
+[   34.596268] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a67000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.596670] day34_edu_stability: init ok
+[   34.602335] day34_edu_stability 0000:00:02.0: remove complete
+[   34.603016] day34_edu_stability: exit ok
+[   34.618063] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.618669] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.618896] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a93000 dma_bytes=4096 dma_mask_bits=32
+[   34.619643] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a93000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.620023] day34_edu_stability: init ok
+[   34.626946] day34_edu_stability 0000:00:02.0: remove complete
+[   34.627340] day34_edu_stability: exit ok
+[   34.645899] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.646506] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.646747] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a97000 dma_bytes=4096 dma_mask_bits=32
+[   34.647526] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a97000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.647922] day34_edu_stability: init ok
+[   34.653676] day34_edu_stability 0000:00:02.0: remove complete
+[   34.654080] day34_edu_stability: exit ok
+[   34.665136] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.665539] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.665788] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a6c000 dma_bytes=4096 dma_mask_bits=32
+[   34.666716] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a6c000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.667101] day34_edu_stability: init ok
+[   34.672808] day34_edu_stability 0000:00:02.0: remove complete
+[   34.673206] day34_edu_stability: exit ok
+[   34.687277] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.687720] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.687965] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42009000 dma_bytes=4096 dma_mask_bits=32
+[   34.688730] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42009000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.689170] day34_edu_stability: init ok
+[   34.695611] day34_edu_stability 0000:00:02.0: remove complete
+[   34.696006] day34_edu_stability: exit ok
+[   34.713603] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.713981] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.714480] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a6c000 dma_bytes=4096 dma_mask_bits=32
+[   34.715174] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a6c000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.715548] day34_edu_stability: init ok
+[   34.721279] day34_edu_stability 0000:00:02.0: remove complete
+[   34.721662] day34_edu_stability: exit ok
+[   34.740551] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.740954] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.741168] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abb000 dma_bytes=4096 dma_mask_bits=32
+[   34.741863] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abb000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.742316] day34_edu_stability: init ok
+[   34.748594] day34_edu_stability 0000:00:02.0: remove complete
+[   34.749113] day34_edu_stability: exit ok
+[   34.764909] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.765275] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.765485] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a6c000 dma_bytes=4096 dma_mask_bits=32
+[   34.766410] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a6c000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.766820] day34_edu_stability: init ok
+[   34.772406] day34_edu_stability 0000:00:02.0: remove complete
+[   34.772794] day34_edu_stability: exit ok
+[   34.787461] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.787821] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.788035] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a68000 dma_bytes=4096 dma_mask_bits=32
+[   34.788767] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a68000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.789161] day34_edu_stability: init ok
+[   34.796464] day34_edu_stability 0000:00:02.0: remove complete
+[   34.796934] day34_edu_stability: exit ok
+[   34.809366] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.809731] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.809940] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab1000 dma_bytes=4096 dma_mask_bits=32
+[   34.810662] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab1000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.811288] day34_edu_stability: init ok
+[   34.817044] day34_edu_stability 0000:00:02.0: remove complete
+[   34.817422] day34_edu_stability: exit ok
+[   34.829452] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.829822] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.830063] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a37000 dma_bytes=4096 dma_mask_bits=32
+[   34.830743] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a37000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.831369] day34_edu_stability: init ok
+[   34.837239] day34_edu_stability 0000:00:02.0: remove complete
+[   34.837658] day34_edu_stability: exit ok
+[   34.849624] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.850033] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.850252] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abb000 dma_bytes=4096 dma_mask_bits=32
+[   34.851124] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abb000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.851518] day34_edu_stability: init ok
+[   34.857489] day34_edu_stability 0000:00:02.0: remove complete
+[   34.857938] day34_edu_stability: exit ok
+[   34.869522] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.869911] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.870124] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a21000 dma_bytes=4096 dma_mask_bits=32
+[   34.871078] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a21000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.871585] day34_edu_stability: init ok
+[   34.877235] day34_edu_stability 0000:00:02.0: remove complete
+[   34.877637] day34_edu_stability: exit ok
+[   34.889219] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.889573] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.889817] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abd000 dma_bytes=4096 dma_mask_bits=32
+[   34.890705] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abd000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.891088] day34_edu_stability: init ok
+[   34.896713] day34_edu_stability 0000:00:02.0: remove complete
+[   34.897087] day34_edu_stability: exit ok
+[   34.909238] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.909618] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.909828] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x4200b000 dma_bytes=4096 dma_mask_bits=32
+[   34.910761] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x4200b000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.911191] day34_edu_stability: init ok
+[   34.916902] day34_edu_stability 0000:00:02.0: remove complete
+[   34.917297] day34_edu_stability: exit ok
+[   34.929466] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.929838] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.930053] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a2b000 dma_bytes=4096 dma_mask_bits=32
+[   34.930995] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a2b000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.931377] day34_edu_stability: init ok
+[   34.937364] day34_edu_stability 0000:00:02.0: remove complete
+[   34.937796] day34_edu_stability: exit ok
+[   34.950364] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.950766] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.950984] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a42000 dma_bytes=4096 dma_mask_bits=32
+[   34.951983] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a42000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.952448] day34_edu_stability: init ok
+[   34.958801] day34_edu_stability 0000:00:02.0: remove complete
+[   34.959201] day34_edu_stability: exit ok
+[   34.978013] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   34.978486] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   34.978890] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a2b000 dma_bytes=4096 dma_mask_bits=32
+[   34.979647] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a2b000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   34.980060] day34_edu_stability: init ok
+[   34.985968] day34_edu_stability 0000:00:02.0: remove complete
+[   34.986432] day34_edu_stability: exit ok
+[   35.002164] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.002824] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.003090] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a65000 dma_bytes=4096 dma_mask_bits=32
+[   35.003847] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a65000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.004240] day34_edu_stability: init ok
+[   35.010227] day34_edu_stability 0000:00:02.0: remove complete
+[   35.010701] day34_edu_stability: exit ok
+[   35.022323] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.023055] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.023287] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a55000 dma_bytes=4096 dma_mask_bits=32
+[   35.024178] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a55000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.024581] day34_edu_stability: init ok
+[   35.031170] day34_edu_stability 0000:00:02.0: remove complete
+[   35.031617] day34_edu_stability: exit ok
+[   35.049489] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.050062] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.050585] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a71000 dma_bytes=4096 dma_mask_bits=32
+[   35.051431] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a71000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.051818] day34_edu_stability: init ok
+[   35.057684] day34_edu_stability 0000:00:02.0: remove complete
+[   35.058067] day34_edu_stability: exit ok
+[   35.078230] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.078863] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.079078] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab5000 dma_bytes=4096 dma_mask_bits=32
+[   35.079769] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab5000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.080158] day34_edu_stability: init ok
+[   35.085838] day34_edu_stability 0000:00:02.0: remove complete
+[   35.086253] day34_edu_stability: exit ok
+[   35.097199] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.097593] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.097803] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abd000 dma_bytes=4096 dma_mask_bits=32
+[   35.098530] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abd000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.099142] day34_edu_stability: init ok
+[   35.105597] day34_edu_stability 0000:00:02.0: remove complete
+[   35.106092] day34_edu_stability: exit ok
+[   35.118381] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.119103] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.119327] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab3000 dma_bytes=4096 dma_mask_bits=32
+[   35.120117] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab3000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.120505] day34_edu_stability: init ok
+[   35.127030] day34_edu_stability 0000:00:02.0: remove complete
+[   35.127566] day34_edu_stability: exit ok
+[   35.145811] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.146432] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.146665] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abd000 dma_bytes=4096 dma_mask_bits=32
+[   35.147369] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abd000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.147751] day34_edu_stability: init ok
+[   35.154067] day34_edu_stability 0000:00:02.0: remove complete
+[   35.154928] day34_edu_stability: exit ok
+[   35.173890] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.174502] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.174736] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a35000 dma_bytes=4096 dma_mask_bits=32
+[   35.175435] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a35000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.175813] day34_edu_stability: init ok
+[   35.181597] day34_edu_stability 0000:00:02.0: remove complete
+[   35.182129] day34_edu_stability: exit ok
+[   35.192986] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.193337] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.193543] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a63000 dma_bytes=4096 dma_mask_bits=32
+[   35.194250] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a63000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.194629] day34_edu_stability: init ok
+[   35.200479] day34_edu_stability 0000:00:02.0: remove complete
+[   35.200851] day34_edu_stability: exit ok
+[   35.213300] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.213685] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.213904] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a97000 dma_bytes=4096 dma_mask_bits=32
+[   35.214847] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a97000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.215234] day34_edu_stability: init ok
+[   35.221086] day34_edu_stability 0000:00:02.0: remove complete
+[   35.221475] day34_edu_stability: exit ok
+[   35.233775] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.234324] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.234784] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a53000 dma_bytes=4096 dma_mask_bits=32
+[   35.235500] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a53000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.235906] day34_edu_stability: init ok
+[   35.241663] day34_edu_stability 0000:00:02.0: remove complete
+[   35.242069] day34_edu_stability: exit ok
+[   35.261972] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.262559] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.262818] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab3000 dma_bytes=4096 dma_mask_bits=32
+[   35.263524] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab3000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.263899] day34_edu_stability: init ok
+[   35.269601] day34_edu_stability 0000:00:02.0: remove complete
+[   35.269987] day34_edu_stability: exit ok
+[   35.282054] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.282441] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.282899] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a5f000 dma_bytes=4096 dma_mask_bits=32
+[   35.283586] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a5f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.283968] day34_edu_stability: init ok
+[   35.289879] day34_edu_stability 0000:00:02.0: remove complete
+[   35.290271] day34_edu_stability: exit ok
+[   35.301414] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.301818] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.302036] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a70000 dma_bytes=4096 dma_mask_bits=32
+[   35.302944] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a70000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.303339] day34_edu_stability: init ok
+[   35.309162] day34_edu_stability 0000:00:02.0: remove complete
+[   35.309594] day34_edu_stability: exit ok
+[   35.321887] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.322484] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.322704] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42abe000 dma_bytes=4096 dma_mask_bits=32
+[   35.323394] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42abe000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.323813] day34_edu_stability: init ok
+[   35.329584] day34_edu_stability 0000:00:02.0: remove complete
+[   35.329981] day34_edu_stability: exit ok
+[   35.342001] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.342628] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.342903] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a43000 dma_bytes=4096 dma_mask_bits=32
+[   35.343655] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a43000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.344077] day34_edu_stability: init ok
+[   35.350103] day34_edu_stability 0000:00:02.0: remove complete
+[   35.351354] day34_edu_stability: exit ok
+[   35.369826] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.370453] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.370684] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a42000 dma_bytes=4096 dma_mask_bits=32
+[   35.371443] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a42000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.371828] day34_edu_stability: init ok
+[   35.377560] day34_edu_stability 0000:00:02.0: remove complete
+[   35.377945] day34_edu_stability: exit ok
+[   35.389166] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.389540] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.389780] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a62000 dma_bytes=4096 dma_mask_bits=32
+[   35.390675] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a62000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.391081] day34_edu_stability: init ok
+[   35.396863] day34_edu_stability 0000:00:02.0: remove complete
+[   35.397266] day34_edu_stability: exit ok
+[   35.409763] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.410160] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.410595] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a5f000 dma_bytes=4096 dma_mask_bits=32
+[   35.411275] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a5f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.411697] day34_edu_stability: init ok
+[   35.417573] day34_edu_stability 0000:00:02.0: remove complete
+[   35.417948] day34_edu_stability: exit ok
+[   35.429520] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.429902] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.430118] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a53000 dma_bytes=4096 dma_mask_bits=32
+[   35.431226] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a53000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.431660] day34_edu_stability: init ok
+[   35.437965] day34_edu_stability 0000:00:02.0: remove complete
+[   35.438397] day34_edu_stability: exit ok
+[   35.458644] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.459077] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.459311] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab6000 dma_bytes=4096 dma_mask_bits=32
+[   35.460131] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab6000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.460569] day34_edu_stability: init ok
+[   35.466530] day34_edu_stability 0000:00:02.0: remove complete
+[   35.467349] day34_edu_stability: exit ok
+[   35.486390] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.487124] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.487369] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a62000 dma_bytes=4096 dma_mask_bits=32
+[   35.488157] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a62000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.488546] day34_edu_stability: init ok
+[   35.495341] day34_edu_stability 0000:00:02.0: remove complete
+[   35.495824] day34_edu_stability: exit ok
+[   35.513944] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.514609] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.514850] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a72000 dma_bytes=4096 dma_mask_bits=32
+[   35.515637] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a72000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.516129] day34_edu_stability: init ok
+[   35.522614] day34_edu_stability 0000:00:02.0: remove complete
+[   35.523081] day34_edu_stability: exit ok
+[   35.543304] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.543720] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.543943] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x428f9000 dma_bytes=4096 dma_mask_bits=32
+[   35.544800] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x428f9000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.545232] day34_edu_stability: init ok
+[   35.551420] day34_edu_stability 0000:00:02.0: remove complete
+[   35.551878] day34_edu_stability: exit ok
+[   35.566210] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.566837] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.567090] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab6000 dma_bytes=4096 dma_mask_bits=32
+[   35.567831] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab6000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.568239] day34_edu_stability: init ok
+[   35.574098] day34_edu_stability 0000:00:02.0: remove complete
+[   35.574971] day34_edu_stability: exit ok
+[   35.593626] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.594060] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.594280] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42009000 dma_bytes=4096 dma_mask_bits=32
+[   35.595223] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42009000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.595668] day34_edu_stability: init ok
+[   35.603993] day34_edu_stability 0000:00:02.0: remove complete
+[   35.604395] day34_edu_stability: exit ok
+[   35.621609] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.621976] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.622205] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a4b000 dma_bytes=4096 dma_mask_bits=32
+[   35.623641] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a4b000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.624033] day34_edu_stability: init ok
+[   35.630828] day34_edu_stability 0000:00:02.0: remove complete
+[   35.631210] day34_edu_stability: exit ok
+[   35.650091] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.650464] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.650672] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a36000 dma_bytes=4096 dma_mask_bits=32
+[   35.651633] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a36000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.652013] day34_edu_stability: init ok
+[   35.658222] day34_edu_stability 0000:00:02.0: remove complete
+[   35.658653] day34_edu_stability: exit ok
+[   35.671314] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.671685] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.671892] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a43000 dma_bytes=4096 dma_mask_bits=32
+[   35.672622] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a43000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.673134] day34_edu_stability: init ok
+[   35.679463] day34_edu_stability 0000:00:02.0: remove complete
+[   35.679848] day34_edu_stability: exit ok
+[   35.693189] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.693555] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.693764] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a36000 dma_bytes=4096 dma_mask_bits=32
+[   35.694734] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a36000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.695216] day34_edu_stability: init ok
+[   35.701060] day34_edu_stability 0000:00:02.0: remove complete
+[   35.701458] day34_edu_stability: exit ok
+[   35.714252] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.714642] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.715095] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a48000 dma_bytes=4096 dma_mask_bits=32
+[   35.715845] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a48000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.716224] day34_edu_stability: init ok
+[   35.721800] day34_edu_stability 0000:00:02.0: remove complete
+[   35.722270] day34_edu_stability: exit ok
+[   35.743089] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.743562] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.743792] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42ab5000 dma_bytes=4096 dma_mask_bits=32
+[   35.744524] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42ab5000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.744924] day34_edu_stability: init ok
+[   35.750637] day34_edu_stability 0000:00:02.0: remove complete
+[   35.751056] day34_edu_stability: exit ok
+[   35.765300] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.765723] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.766016] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x428fa000 dma_bytes=4096 dma_mask_bits=32
+[   35.766960] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x428fa000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.767365] day34_edu_stability: init ok
+[   35.773646] day34_edu_stability 0000:00:02.0: remove complete
+[   35.774114] day34_edu_stability: exit ok
+[   35.785748] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.786208] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.786429] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a22000 dma_bytes=4096 dma_mask_bits=32
+[   35.787342] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a22000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.787726] day34_edu_stability: init ok
+[   35.793377] day34_edu_stability 0000:00:02.0: remove complete
+[   35.793807] day34_edu_stability: exit ok
+[   35.807682] day34_edu_stability 0000:00:02.0: probe enter: 1234:11e8
+[   35.808149] day34_edu_stability 0000:00:02.0: dma mask set to 32 bits
+[   35.808394] day34_edu_stability 0000:00:02.0: dma_alloc_coherent ok: dma_handle=0x42a5f000 dma_bytes=4096 dma_mask_bits=32
+[   35.809223] day34_edu_stability 0000:00:02.0: probe success: dev=/dev/day34_edu0 dma_handle=0x42a5f000 bar0=[0x0x0000000010000000 + 0x0x0000000000100000)
+[   35.809602] day34_edu_stability: init ok
+[   35.821507] day34_edu_stability 0000:00:02.0: mmap rejected: pgoff=1 must be 0

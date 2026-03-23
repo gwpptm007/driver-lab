@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+"""生成 Day35 风险登记表。"""
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[2]
+OUTPUT = ROOT / "day35" / "output"
+
+text = """# Day35 风险登记表
+
+| 风险ID | 风险项 | 当前状态 | 影响 | 建议动作 | 推荐回滚点 |
+|---|---|---|---|---|---|
+| R1 | Day33 trace 覆盖完整性仍可继续优化 | Watch | 不影响基础通过，但会影响关键路径解释的完整性 | 继续优化 `set_graph_function` 与 workload 组合，补齐 `do_run_dma / wait_dma_idle` 视角 | Day34 |
+| R2 | 性能数据主要来自 QEMU EDU 教学环境 | Open | 不能直接外推真实硬件绝对性能 | 报告中明确环境限制，后续补真实硬件或更多内核版本验证 | Day32 |
+| R3 | 后续继续引入功能修改可能破坏稳定性基线 | Watch | 并发与模块循环结果可能退化 | 保留 Day34 稳定性回归为固定回归门槛 | Day34 |
+"""
+
+(OUTPUT / "day35_risk_register.md").write_text(text, encoding="utf-8")

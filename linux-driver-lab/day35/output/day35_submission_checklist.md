@@ -1,7 +1,8 @@
-# day35 提交检查表
+# Day35 提交检查单
 
-- [ ] W4/W5 关键证据都已归档
-- [ ] 报告中每个结论都有对应证据路径
-- [ ] 已明确写出限制条件
-- [ ] 已明确写出风险和回滚办法
-- [ ] README/START_HERE 可指导别人复现
+- [ ] `output/day35_final_report.md` 已生成
+- [ ] `output/day35_evidence_index.md` 已生成
+- [ ] `output/day35_metrics_summary.csv` 已生成
+- [ ] `output/day35_risk_register.md` 已生成
+- [ ] 报告中明确标出 Day33 为开放风险
+- [ ] 报告中明确标出 Day34 为稳定性回归通过点

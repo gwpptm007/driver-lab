@@ -1,4 +1,10 @@
-path,mode,payload_bytes,iterations,warmup,p50_us,p99_us,throughput_mbps,cpu_user_pct,cpu_sys_pct,notes
-ioctl,baseline,4096,10000,1000,,,,,,
-mmap,baseline,4096,10000,1000,,,,,,
-dma,baseline,4096,10000,1000,,,,,,
+mode,payload_bytes,iterations,warmup,success_ops,failed_ops,success_rate,avg_us,p50_us,p95_us,p99_us,min_us,max_us,throughput_mbps,cpu_user_pct,cpu_sys_pct,notes
+ioctl,0,1000,100,,,,,,,,,,,,control path baseline
+mmap,64,1000,100,,,,,,,,,,,,userspace mapped buffer copy+compare
+mmap,256,1000,100,,,,,,,,,,,,userspace mapped buffer copy+compare
+mmap,1024,1000,100,,,,,,,,,,,,userspace mapped buffer copy+compare
+mmap,2048,1000,100,,,,,,,,,,,,userspace mapped buffer copy+compare
+dma,64,1000,100,,,,,,,,,,,,EDU DMA round-trip + userspace compare
+dma,256,1000,100,,,,,,,,,,,,EDU DMA round-trip + userspace compare
+dma,1024,1000,100,,,,,,,,,,,,EDU DMA round-trip + userspace compare
+dma,2048,1000,100,,,,,,,,,,,,EDU DMA round-trip + userspace compare

@@ -1,0 +1,19 @@
+[    1.723897] day30_edu_mmap 0000:00:02.0: mmap ok: len=4096 pgoff=0 dma=0x42ad7000
+[    1.724289] day30_edu_mmap 0000:00:02.0: run_dma start: len=256 seed=0x41 src_dma=0x42ad7000 dst_dma=0x42ad7800
+[    1.824539] day30_edu_mmap 0000:00:02.0: irq handler: irq=50 status=0x00000100 count=1
+[    1.935682] day30_edu_mmap 0000:00:02.0: irq handler: irq=50 status=0x00000100 count=2
+[    1.935917] day30_edu_mmap 0000:00:02.0: run_dma ok: len=256 seed=0x41 irq_delta=2
+verify_len=256
+verify_seed=0x41
+verify_ok=1
+mismatch_index=-1
+mismatch_expected=0x00
+mismatch_actual=0x00
+run_ok=1
+run_error=0
+irq_delta=2
+last_dma_cmd=0x00000007
+mmap_ok=1
+mmap_error=0
+mmap_len=4096
+mmap_pgoff=0

@@ -1,0 +1,2 @@
+[    1.717727] day30_edu_mmap 0000:00:02.0: mmap rejected: pgoff=1 expected=0
+expected failure: invalid offset rejected, page_off=1 errno=22(Invalid argument)

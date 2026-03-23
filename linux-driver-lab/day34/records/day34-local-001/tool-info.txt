@@ -1,0 +1,12 @@
+tool_api_version=1
+vendor_id=0x1234
+device_id=0x11e8
+irq_vector=50
+irq_count=0
+dma_handle=0x42a47000
+dma_bytes=4096
+dma_mask_bits=32
+map_bytes=4096
+src_off=0
+dst_off=2048
+max_verify_len=2048

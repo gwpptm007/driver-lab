@@ -1,0 +1,262 @@
+# Day35 证据索引
+
+## Day29
+
+- run id: `day29-local-001`
+- records path: `day29/records/day29-local-001`
+- run-summary 摘要：
+  - run id: day29-local-001
+  - edu device visible: yes
+  - probe logged: yes
+  - dma_alloc_coherent logged: yes
+  - verify ok: yes
+  - guest flow complete: yes
+  - oops/dma-error/hung/panic found: no
+- `verify-result.txt` 关键字段：
+  - verify_ok=1
+  - irq_delta=2
+
+## Day30
+
+- run id: `day30-local-001`
+- records path: `day30/records/day30-local-001`
+- run-summary 摘要：
+  - run id: day30-local-001
+  - edu device visible: yes
+  - probe logged: yes
+  - dma_alloc_coherent logged: yes
+  - user mmap verify ok: yes
+  - driver run ok: yes
+  - invalid mmap len rejected: no
+  - invalid mmap offset rejected: yes
+  - guest flow complete: yes
+  - oops/dma-error/hung/panic found: no
+- `mmap-verify.txt` 关键字段：
+  - verify_ok=1
+  - run_ok=1
+  - run_error=0
+  - irq_delta=2
+  - mmap_ok=1
+  - mmap_error=0
+- `run-result.txt` 关键字段：
+  - run_ok=1
+  - run_error=0
+  - irq_delta=2
+  - mmap_ok=1
+  - mmap_error=0
+
+## Day31
+
+- run id: `day31-local-001`
+- records path: `day31/records/day31-local-001`
+- run-summary 摘要：
+  - run id: day31-local-001
+  - edu device visible: yes
+  - probe logged: yes
+  - dma_alloc_coherent logged: yes
+  - mmap verify ok: yes
+  - bench ioctl present: yes
+  - bench mmap present: yes
+  - bench dma present: yes
+  - bench dma partial: no
+  - bench dma marker started: yes
+  - bench dma marker ended: yes
+  - bench all requested: 0
+  - bench all present: no
+  - guest flow complete: yes
+  - qemu timeout hit: no
+  - oops/dma-error/hung/panic found: no
+- `mmap-verify.txt` 关键字段：
+  - verify_ok=1
+  - run_ok=1
+  - run_error=0
+  - irq_delta=2
+  - mmap_ok=1
+  - mmap_error=0
+- `run-result.txt` 关键字段：
+  - run_ok=1
+  - run_error=0
+  - irq_delta=2
+  - mmap_ok=1
+  - mmap_error=0
+- `bench-ioctl.txt` 关键字段：
+  - success_ops=200
+  - failed_ops=0
+  - avg_us=15.942
+  - p99_us=23.616
+  - throughput_mbps=0.000
+- `bench-mmap.txt` 关键字段：
+  - success_ops=200
+  - failed_ops=0
+  - avg_us=0.557
+  - p99_us=0.752
+  - throughput_mbps=886.949
+- `bench-dma.txt` 关键字段：
+  - success_ops=200
+  - failed_ops=0
+  - avg_us=200222.804
+  - p99_us=208327.968
+  - throughput_mbps=0.009
+
+## Day32
+
+- run id: `day32-local-001`
+- records path: `day32/records/day32-local-001`
+- run-summary 摘要：
+  - run id: day32-local-001
+  - edu device visible: yes
+  - probe logged: yes
+  - dma_alloc_coherent logged: yes
+  - mmap verify ok: yes
+  - baseline bench present: yes
+  - optimized bench present: yes
+  - compare mmap present: yes
+  - ioctl bench present: yes
+  - dma lite bench present: yes
+  - host perf baseline present: no
+  - host perf optimized present: no
+  - guest flow complete: yes
+  - qemu timeout hit: no
+  - oops/dma-error/hung/panic found: no
+  - baseline avg_us: 283.590
+  - optimized avg_us: 0.892
+  - avg latency gain pct: 99.65
+  - baseline p99_us: 641.344
+  - optimized p99_us: 0.912
+  - p99 latency gain pct: 99.85
+  - baseline throughput_mbps: 6.585
+  - optimized throughput_mbps: 1575.094
+  - throughput gain pct: 24826.37
+- `mmap-verify.txt` 关键字段：
+  - verify_ok=1
+  - run_ok=1
+  - run_error=0
+  - irq_delta=2
+  - mmap_ok=1
+  - mmap_error=0
+- `run-result.txt` 关键字段：
+  - run_ok=1
+  - run_error=0
+  - irq_delta=2
+  - mmap_ok=1
+  - mmap_error=0
+- `bench-ioctl.txt` 关键字段：
+  - success_ops=1000
+  - failed_ops=0
+  - avg_us=16.291
+  - p99_us=46.160
+  - throughput_mbps=0.000
+- `bench-mmap-baseline.txt` 关键字段：
+  - success_ops=1000
+  - failed_ops=0
+  - avg_us=283.590
+  - p99_us=641.344
+  - throughput_mbps=6.585
+- `bench-mmap-optimized.txt` 关键字段：
+  - success_ops=1000
+  - failed_ops=0
+  - avg_us=0.892
+  - p99_us=0.912
+  - throughput_mbps=1575.094
+- `compare-mmap.txt` 关键字段：
+  - avg_latency_gain_pct=99.65
+  - p99_latency_gain_pct=99.85
+  - throughput_gain_pct=24826.37
+- `bench-dma-lite.txt` 关键字段：
+  - success_ops=32
+  - failed_ops=0
+  - avg_us=201041.057
+  - p99_us=207965.824
+  - throughput_mbps=0.002
+
+## Day33
+
+- run id: `day33-local-001`
+- records path: `day33/records/day33-local-001`
+- run-summary 摘要：
+  - run id: day33-local-001
+  - edu device visible: yes
+  - probe logged: yes
+  - dma_alloc_coherent logged: yes
+  - mmap verify ok: yes
+  - trace config function_graph: yes
+  - trace setup failed marker: no
+  - trace window present: yes
+  - trace window skipped: no
+  - trace mentions day33_ioctl: yes
+  - trace mentions day33_do_run_dma: no
+  - trace mentions day33_wait_dma_idle: no
+  - trace mentions day33_irq_handler: yes
+  - guest flow complete: yes
+  - qemu timeout hit: no
+  - oops/dma-error/hung/panic found: no
+- `mmap-verify.txt` 关键字段：
+  - verify_ok=1
+  - run_ok=1
+  - run_error=0
+  - irq_delta=2
+  - mmap_ok=1
+  - mmap_error=0
+- `run-result.txt` 关键字段：
+  - run_ok=1
+  - run_error=0
+  - irq_delta=2
+  - mmap_ok=1
+  - mmap_error=0
+- `trace-config.txt` 关键字段：
+- `trace-window.txt` 关键字段：
+  - verify_ok=1
+  - run_ok=1
+  - run_error=0
+  - irq_delta=2
+  - mmap_ok=1
+  - mmap_error=0
+
+## Day34
+
+- run id: `day34-local-001`
+- records path: `day34/records/day34-local-001`
+- run-summary 摘要：
+  - run id: day34-local-001
+  - lspci available in guest: yes
+  - edu device visible: yes
+  - probe logged: yes
+  - dma_alloc_coherent logged: yes
+  - mmap verify ok: yes
+  - concurrent stress present: yes
+  - concurrent stress ok: yes
+  - module loop present: yes
+  - module loop ok: yes
+  - fault invalid len ok: yes
+  - fault mmap offset ok: yes
+  - guest flow complete: yes
+  - qemu timeout hit: no
+  - oops/dma-error/hung/panic found: no
+- `mmap-verify.txt` 关键字段：
+  - mmap_ok=1
+  - run_ok=1
+  - run_error=0
+  - irq_delta=2
+  - verify_ok=1
+- `run-result.txt` 关键字段：
+  - run_ok=0
+  - run_error=0
+  - irq_delta=0
+  - mmap_ok=0
+  - mmap_error=-22
+- `concurrent-stress.txt` 关键字段：
+  - success_ops=200
+  - failed_ops=0
+  - worker_ioctl_rc=0
+  - worker_fail=0
+- `module-loop.txt` 关键字段：
+  - requested_loops=1000
+  - completed_loops=1000
+  - failed_loops=0
+- `fault-invalid-len.txt` 关键字段：
+  - expected_failure=1
+  - errno=22
+- `fault-mmap-offset.txt` 关键字段：
+  - expected_failure=1
+  - errno=22
+

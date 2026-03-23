@@ -1,0 +1,19 @@
+[    0.000000] Kernel command line: console=ttyAMA0 rdinit=/init day29_verify_len=256 day29_verify_seed=0x41
+[    0.000000] Unknown kernel command line parameters "day29_verify_len=256 day29_verify_seed=0x41", will be passed to user space.
+[    0.357114] pci 0000:00:02.0: [1234:11e8] type 00 class 0x00ff00
+[    0.516819]     day29_verify_len=256
+[    0.516826]     day29_verify_seed=0x41
+[    0.674705] day29_edu_dma: loading out-of-tree module taints kernel.
+[    0.680787] day29_edu_dma 0000:00:02.0: probe enter: 1234:11e8
+[    0.681465] day29_edu_dma 0000:00:02.0: enabling device (0000 -> 0002)
+[    0.681955] day29_edu_dma 0000:00:02.0: dma mask set to 32 bits
+[    0.682330] day29_edu_dma 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[    0.682576] day29_edu_dma 0000:00:02.0: ident=0x010000ed liveness=0x00000000
+[    0.682932] day29_edu_dma 0000:00:02.0: dma_alloc_coherent ok: virt=ffff4d7e02a42000 dma=0x42a42000 bytes=4096
+[    0.684614] day29_edu_dma 0000:00:02.0: MSI vector=50 enabled=1
+[    0.685108] day29_edu_dma 0000:00:02.0: probe success
+[    0.685699] day29_edu_dma: init ok
+[    1.720064] day29_edu_dma 0000:00:02.0: verify start: len=256 seed=0x41 src_dma=0x42a42000 dst_dma=0x42a42800
+[    1.823116] day29_edu_dma 0000:00:02.0: irq handler: irq=50 status=0x00000100 count=1
+[    1.926846] day29_edu_dma 0000:00:02.0: irq handler: irq=50 status=0x00000100 count=2
+[    1.927084] day29_edu_dma 0000:00:02.0: verify ok: len=256 seed=0x41 irq_delta=2

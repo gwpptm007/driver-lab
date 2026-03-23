@@ -1,0 +1,4 @@
+expected_failure=1
+unexpected_success=0
+errno=22
+error_text=Invalid argument

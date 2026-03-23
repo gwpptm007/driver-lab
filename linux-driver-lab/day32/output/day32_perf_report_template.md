@@ -1,25 +1,31 @@
-# day32 perf 报告模板
+# Day32 perf 报告模板
 
 ## workload
-- 命令：
-- 样本时长：
-- 数据量：
+- profile mode:
+- len:
+- iterations:
+- warmup:
 
-## 热点函数
+## baseline 热点
 1. 函数名：
    - 占比：
-   - 所在模块：
+   - 现象解释：
+
+## optimized 热点
+1. 函数名：
+   - 占比：
    - 现象解释：
 
 ## 选择的优化点
-- 背景：
-- 修改：
-- 原因：
+- baseline 行为：
+- optimized 行为：
+- 为什么这是热点：
 
-## 优化前后对比
-- 指标 1：
-- 指标 2：
-- 指标 3：
+## timing 对比
+- baseline avg_us:
+- optimized avg_us:
+- avg latency gain:
+- throughput gain:
 
 ## 结论
 - 是否值得保留：

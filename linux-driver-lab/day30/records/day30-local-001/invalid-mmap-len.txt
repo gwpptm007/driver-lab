@@ -1,0 +1,2 @@
+[    1.710621] day30_edu_mmap 0000:00:02.0: mmap ok: len=4096 pgoff=0 dma=0x42ad7000
+unexpected success: invalid length 2048 should be rejected

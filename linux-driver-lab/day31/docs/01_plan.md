@@ -1,38 +1,81 @@
 # day31 详细计划
 
 ## 1. 今日主题
-bench：吞吐/延迟/CPU 占用
+
+bench：吞吐 / 延迟 / CPU 占用
 
 ## 2. 核心目标
-做最小 bench，输出吞吐、延迟、p50/p99 和 CPU 占用，形成可比较的报表。
+
+基于 day30 已经跑通的 coherent DMA + `mmap` 主链路，完成一版最小 bench，输出：
+
+- `ioctl` 控制路径基线
+- `mmap` 用户态路径
+- `DMA` 端到端路径
+- 延迟分位数
+- 吞吐
+- CPU 占用
 
 ## 3. 今日最小闭环
-- 输入：前置环境、设备后端、源码目录、guest 工具
-- 过程：实施步骤、观察日志、校验行为
-- 输出：原始证据、阶段结论、下一步输入
 
-## 4. 实施步骤展开
+### 输入
 
-### 1. 步骤 1
-定义测试模式：ioctl、mmap、DMA 三条路径至少选两条。
+- QEMU EDU 设备
+- arm64 guest 工具链
+- day31 独立驱动与 guest bench 工具
 
-### 2. 步骤 2
-设计样本量、预热轮次和统计字段。
+### 过程
 
-### 3. 步骤 3
-输出 CSV/Markdown 报表。
+1. 加载 `day31_edu_bench.ko`
+2. 完成一次 `mmap-verify`，确认功能基线仍然成立
+3. 依次执行 `bench-ioctl / bench-mmap / bench-dma`
+4. 运行 `bench-all`，产出多负载结果
+5. 归档 serial、bench 输出、driver dmesg、run summary
 
-### 4. 步骤 4
-注明测试环境和限制条件。
+### 输出
 
+- `records/<RUN_ID>/bench-ioctl.txt`
+- `records/<RUN_ID>/bench-mmap.txt`
+- `records/<RUN_ID>/bench-dma.txt`
+- `records/<RUN_ID>/bench-all.txt`
+- `records/<RUN_ID>/run-summary.md`
+- `output/day31_bench_report_template.csv`
 
-## 5. 建议当天保留的证据
-- 命令原文
-- 关键日志
-- 错误样本
-- 最终结论
+## 4. Day31 三条路径的真实含义
 
-## 6. 当天结束前自查
-- 主链路是否完成
-- 异常路径是否至少验证一条
-- `records/` 是否可供别人复盘
+### 4.1 ioctl path
+
+- 被测动作：`DAY31_IOC_GET_INFO`
+- 用途：提供“单次控制路径”的最轻基线
+- 价值：帮助判断 DMA 路径里，纯 syscall / ioctl 成本占了多大比例
+
+### 4.2 mmap path
+
+- 被测动作：用户态在映射区执行 `fill + clear + memcpy + memcmp`
+- 用途：观察用户态直接访问 coherent buffer 的成本
+- 价值：和 DMA 路径对比时，可以看出“设备参与”本身的开销
+
+### 4.3 dma path
+
+- 被测动作：用户态填 src、清 dst，驱动执行两段 DMA，然后用户态 compare
+- 用途：观察最接近真实设备参与的数据路径的表现
+- 价值：Day31 的主角路径
+
+## 5. 建议统计口径
+
+- `warmup = 20`
+- `iterations = 200`
+- `payload_bytes = 64 / 256 / 1024 / 2048`
+
+输出至少包含：
+
+- `min / avg / p50 / p95 / p99 / max`
+- `throughput_mbps`
+- `cpu_user_pct / cpu_sys_pct`
+- `success_rate`
+
+## 6. 今日结束前自查
+
+- `mmap-verify` 是否仍能通过
+- 至少一条 `bench-all` 结果是否已经生成
+- `records/` 是否包含 raw serial 与 raw bench 输出
+- 文档是否写清楚统计口径和限制条件

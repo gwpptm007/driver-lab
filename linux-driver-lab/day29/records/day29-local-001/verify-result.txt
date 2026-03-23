@@ -1,0 +1,9 @@
+verify_len=256
+verify_seed=0x41
+verify_ok=1
+verify_error=0
+mismatch_index=-1
+mismatch_expected=0x00
+mismatch_actual=0x00
+irq_delta=2
+last_dma_cmd=0x00000007

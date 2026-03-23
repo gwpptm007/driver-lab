@@ -4,35 +4,45 @@
 perf：热点采集与一个优化点
 
 ## 2. 核心目标
-用 `perf record/report` 找到热点，完成一个具体优化点，并给出前后对比。
 
-## 3. 今日最小闭环
-- 输入：前置环境、设备后端、源码目录、guest 工具
-- 过程：实施步骤、观察日志、校验行为
-- 输出：原始证据、阶段结论、下一步输入
+围绕 day31 已通过的 mmap 主链路，完成：
 
-## 4. 实施步骤展开
+- baseline workload
+- optimized workload
+- perf 采集入口
+- 前后对比摘要
 
-### 1. 步骤 1
-确定热点采集命令与 workload。
+## 3. 选择的优化点
 
-### 2. 步骤 2
-输出热点函数列表和调用占比。
+Day32 不直接去优化 QEMU EDU 的 DMA 仿真，而是先优化**用户态 mmap bench 自身的热循环**。
 
-### 3. 步骤 3
-实施一个最小优化，例如减少锁竞争、批处理、减少拷贝。
+### baseline
+每轮循环都做：
 
-### 4. 步骤 4
-回收优化前后数据并对比。
+1. `GET_INFO`
+2. `mmap`
+3. 数据准备与 compare
+4. `munmap`
 
+### optimized
+在循环外一次性完成：
 
-## 5. 建议当天保留的证据
-- 命令原文
-- 关键日志
-- 错误样本
-- 最终结论
+1. `GET_INFO`
+2. `mmap`
 
-## 6. 当天结束前自查
-- 主链路是否完成
-- 异常路径是否至少验证一条
-- `records/` 是否可供别人复盘
+循环内只做：
+
+1. 数据准备
+2. `memcpy/memcmp`
+
+## 4. 为什么先做这个点
+
+- 容易被 perf 捕捉
+- 不依赖更深的硬件仿真优化
+- 修改小，结论容易讲清楚
+
+## 5. 当天最小闭环
+
+- `make run` 产出 baseline/optimized/compare 结果
+- `make perf-baseline` / `make perf-optimized` 产出宿主 perf 原始输出
+- `make compare-perf` 生成摘要

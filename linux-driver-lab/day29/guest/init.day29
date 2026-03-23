@@ -1,0 +1,76 @@
+#!/bin/sh
+set -eu
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export PATH
+
+echo "===DAY29:BOOT==="
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+
+VERIFY_LEN="$(sed -n 's/.*day29_verify_len=\([^ ]*\).*/\1/p' /proc/cmdline | head -n1)"
+VERIFY_SEED="$(sed -n 's/.*day29_verify_seed=\([^ ]*\).*/\1/p' /proc/cmdline | head -n1)"
+[ -n "$VERIFY_LEN" ] || VERIFY_LEN=256
+[ -n "$VERIFY_SEED" ] || VERIFY_SEED=0x41
+# Day29 自动化不再依赖 guest 运行时模块参数传 dma_mask_bits。
+# 该值已经在驱动里收口为默认 32，并与宿主侧 QEMU edu,dma_mask=0xffffffff 配套。
+echo "[day29-guest] verify_len=${VERIFY_LEN} verify_seed=${VERIFY_SEED} module_default_dma_mask_bits=32"
+
+echo "===DAY29:LSPCI_NN:BEGIN==="
+/bin/lspci -nn || true
+echo "===DAY29:LSPCI_NN:END==="
+
+echo "===DAY29:LSPCI_VV_NN:BEGIN==="
+/bin/lspci -vv -nn || true
+echo "===DAY29:LSPCI_VV_NN:END==="
+
+# 这里不再传 dma_mask_bits=...，避免现场出现“参数最终被解析为空值”
+# 导致模块加载失败。Day29 自动化统一走驱动默认值 32-bit。
+insmod /root/day29_edu_dma.ko
+sleep 1
+
+if [ ! -e /dev/day29_edu0 ] && [ -r /sys/class/day29_edu/day29_edu0/dev ]; then
+    major_minor="$(cat /sys/class/day29_edu/day29_edu0/dev)"
+    major="${major_minor%:*}"
+    minor="${major_minor#*:}"
+    mknod /dev/day29_edu0 c "$major" "$minor"
+fi
+
+if [ ! -e /dev/day29_edu0 ]; then
+    echo "[day29-guest][ERROR] /dev/day29_edu0 not found"
+    echo "[day29-guest][ERROR] 模块未成功创建设备节点，打印 dmesg 后退出。"
+    dmesg || true
+    poweroff -f || reboot -f || exec sh
+fi
+
+echo "===DAY29:TOOL_INFO:BEGIN==="
+/bin/day29_edu_dma_tool /dev/day29_edu0 info || true
+echo "===DAY29:TOOL_INFO:END==="
+
+echo "===DAY29:DEVICE_STATE_BEFORE:BEGIN==="
+cat /dev/day29_edu0 || true
+echo "===DAY29:DEVICE_STATE_BEFORE:END==="
+
+echo "===DAY29:DMA_VERIFY:BEGIN==="
+/bin/day29_edu_dma_tool /dev/day29_edu0 verify "$VERIFY_LEN" "$VERIFY_SEED" || true
+echo "===DAY29:DMA_VERIFY:END==="
+
+echo "===DAY29:VERIFY_RESULT:BEGIN==="
+/bin/day29_edu_dma_tool /dev/day29_edu0 result || true
+echo "===DAY29:VERIFY_RESULT:END==="
+
+echo "===DAY29:DEVICE_STATE_AFTER:BEGIN==="
+cat /dev/day29_edu0 || true
+echo "===DAY29:DEVICE_STATE_AFTER:END==="
+
+echo "===DAY29:PROC_INTERRUPTS_AFTER:BEGIN==="
+cat /proc/interrupts || true
+echo "===DAY29:PROC_INTERRUPTS_AFTER:END==="
+
+echo "===DAY29:DMESG_DRIVER:BEGIN==="
+dmesg | grep -E 'day29_edu_dma|1234:11e8|irq handler|dma_alloc_coherent|verify' || dmesg || true
+echo "===DAY29:DMESG_DRIVER:END==="
+
+echo "===DAY29:COMPLETE==="
+poweroff -f || reboot -f || exec sh

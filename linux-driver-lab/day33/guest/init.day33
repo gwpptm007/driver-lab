@@ -1,0 +1,176 @@
+#!/bin/sh
+set -eu
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export PATH
+
+echo "===DAY33:BOOT==="
+# Day33 需要同时准备 sysfs / debugfs / tracefs 三类入口。
+# 其中 trace 相关节点在不同内核/配置里可能落在：
+# 1) /sys/kernel/tracing
+# 2) /sys/kernel/debug/tracing
+# 因此这里不假设某一个路径一定存在，而是先尽量挂载两边，再动态探测。
+mkdir -p /proc /sys /dev /sys/kernel/debug /sys/kernel/tracing
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+mount -t debugfs none /sys/kernel/debug 2>/dev/null || true
+mount -t tracefs nodev /sys/kernel/tracing 2>/dev/null || true
+
+get_cmdline_value() {
+    key="$1"
+    for token in $(cat /proc/cmdline); do
+        case "$token" in
+            "$key"=*)
+                echo "${token#*=}"
+                return 0
+                ;;
+        esac
+    done
+    return 1
+}
+
+get_tracefs_root() {
+    # 以 available_tracers 是否存在作为“这个 tracing 根目录真的可用”的判断依据。
+    # 只看目录是否存在不够，因为某些环境目录在，但并没有真正挂上 tracefs。
+    if [ -e /sys/kernel/tracing/available_tracers ]; then
+        echo /sys/kernel/tracing
+        return 0
+    fi
+    if [ -e /sys/kernel/debug/tracing/available_tracers ]; then
+        echo /sys/kernel/debug/tracing
+        return 0
+    fi
+    return 1
+}
+
+VERIFY_LEN="$(get_cmdline_value day33_verify_len || true)"
+VERIFY_SEED="$(get_cmdline_value day33_verify_seed || true)"
+TRACE_LEN="$(get_cmdline_value day33_trace_len || true)"
+TRACE_SEED="$(get_cmdline_value day33_trace_seed || true)"
+TRACE_WORKLOAD="$(get_cmdline_value day33_trace_workload || true)"
+TRACE_DMA_ITER="$(get_cmdline_value day33_trace_dma_iter || true)"
+TRACE_DMA_WARMUP="$(get_cmdline_value day33_trace_dma_warmup || true)"
+[ -n "$VERIFY_LEN" ] || VERIFY_LEN=256
+[ -n "$VERIFY_SEED" ] || VERIFY_SEED=0x41
+[ -n "$TRACE_LEN" ] || TRACE_LEN=64
+[ -n "$TRACE_SEED" ] || TRACE_SEED=0x55
+[ -n "$TRACE_WORKLOAD" ] || TRACE_WORKLOAD=verify
+[ -n "$TRACE_DMA_ITER" ] || TRACE_DMA_ITER=2
+[ -n "$TRACE_DMA_WARMUP" ] || TRACE_DMA_WARMUP=0
+
+echo "[day33-guest] verify_len=${VERIFY_LEN} verify_seed=${VERIFY_SEED} trace_len=${TRACE_LEN} trace_seed=${TRACE_SEED} trace_workload=${TRACE_WORKLOAD} trace_dma_iter=${TRACE_DMA_ITER}"
+
+echo "===DAY33:LSPCI_NN:BEGIN==="
+/bin/lspci -nn || true
+echo "===DAY33:LSPCI_NN:END==="
+
+echo "===DAY33:LSPCI_VV_NN:BEGIN==="
+/bin/lspci -vv -nn || true
+echo "===DAY33:LSPCI_VV_NN:END==="
+
+insmod /root/day33_edu_trace.ko
+sleep 1
+
+if [ ! -e /dev/day33_edu0 ] && [ -r /sys/class/day33_edu/day33_edu0/dev ]; then
+    major_minor="$(cat /sys/class/day33_edu/day33_edu0/dev)"
+    major="${major_minor%:*}"
+    minor="${major_minor#*:}"
+    mknod /dev/day33_edu0 c "$major" "$minor"
+fi
+
+if [ ! -e /dev/day33_edu0 ]; then
+    echo "[day33-guest][ERROR] /dev/day33_edu0 not found"
+    dmesg || true
+    echo "===DAY33:ABORT:device-node-missing==="
+    poweroff -f || reboot -f || exec sh
+fi
+
+echo "===DAY33:TOOL_INFO:BEGIN==="
+/bin/day33_edu_trace_tool /dev/day33_edu0 info || true
+echo "===DAY33:TOOL_INFO:END==="
+
+echo "===DAY33:MMAP_VERIFY:BEGIN==="
+/bin/day33_edu_trace_tool /dev/day33_edu0 mmap-verify "$VERIFY_LEN" "$VERIFY_SEED" || true
+echo "===DAY33:MMAP_VERIFY:END==="
+
+TRACEFS="$(get_tracefs_root || true)"
+# TRACE_SETUP_OK=0 不再代表“驱动失败”，只代表“trace 环境未就绪”。
+# 这种情况下 Day33 当前轮不能算通过，但也不应该让 /init 直接 panic。
+TRACE_SETUP_OK=1
+
+echo "===DAY33:TRACE_CONFIG:BEGIN==="
+if [ -z "$TRACEFS" ]; then
+    TRACE_SETUP_OK=0
+    echo "tracefs=unavailable"
+    echo "trace_setup_failed=tracefs-not-found"
+else
+    echo "tracefs=${TRACEFS}"
+    # 这里按“先停 tracing -> 清 tracer -> 清 graph filter -> 清 trace -> 再切 tracer”
+    # 的顺序配置，尽量减少上轮残留状态对本轮的污染。
+    if ! echo 0 > "$TRACEFS/tracing_on" 2>/dev/null; then
+        TRACE_SETUP_OK=0
+        echo "trace_setup_failed=write-tracing_on"
+    elif ! echo nop > "$TRACEFS/current_tracer" 2>/dev/null; then
+        TRACE_SETUP_OK=0
+        echo "trace_setup_failed=write-current_tracer-nop"
+    elif ! : > "$TRACEFS/set_graph_function" 2>/dev/null; then
+        TRACE_SETUP_OK=0
+        echo "trace_setup_failed=clear-set_graph_function"
+    elif ! : > "$TRACEFS/trace" 2>/dev/null; then
+        TRACE_SETUP_OK=0
+        echo "trace_setup_failed=clear-trace"
+    elif ! echo function_graph > "$TRACEFS/current_tracer" 2>/dev/null; then
+        TRACE_SETUP_OK=0
+        echo "trace_setup_failed=enable-function_graph"
+    else
+        for fn in day33_ioctl day33_do_run_dma day33_program_dma day33_wait_dma_idle day33_irq_handler; do
+            echo "$fn" >> "$TRACEFS/set_graph_function" 2>/dev/null || true
+            echo "graph_function=$fn"
+        done
+        cat "$TRACEFS/current_tracer" 2>/dev/null || true
+    fi
+fi
+echo "===DAY33:TRACE_CONFIG:END==="
+
+if [ "$TRACE_SETUP_OK" -eq 1 ]; then
+    echo "===DAY33:TRACE_WINDOW:BEGIN==="
+    echo 0 > "$TRACEFS/tracing_on" 2>/dev/null || true
+    : > "$TRACEFS/trace" 2>/dev/null || true
+    echo 1 > "$TRACEFS/tracing_on" 2>/dev/null || true
+    if [ "$TRACE_WORKLOAD" = "dma" ]; then
+        /bin/day33_edu_trace_tool /dev/day33_edu0 bench-dma "$TRACE_LEN" "$TRACE_DMA_ITER" "$TRACE_DMA_WARMUP" "$TRACE_SEED" || true
+    else
+        /bin/day33_edu_trace_tool /dev/day33_edu0 mmap-verify "$TRACE_LEN" "$TRACE_SEED" || true
+    fi
+    echo 0 > "$TRACEFS/tracing_on" 2>/dev/null || true
+    cat "$TRACEFS/trace" 2>/dev/null || true
+    echo "===DAY33:TRACE_WINDOW:END==="
+else
+    echo "===DAY33:TRACE_WINDOW:BEGIN==="
+    echo "trace_window_skipped=trace_setup_failed"
+    echo "===DAY33:TRACE_WINDOW:END==="
+fi
+
+echo "===DAY33:RUN_RESULT:BEGIN==="
+/bin/day33_edu_trace_tool /dev/day33_edu0 result || true
+echo "===DAY33:RUN_RESULT:END==="
+
+echo "===DAY33:DEVICE_STATE_AFTER:BEGIN==="
+cat /dev/day33_edu0 || true
+echo "===DAY33:DEVICE_STATE_AFTER:END==="
+
+echo "===DAY33:PROC_INTERRUPTS_AFTER:BEGIN==="
+cat /proc/interrupts || true
+echo "===DAY33:PROC_INTERRUPTS_AFTER:END==="
+
+echo "===DAY33:DMESG_DRIVER:BEGIN==="
+dmesg | grep -E 'day33_edu_trace|1234:11e8|dma_alloc_coherent|mmap rejected|mmap ok|probe success|run_dma|trace' || dmesg || true
+echo "===DAY33:DMESG_DRIVER:END==="
+
+if [ "$TRACE_SETUP_OK" -eq 1 ]; then
+    echo "===DAY33:COMPLETE==="
+else
+    echo "===DAY33:COMPLETE_WITH_TRACE_SETUP_FAILED==="
+fi
+poweroff -f || reboot -f || exec sh

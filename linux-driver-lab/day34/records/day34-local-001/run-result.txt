@@ -1,0 +1,14 @@
+total_run_calls=0
+total_run_ok=0
+total_run_fail=0
+last_run_ns=0
+run_len=0
+run_seed=0x0
+run_ok=0
+run_error=0
+irq_delta=0
+last_dma_cmd=0x0
+mmap_ok=0
+mmap_error=-22
+mmap_len=4096
+mmap_pgoff=1

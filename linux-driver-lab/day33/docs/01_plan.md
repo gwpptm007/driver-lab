@@ -1,38 +1,41 @@
 # day33 详细计划
 
 ## 1. 今日主题
-ftrace function_graph 关键路径解释
+
+ftrace `function_graph` 关键路径解释。
 
 ## 2. 核心目标
-采集关键路径的 function_graph 窗口，解释主要耗时函数并沉淀截图/文本证据。
 
-## 3. 今日最小闭环
-- 输入：前置环境、设备后端、源码目录、guest 工具
-- 过程：实施步骤、观察日志、校验行为
-- 输出：原始证据、阶段结论、下一步输入
+围绕一条固定 workload 采集 `function_graph`，并回答三个问题：
 
-## 4. 实施步骤展开
+1. 这条 workload 真实经过了哪些关键函数？
+2. 哪一段调用最耗时？
+3. 这些耗时是否与 day31/day32 的 bench 结论互相印证？
 
-### 1. 步骤 1
-确定关键路径，例如 ioctl -> DMA 提交 -> 中断完成。
+## 3. 为什么默认 workload 选 `mmap-verify`
 
-### 2. 步骤 2
-设置 function_graph 的 filter 与 trace 窗口。
+相比大规模 `bench-dma`，`mmap-verify` 有几个明显优势：
 
-### 3. 步骤 3
-导出 trace 文本或截图。
+- 一次执行就能覆盖 `RUN_DMA` 主链路
+- trace 更短，更适合人工阅读
+- 仍然能看到 `program_dma / wait_dma_idle / irq_handler` 这些关键函数
 
-### 4. 步骤 4
-解释主要耗时点与调用关系。
+## 4. 今日最小闭环
 
+- 输入：day32 已通过的 `mmap + dma` 代码基线
+- 过程：配置 tracefs -> 执行 workload -> 导出 trace -> 人工解释
+- 输出：`trace-window.txt` + `day33_trace_summary.md`
 
 ## 5. 建议当天保留的证据
-- 命令原文
-- 关键日志
-- 错误样本
-- 最终结论
+
+- guest 中的 tracing 配置原文
+- `mmap-verify` 原始输出
+- `trace-window.txt`
+- `run-result.txt`
+- `dmesg-driver.txt`
 
 ## 6. 当天结束前自查
+
 - 主链路是否完成
-- 异常路径是否至少验证一条
+- trace 是否真的命中了关键函数
 - `records/` 是否可供别人复盘

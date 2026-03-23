@@ -1,0 +1,18 @@
+[    0.355014] pci 0000:00:02.0: [1234:11e8] type 00 class 0x00ff00
+[    0.661193] day30_edu_mmap: loading out-of-tree module taints kernel.
+[    0.666914] day30_edu_mmap 0000:00:02.0: probe enter: 1234:11e8
+[    0.667348] day30_edu_mmap 0000:00:02.0: enabling device (0000 -> 0002)
+[    0.667825] day30_edu_mmap 0000:00:02.0: dma mask set to 32 bits
+[    0.668210] day30_edu_mmap 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[    0.668460] day30_edu_mmap 0000:00:02.0: ident=0x010000ed liveness=0x00000000
+[    0.668903] day30_edu_mmap 0000:00:02.0: dma_alloc_coherent ok: virt=ffff02ed42ad7000 dma=0x42ad7000 bytes=4096
+[    0.670608] day30_edu_mmap 0000:00:02.0: MSI vector=50 enabled=1
+[    0.671637] day30_edu_mmap 0000:00:02.0: probe success
+[    0.672025] day30_edu_mmap: init ok
+[    1.710621] day30_edu_mmap 0000:00:02.0: mmap ok: len=4096 pgoff=0 dma=0x42ad7000
+[    1.717727] day30_edu_mmap 0000:00:02.0: mmap rejected: pgoff=1 expected=0
+[    1.723897] day30_edu_mmap 0000:00:02.0: mmap ok: len=4096 pgoff=0 dma=0x42ad7000
+[    1.724289] day30_edu_mmap 0000:00:02.0: run_dma start: len=256 seed=0x41 src_dma=0x42ad7000 dst_dma=0x42ad7800
+[    1.824539] day30_edu_mmap 0000:00:02.0: irq handler: irq=50 status=0x00000100 count=1
+[    1.935682] day30_edu_mmap 0000:00:02.0: irq handler: irq=50 status=0x00000100 count=2
+[    1.935917] day30_edu_mmap 0000:00:02.0: run_dma ok: len=256 seed=0x41 irq_delta=2

@@ -1,0 +1,8 @@
+mmap_ok=1
+verify_len=64
+verify_seed=0x55
+run_ok=1
+run_error=0
+irq_delta=2
+verify_ok=1
+mismatch_index=-1

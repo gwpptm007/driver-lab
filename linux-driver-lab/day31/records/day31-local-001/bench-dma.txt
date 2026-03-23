@@ -1,0 +1,20 @@
+[    1.969946] day31_edu_bench 0000:00:02.0: mmap ok: len=4096 pgoff=0 dma=0x42a24000
+[   27.425006] random: fast init done
+mode=dma
+payload_bytes=256
+iterations=200
+warmup=20
+success_ops=200
+failed_ops=0
+success_rate=100.00
+wall_total_us=44054719.14
+avg_us=200222.804
+p50_us=199995.680
+p95_us=200369.536
+p99_us=208327.968
+min_us=199559.552
+max_us=208667.424
+throughput_mbps=0.009
+cpu_user_pct=0.000
+cpu_sys_pct=98.590
+csv,mode=dma,payload_bytes=256,iterations=200,warmup=20,success_ops=200,failed_ops=0,success_rate=100.00,avg_us=200222.804,p50_us=199995.680,p95_us=200369.536,p99_us=208327.968,min_us=199559.552,max_us=208667.424,throughput_mbps=0.009,cpu_user_pct=0.000,cpu_sys_pct=98.590

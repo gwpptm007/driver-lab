@@ -1,0 +1,178 @@
+#!/bin/sh
+set -u
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export PATH
+
+echo "===DAY34:BOOT==="
+mkdir -p /proc /sys /dev /sys/kernel/debug
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+mount -t debugfs none /sys/kernel/debug 2>/dev/null || true
+
+get_cmdline_value() {
+    key="$1"
+    for token in $(cat /proc/cmdline); do
+        case "$token" in
+            "$key"=*)
+                echo "${token#*=}"
+                return 0
+                ;;
+        esac
+    done
+    return 1
+}
+
+ensure_dev_node() {
+    if [ ! -e /dev/day34_edu0 ] && [ -r /sys/class/day34_edu/day34_edu0/dev ]; then
+        major_minor="$(cat /sys/class/day34_edu/day34_edu0/dev)"
+        major="${major_minor%:*}"
+        minor="${major_minor#*:}"
+        mknod /dev/day34_edu0 c "$major" "$minor" || true
+    fi
+}
+
+VERIFY_LEN="$(get_cmdline_value day34_verify_len || true)"
+VERIFY_SEED="$(get_cmdline_value day34_verify_seed || true)"
+CONCURRENCY_WORKERS="$(get_cmdline_value day34_concurrency_workers || true)"
+CONCURRENCY_ITERS="$(get_cmdline_value day34_concurrency_iters || true)"
+CONCURRENCY_LEN="$(get_cmdline_value day34_concurrency_len || true)"
+IOCTL_ITERS="$(get_cmdline_value day34_ioctl_iters || true)"
+MODULE_LOOPS="$(get_cmdline_value day34_module_loops || true)"
+FAULT_LEN="$(get_cmdline_value day34_fault_len || true)"
+FAULT_OFFSET_PGOFF="$(get_cmdline_value day34_fault_offset_pgoff || true)"
+[ -n "$VERIFY_LEN" ] || VERIFY_LEN=64
+[ -n "$VERIFY_SEED" ] || VERIFY_SEED=0x55
+[ -n "$CONCURRENCY_WORKERS" ] || CONCURRENCY_WORKERS=4
+[ -n "$CONCURRENCY_ITERS" ] || CONCURRENCY_ITERS=16
+[ -n "$CONCURRENCY_LEN" ] || CONCURRENCY_LEN=64
+[ -n "$IOCTL_ITERS" ] || IOCTL_ITERS=200
+[ -n "$MODULE_LOOPS" ] || MODULE_LOOPS=1000
+[ -n "$FAULT_LEN" ] || FAULT_LEN=4096
+[ -n "$FAULT_OFFSET_PGOFF" ] || FAULT_OFFSET_PGOFF=1
+
+/bin/lspci -nn >/dev/null 2>&1 || true
+
+echo "===DAY34:LSPCI_NN:BEGIN==="
+/bin/lspci -nn || true
+echo "===DAY34:LSPCI_NN:END==="
+
+echo "===DAY34:LSPCI_VV_NN:BEGIN==="
+/bin/lspci -vv -nn || true
+echo "===DAY34:LSPCI_VV_NN:END==="
+
+insmod /root/day34_edu_stability.ko
+sleep 1
+ensure_dev_node
+
+if [ ! -e /dev/day34_edu0 ]; then
+    echo "[day34-guest][ERROR] /dev/day34_edu0 not found"
+    dmesg || true
+    echo "===DAY34:ABORT:device-node-missing==="
+    poweroff -f || reboot -f || exec sh
+fi
+
+echo "===DAY34:TOOL_INFO:BEGIN==="
+/bin/day34_edu_stability_tool /dev/day34_edu0 info || true
+echo "===DAY34:TOOL_INFO:END==="
+
+echo "===DAY34:MMAP_VERIFY:BEGIN==="
+/bin/day34_edu_stability_tool /dev/day34_edu0 mmap-verify "$VERIFY_LEN" "$VERIFY_SEED" || true
+echo "===DAY34:MMAP_VERIFY:END==="
+
+echo "===DAY34:CONCURRENT_STRESS:BEGIN==="
+worker_fail=0
+worker_total=0
+# 默认 3 个 mmap worker + 1 个 ioctl worker；如果用户把 worker 数调小，则至少保留一个 ioctl worker。
+idx=1
+while [ "$idx" -lt "$CONCURRENCY_WORKERS" ]; do
+    /bin/day34_edu_stability_tool /dev/day34_edu0 stress-mmap "$CONCURRENCY_LEN" "$CONCURRENCY_ITERS" "$((0x100 + idx * 0x10))" > "/tmp/worker_${idx}.txt" 2>&1 &
+    eval "pid_${idx}=$!"
+    worker_total=$((worker_total + 1))
+    idx=$((idx + 1))
+done
+/bin/day34_edu_stability_tool /dev/day34_edu0 stress-ioctl "$IOCTL_ITERS" > /tmp/worker_ioctl.txt 2>&1 &
+pid_ioctl=$!
+worker_total=$((worker_total + 1))
+
+idx=1
+while [ "$idx" -lt "$CONCURRENCY_WORKERS" ]; do
+    eval "p=\$pid_${idx}"
+    if wait "$p"; then rc=0; else rc=$?; fi
+    echo "worker_${idx}_rc=${rc}"
+    cat "/tmp/worker_${idx}.txt" || true
+    [ "$rc" -eq 0 ] || worker_fail=$((worker_fail + 1))
+    idx=$((idx + 1))
+done
+if wait "$pid_ioctl"; then rc=0; else rc=$?; fi
+echo "worker_ioctl_rc=${rc}"
+cat /tmp/worker_ioctl.txt || true
+[ "$rc" -eq 0 ] || worker_fail=$((worker_fail + 1))
+echo "worker_total=${worker_total}"
+echo "worker_fail=${worker_fail}"
+echo "===DAY34:CONCURRENT_STRESS:END==="
+
+echo "===DAY34:MODULE_LOOP:BEGIN==="
+completed_loops=0
+failed_loops=0
+i=1
+# 模块循环是 day34 的核心稳定性检查之一：目标是验证 remove()/probe()
+# 资源释放与重新申请是否完全配对。若 rmmod/insmod 任何一步失败，就立即
+# 停止并把现场写进 records，避免后续 fault/result 因设备节点缺失而把根因冲淡。
+while [ "$i" -le "$MODULE_LOOPS" ]; do
+    rmmod day34_edu_stability >/tmp/day34_rmmod.txt 2>&1 || {
+        failed_loops=$((failed_loops + 1))
+        echo "loop_${i}_rmmod_failed=1"
+        cat /tmp/day34_rmmod.txt || true
+        break
+    }
+    insmod /root/day34_edu_stability.ko >/tmp/day34_insmod.txt 2>&1 || {
+        failed_loops=$((failed_loops + 1))
+        echo "loop_${i}_insmod_failed=1"
+        cat /tmp/day34_insmod.txt || true
+        break
+    }
+    ensure_dev_node
+    completed_loops=$((completed_loops + 1))
+    i=$((i + 1))
+done
+echo "requested_loops=${MODULE_LOOPS}"
+echo "completed_loops=${completed_loops}"
+echo "failed_loops=${failed_loops}"
+echo "===DAY34:MODULE_LOOP:END==="
+
+# Day34 的两条 fault 注入都放在 result 之前执行，目的是验证：
+# 1) 非法长度是否被 ioctl(RUN_DMA) 明确拒绝；
+# 2) 非法页偏移 mmap 是否被字符设备 mmap 明确拒绝。
+#
+# 因为 result 读取的是驱动里“最近一次操作”的结果快照，所以当前 records 中
+# 的 run-result.txt 反映的是最后一次 fault-mmap-offset 的状态，而不是整轮
+# 稳定性回归总览。整轮是否通过，要看 run-summary.md + concurrent/module/fault
+# 几组 records 一起判断。
+echo "===DAY34:FAULT_INVALID_LEN:BEGIN==="
+/bin/day34_edu_stability_tool /dev/day34_edu0 fault-invalid-len "$FAULT_LEN" "$VERIFY_SEED" || true
+echo "===DAY34:FAULT_INVALID_LEN:END==="
+
+echo "===DAY34:FAULT_MMAP_OFFSET:BEGIN==="
+/bin/day34_edu_stability_tool /dev/day34_edu0 fault-mmap-offset "$FAULT_OFFSET_PGOFF" || true
+echo "===DAY34:FAULT_MMAP_OFFSET:END==="
+
+echo "===DAY34:RUN_RESULT:BEGIN==="
+/bin/day34_edu_stability_tool /dev/day34_edu0 result || true
+echo "===DAY34:RUN_RESULT:END==="
+
+echo "===DAY34:DEVICE_STATE_AFTER:BEGIN==="
+cat /dev/day34_edu0 || true
+echo "===DAY34:DEVICE_STATE_AFTER:END==="
+
+echo "===DAY34:PROC_INTERRUPTS_AFTER:BEGIN==="
+cat /proc/interrupts || true
+echo "===DAY34:PROC_INTERRUPTS_AFTER:END==="
+
+echo "===DAY34:DMESG_DRIVER:BEGIN==="
+dmesg | grep -E 'day34_edu_stability|1234:11e8|dma_alloc_coherent|mmap rejected|probe success|DMA timeout|remove complete' || dmesg || true
+echo "===DAY34:DMESG_DRIVER:END==="
+
+echo "===DAY34:COMPLETE==="
+poweroff -f || reboot -f || exec sh

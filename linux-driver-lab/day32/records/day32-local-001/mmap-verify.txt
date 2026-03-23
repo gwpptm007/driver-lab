@@ -1,0 +1,16 @@
+[    1.787165] day32_edu_perf 0000:00:02.0: mmap ok: len=4096 pgoff=0 dma=0x42a48000
+verify_len=256
+verify_seed=0x41
+verify_ok=1
+mismatch_index=-1
+mismatch_expected=0x00
+mismatch_actual=0x00
+run_ok=1
+run_error=0
+irq_delta=2
+last_run_ns=206588592
+last_dma_cmd=0x00000007
+mmap_ok=1
+mmap_error=0
+mmap_len=4096
+mmap_pgoff=0

@@ -1,24 +1,13 @@
-# day31 bench 汇总模板
+# day31 bench summary
 
-## 测试环境
-- guest 内核：
-- machine：
-- vCPU：
-- 内存：
-- 设备后端：
+## 建议填写方式
 
-## 测试路径
-- ioctl
-- mmap
-- dma
+1. 先把 `records/<RUN_ID>/bench-all.txt` 中的 `csv,` 行整理到 CSV 模板里
+2. 再把关键观察写在这里
 
-## 关键结果
-- p50：
-- p99：
-- 吞吐：
-- CPU 占用：
+## 建议至少回答的问题
 
-## 初步结论
-- 哪条路径更适合小包？
-- 哪条路径更适合大包？
-- 哪些数据仍需复核？
+- `ioctl / mmap / dma` 三条路径谁最轻、谁最重
+- payload 从 64B 增长到 2048B 时，延迟和吞吐的趋势如何
+- `cpu_user_pct / cpu_sys_pct` 是否揭示了零拷贝带来的价值
+- `p99` 与 `avg` 的差距是否明显，是否存在抖动

@@ -1,0 +1,5 @@
+[    1.720064] day29_edu_dma 0000:00:02.0: verify start: len=256 seed=0x41 src_dma=0x42a42000 dst_dma=0x42a42800
+[    1.823116] day29_edu_dma 0000:00:02.0: irq handler: irq=50 status=0x00000100 count=1
+[    1.926846] day29_edu_dma 0000:00:02.0: irq handler: irq=50 status=0x00000100 count=2
+[    1.927084] day29_edu_dma 0000:00:02.0: verify ok: len=256 seed=0x41 irq_delta=2
+verify submitted: len=256 seed=0x41

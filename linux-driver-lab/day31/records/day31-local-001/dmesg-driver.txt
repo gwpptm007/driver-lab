@@ -1,0 +1,14 @@
+[    0.356995] pci 0000:00:02.0: [1234:11e8] type 00 class 0x00ff00
+[    0.691375] day31_edu_bench: loading out-of-tree module taints kernel.
+[    0.698269] day31_edu_bench 0000:00:02.0: probe enter: 1234:11e8
+[    0.698709] day31_edu_bench 0000:00:02.0: enabling device (0000 -> 0002)
+[    0.699182] day31_edu_bench 0000:00:02.0: dma mask set to 32 bits
+[    0.699832] day31_edu_bench 0000:00:02.0: BAR0: start=0x10000000 len=0x100000 flags=0x40200
+[    0.700098] day31_edu_bench 0000:00:02.0: ident=0x010000ed liveness=0x00000000
+[    0.700466] day31_edu_bench 0000:00:02.0: dma_alloc_coherent ok: virt=ffff3e3a82a24000 dma=0x42a24000 bytes=4096
+[    0.702170] day31_edu_bench 0000:00:02.0: MSI vector=50 enabled=1
+[    0.702569] day31_edu_bench 0000:00:02.0: probe success
+[    0.702932] day31_edu_bench: init ok
+[    1.735461] day31_edu_bench 0000:00:02.0: mmap ok: len=4096 pgoff=0 dma=0x42a24000
+[    1.962267] day31_edu_bench 0000:00:02.0: mmap ok: len=4096 pgoff=0 dma=0x42a24000
+[    1.969946] day31_edu_bench 0000:00:02.0: mmap ok: len=4096 pgoff=0 dma=0x42a24000

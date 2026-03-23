@@ -1,0 +1,14 @@
+total_run_calls=37
+total_run_ok=37
+total_run_fail=0
+last_run_ns=203713568
+run_len=64
+run_seed=0x64
+run_ok=1
+run_error=0
+irq_delta=2
+last_dma_cmd=0x00000007
+mmap_ok=1
+mmap_error=0
+mmap_len=4096
+mmap_pgoff=0

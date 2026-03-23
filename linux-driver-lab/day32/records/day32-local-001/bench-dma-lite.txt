@@ -1,0 +1,19 @@
+[    2.684022] day32_edu_perf 0000:00:02.0: mmap ok: len=4096 pgoff=0 dma=0x42a48000
+mode=dma
+payload_bytes=64
+iterations=32
+warmup=4
+success_ops=32
+failed_ops=0
+success_rate=100.00
+wall_total_us=7243375.54
+avg_us=201041.057
+p50_us=200039.840
+p95_us=204498.752
+p99_us=207965.824
+min_us=199690.592
+max_us=207965.824
+throughput_mbps=0.002
+cpu_user_pct=0.034
+cpu_sys_pct=98.386
+csv,mode=dma,payload_bytes=64,iterations=32,warmup=4,success_ops=32,failed_ops=0,success_rate=100.00,avg_us=201041.057,p50_us=200039.840,p95_us=204498.752,p99_us=207965.824,min_us=199690.592,max_us=207965.824,throughput_mbps=0.002,cpu_user_pct=0.034,cpu_sys_pct=98.386

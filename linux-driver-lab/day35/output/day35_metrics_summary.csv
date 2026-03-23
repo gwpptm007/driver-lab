@@ -1,0 +1,140 @@
+day,run_id,category,metric,value,source
+29,day29-local-001,run-summary,verify ok,yes,day29/records/day29-local-001/run-summary.md
+29,day29-local-001,run-summary,guest flow complete,yes,day29/records/day29-local-001/run-summary.md
+29,day29-local-001,run-summary,oops/dma-error/hung/panic found,no,day29/records/day29-local-001/run-summary.md
+29,day29-local-001,verify-result.txt,verify_ok,1,day29/records/day29-local-001/verify-result.txt
+29,day29-local-001,verify-result.txt,irq_delta,2,day29/records/day29-local-001/verify-result.txt
+30,day30-local-001,run-summary,guest flow complete,yes,day30/records/day30-local-001/run-summary.md
+30,day30-local-001,run-summary,oops/dma-error/hung/panic found,no,day30/records/day30-local-001/run-summary.md
+30,day30-local-001,mmap-verify.txt,verify_ok,1,day30/records/day30-local-001/mmap-verify.txt
+30,day30-local-001,mmap-verify.txt,run_ok,1,day30/records/day30-local-001/mmap-verify.txt
+30,day30-local-001,mmap-verify.txt,run_error,0,day30/records/day30-local-001/mmap-verify.txt
+30,day30-local-001,mmap-verify.txt,irq_delta,2,day30/records/day30-local-001/mmap-verify.txt
+30,day30-local-001,mmap-verify.txt,mmap_ok,1,day30/records/day30-local-001/mmap-verify.txt
+30,day30-local-001,mmap-verify.txt,mmap_error,0,day30/records/day30-local-001/mmap-verify.txt
+30,day30-local-001,run-result.txt,run_ok,1,day30/records/day30-local-001/run-result.txt
+30,day30-local-001,run-result.txt,run_error,0,day30/records/day30-local-001/run-result.txt
+30,day30-local-001,run-result.txt,irq_delta,2,day30/records/day30-local-001/run-result.txt
+30,day30-local-001,run-result.txt,mmap_ok,1,day30/records/day30-local-001/run-result.txt
+30,day30-local-001,run-result.txt,mmap_error,0,day30/records/day30-local-001/run-result.txt
+31,day31-local-001,run-summary,mmap verify ok,yes,day31/records/day31-local-001/run-summary.md
+31,day31-local-001,run-summary,guest flow complete,yes,day31/records/day31-local-001/run-summary.md
+31,day31-local-001,run-summary,qemu timeout hit,no,day31/records/day31-local-001/run-summary.md
+31,day31-local-001,run-summary,oops/dma-error/hung/panic found,no,day31/records/day31-local-001/run-summary.md
+31,day31-local-001,mmap-verify.txt,verify_ok,1,day31/records/day31-local-001/mmap-verify.txt
+31,day31-local-001,mmap-verify.txt,run_ok,1,day31/records/day31-local-001/mmap-verify.txt
+31,day31-local-001,mmap-verify.txt,run_error,0,day31/records/day31-local-001/mmap-verify.txt
+31,day31-local-001,mmap-verify.txt,irq_delta,2,day31/records/day31-local-001/mmap-verify.txt
+31,day31-local-001,mmap-verify.txt,mmap_ok,1,day31/records/day31-local-001/mmap-verify.txt
+31,day31-local-001,mmap-verify.txt,mmap_error,0,day31/records/day31-local-001/mmap-verify.txt
+31,day31-local-001,run-result.txt,run_ok,1,day31/records/day31-local-001/run-result.txt
+31,day31-local-001,run-result.txt,run_error,0,day31/records/day31-local-001/run-result.txt
+31,day31-local-001,run-result.txt,irq_delta,2,day31/records/day31-local-001/run-result.txt
+31,day31-local-001,run-result.txt,mmap_ok,1,day31/records/day31-local-001/run-result.txt
+31,day31-local-001,run-result.txt,mmap_error,0,day31/records/day31-local-001/run-result.txt
+31,day31-local-001,bench-ioctl.txt,success_ops,200,day31/records/day31-local-001/bench-ioctl.txt
+31,day31-local-001,bench-ioctl.txt,failed_ops,0,day31/records/day31-local-001/bench-ioctl.txt
+31,day31-local-001,bench-ioctl.txt,avg_us,15.942,day31/records/day31-local-001/bench-ioctl.txt
+31,day31-local-001,bench-ioctl.txt,p99_us,23.616,day31/records/day31-local-001/bench-ioctl.txt
+31,day31-local-001,bench-ioctl.txt,throughput_mbps,0.000,day31/records/day31-local-001/bench-ioctl.txt
+31,day31-local-001,bench-mmap.txt,success_ops,200,day31/records/day31-local-001/bench-mmap.txt
+31,day31-local-001,bench-mmap.txt,failed_ops,0,day31/records/day31-local-001/bench-mmap.txt
+31,day31-local-001,bench-mmap.txt,avg_us,0.557,day31/records/day31-local-001/bench-mmap.txt
+31,day31-local-001,bench-mmap.txt,p99_us,0.752,day31/records/day31-local-001/bench-mmap.txt
+31,day31-local-001,bench-mmap.txt,throughput_mbps,886.949,day31/records/day31-local-001/bench-mmap.txt
+31,day31-local-001,bench-dma.txt,success_ops,200,day31/records/day31-local-001/bench-dma.txt
+31,day31-local-001,bench-dma.txt,failed_ops,0,day31/records/day31-local-001/bench-dma.txt
+31,day31-local-001,bench-dma.txt,avg_us,200222.804,day31/records/day31-local-001/bench-dma.txt
+31,day31-local-001,bench-dma.txt,p99_us,208327.968,day31/records/day31-local-001/bench-dma.txt
+31,day31-local-001,bench-dma.txt,throughput_mbps,0.009,day31/records/day31-local-001/bench-dma.txt
+32,day32-local-001,run-summary,mmap verify ok,yes,day32/records/day32-local-001/run-summary.md
+32,day32-local-001,run-summary,guest flow complete,yes,day32/records/day32-local-001/run-summary.md
+32,day32-local-001,run-summary,qemu timeout hit,no,day32/records/day32-local-001/run-summary.md
+32,day32-local-001,run-summary,oops/dma-error/hung/panic found,no,day32/records/day32-local-001/run-summary.md
+32,day32-local-001,run-summary,avg latency gain pct,99.65,day32/records/day32-local-001/run-summary.md
+32,day32-local-001,run-summary,p99 latency gain pct,99.85,day32/records/day32-local-001/run-summary.md
+32,day32-local-001,run-summary,throughput gain pct,24826.37,day32/records/day32-local-001/run-summary.md
+32,day32-local-001,mmap-verify.txt,verify_ok,1,day32/records/day32-local-001/mmap-verify.txt
+32,day32-local-001,mmap-verify.txt,run_ok,1,day32/records/day32-local-001/mmap-verify.txt
+32,day32-local-001,mmap-verify.txt,run_error,0,day32/records/day32-local-001/mmap-verify.txt
+32,day32-local-001,mmap-verify.txt,irq_delta,2,day32/records/day32-local-001/mmap-verify.txt
+32,day32-local-001,mmap-verify.txt,mmap_ok,1,day32/records/day32-local-001/mmap-verify.txt
+32,day32-local-001,mmap-verify.txt,mmap_error,0,day32/records/day32-local-001/mmap-verify.txt
+32,day32-local-001,run-result.txt,run_ok,1,day32/records/day32-local-001/run-result.txt
+32,day32-local-001,run-result.txt,run_error,0,day32/records/day32-local-001/run-result.txt
+32,day32-local-001,run-result.txt,irq_delta,2,day32/records/day32-local-001/run-result.txt
+32,day32-local-001,run-result.txt,mmap_ok,1,day32/records/day32-local-001/run-result.txt
+32,day32-local-001,run-result.txt,mmap_error,0,day32/records/day32-local-001/run-result.txt
+32,day32-local-001,bench-ioctl.txt,success_ops,1000,day32/records/day32-local-001/bench-ioctl.txt
+32,day32-local-001,bench-ioctl.txt,failed_ops,0,day32/records/day32-local-001/bench-ioctl.txt
+32,day32-local-001,bench-ioctl.txt,avg_us,16.291,day32/records/day32-local-001/bench-ioctl.txt
+32,day32-local-001,bench-ioctl.txt,p99_us,46.160,day32/records/day32-local-001/bench-ioctl.txt
+32,day32-local-001,bench-ioctl.txt,throughput_mbps,0.000,day32/records/day32-local-001/bench-ioctl.txt
+32,day32-local-001,bench-mmap-baseline.txt,success_ops,1000,day32/records/day32-local-001/bench-mmap-baseline.txt
+32,day32-local-001,bench-mmap-baseline.txt,failed_ops,0,day32/records/day32-local-001/bench-mmap-baseline.txt
+32,day32-local-001,bench-mmap-baseline.txt,avg_us,283.590,day32/records/day32-local-001/bench-mmap-baseline.txt
+32,day32-local-001,bench-mmap-baseline.txt,p99_us,641.344,day32/records/day32-local-001/bench-mmap-baseline.txt
+32,day32-local-001,bench-mmap-baseline.txt,throughput_mbps,6.585,day32/records/day32-local-001/bench-mmap-baseline.txt
+32,day32-local-001,bench-mmap-optimized.txt,success_ops,1000,day32/records/day32-local-001/bench-mmap-optimized.txt
+32,day32-local-001,bench-mmap-optimized.txt,failed_ops,0,day32/records/day32-local-001/bench-mmap-optimized.txt
+32,day32-local-001,bench-mmap-optimized.txt,avg_us,0.892,day32/records/day32-local-001/bench-mmap-optimized.txt
+32,day32-local-001,bench-mmap-optimized.txt,p99_us,0.912,day32/records/day32-local-001/bench-mmap-optimized.txt
+32,day32-local-001,bench-mmap-optimized.txt,throughput_mbps,1575.094,day32/records/day32-local-001/bench-mmap-optimized.txt
+32,day32-local-001,compare-mmap.txt,avg_latency_gain_pct,99.65,day32/records/day32-local-001/compare-mmap.txt
+32,day32-local-001,compare-mmap.txt,p99_latency_gain_pct,99.85,day32/records/day32-local-001/compare-mmap.txt
+32,day32-local-001,compare-mmap.txt,throughput_gain_pct,24826.37,day32/records/day32-local-001/compare-mmap.txt
+32,day32-local-001,bench-dma-lite.txt,success_ops,32,day32/records/day32-local-001/bench-dma-lite.txt
+32,day32-local-001,bench-dma-lite.txt,failed_ops,0,day32/records/day32-local-001/bench-dma-lite.txt
+32,day32-local-001,bench-dma-lite.txt,avg_us,201041.057,day32/records/day32-local-001/bench-dma-lite.txt
+32,day32-local-001,bench-dma-lite.txt,p99_us,207965.824,day32/records/day32-local-001/bench-dma-lite.txt
+32,day32-local-001,bench-dma-lite.txt,throughput_mbps,0.002,day32/records/day32-local-001/bench-dma-lite.txt
+33,day33-local-001,run-summary,mmap verify ok,yes,day33/records/day33-local-001/run-summary.md
+33,day33-local-001,run-summary,guest flow complete,yes,day33/records/day33-local-001/run-summary.md
+33,day33-local-001,run-summary,qemu timeout hit,no,day33/records/day33-local-001/run-summary.md
+33,day33-local-001,run-summary,oops/dma-error/hung/panic found,no,day33/records/day33-local-001/run-summary.md
+33,day33-local-001,mmap-verify.txt,verify_ok,1,day33/records/day33-local-001/mmap-verify.txt
+33,day33-local-001,mmap-verify.txt,run_ok,1,day33/records/day33-local-001/mmap-verify.txt
+33,day33-local-001,mmap-verify.txt,run_error,0,day33/records/day33-local-001/mmap-verify.txt
+33,day33-local-001,mmap-verify.txt,irq_delta,2,day33/records/day33-local-001/mmap-verify.txt
+33,day33-local-001,mmap-verify.txt,mmap_ok,1,day33/records/day33-local-001/mmap-verify.txt
+33,day33-local-001,mmap-verify.txt,mmap_error,0,day33/records/day33-local-001/mmap-verify.txt
+33,day33-local-001,run-result.txt,run_ok,1,day33/records/day33-local-001/run-result.txt
+33,day33-local-001,run-result.txt,run_error,0,day33/records/day33-local-001/run-result.txt
+33,day33-local-001,run-result.txt,irq_delta,2,day33/records/day33-local-001/run-result.txt
+33,day33-local-001,run-result.txt,mmap_ok,1,day33/records/day33-local-001/run-result.txt
+33,day33-local-001,run-result.txt,mmap_error,0,day33/records/day33-local-001/run-result.txt
+33,day33-local-001,trace-window.txt,verify_ok,1,day33/records/day33-local-001/trace-window.txt
+33,day33-local-001,trace-window.txt,run_ok,1,day33/records/day33-local-001/trace-window.txt
+33,day33-local-001,trace-window.txt,run_error,0,day33/records/day33-local-001/trace-window.txt
+33,day33-local-001,trace-window.txt,irq_delta,2,day33/records/day33-local-001/trace-window.txt
+33,day33-local-001,trace-window.txt,mmap_ok,1,day33/records/day33-local-001/trace-window.txt
+33,day33-local-001,trace-window.txt,mmap_error,0,day33/records/day33-local-001/trace-window.txt
+34,day34-local-001,run-summary,mmap verify ok,yes,day34/records/day34-local-001/run-summary.md
+34,day34-local-001,run-summary,concurrent stress ok,yes,day34/records/day34-local-001/run-summary.md
+34,day34-local-001,run-summary,module loop ok,yes,day34/records/day34-local-001/run-summary.md
+34,day34-local-001,run-summary,fault invalid len ok,yes,day34/records/day34-local-001/run-summary.md
+34,day34-local-001,run-summary,fault mmap offset ok,yes,day34/records/day34-local-001/run-summary.md
+34,day34-local-001,run-summary,guest flow complete,yes,day34/records/day34-local-001/run-summary.md
+34,day34-local-001,run-summary,qemu timeout hit,no,day34/records/day34-local-001/run-summary.md
+34,day34-local-001,run-summary,oops/dma-error/hung/panic found,no,day34/records/day34-local-001/run-summary.md
+34,day34-local-001,mmap-verify.txt,mmap_ok,1,day34/records/day34-local-001/mmap-verify.txt
+34,day34-local-001,mmap-verify.txt,run_ok,1,day34/records/day34-local-001/mmap-verify.txt
+34,day34-local-001,mmap-verify.txt,run_error,0,day34/records/day34-local-001/mmap-verify.txt
+34,day34-local-001,mmap-verify.txt,irq_delta,2,day34/records/day34-local-001/mmap-verify.txt
+34,day34-local-001,mmap-verify.txt,verify_ok,1,day34/records/day34-local-001/mmap-verify.txt
+34,day34-local-001,run-result.txt,run_ok,0,day34/records/day34-local-001/run-result.txt
+34,day34-local-001,run-result.txt,run_error,0,day34/records/day34-local-001/run-result.txt
+34,day34-local-001,run-result.txt,irq_delta,0,day34/records/day34-local-001/run-result.txt
+34,day34-local-001,run-result.txt,mmap_ok,0,day34/records/day34-local-001/run-result.txt
+34,day34-local-001,run-result.txt,mmap_error,-22,day34/records/day34-local-001/run-result.txt
+34,day34-local-001,concurrent-stress.txt,success_ops,200,day34/records/day34-local-001/concurrent-stress.txt
+34,day34-local-001,concurrent-stress.txt,failed_ops,0,day34/records/day34-local-001/concurrent-stress.txt
+34,day34-local-001,concurrent-stress.txt,worker_ioctl_rc,0,day34/records/day34-local-001/concurrent-stress.txt
+34,day34-local-001,concurrent-stress.txt,worker_fail,0,day34/records/day34-local-001/concurrent-stress.txt
+34,day34-local-001,module-loop.txt,requested_loops,1000,day34/records/day34-local-001/module-loop.txt
+34,day34-local-001,module-loop.txt,completed_loops,1000,day34/records/day34-local-001/module-loop.txt
+34,day34-local-001,module-loop.txt,failed_loops,0,day34/records/day34-local-001/module-loop.txt
+34,day34-local-001,fault-invalid-len.txt,expected_failure,1,day34/records/day34-local-001/fault-invalid-len.txt
+34,day34-local-001,fault-invalid-len.txt,errno,22,day34/records/day34-local-001/fault-invalid-len.txt
+34,day34-local-001,fault-mmap-offset.txt,expected_failure,1,day34/records/day34-local-001/fault-mmap-offset.txt
+34,day34-local-001,fault-mmap-offset.txt,errno,22,day34/records/day34-local-001/fault-mmap-offset.txt

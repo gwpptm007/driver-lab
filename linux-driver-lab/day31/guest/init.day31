@@ -1,0 +1,133 @@
+#!/bin/sh
+set -eu
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export PATH
+
+# Day31 guest 自动化入口：
+# 1. 在 guest 内完成设备发现、驱动装载与 bench 执行；
+# 2. 所有关键信息都通过 BEGIN/END marker 打到串口，方便宿主机脚本切块归档；
+# 3. cmdline 参数只用于“本轮实验配置”，不要把业务逻辑硬编码到工具里。
+
+echo "===DAY31:BOOT==="
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+
+# 从 /proc/cmdline 提取键值。这里不用 sed '\1'，避免生成脚本时把反向引用误写成控制字符。
+# 约定：/proc/cmdline 形如 "... key=value key2=value2 ..."。
+get_cmdline_value() {
+    key="$1"
+    for token in $(cat /proc/cmdline); do
+        case "$token" in
+            "$key"=*)
+                echo "${token#*=}"
+                return 0
+                ;;
+        esac
+    done
+    return 1
+}
+
+VERIFY_LEN="$(get_cmdline_value day31_verify_len || true)"
+VERIFY_SEED="$(get_cmdline_value day31_verify_seed || true)"
+BENCH_ITER="$(get_cmdline_value day31_bench_iter || true)"
+BENCH_WARMUP="$(get_cmdline_value day31_bench_warmup || true)"
+[ -n "$VERIFY_LEN" ] || VERIFY_LEN=256
+[ -n "$VERIFY_SEED" ] || VERIFY_SEED=0x41
+RUN_BENCH_ALL="$(get_cmdline_value day31_run_bench_all || true)"
+[ -n "$BENCH_ITER" ] || BENCH_ITER=200
+[ -n "$BENCH_WARMUP" ] || BENCH_WARMUP=20
+[ -n "$RUN_BENCH_ALL" ] || RUN_BENCH_ALL=0
+
+echo "[day31-guest] verify_len=${VERIFY_LEN} verify_seed=${VERIFY_SEED} bench_iter=${BENCH_ITER} bench_warmup=${BENCH_WARMUP} run_bench_all=${RUN_BENCH_ALL}"
+
+echo "===DAY31:LSPCI_NN:BEGIN==="
+/bin/lspci -nn || true
+echo "===DAY31:LSPCI_NN:END==="
+
+echo "===DAY31:LSPCI_VV_NN:BEGIN==="
+/bin/lspci -vv -nn || true
+echo "===DAY31:LSPCI_VV_NN:END==="
+
+insmod /root/day31_edu_bench.ko
+sleep 1
+
+# 设备节点优先通过 sysfs 暴露的 major:minor 动态创建设备文件，避免写死主设备号。
+if [ ! -e /dev/day31_edu0 ] && [ -r /sys/class/day31_edu/day31_edu0/dev ]; then
+    major_minor="$(cat /sys/class/day31_edu/day31_edu0/dev)"
+    major="${major_minor%:*}"
+    minor="${major_minor#*:}"
+    mknod /dev/day31_edu0 c "$major" "$minor"
+fi
+
+if [ ! -e /dev/day31_edu0 ]; then
+    echo "[day31-guest][ERROR] /dev/day31_edu0 not found"
+    dmesg || true
+    poweroff -f || reboot -f || exec sh
+fi
+
+echo "===DAY31:TOOL_INFO:BEGIN==="
+/bin/day31_edu_bench_tool /dev/day31_edu0 info || true
+echo "===DAY31:TOOL_INFO:END==="
+
+echo "===DAY31:DEVICE_STATE_BEFORE:BEGIN==="
+cat /dev/day31_edu0 || true
+echo "===DAY31:DEVICE_STATE_BEFORE:END==="
+
+echo "===DAY31:MMAP_VERIFY:BEGIN==="
+/bin/day31_edu_bench_tool /dev/day31_edu0 mmap-verify "$VERIFY_LEN" "$VERIFY_SEED" || true
+echo "===DAY31:MMAP_VERIFY:END==="
+
+echo "===DAY31:BENCH_IOCTL:BEGIN==="
+/bin/day31_edu_bench_tool /dev/day31_edu0 bench-ioctl "$BENCH_ITER" "$BENCH_WARMUP" || true
+echo "===DAY31:BENCH_IOCTL:END==="
+
+echo "===DAY31:BENCH_MMAP:BEGIN==="
+/bin/day31_edu_bench_tool /dev/day31_edu0 bench-mmap "$VERIFY_LEN" "$BENCH_ITER" "$BENCH_WARMUP" "$VERIFY_SEED" || true
+echo "===DAY31:BENCH_MMAP:END==="
+
+# DMA bench 是 day31 最耗时的阶段：每次 run 会触发两段 DMA 和两次 IRQ。
+# 因此 day31 默认 bench 规模下调为 200/20，并把 bench-all 改成“默认不自动执行”。
+# 这样自动化更容易在 QEMU timeout 窗口内完整跑完，bench-all 作为扩展矩阵留给手工复测。
+echo "===DAY31:BENCH_DMA:BEGIN==="
+/bin/day31_edu_bench_tool /dev/day31_edu0 bench-dma "$VERIFY_LEN" "$BENCH_ITER" "$BENCH_WARMUP" "$VERIFY_SEED" || true
+echo "===DAY31:BENCH_DMA:END==="
+
+# bench-all 默认不自动执行。原因：它会把 ioctl/mmap/dma 负载矩阵再跑一遍，
+# 在 QEMU EDU 上很容易把自动化时长显著拉长。
+# 若宿主通过 day31_run_bench_all=1 显式开启，则仍然保留完整 bench-all 能力。
+if [ "$RUN_BENCH_ALL" = "1" ]; then
+    echo "===DAY31:BENCH_ALL:BEGIN==="
+    /bin/day31_edu_bench_tool /dev/day31_edu0 bench-all "$BENCH_ITER" "$BENCH_WARMUP" "$VERIFY_SEED" || true
+    echo "===DAY31:BENCH_ALL:END==="
+else
+    echo "===DAY31:BENCH_ALL:BEGIN==="
+    echo "bench-all skipped by default; set day31_run_bench_all=1 to enable"
+    echo "===DAY31:BENCH_ALL:END==="
+fi
+
+# RUN_RESULT 记录的是“本轮自动化结束时驱动内部的最终状态”，
+# 它和 bench 文本输出互相补位：
+# - bench-*.txt 负责看统计口径；
+# - run-result.txt 负责看驱动内部累计 run 次数、错误码与最近一次 run 结果。
+echo "===DAY31:RUN_RESULT:BEGIN==="
+/bin/day31_edu_bench_tool /dev/day31_edu0 result || true
+echo "===DAY31:RUN_RESULT:END==="
+
+echo "===DAY31:DEVICE_STATE_AFTER:BEGIN==="
+cat /dev/day31_edu0 || true
+echo "===DAY31:DEVICE_STATE_AFTER:END==="
+
+echo "===DAY31:PROC_INTERRUPTS_AFTER:BEGIN==="
+cat /proc/interrupts || true
+echo "===DAY31:PROC_INTERRUPTS_AFTER:END==="
+
+echo "===DAY31:DMESG_DRIVER:BEGIN==="
+dmesg | grep -E 'day31_edu_bench|1234:11e8|irq handler|dma_alloc_coherent|run_dma|mmap' || dmesg || true
+echo "===DAY31:DMESG_DRIVER:END==="
+
+# COMPLETE marker 是宿主 records 提取脚本判断“guest 是否完整跑完”的第一信号。
+# 只有 marker 出现，run-summary 才会记为 guest flow complete=yes。
+echo "===DAY31:COMPLETE==="
+poweroff -f || reboot -f || exec sh

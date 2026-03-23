@@ -1,0 +1,6 @@
+[   35.809602] day34_edu_stability: init ok
+[   35.821507] day34_edu_stability 0000:00:02.0: mmap rejected: pgoff=1 must be 0
+expected_failure=1
+unexpected_success=0
+errno=22
+error_text=Invalid argument

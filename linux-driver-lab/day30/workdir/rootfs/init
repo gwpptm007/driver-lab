@@ -1,0 +1,81 @@
+#!/bin/sh
+set -eu
+
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export PATH
+
+echo "===DAY30:BOOT==="
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+
+VERIFY_LEN="$(sed -n 's/.*day30_verify_len=\([^ ]*\).*/\1/p' /proc/cmdline | head -n1)"
+VERIFY_SEED="$(sed -n 's/.*day30_verify_seed=\([^ ]*\).*/\1/p' /proc/cmdline | head -n1)"
+[ -n "$VERIFY_LEN" ] || VERIFY_LEN=256
+[ -n "$VERIFY_SEED" ] || VERIFY_SEED=0x41
+
+echo "[day30-guest] verify_len=${VERIFY_LEN} verify_seed=${VERIFY_SEED} driver_default_dma_mask_bits=32"
+
+echo "===DAY30:LSPCI_NN:BEGIN==="
+/bin/lspci -nn || true
+echo "===DAY30:LSPCI_NN:END==="
+
+echo "===DAY30:LSPCI_VV_NN:BEGIN==="
+/bin/lspci -vv -nn || true
+echo "===DAY30:LSPCI_VV_NN:END==="
+
+insmod /root/day30_edu_mmap.ko
+sleep 1
+
+if [ ! -e /dev/day30_edu0 ] && [ -r /sys/class/day30_edu/day30_edu0/dev ]; then
+    major_minor="$(cat /sys/class/day30_edu/day30_edu0/dev)"
+    major="${major_minor%:*}"
+    minor="${major_minor#*:}"
+    mknod /dev/day30_edu0 c "$major" "$minor"
+fi
+
+if [ ! -e /dev/day30_edu0 ]; then
+    echo "[day30-guest][ERROR] /dev/day30_edu0 not found"
+    echo "[day30-guest][ERROR] 打印 dmesg 后退出。"
+    dmesg || true
+    poweroff -f || reboot -f || exec sh
+fi
+
+echo "===DAY30:TOOL_INFO:BEGIN==="
+/bin/day30_edu_mmap_tool /dev/day30_edu0 info || true
+echo "===DAY30:TOOL_INFO:END==="
+
+echo "===DAY30:DEVICE_STATE_BEFORE:BEGIN==="
+cat /dev/day30_edu0 || true
+echo "===DAY30:DEVICE_STATE_BEFORE:END==="
+
+echo "===DAY30:INVALID_MMAP_LEN:BEGIN==="
+/bin/day30_edu_mmap_tool /dev/day30_edu0 mmap-invalid-len 2048 || true
+echo "===DAY30:INVALID_MMAP_LEN:END==="
+
+echo "===DAY30:INVALID_MMAP_OFFSET:BEGIN==="
+/bin/day30_edu_mmap_tool /dev/day30_edu0 mmap-invalid-offset 1 || true
+echo "===DAY30:INVALID_MMAP_OFFSET:END==="
+
+echo "===DAY30:MMAP_VERIFY:BEGIN==="
+/bin/day30_edu_mmap_tool /dev/day30_edu0 mmap-verify "$VERIFY_LEN" "$VERIFY_SEED" || true
+echo "===DAY30:MMAP_VERIFY:END==="
+
+echo "===DAY30:RUN_RESULT:BEGIN==="
+/bin/day30_edu_mmap_tool /dev/day30_edu0 result || true
+echo "===DAY30:RUN_RESULT:END==="
+
+echo "===DAY30:DEVICE_STATE_AFTER:BEGIN==="
+cat /dev/day30_edu0 || true
+echo "===DAY30:DEVICE_STATE_AFTER:END==="
+
+echo "===DAY30:PROC_INTERRUPTS_AFTER:BEGIN==="
+cat /proc/interrupts || true
+echo "===DAY30:PROC_INTERRUPTS_AFTER:END==="
+
+echo "===DAY30:DMESG_DRIVER:BEGIN==="
+dmesg | grep -E 'day30_edu_mmap|1234:11e8|irq handler|dma_alloc_coherent|run_dma|mmap' || dmesg || true
+echo "===DAY30:DMESG_DRIVER:END==="
+
+echo "===DAY30:COMPLETE==="
+poweroff -f || reboot -f || exec sh

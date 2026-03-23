@@ -1,0 +1,9 @@
+tool_api_version=1
+vendor=0x1234 device=0x11e8
+irq_vector=50 irq_count=0 msi_enabled=1
+last_irq_status=0x00000000 last_ack_value=0x00000000
+bar0_start=0x10000000 bar0_len=0x100000
+dma_handle=0x42a42000 dma_bytes=4096 dma_mask_bits=32
+verify_len=0 verify_seed=0x0 verify_ok=0 verify_error=0
+mismatch_index=-1 mismatch_expected=0x00 mismatch_actual=0x00
+last_irq_delta=0 last_dma_cmd=0x00000000
