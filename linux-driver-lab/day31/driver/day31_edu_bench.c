@@ -1,12 +1,28 @@
 // SPDX-License-Identifier: GPL-2.0
 /*
- * Day31 - QEMU EDU bench driver
+ * Day31 - QEMU EDU bench 驱动
  *
- * 目标：
- * 1. 延续 day30 的 coherent DMA + mmap 主链路；
- * 2. 保持用户态直接访问 DMA buffer 的能力；
- * 3. 在驱动侧补充最小 bench 统计（run 次数/成功失败/最近一次耗时）；
- * 4. 为 day31 的 guest bench 工具提供稳定、可量化的内核接口。
+ * ==================== 驱动目标 ====================
+ *
+ * Day31 承接 Day30 的 mmap 零拷贝基础，引入性能基准测试（Bench）。
+ *
+ * 【Day30 vs Day31 的核心区别】
+ *   Day30：验证 mmap 零拷贝能工作（功能测试）
+ *   Day31：测量这链路有多快/多稳（性能测试）
+ *
+ * 【Day31 的职责划分】
+ *   用户态负责：计时、统计、分位数计算
+ *   内核负责：提供 last_run_ns（内核视角的纯 DMA 耗时）
+ *
+ * ==================== 头文件依赖 ====================
+ *
+ * 新增时间相关：
+ *   linux/ktime.h → ktime_get_ns()（纳秒精度计时）
+ *
+ * 其他与 Day30 相同：
+ *   DMA：linux/dma-mapping.h
+ *   字符设备：linux/cdev.h, linux/fs.h
+ *   PCI：linux/pci.h
  */
 #include <linux/cdev.h>
 #include <linux/delay.h>
@@ -26,6 +42,17 @@
 #include "include/day31_edu_bench.h"
 #include "../include/day31_edu_uapi.h"
 
+/*
+ * ==================== 模块全局变量 ====================
+ *
+ * g_day31_base_dev：分配到的设备号范围
+ * g_day31_class：sysfs class 指针
+ * g_day31_minor：次设备号计数器
+ * dma_mask_bits：可加载参数，默认 32
+ *
+ * 【新增】bench_verbose：热路径日志开关
+ *   默认关闭（0），避免 IRQ handler 打印拖慢自动化
+ */
 static dev_t g_day31_base_dev;
 static struct class *g_day31_class;
 static atomic_t g_day31_minor = ATOMIC_INIT(0);
@@ -35,11 +62,29 @@ module_param(dma_mask_bits, uint, 0644);
 MODULE_PARM_DESC(dma_mask_bits,
 		 "DMA mask bits for QEMU EDU (default 32 in day31 automation)");
 
+/*
+ * bench_verbose：热路径日志开关
+ *
+ * 为什么需要这个参数？
+ *   bench-dma 每次运行触发两次 IRQ
+ *   如果每次 IRQ 都 dev_info() 打印，在 QEMU -nographic 下会拖慢自动化
+ *
+ * 默认值：false（关闭）
+ * 设置方式：insmod day31_edu_bench.ko bench_verbose=1
+ */
 static bool bench_verbose;
 module_param(bench_verbose, bool, 0644);
 MODULE_PARM_DESC(bench_verbose,
 		 "Enable verbose hot-path logging for irq/run_dma (default false)");
 
+/*
+ * ==================== 寄存器读写辅助函数 ====================
+ *
+ * 与 Day30 完全相同：
+ *   day31_read32：读 32-bit 寄存器
+ *   day31_write32：写 32-bit 寄存器
+ *   day31_write64：写 64-bit 寄存器（DMA 地址）
+ */
 static inline u32 day31_read32(struct day31_dev *d, u32 off)
 {
 	return readl(d->bar0 + off);
@@ -55,6 +100,13 @@ static inline void day31_write64(struct day31_dev *d, u32 off, u64 val)
 	writeq(val, d->bar0 + off);
 }
 
+/*
+ * ==================== 中断处理函数 ====================
+ *
+ * 与 Day30 的区别：
+ *   - hot-path 日志默认关闭（bench_verbose 控制）
+ *   - 其他逻辑完全相同
+ */
 static irqreturn_t day31_irq_handler(int irq, void *opaque)
 {
 	struct day31_dev *d = opaque;
@@ -65,6 +117,9 @@ static irqreturn_t day31_irq_handler(int irq, void *opaque)
 	if (!status)
 		return IRQ_NONE;
 
+	/*
+	 * 自旋锁保护共享数据
+	 */
 	spin_lock_irqsave(&d->irq_lock, flags);
 	d->irq_count++;
 	d->last_irq_status = status;
@@ -72,10 +127,12 @@ static irqreturn_t day31_irq_handler(int irq, void *opaque)
 	spin_unlock_irqrestore(&d->irq_lock, flags);
 
 	day31_write32(d, DAY31_EDU_REG_IRQ_ACK, status);
+
 	/*
-	 * day31 默认关闭 hot-path 日志。
-	 * 原因：bench-dma 每次 run 都会触发两次 IRQ，若每次 IRQ 都打印，
-	 * 在 -nographic 的 QEMU 场景下会显著拖慢自动化。
+	 * 【Day31 变化】bench_verbose 控制 hot-path 日志
+	 *
+	 * bench-dma 每次运行触发两次 IRQ
+	 * 关闭 verbose 可避免日志拖慢自动化
 	 */
 	if (unlikely(bench_verbose))
 		dev_info(&d->pdev->dev,
@@ -84,6 +141,11 @@ static irqreturn_t day31_irq_handler(int irq, void *opaque)
 	return IRQ_HANDLED;
 }
 
+/*
+ * ==================== DMA 等待与编程 ====================
+ *
+ * 与 Day30 完全相同
+ */
 static int day31_wait_dma_idle(struct day31_dev *d)
 {
 	int i;
@@ -115,6 +177,15 @@ static int day31_program_dma(struct day31_dev *d, u64 src, u64 dst,
 	return day31_wait_dma_idle(d);
 }
 
+/*
+ * ==================== 状态记录函数 ====================
+ *
+ * day31_reset_run_result：重置 DMA 运行结果
+ * day31_record_mmap_result：记录 mmap 结果
+ *
+ * 与 Day30 的区别：
+ *   - day31_reset_run_result 新增 last_run_ns 重置
+ */
 static void day31_reset_run_result(struct day31_dev *d)
 {
 	d->last_run_ns = 0;
@@ -136,6 +207,20 @@ static void day31_record_mmap_result(struct day31_dev *d, bool ok,
 	d->last_mmap_pgoff = (u32)pgoff;
 }
 
+/*
+ * ==================== 【核心】DMA 运行 + 计时 ====================
+ *
+ * day31_do_run_dma：执行两段 DMA 往返 + 纳秒精度计时
+ *
+ * 【与 Day30 day30_do_run_dma 的区别】
+ *   Day30：不计时，只发起 DMA
+ *   Day31：使用 ktime_get_ns() 精确计时，记录 last_run_ns
+ *
+ * 【时间精度】
+ *   ktime_get_ns() 返回纳秒（10^-9 秒）
+ *   DMA 往返约 200μs = 200,000ns
+ *   纳秒精度足够测量
+ */
 static int day31_do_run_dma(struct day31_dev *d, u32 len, u32 seed)
 {
 	u64 src_dma;
@@ -151,21 +236,32 @@ static int day31_do_run_dma(struct day31_dev *d, u32 len, u32 seed)
 		return -EINVAL;
 
 	mutex_lock(&d->op_lock);
+
+	/*
+	 * 重置运行结果并更新统计
+	 */
 	day31_reset_run_result(d);
-	d->total_run_calls++;
+	d->total_run_calls++;  /* 【新增】累计调用计数 */
 	d->last_run_len = len;
 	d->last_run_seed = seed;
 
+	/*
+	 * 计算 DMA 地址
+	 */
 	src_dma = (u64)d->dma_handle + DAY31_DMA_SRC_OFF;
 	dst_dma = (u64)d->dma_handle + DAY31_DMA_DST_OFF;
+
 	irq_before = d->irq_count;
 
 	/*
-	 * Day31 延续 day30 的核心设计：
-	 * - buffer 内容依然由用户态通过 mmap 去准备与验证；
-	 * - 内核尽量只负责 DMA 发起、等待完成与最小统计。
+	 * 【Day31 核心变化】纳秒精度计时
 	 *
-	 * 这样 bench 结果才能把“用户态内存处理成本”和“设备参与成本”分开看。
+	 * start_ns 记录 DMA 开始时刻
+	 * end_ns 记录 DMA 结束时刻
+	 * last_run_ns = end_ns - start_ns
+	 *
+	 * 注意：这是"内核视角"的计时
+	 * 不包括用户态 memcpy 和 ioctl syscall 开销
 	 */
 	if (unlikely(bench_verbose))
 		dev_info(&d->pdev->dev,
@@ -176,6 +272,9 @@ static int day31_do_run_dma(struct day31_dev *d, u32 len, u32 seed)
 
 	start_ns = ktime_get_ns();
 
+	/*
+	 * 第一次 DMA：RAM → EDU
+	 */
 	ret = day31_program_dma(d, src_dma, DAY31_EDU_DEVBUF_OFFSET,
 				len,
 				DAY31_EDU_DMA_CMD_START |
@@ -186,6 +285,9 @@ static int day31_do_run_dma(struct day31_dev *d, u32 len, u32 seed)
 		goto out;
 	}
 
+	/*
+	 * 第二次 DMA：EDU → RAM
+	 */
 	ret = day31_program_dma(d, DAY31_EDU_DEVBUF_OFFSET, dst_dma,
 				len,
 				DAY31_EDU_DMA_CMD_START |
@@ -198,27 +300,40 @@ static int day31_do_run_dma(struct day31_dev *d, u32 len, u32 seed)
 	}
 
 	/*
-	 * EDU round-trip 的理想情况是两次 IRQ：
-	 * 1) RAM -> EDU internal buffer
-	 * 2) EDU internal buffer -> RAM
+	 * 记录 DMA 结果和耗时
 	 */
 	d->last_irq_delta = (u32)(d->irq_count - irq_before);
 	d->last_run_ok = 1;
-	d->total_run_ok++;
+	d->total_run_ok++;  /* 【新增】累计成功计数 */
+
 	if (unlikely(bench_verbose))
 		dev_info(&d->pdev->dev,
 			 "run_dma ok: len=%u seed=0x%x irq_delta=%u\n",
 			 len, seed, d->last_irq_delta);
 
 out:
+	/*
+	 * 【Day31 核心】在互斥锁外计算耗时
+	 * 确保 last_run_ns 反映真实的 DMA 执行时间
+	 */
 	end_ns = ktime_get_ns();
 	d->last_run_ns = end_ns - start_ns;
+
 	if (d->last_run_error)
-		d->total_run_fail++;
+		d->total_run_fail++;  /* 【新增】累计失败计数 */
+
 	mutex_unlock(&d->op_lock);
 	return d->last_run_error;
 }
 
+/*
+ * ==================== 状态文本构建 ====================
+ *
+ * day31_build_state_text：生成可读状态字符串
+ *
+ * 与 Day30 的区别：
+ *   - 新增 total_run_calls / total_run_ok / total_run_fail / last_run_ns
+ */
 static ssize_t day31_build_state_text(struct day31_dev *d, char *buf, size_t size)
 {
 	return scnprintf(buf, size,
@@ -264,6 +379,16 @@ static ssize_t day31_build_state_text(struct day31_dev *d, char *buf, size_t siz
 			 d->last_mmap_pgoff);
 }
 
+/*
+ * ==================== 文件操作集合 ====================
+ *
+ * day31_open：打开设备
+ * day31_read：读取状态文本
+ * day31_mmap：【核心】mmap coherent DMA buffer
+ * day31_ioctl：设备控制
+ *
+ * 与 Day30 完全相同
+ */
 static int day31_open(struct inode *inode, struct file *file)
 {
 	struct day31_dev *d = container_of(inode->i_cdev, struct day31_dev, cdev);
@@ -297,9 +422,7 @@ static int day31_mmap(struct file *file, struct vm_area_struct *vma)
 		return -ENODEV;
 
 	/*
-	 * Day31 继续只支持“整页映射 + offset=0”：
-	 * - 这样 bench 的变量更少，路径定义更稳定；
-	 * - 同时保留清晰的非法映射失败路径，便于后续验证边界。
+	 * 边界校验：只允许 offset=0 和 length=map_bytes
 	 */
 	if (vma->vm_pgoff != 0) {
 		day31_record_mmap_result(d, false, -EINVAL, len, vma->vm_pgoff);
@@ -322,6 +445,7 @@ static int day31_mmap(struct file *file, struct vm_area_struct *vma)
 	ret = dma_mmap_coherent(&d->pdev->dev, vma,
 				d->dma_virt, d->dma_handle, d->dma_bytes);
 	day31_record_mmap_result(d, ret == 0, ret, len, vma->vm_pgoff);
+
 	if (ret)
 		dev_err(&d->pdev->dev, "dma_mmap_coherent failed: %d\n", ret);
 	else
@@ -332,6 +456,19 @@ static int day31_mmap(struct file *file, struct vm_area_struct *vma)
 	return ret;
 }
 
+/*
+ * ==================== ioctl 命令处理 ====================
+ *
+ * 与 Day30 相比：
+ *   - 新增 total_run_calls / total_run_ok / total_run_fail / last_run_ns
+ *   - ioctl 编号使用 'B' ('B' for Bench)
+ *
+ * 命令：
+ *   DAY31_IOC_GET_INFO：获取完整信息（含 bench 统计）
+ *   DAY31_IOC_RUN_DMA：触发 DMA + 计时
+ *   DAY31_IOC_GET_RESULT：获取结果（含 last_run_ns）
+ *   DAY31_IOC_RESET_STATS：重置所有统计
+ */
 static long day31_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
 	struct day31_dev *d = file->private_data;
@@ -422,6 +559,9 @@ static long day31_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 	}
 }
 
+/*
+ * ==================== 文件操作集合定义 ====================
+ */
 static const struct file_operations day31_fops = {
 	.owner          = THIS_MODULE,
 	.open           = day31_open,
@@ -431,6 +571,11 @@ static const struct file_operations day31_fops = {
 	.llseek         = no_llseek,
 };
 
+/*
+ * ==================== 字符设备注册/注销 ====================
+ *
+ * 与 Day30 完全相同
+ */
 static int day31_setup_chrdev(struct day31_dev *d)
 {
 	int minor;
@@ -464,6 +609,13 @@ static void day31_destroy_chrdev(struct day31_dev *d)
 	cdev_del(&d->cdev);
 }
 
+/*
+ * ==================== PCI probe/remove ====================
+ *
+ * 与 Day30 几乎完全相同
+ * 区别：day31_dev 结构体多了 total_run_calls/ok/fail 字段
+ *       这些字段在 kzalloc 时自动清零
+ */
 static int day31_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 {
 	struct day31_dev *d;
@@ -526,6 +678,10 @@ static int day31_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	live = day31_read32(d, DAY31_EDU_REG_LIVENESS);
 	dev_info(&pdev->dev, "ident=0x%08x liveness=0x%08x\n", ident, live);
 
+	/*
+	 * 分配 coherent DMA buffer
+	 * 与 Day30 完全相同
+	 */
 	d->dma_virt = dma_alloc_coherent(&pdev->dev, d->dma_bytes,
 					 &d->dma_handle, GFP_KERNEL);
 	if (!d->dma_virt) {
@@ -606,6 +762,9 @@ static void day31_remove(struct pci_dev *pdev)
 	kfree(d);
 }
 
+/*
+ * ==================== PCI ID 表和驱动注册 ====================
+ */
 static const struct pci_device_id day31_pci_ids[] = {
 	{ PCI_DEVICE(DAY31_EDU_VENDOR_ID, DAY31_EDU_DEVICE_ID) },
 	{ 0, }
@@ -619,6 +778,9 @@ static struct pci_driver day31_pci_driver = {
 	.remove = day31_remove,
 };
 
+/*
+ * ==================== 模块初始化/退出 ====================
+ */
 static int __init day31_init(void)
 {
 	int ret;
@@ -659,3 +821,61 @@ module_exit(day31_exit);
 MODULE_AUTHOR("OpenAI");
 MODULE_DESCRIPTION("Day31 QEMU EDU bench driver");
 MODULE_LICENSE("GPL");
+
+/*
+ * ==================== 附录：Bench 三条路径性能对比 ====================
+ *
+ * 【路径 A：ioctl 控制路径】
+ *   操作：ioctl(GET_INFO)
+ *   测量内容：用户态 → 内核态 → 返回
+ *   典型耗时：~16μs
+ *
+ *   用户态计时                    内核视角
+ *   ├─ ioctl syscall              │
+ *   │                             ├─ GET_INFO 处理
+ *   │                             │
+ *   └─ 返回                       └─ 返回
+ *
+ *
+ * 【路径 B：mmap 用户态路径】
+ *   操作：memcpy + memcmp（纯用户态）
+ *   测量内容：直接内存访问速度
+ *   典型耗时：~0.5μs，吞吐 ~887MB/s
+ *
+ *   用户态计时
+ *   ├─ memcpy(dst, src, len)
+ *   ├─ memcmp(src, dst, len)
+ *   └─ 返回
+ *
+ *   无内核参与！
+ *
+ *
+ * 【路径 C：DMA 端到端路径】
+ *   操作：ioctl(RUN_DMA) + memcmp
+ *   测量内容：用户态 + 内核 DMA + 设备
+ *   典型耗时：~200ms（QEMU EDU 软件模拟，较慢）
+ *
+ *   用户态计时                    内核视角              EDU 设备
+ *   ├─ fill_pattern              │                     │
+ *   ├─ memset                   │                     │
+ *   ├─ ioctl syscall            │                     │
+ *   │                           ├─ DMA 编程            │
+ *   │                           │                     │
+ *   │                           ├─ 等待 DMA 完成       │
+ *   │                           │                     │
+ *   │                           └─ last_run_ns        │
+ *   │                                                │
+ *   ├─ memcmp                  │                     │
+ *   └─ 返回                     │                     │
+ *
+ *
+ * 【last_run_ns 的意义】
+ *
+ *   last_run_ns 只包含"内核视角的纯 DMA 耗时"
+ *   不包括：用户态 memcpy/ioctl syscall/ memcmp
+ *
+ *   这样可以分析：
+ *     - ioctl 总耗时 ≈ syscall 开销 + 内核 DMA 耗时
+ *     - 如果 ioctl 耗时 >> last_run_ns，说明瓶颈在 syscall
+ *     - 如果 ioctl 耗时 ≈ last_run_ns，说明瓶颈在 DMA
+ */

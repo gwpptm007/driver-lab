@@ -1,21 +1,44 @@
 // SPDX-License-Identifier: GPL-2.0
 /*
- * Day27 - remove/unload symmetry + 200-loop stress
+ * day27_edu_loop.c - EDU 循环卸载稳定性测试驱动
  *
- * 本日目标不是继续扩功能，而是把“重复 insmod/rmmod 是否稳定”做扎实。
- * 因此驱动设计尽量简单、可重复、可观测：
- * 1. 继续基于 Day25/Day26 已经验证过的 QEMU EDU 设备；
- * 2. 保留最小用户态可观测接口（read / write / ioctl）；
- * 3. 在 remove() 中严格对称释放：
- *    - device_destroy
- *    - cdev_del
- *    - free_irq / pci_free_irq_vectors
- *    - pci_iounmap
- *    - pci_release_regions
- *    - pci_disable_device
- *    - kfree
- * 4. 每轮循环只做一次最小 smoke：打开 /dev、触发一次 IRQ、确认 count>0，再卸载。
+ * ==================== 文件概述 ====================
+ *
+ * Day27 的核心目标：验证驱动在重复 insmod/rmmod 下是否稳定。
+ *
+ * 【学习焦点】
+ *   1. remove 对称性：probe 分配什么，remove 就释放什么，顺序相反
+ *   2. 200 次循环测试：验证无资源泄漏、无 oops/panic
+ *   3. MSI/LEGACY 回退：pci_alloc_irq_vectors 允许失败时回退
+ *   4. 最小化 probe：去掉 Day26 的 identity/liveness 读取，专注稳定性
+ *
+ * 【与 Day26 的核心区别】
+ *   Day26：追求用户态友好接口（read 文本、write 触发、详细错误码）
+ *   Day27：追求卸载稳定性（最小化 probe、严格对称 remove、循环测试）
+ *
+ * 【硬件模型】
+ *   与 Day25/Day26 完全相同：QEMU EDU 教学设备 (1234:11e8)
+ *   - BAR0 MMIO 映射到寄存器
+ *   - MSI 中断（优先）/LEGACY 中断（回退）
+ *   - IRQ_RAISE → 触发中断 → IRQ_ACK 清除
+ *
+ * ==================== 代码结构 ====================
+ *
+ *  1. 全局资源（模块级别）
+ *  2. EDU 寄存器读写封装
+ *  3. MSI 中断处理函数
+ *  4. 文本状态快照生成
+ *  5. file_operations（open/read/write/ioctl）
+ *  6. 字符设备注册/销毁
+ *  7. PCI probe/remove（对称性关键）
+ *  8. 模块 init/exit
+ *
+ * 【为什么这样组织？】
+ *   → 循环测试要求驱动尽量简单，任何冗余代码都可能成为不稳定因素
+ *   → 去掉 identity_value/liveness_value 读取，简化验证链路
+ *   → 所有资源分配/释放必须严格对称，200 次循环才能稳定
  */
+
 #include <linux/cdev.h>
 #include <linux/device.h>
 #include <linux/fs.h>
@@ -29,14 +52,37 @@
 #include "include/day27_edu_loop.h"
 #include "../include/day27_edu_uapi.h"
 
+/*
+ * ==================== 第1部分：全局字符设备资源 ====================
+ *
+ * 与 Day26 完全相同的全局资源设计。
+ *
+ * 【为什么需要全局资源？】
+ *   → 一个 major + 多个 minor：支持多个 EDU 设备
+ *   → class_create：sysfs 类，自动创建设备节点
+ *   → atomic_t minor：线程安全的 minor 号分配
+ */
 static dev_t g_day27_base_dev;
 static struct class *g_day27_class;
 static atomic_t g_day27_minor = ATOMIC_INIT(0);
 
 /*
- * 统一封装 BAR0 寄存器读写。Day27 没有复杂寄存器协议，只需要：
- * - 向 EDU 的 IRQ_RAISE 寄存器写入一个非 0 值来触发中断；
- * - 在 IRQ handler 中读取 IRQ_STATUS 并写 IRQ_ACK 完成清中断。
+ * ==================== 第2部分：EDU 寄存器读写封装 ====================
+ *
+ * 【与 Day26 的区别】
+ *   Day26 注释详细说明了为什么要封装，这里不再重复。
+ *   Day27 的封装是 inline 的（static inline），因为函数非常简单，
+ *   编译器会内联，减少函数调用开销（对 200 次循环有微小影响）。
+ *
+ * 【Day27 用到的寄存器】
+ *   - IRQ_STATUS (0x24)：读取中断状态
+ *   - IRQ_RAISE (0x60)：写入触发中断
+ *   - IRQ_ACK (0x64)：写入清除中断
+ *
+ * 【Day27 没用到但 Day26 用到的寄存器】
+ *   - IDENTITY (0x00)：Day26 probe 时读取验证
+ *   - LIVENESS (0x04)：Day26 probe 时读取验证
+ *   → Day27 简化掉了这些，因为链路已在 Day26 验证通过
  */
 static inline u32 day27_read32(struct day27_dev *d, u32 off)
 {
@@ -49,13 +95,20 @@ static inline void day27_write32(struct day27_dev *d, u32 off, u32 val)
 }
 
 /*
- * Day27 的中断处理函数非常克制：
- * 1. 先读 IRQ_STATUS；
- * 2. 记录本轮看到的 status 和累计次数；
- * 3. 把相同值写回 IRQ_ACK；
- * 4. 打日志，供 records 统计。
+ * ==================== 第3部分：MSI 中断处理函数 ====================
  *
- * 这样做的目的不是追求性能，而是为了在 200 次循环里最大化可观测性。
+ * 【与 Day26 的区别】
+ *   几乎完全相同。唯一区别是注释更强调"克制"和"可观测性"。
+ *
+ * 【为什么强调"克制"？】
+ *   → 200 次循环中，中断处理函数会被调用 200 次
+ *   → 如果 handler 太复杂，会增加延迟和不确定性
+ *   → Day27 的 handler 非常简洁：读状态→更新计数→写 ACK→日志
+ *
+ * 【为什么强调"可观测性"？】
+ *   → 每次中断都有 dev_info 日志
+ *   → 便于统计中断次数、验证循环是否正常
+ *   → 如果某轮循环中断没触发，日志中会明显看到 count 不增长
  */
 static irqreturn_t day27_irq_handler(int irq, void *opaque)
 {
@@ -63,32 +116,41 @@ static irqreturn_t day27_irq_handler(int irq, void *opaque)
     unsigned long flags;
     u32 status;
 
+    /* 第1步：读取中断状态寄存器 */
     status = day27_read32(d, DAY27_EDU_REG_IRQ_STATUS);
     if (!status)
-        return IRQ_NONE;
+        return IRQ_NONE;  /* 不是我们的中断，快速返回 */
 
+    /* 第2步：更新共享数据（需要加锁保护） */
     spin_lock_irqsave(&d->irq_lock, flags);
     d->irq_count++;
     d->last_irq_status = status;
     d->last_ack_value = status;
     spin_unlock_irqrestore(&d->irq_lock, flags);
 
-    /* EDU 需要把相同状态值写回 IRQ_ACK 以完成 ACK。 */
+    /* 第3步：清除中断（向 IRQ_ACK 写入相同值） */
     day27_write32(d, DAY27_EDU_REG_IRQ_ACK, status);
 
+    /* 第4步：打印日志（供 records 统计和调试） */
     dev_info(&d->pdev->dev,
              "irq handler: irq=%d status=0x%08x count=%llu\n",
              irq, status, d->irq_count);
+
     return IRQ_HANDLED;
 }
 
 /*
- * 把当前设备状态拼成一段文本。
- * Day27 的 read() 接口不追求结构化，而是为了 guest 脚本和 records 直观看到：
- * - 当前设备是谁；
- * - BAR0 资源范围；
- * - IRQ vector / irq_count；
- * - 最近一次中断的 status / ack。
+ * ==================== 第4部分：生成文本状态快照 ====================
+ *
+ * 【与 Day26 的区别】
+ *   Day26 输出包含 identity_value 和 liveness_inverted，
+ *   Day27 简化后不再有这些字段，所以文本快照也更精简。
+ *
+ * 【输出格式】
+ *   vendor=0x1234 device=0x11e8
+ *   bar0_start=0x... bar0_len=0x...
+ *   irq_vector=XX irq_count=YY msi_enabled=1
+ *   last_irq_status=0x... last_ack_value=0x...
  */
 static ssize_t day27_build_state_text(struct day27_dev *d, char *buf, size_t size)
 {
@@ -109,8 +171,10 @@ static ssize_t day27_build_state_text(struct day27_dev *d, char *buf, size_t siz
 }
 
 /*
- * open 只做最小工作：把 day27_dev 塞进 private_data，
- * 后续 read/write/ioctl 统一从 file->private_data 取设备上下文。
+ * ==================== 第5部分：file_operations ====================
+ *
+ * 【open】
+ *   与 Day26 完全相同：通过 container_of 从 inode 获取 day27_dev。
  */
 static int day27_open(struct inode *inode, struct file *file)
 {
@@ -119,6 +183,10 @@ static int day27_open(struct inode *inode, struct file *file)
     return 0;
 }
 
+/*
+ * 【read】
+ *   与 Day26 完全相同：返回文本状态快照。
+ */
 static ssize_t day27_read(struct file *file, char __user *buf, size_t count, loff_t *ppos)
 {
     struct day27_dev *d = file->private_data;
@@ -133,12 +201,19 @@ static ssize_t day27_read(struct file *file, char __user *buf, size_t count, lof
 }
 
 /*
- * write() 的语义是：用户态写一个十进制/十六进制整数，驱动把它写到 EDU 的 IRQ_RAISE 寄存器。
- * 约束：
- * - 不能为空；
- * - 不能太长；
- * - 必须能被解析成整数；
- * - 0 不允许，因为 Day27 约定“非 0 才触发中断”。
+ * 【write】
+ *   与 Day26 完全相同：解析整数、验证非零、写入 IRQ_RAISE。
+ *
+ * 【约束条件】
+ *   - 不能为空（count == 0）
+ *   - 不能太长（count >= 32）
+ *   - 必须能解析为整数
+ *   - 必须非零（v == 0 返回 -EINVAL）
+ *
+ * 【为什么 trigger 0 要报错？】
+ *   → 这是故意的负向测试设计
+ *   → 验证错误处理路径是否正确
+ *   → 避免用户误操作导致无意义的 0 值触发
  */
 static ssize_t day27_write(struct file *file, const char __user *buf,
                            size_t count, loff_t *ppos)
@@ -175,17 +250,24 @@ static ssize_t day27_write(struct file *file, const char __user *buf,
 }
 
 /*
- * ioctl 提供结构化接口，给用户态工具做更稳定的校验。
- * Day27 保留最小集合：
- * - GET_INFO：看设备/中断/最近状态；
- * - GET_IRQ_COUNT：看累计中断次数；
- * - RESET_STATS：把计数归零，方便每轮循环都从干净状态开始。
+ * 【ioctl】
+ *   Day27 的 ioctl 比 Day26 少一个 GET_IRQ_STATUS，但功能基本相同。
+ *
+ * 【保留的命令】
+ *   - GET_INFO：完整设备信息
+ *   - GET_IRQ_COUNT：中断计数
+ *   - RESET_STATS：重置计数
+ *
+ * 【去掉】
+ *   - Day26 的 GET_IRQ_STATUS（用 read() 文本状态代替）
+ *   → Day27 追求最小化，不需要那么细致的区分
  */
 static long day27_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
 {
     struct day27_dev *d = file->private_data;
 
     switch (cmd) {
+
     case DAY27_IOC_GET_INFO: {
         struct day27_info info = {
             .tool_api_version = DAY27_TOOL_API_VERSION,
@@ -203,17 +285,20 @@ static long day27_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
             return -EFAULT;
         return 0;
     }
+
     case DAY27_IOC_GET_IRQ_COUNT: {
         struct day27_irq_count cnt = { .count = d->irq_count };
         if (copy_to_user((void __user *)arg, &cnt, sizeof(cnt)))
             return -EFAULT;
         return 0;
     }
+
     case DAY27_IOC_RESET_STATS:
         d->irq_count = 0;
         d->last_irq_status = 0;
         d->last_ack_value = 0;
         return 0;
+
     default:
         return -ENOTTY;
     }
@@ -229,9 +314,19 @@ static const struct file_operations day27_fops = {
 };
 
 /*
- * 创建字符设备节点 /dev/day27_eduX。
- * 每次 probe 分配一个 minor，remove 时成对销毁。
- * Day27 循环稳定性的一个关键点就是：这里分配出去的对象必须在 remove 中完整回收。
+ * ==================== 第6部分：字符设备注册/销毁 ====================
+ *
+ * 【setup_chrdev】
+ *   与 Day26 完全相同：
+ *   1. atomic_fetch_add 分配 minor
+ *   2. MKDEV 构建设备号
+ *   3. cdev_init + cdev_add
+ *   4. device_create 创建设备节点
+ *
+ * 【destroy_chrdev】
+ *   与 Day26 完全相同：
+ *   1. device_destroy 销毁节点
+ *   2. cdev_del 从 VFS 删除
  */
 static int day27_setup_chrdev(struct day27_dev *d)
 {
@@ -257,9 +352,6 @@ static int day27_setup_chrdev(struct day27_dev *d)
     return 0;
 }
 
-/*
- * 与 day27_setup_chrdev() 对称的释放路径。
- */
 static void day27_destroy_chrdev(struct day27_dev *d)
 {
     if (d->device)
@@ -268,14 +360,30 @@ static void day27_destroy_chrdev(struct day27_dev *d)
 }
 
 /*
- * probe 路径：
- * 1. 分配软件对象；
- * 2. enable / request_regions / set_master；
- * 3. ioremap BAR0；
- * 4. 申请 MSI（失败时回退到 LEGACY）；
- * 5. request_irq；
- * 6. 创建字符设备；
- * 7. 打出足够多的日志，供 Day27 records 统计。
+ * ==================== 第7部分：PCI probe（最小化版本）====================
+ *
+ * 【与 Day26 probe 的区别】
+ *
+ *   Day26 probe 中：
+ *   - 读取 IDENTITY 寄存器验证
+ *   - 读取 LIVENESS 寄存器验证
+ *   - 读取 LIVENESS_INVERTED 计算
+ *
+ *   Day27 probe 中：
+ *   - 去掉以上所有，只保留最小必需操作
+ *   - 不再验证 MMIO 映射是否正确（Day26 已验证过）
+ *
+ * 【为什么简化？】
+ *   → 200 次循环中，每轮都做 ID/LIVENESS 验证是多余的
+ *   → 简化后的 probe 更快、更稳定、代码更少
+ *   → 如果链路有问题，smoke 测试（trigger + count）会捕获
+ *
+ * 【MSI/LEGACY 回退设计】
+ *   ret = pci_alloc_irq_vectors(pdev, 1, 1, PCI_IRQ_MSI | PCI_IRQ_LEGACY);
+ *
+ *   → 优先申请 MSI（性能更好）
+ *   → 如果 MSI 失败（比如虚拟化环境不支持），自动回退到 LEGACY
+ *   → 这样可以兼容更多的测试环境
  */
 static int day27_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 {
@@ -284,27 +392,36 @@ static int day27_probe(struct pci_dev *pdev, const struct pci_device_id *id)
 
     dev_info(&pdev->dev, "probe enter: %04x:%04x\n", pdev->vendor, pdev->device);
 
+    /* 第1步：分配私有数据结构 */
     d = kzalloc(sizeof(*d), GFP_KERNEL);
     if (!d)
         return -ENOMEM;
     d->pdev = pdev;
+
+    /* 关联私有数据到 PCI 设备 */
     pci_set_drvdata(pdev, d);
+
+    /* 初始化自旋锁 */
     spin_lock_init(&d->irq_lock);
 
+    /* 第2步：启用 PCI 设备 */
     ret = pci_enable_device(pdev);
     if (ret) {
         dev_err(&pdev->dev, "pci_enable_device failed: %d\n", ret);
         goto err_free;
     }
 
+    /* 第3步：请求 BAR 资源 */
     ret = pci_request_regions(pdev, DAY27_DRV_NAME);
     if (ret) {
         dev_err(&pdev->dev, "pci_request_regions failed: %d\n", ret);
         goto err_disable;
     }
 
+    /* 第4步：设置为主设备 */
     pci_set_master(pdev);
 
+    /* 第5步：获取 BAR0 信息 */
     d->bar0_start = pci_resource_start(pdev, 0);
     d->bar0_len   = pci_resource_len(pdev, 0);
     dev_info(&pdev->dev, "BAR0: start=0x%llx len=0x%llx flags=0x%lx\n",
@@ -312,6 +429,7 @@ static int day27_probe(struct pci_dev *pdev, const struct pci_device_id *id)
              (unsigned long long)d->bar0_len,
              (unsigned long)pci_resource_flags(pdev, 0));
 
+    /* 第6步：映射 BAR0 MMIO */
     d->bar0 = pci_iomap(pdev, 0, 0);
     if (!d->bar0) {
         ret = -ENOMEM;
@@ -320,7 +438,12 @@ static int day27_probe(struct pci_dev *pdev, const struct pci_device_id *id)
     }
 
     /*
-     * Day27 的重点是稳定性，所以这里优先申请 MSI，必要时允许回退到传统 LEGACY。
+     * 第7步：分配中断向量
+     *
+     * 【关键区别】Day27 使用 MSI|LEGACY 回退
+     *   - PCI_IRQ_MSI：优先使用消息信号中断
+     *   - PCI_IRQ_LEGACY：如果 MSI 不可用，回退到传统中断
+     *   - 第三个参数 1：只分配 1 个向量
      */
     ret = pci_alloc_irq_vectors(pdev, 1, 1, PCI_IRQ_MSI | PCI_IRQ_LEGACY);
     if (ret < 0) {
@@ -329,14 +452,18 @@ static int day27_probe(struct pci_dev *pdev, const struct pci_device_id *id)
     }
     d->irq_vector = pci_irq_vector(pdev, 0);
 
+    /* 第8步：注册中断处理函数 */
     ret = request_irq(d->irq_vector, day27_irq_handler, 0, DAY27_DRV_NAME, d);
     if (ret) {
         dev_err(&pdev->dev, "request_irq(%u) failed: %d\n", d->irq_vector, ret);
         goto err_irq_vectors;
     }
+
+    /* 打印 MSI/LEGACY 状态 */
     dev_info(&pdev->dev, "MSI vector=%u enabled=%u\n",
              d->irq_vector, !!pdev->msi_enabled);
 
+    /* 第9步：注册字符设备 */
     ret = day27_setup_chrdev(d);
     if (ret) {
         dev_err(&pdev->dev, "day27_setup_chrdev failed: %d\n", ret);
@@ -346,6 +473,7 @@ static int day27_probe(struct pci_dev *pdev, const struct pci_device_id *id)
     dev_info(&pdev->dev, "probe success\n");
     return 0;
 
+/* 错误处理标签（按分配倒序释放） */
 err_irq:
     free_irq(d->irq_vector, d);
 err_irq_vectors:
@@ -362,8 +490,30 @@ err_free:
 }
 
 /*
- * remove 路径必须与 probe 严格对称。
- * Day27 的 200 次循环能否通过，本质上就看这里会不会漏资源、会不会留下脏状态。
+ * ==================== 第8部分：PCI remove（严格对称）====================
+ *
+ * 【remove 对称性是 Day27 的核心】
+ *
+ * probe 分配的资源，必须按倒序在 remove 中释放：
+ *
+ *   probe:                     remove:
+ *   1. kzalloc            →    7. kfree
+ *   2. pci_enable_device  →    6. pci_disable_device
+ *   3. pci_request_regions →   5. pci_release_regions
+ *   4. pci_iomap          →    4. pci_iounmap
+ *   5. pci_alloc_irq_vec  →    3. pci_free_irq_vectors
+ *   6. request_irq        →    2. free_irq
+ *   7. setup_chrdev      →    1. destroy_chrdev
+ *
+ * 【为什么顺序重要？】
+ *   → 一些资源有依赖关系（比如 free_irq 需要 irq_vector）
+ *   → 必须先释放后代资源，再释放祖先资源
+ *   → 违反顺序会导致 use-after-free 或 double-free
+ *
+ * 【防御性检查】
+ *   → if (!d) return：防止重复 remove
+ *   → if (d->bar0) pci_iounmap：bar0 可能映射失败
+ *   → if (d->device) device_destroy：device 可能创建失败
  */
 static void day27_remove(struct pci_dev *pdev)
 {
@@ -373,17 +523,37 @@ static void day27_remove(struct pci_dev *pdev)
         return;
 
     dev_info(&pdev->dev, "remove enter\n");
+
+    /* 第1步：销毁字符设备 */
     day27_destroy_chrdev(d);
+
+    /* 第2步：释放中断处理函数 */
     free_irq(d->irq_vector, d);
+
+    /* 第3步：释放中断向量 */
     pci_free_irq_vectors(pdev);
+
+    /* 第4步：解除 MMIO 映射 */
     if (d->bar0)
         pci_iounmap(pdev, d->bar0);
+
+    /* 第5步：释放 BAR 资源 */
     pci_release_regions(pdev);
+
+    /* 第6步：禁用 PCI 设备 */
     pci_disable_device(pdev);
+
+    /* 第7步：释放私有数据内存 */
     kfree(d);
+
     dev_info(&pdev->dev, "remove leave\n");
 }
 
+/*
+ * ==================== 第9部分：pci_driver 定义 ====================
+ *
+ * 与 Day26 完全相同的 pci_driver 结构体。
+ */
 static const struct pci_device_id day27_pci_ids[] = {
     { PCI_DEVICE(DAY27_EDU_VENDOR_ID, DAY27_EDU_DEVICE_ID) },
     { }
@@ -397,6 +567,11 @@ static struct pci_driver day27_pci_driver = {
     .remove = day27_remove,
 };
 
+/*
+ * ==================== 第10部分：模块 init/exit ====================
+ *
+ * 与 Day26 完全相同的 init/exit 流程。
+ */
 static int __init day27_init(void)
 {
     int ret;
@@ -437,3 +612,68 @@ module_exit(day27_exit);
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("OpenAI");
 MODULE_DESCRIPTION("Day27 EDU loop/remove symmetry driver");
+
+/*
+ * ==================== 附录：200 次循环数据流 ====================
+ *
+ * 【循环架构】
+ *
+ *   Guest 用户态                    内核驱动                    EDU 硬件
+ *   ─────────────────────────────────────────────────────────────────────
+ *
+ *   for i in 1..200:
+ *       insmod day27_edu_loop.ko
+ *           │
+ *           ↓
+ *       pci_register_driver ────→ day27_probe()
+ *           │                        ├→ kzalloc
+ *           │                        ├→ pci_enable_device
+ *           │                        ├→ pci_request_regions
+ *           │                        ├→ pci_iomap
+ *           │                        ├→ pci_alloc_irq_vectors(MSI|LEGACY)
+ *           │                        ├→ request_irq
+ *           │                        └→ day27_setup_chrdev
+ *           │
+ *       open("/dev/day27_edu0")
+ *           │
+ *       write("1") ────────────────→ day27_write()
+ *           │                             └→ writel(1, IRQ_RAISE)
+ *           │                                    │
+ *           │                                    ↓
+ *           │                               [MSI 中断]
+ *           │                                    │
+ *           │              day27_irq_handler() ←─┘
+ *           │                    ├→ irq_count++
+ *           │                    └→ writel(status, IRQ_ACK)
+ *           │
+ *       ioctl(GET_IRQ_COUNT) ───→ irq_count > 0 ? pass : fail
+ *           │
+ *       rmmod day27_edu_loop
+ *           │
+ *           ↓
+ *       pci_unregister_driver ───→ day27_remove()
+ *                                        ├→ destroy_chrdev
+ *                                        ├→ free_irq
+ *                                        ├→ pci_free_irq_vectors
+ *                                        ├→ pci_iounmap
+ *                                        ├→ pci_release_regions
+ *                                        ├→ pci_disable_device
+ *                                        └→ kfree
+ *
+ *   loop-summary.txt:
+ *       loop_count=200
+ *       pass=200
+ *       fail=0
+ *
+ * 【关键观测点】
+ *
+ *   dmesg 中应该反复出现（每轮 2 次）：
+ *       "probe enter: 1234:11e8"
+ *       "probe success"
+ *       "irq handler: irq=XX status=0x... count=YY"  ← 每轮至少 1 次
+ *       "remove enter"
+ *       "remove leave"
+ *
+ *   如果失败，dmesg 中会出现：
+ *       "BUG:" / "Oops:" / "Kernel panic" / "hung task"
+ */

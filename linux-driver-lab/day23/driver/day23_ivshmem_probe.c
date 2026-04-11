@@ -75,6 +75,7 @@ static int day23_map_bar(struct day23_dev *d, int bar)
     if (!day23_bar_should_map(d->pdev, bar))
         return 0;
 
+    // 内核态：调用 pci_iomap() 或 ioremap()，将物理地址转为内核虚拟地址
     vaddr = pci_iomap(d->pdev, bar, 0);
     if (!vaddr) {
         dev_err(&d->pdev->dev, "BAR%d: pci_iomap failed\n", bar);
