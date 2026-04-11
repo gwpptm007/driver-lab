@@ -1096,7 +1096,7 @@ module_pci_driver(day24_pci_driver);
 /*
  * ==================== 模块信息 ====================
  */
-MODULE_AUTHOR("OpenAI / WangQi day24 lab");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("day24 ivshmem MMIO lab: BAR2 protocol + misc device + user tool");
 MODULE_LICENSE("GPL");
 

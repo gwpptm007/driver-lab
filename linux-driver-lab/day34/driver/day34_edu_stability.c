@@ -926,7 +926,7 @@ module_init(day34_init);
 module_exit(day34_exit);
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("OpenAI");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day34 stability EDU driver");
 
 /*

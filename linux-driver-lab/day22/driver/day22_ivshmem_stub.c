@@ -239,7 +239,7 @@ module_pci_driver(day22_pci_driver);
 /*
  * ==================== 模块信息 ====================
  */
-MODULE_AUTHOR("OpenAI / WangQi day22 lab scaffold");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("day22 ivshmem pci stub for learning probe/remove lifecycle");
 MODULE_LICENSE("GPL");
 

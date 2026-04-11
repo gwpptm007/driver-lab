@@ -1,62 +1,94 @@
 # driver-lab
 
-一个面向初学者的 Linux 驱动学习项目。
+一个以 **Linux 驱动学习 + 实验环境搭建 + 阶段交付收口** 为主线的项目仓库。
 
-仓库分为两部分：
+这套仓库不是只放单个 demo，而是把：
 
-- `kernel-src/`：准备实验环境
-- `linux-driver-lab/`：放每天的驱动代码、脚本和文档
+- 内核与 BusyBox 实验环境准备
+- 每日驱动代码与脚本
+- 回归记录与证据归档
+- 阶段总结与交付文档
+
+放在同一个项目里持续演进。
 
 ---
 
-## 顶层目录
+## 1. 仓库分层
 
 ```text
 driver-lab/
-├── kernel-src/
-│   ├── README.md
-│   ├── linux-5.15.10/
-│   │   ├── src/
-│   │   ├── build/
-│   │   │   ├── x86/
-│   │   │   └── arm64/
-│   │   └── output/
-│   │       ├── x86/
-│   │       └── arm64/
-│   └── busybox-1.36.1/
-│       ├── src/
-│       ├── build/
-│       │   ├── x86/
-│       │   └── arm64/
-│       └── output/
-│           ├── x86/
-│           └── arm64/
-└── linux-driver-lab/
-    ├── README.md
-    ├── docs/
-    ├── day01/
-    ├── day02/
-    ├── day03/
-    ├── day04/
-    ├── day05/
-    ├── day06/
-    ├── day07/
-    ├── day08/
-    └── day09/
+├── kernel-src/          内核 / BusyBox 环境准备说明与目录骨架
+└── linux-driver-lab/    day01 ~ day35 的代码、脚本、文档、records、阶段报告
 ```
 
+### `kernel-src/`
+负责说明实验环境依赖，包括：
+
+- Linux 内核源码与构建目录
+- BusyBox 源码与最小 rootfs 产物
+- x86 / arm64 的基础目录约定
+
+### `linux-driver-lab/`
+负责真正的学习主线，当前已经覆盖：
+
+- **W1：字符设备基础闭环**（day01 ~ day07）
+- **W2：platform / DT / IRQ / regmap / ftrace**（day08 ~ day14）
+- **W3：baseline / profile / perf / 回归收口**（day15 ~ day21）
+- **W4：PCIe 基本功作品线**（day22 ~ day28）
+- **W5：DMA / mmap / bench / perf / ftrace / stability**（day29 ~ day35）
+
+也就是说，仓库当前状态已经不再是“入门样例集合”，而是一条比较完整的驱动实验型学习路线。
+
 ---
 
-## 使用顺序
+## 2. 当前推荐阅读顺序
 
-1. 先阅读 `kernel-src/README.md`，准备 Linux 内核和 BusyBox 环境
-2. 再阅读 `linux-driver-lab/README.md`
-3. 按 day 目录逐步实验
+第一次看这个仓库，建议按下面顺序进入：
+
+1. `kernel-src/README.md`
+2. `linux-driver-lab/START_HERE_CURRENT.md`
+3. `linux-driver-lab/docs/CURRENT_PROJECT_REVIEW.md`
+4. `linux-driver-lab/README.md`
+5. 按阶段阅读：
+   - W3 总结入口：`linux-driver-lab/day21/FINAL_SUBMISSION.md`
+   - W4 总结入口：`linux-driver-lab/day28/README.md`
+   - W5 总结入口：`linux-driver-lab/day35/README.md`
 
 ---
 
-## 说明
+## 3. 当前仓库最适合怎么用
+
+### 用法 A：按学习路径逐天推进
+从 `linux-driver-lab/day01` 开始按 day 阅读与复现。
+
+### 用法 B：按阶段复盘
+如果你不是第一次看，建议直接看：
+
+- W1/W2：`linux-driver-lab/docs/W1_REVIEW.md`
+- W3：`linux-driver-lab/docs/W3_REVIEW.md`
+- W4：`linux-driver-lab/day28/README.md`
+- W5：`linux-driver-lab/day35/README.md`
+
+### 用法 C：做项目评审
+优先看：
+
+- `linux-driver-lab/START_HERE_CURRENT.md`
+- `linux-driver-lab/docs/CURRENT_PROJECT_REVIEW.md`
+- `linux-driver-lab/docs/PROGRESS.md`
+
+这 3 个文件是我这次按当前 day35 基线重新整理后的总览入口。
+
+---
+
+## 4. 当前项目状态一句话结论
+
+> 当前仓库已经完成从字符设备基础，到 platform/DT/IRQ，再到 PCIe/DMA/性能分析与稳定性验证的主线闭环；
+> 现在更适合作为“阶段性完整作品”来评审，而不是继续把它当成零散 demo 仓库来看。
+
+---
+
+## 5. 说明
 
 仓库中不提交 Linux 和 BusyBox 的完整源码内容。
 
-使用时请先把源码压缩包放到 `kernel-src/` 根目录，再按 `kernel-src/README.md` 的说明解压、编译并准备各平台产物。
+使用时请先根据 `kernel-src/README.md` 准备本地内核与 BusyBox 目录，再按 `linux-driver-lab/` 中各 day 的说明执行。

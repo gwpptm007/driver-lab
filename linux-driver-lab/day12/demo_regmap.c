@@ -788,5 +788,5 @@ module_init(demo_regmap_init);
 module_exit(demo_regmap_exit);
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("OpenAI");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day12 demo: regmap-backed shadow registers with debugfs snapshot");

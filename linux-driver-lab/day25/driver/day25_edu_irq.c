@@ -736,7 +736,7 @@ module_exit(day25_exit);
 /*
  * ==================== 模块信息 ====================
  */
-MODULE_AUTHOR("OpenAI");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day25 EDU MSI interrupt experiment");
 MODULE_LICENSE("GPL");
 

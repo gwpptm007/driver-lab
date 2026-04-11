@@ -1002,7 +1002,7 @@ static void __exit day32_exit(void)
 module_init(day32_init);
 module_exit(day32_exit);
 
-MODULE_AUTHOR("OpenAI");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day32 QEMU EDU perf driver");
 MODULE_LICENSE("GPL");
 

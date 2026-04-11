@@ -192,6 +192,6 @@ static struct pci_driver day23_pci_driver = {
 
 module_pci_driver(day23_pci_driver);
 
-MODULE_AUTHOR("OpenAI / WangQi day23 lab");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("day23 ivshmem pci probe lab: enable/request/iomap/remove");
 MODULE_LICENSE("GPL");

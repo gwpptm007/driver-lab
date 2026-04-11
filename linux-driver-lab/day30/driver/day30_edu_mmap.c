@@ -915,7 +915,7 @@ static void __exit day30_exit(void)
 module_init(day30_init);
 module_exit(day30_exit);
 
-MODULE_AUTHOR("OpenAI");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day30 QEMU EDU coherent DMA mmap zero-copy driver");
 MODULE_LICENSE("GPL");
 

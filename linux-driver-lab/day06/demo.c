@@ -653,5 +653,5 @@ module_init(demo_init);
 module_exit(demo_exit);
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Wang Qi");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day06 demo: regression/stress baseline for waitqueue/workqueue driver");

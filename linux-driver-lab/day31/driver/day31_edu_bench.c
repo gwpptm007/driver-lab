@@ -818,7 +818,7 @@ static void __exit day31_exit(void)
 module_init(day31_init);
 module_exit(day31_exit);
 
-MODULE_AUTHOR("OpenAI");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day31 QEMU EDU bench driver");
 MODULE_LICENSE("GPL");
 

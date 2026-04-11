@@ -828,7 +828,7 @@ static void __exit day29_exit(void)
 module_init(day29_init);
 module_exit(day29_exit);
 
-MODULE_AUTHOR("OpenAI");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day29 QEMU EDU coherent DMA round-trip driver");
 MODULE_LICENSE("GPL");
 

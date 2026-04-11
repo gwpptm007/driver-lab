@@ -610,7 +610,7 @@ module_init(day27_init);
 module_exit(day27_exit);
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("OpenAI");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day27 EDU loop/remove symmetry driver");
 
 /*

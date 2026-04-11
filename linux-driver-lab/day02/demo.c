@@ -90,4 +90,4 @@ module_init(demo_init);
 module_exit(demo_exit);
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("WQ7");
+MODULE_AUTHOR("Richer Wong");

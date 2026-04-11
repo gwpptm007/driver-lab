@@ -1,29 +1,139 @@
 # linux-driver-lab
 
-Linux 驱动学习实验目录。
+Linux 驱动学习实验主目录。
 
-这里放的是每天的实验代码、测试脚本、README 和学习记录。
-环境准备不在本目录处理，请先阅读：
+这里放的是 day01 ~ day35 的：
 
-- `../kernel-src/README.md`
+- 驱动代码
+- 构建脚本
+- QEMU / rootfs 配套脚本
+- records 证据归档
+- 阶段总结文档
+
+当前这套目录已经形成了比较完整的 **W1 ~ W5 学习闭环**。
 
 ---
 
-## 目录概览
+## 1. 先看哪里
+
+建议先看：
+
+1. `START_HERE_CURRENT.md`
+2. `docs/CURRENT_PROJECT_REVIEW.md`
+3. `docs/PROGRESS.md`
+
+如果你是第一次接触本仓库，再补：
+
+4. `../kernel-src/README.md`
+5. 本文件（`README.md`）
+
+---
+
+## 2. 当前目录概览
 
 ```text
 linux-driver-lab/
 ├── README.md
+├── START_HERE_CURRENT.md             当前仓库总入口（本次新整理）
+├── POST_DAY35_LEARNING_ROADMAP.md    day35 后续学习路线草案
 ├── docs/
-├── day01/ ~ day14/   字符设备 / platform_driver / DT / regmap / irq / ftrace 基础线
-├── day15/ ~ day18/   配置裁剪 / profile / perf 能力收口
-├── day19/ ~ day21/   回归套件 / 总结 / 最终交付文档线
-└── day22/ ~ day35/   PCIe 作品线（W4-W5）
+│   ├── CURRENT_PROJECT_REVIEW.md     当前项目状态深度整理（本次新整理）
+│   ├── PROGRESS.md                   当前进度与阶段结论（本次更新）
+│   ├── ROADMAP.md
+│   ├── W1_REVIEW.md
+│   ├── W3_REVIEW.md
+│   ├── W4_PCIE_PLAN.md
+│   └── W5_DMA_PERF_PLAN.md
+├── day01/  ~ day07/                  W1：字符设备基础闭环
+├── day08/  ~ day14/                  W2：platform / DT / IRQ / regmap / ftrace
+├── day15/  ~ day21/                  W3：baseline / 裁剪 / perf / 回归 / 提交收口
+├── day22/  ~ day28/                  W4：PCIe 基本功作品线
+└── day29/  ~ day35/                  W5：DMA / mmap / bench / perf / ftrace / stability
 ```
 
 ---
 
-## 环境依赖
+## 3. 当前阶段划分
+
+### W1：day01 ~ day07
+主题：字符设备基础闭环
+
+覆盖：
+- miscdevice / file_operations
+- ioctl
+- sysfs / debugfs
+- waitqueue / workqueue
+- 回归脚本与并发压测
+
+### W2：day08 ~ day14
+主题：嵌入式通用驱动套路
+
+覆盖：
+- platform_driver
+- Device Tree 匹配与资源解析
+- request_irq
+- workqueue bottom-half
+- regmap
+- function_graph
+- bring-up checklist
+
+### W3：day15 ~ day21
+主题：工程化收口
+
+覆盖：
+- baseline 冻结
+- 配置裁剪
+- tracing / perf 能力保留
+- 对比与回归自动化
+- 阶段总结与提交物生成
+
+### W4：day22 ~ day28
+主题：PCIe 基本功作品线
+
+覆盖：
+- PCI 枚举与 `lspci -vv`
+- `pci_driver` 骨架
+- BAR / MMIO / 共享内存协议
+- MSI / 用户态接口
+- remove / 循环装卸 / 证据收口
+
+### W5：day29 ~ day35
+主题：DMA 与性能分析作品线
+
+覆盖：
+- coherent DMA
+- `mmap` 零拷贝
+- bench
+- perf / function_graph
+- 稳定性与错误注入
+- 阶段性能与风险报告
+
+---
+
+## 4. 当前项目的一句话定位
+
+> 这不是“学几个驱动 API”的目录，而是一套从最小驱动骨架，一直走到 PCIe / DMA / perf / 稳定性报告的实验型驱动学习项目。
+
+---
+
+## 5. 当前最适合评审的入口
+
+### 看 W3 收口
+- `day21/FINAL_SUBMISSION.md`
+
+### 看 W4 收口
+- `day28/README.md`
+
+### 看 W5 收口
+- `day35/README.md`
+
+### 看整体判断
+- `docs/CURRENT_PROJECT_REVIEW.md`
+- `docs/PROGRESS.md`
+
+---
+
+## 6. 环境依赖
 
 本目录中的实验通常依赖：
 
@@ -31,7 +141,7 @@ linux-driver-lab/
 - x86 内核镜像：`../kernel-src/linux-5.15.10/output/x86/bzImage`
 - x86 BusyBox 安装目录：`../kernel-src/busybox-1.36.1/output/x86/_install`
 
-如果要做 arm64 相关实验，则对应使用：
+如果做 arm64 相关实验，则通常使用：
 
 - arm64 内核构建目录：`../kernel-src/linux-5.15.10/build/arm64`
 - arm64 内核镜像：`../kernel-src/linux-5.15.10/output/arm64/Image`
@@ -39,50 +149,23 @@ linux-driver-lab/
 
 ---
 
-## 当前内容
+## 7. 当前建议阅读顺序
 
-### day01 ~ day07
-字符设备基础、ioctl/sysfs/debugfs、waitqueue/workqueue、回归脚本与阶段总结。
+### 情况 A：你想从头学
+按 `day01 -> day35` 顺序推进。
 
-### day08 ~ day14
-platform_driver、Device Tree、request_irq、中断计数、bottom half、regmap、ftrace 和 bring-up checklist。
+### 情况 B：你想快速看当前完成度
+按下面顺序：
 
-### day15 ~ day18
-裁剪、profile、perf/tracing 能力保持、结果比对与交付收口。
+1. `START_HERE_CURRENT.md`
+2. `docs/CURRENT_PROJECT_REVIEW.md`
+3. `day21/FINAL_SUBMISSION.md`
+4. `day28/README.md`
+5. `day35/README.md`
 
-### day19 ~ day21
-回归方案、总结文档、最终提交版报告与脚本化输出。
+### 情况 C：你想开始做代码评审
+优先看：
 
-### day22 ~ day28（W4）
-PCIe 基本功学习线：  
-QEMU PCI 设备选型（ivshmem）→ day22 设备可见性 → day23 `pci_driver` 骨架与 BAR 资源接管 → day24 MMIO/共享内存协议 → day25 消息中断向量 → day26 用户态工具 → day27 remove/循环卸载 → day28 证据归档。
-
-### day29 ~ day35（W5）
-DMA/性能分析学习线：  
-DMA-capable 设备（QEMU EDU）→ `dma_alloc_coherent` → `mmap` 零拷贝 → bench → perf → ftrace → 稳定性 → 性能与风险报告。
-
----
-
-## W4-W5 当前推荐路线
-
-- **W4 使用 ivshmem-doorbell**
-  - 先把 PCI 设备发现、BAR、MMIO、共享内存、消息中断、用户态接口、remove 对称释放这套基本功学透。
-- **W5 使用 DMA-capable 设备（推荐 QEMU EDU）**
-  - 再把 `dma_alloc_coherent`、DMA 校验、`mmap`、bench、perf、ftrace、并发与稳定性做成“真闭环”。
-
-也就是说：
-- W4 是 PCI 基本功线；
-- W5 是 DMA/性能分析线；
-- 两段组合成最终的 PCIe 作品。
-
----
-
-## 建议阅读顺序
-
-1. `docs/W3_REVIEW.md`
-2. `docs/W3_BASELINE_AND_REGRESSION_GUIDE.md`
-3. `docs/W4_PCIE_PLAN.md`
-4. `docs/W5_DMA_PERF_PLAN.md`
-5. `day22/START_HERE.md`
-6. `day29/START_HERE.md`
-7. 之后按 day22 → day35 顺序推进
+- W1 / W2 的接口和基础套路
+- W4 / W5 的 records、脚本、输出物
+- `docs/PROGRESS.md` 中的“当前开放项”

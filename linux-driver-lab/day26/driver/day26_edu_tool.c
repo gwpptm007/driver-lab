@@ -777,7 +777,7 @@ module_init(day26_init);
 module_exit(day26_exit);
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("OpenAI");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day26 EDU userspace-friendly tool driver");
 
 /*

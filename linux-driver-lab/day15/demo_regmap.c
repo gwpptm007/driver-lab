@@ -1129,5 +1129,5 @@ module_init(demo_regmap_init);
 module_exit(demo_regmap_exit);
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("OpenAI");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day13 demo: function_graph tracing over regmap-backed IRQ/workqueue path");

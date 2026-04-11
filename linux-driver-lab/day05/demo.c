@@ -665,5 +665,5 @@ module_init(demo_init);
 module_exit(demo_exit);
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Wang Qi");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day05 demo: waitqueue + workqueue + blocking read");

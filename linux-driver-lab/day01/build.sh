@@ -84,8 +84,8 @@ if [ -f test_ioctl.c ]; then
 fi
 
 echo "[STEP 2] 重新准备 rootfs，避免旧文件污染"
-rm -rf "$ROOTFS"
-mkdir -p "$ROOTFS"/{bin,dev,proc,sys,etc,sbin,tmp}
+rm -rf -- "${ROOTFS:?}"
+mkdir -p "${ROOTFS}"/{bin,dev,proc,sys,etc,sbin,tmp}
 
 # 拷贝 busybox，并创建常用命令软链接。
 cp "$BUSYBOX_PATH" "$ROOTFS/bin/busybox"

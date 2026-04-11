@@ -855,7 +855,7 @@ static void __exit day33_exit(void)
 module_init(day33_init);
 module_exit(day33_exit);
 
-MODULE_AUTHOR("OpenAI");
+MODULE_AUTHOR("Richer Wong");
 MODULE_DESCRIPTION("Day33 QEMU EDU trace driver");
 MODULE_LICENSE("GPL");
 
