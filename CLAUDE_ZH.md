@@ -19,7 +19,7 @@
 每个 day 目录通常包含一个 `build.sh` 脚本，执行完整的实验流程：
 
 ```bash
-cd linux-driver-lab/dayXX
+cd linux-driver-lab/foundation/dayXX
 chmod +x build.sh
 ./build.sh
 ```
@@ -203,11 +203,11 @@ find . | cpio -o -H newc | gzip -9 > ../rootfs.img
 ### 新用户阅读顺序
 
 理解项目结构和学习路径的顺序：
-1. `linux-driver-lab/README.md` - 整体路线图
-2. `docs/FILE_GUIDE.md` - 文件用途说明
-3. `docs/ROADMAP.md` - 按周学习目标
-4. 各日期的 `README.md` - 具体主题
-5. 后续周：`START_HERE.md` → `docs/01_overview.md` 等
+1. `linux-driver-lab/START_HERE_CURRENT.md` - 当前项目状态与导航
+2. `linux-driver-lab/README.md` - 整体路线图
+3. `linux-driver-lab/foundation/README.md` - 基础学习区入口
+4. `linux-driver-lab/docs/PROGRESS.md` - 当前进度与开放项
+5. 各日期的 `foundation/dayXX/README.md` - 具体主题
 
 ### W4-W5 整合
 

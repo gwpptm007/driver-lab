@@ -19,7 +19,7 @@ This is a Linux driver learning laboratory organized into 35 days (day01-day35) 
 Each day directory typically contains a `build.sh` script that performs the complete experiment chain:
 
 ```bash
-cd linux-driver-lab/dayXX
+cd linux-driver-lab/foundation/dayXX
 chmod +x build.sh
 ./build.sh
 ```
@@ -203,11 +203,11 @@ Always implement symmetric resource management:
 ### Reading Order for New Users
 
 For understanding the project structure and learning path:
-1. `linux-driver-lab/README.md` - Overall roadmap
-2. `docs/FILE_GUIDE.md` - File purpose explanation
-3. `docs/ROADMAP.md` - Week-by-week learning goals
-4. Individual day `README.md` files for specific topics
-5. Later weeks: `START_HERE.md` → `docs/01_overview.md` etc.
+1. `linux-driver-lab/START_HERE_CURRENT.md` - Current project status and navigation
+2. `linux-driver-lab/README.md` - Overall roadmap
+3. `linux-driver-lab/foundation/README.md` - Foundation learning path
+4. `linux-driver-lab/docs/PROGRESS.md` - Current progress and open items
+5. Individual `foundation/dayXX/README.md` files for specific topics
 
 ### W4-W5 Integration
 

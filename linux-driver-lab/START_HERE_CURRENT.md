@@ -33,13 +33,13 @@
 - `docs/PROGRESS.md`
 
 ### 入口 3：W3 收口
-- `day21/FINAL_SUBMISSION.md`
+- `foundation/day21/FINAL_SUBMISSION.md`
 
 ### 入口 4：W4 收口
-- `day28/README.md`
+- `foundation/day28/README.md`
 
 ### 入口 5：W5 收口
-- `day35/README.md`
+- `foundation/day35/README.md`
 
 如果你只想花最少时间评审当前仓库，这 5 个入口已经够用了。
 
@@ -73,14 +73,14 @@
 
 ### 方式 B：看是否已经形成阶段交付物
 看：
-- `day21/FINAL_SUBMISSION.md`
-- `day28/README.md`
-- `day35/README.md`
+- `foundation/day21/FINAL_SUBMISSION.md`
+- `foundation/day28/README.md`
+- `foundation/day35/README.md`
 
 ### 方式 C：看是否具备后续扩展基础
 看：
 - W4 / W5 的脚本、records、输出物
-- `POST_DAY35_LEARNING_ROADMAP.md`
+- `EXTENSION_ROADMAP.md`
 
 ---
 
