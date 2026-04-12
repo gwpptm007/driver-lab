@@ -11,6 +11,7 @@ linux-driver-lab/
 ├── README.md
 ├── START_HERE_CURRENT.md             当前仓库总入口
 ├── EXTENSION_ROADMAP.md             扩展学习路线图（后续新建主题）
+├── POST_DAY35_MASTER_REVIEW_AND_ROADMAP.md  ⭐ 评审结论 + 执行路线总文档
 ├── docs/                              项目文档
 ├── foundation/                        ⭐ 基础学习区（day01~day35 已收拢）
 │   ├── README.md                      foundation 学习路径说明
@@ -28,9 +29,10 @@ linux-driver-lab/
 ## 先看哪里
 
 1. `START_HERE_CURRENT.md`
-2. `foundation/README.md` — 基础学习区入口
-3. `docs/CURRENT_PROJECT_REVIEW.md`
-4. `docs/PROGRESS.md`
+2. `POST_DAY35_MASTER_REVIEW_AND_ROADMAP.md` — 当前最完整的评审与路线建议
+3. `foundation/README.md` — 基础学习区入口
+4. `docs/CURRENT_PROJECT_REVIEW.md`
+5. `docs/PROGRESS.md`
 
 如果你是第一次接触本仓库，再补：
 
@@ -82,10 +84,11 @@ chmod +x build.sh
 
 ### 情况 B：你想快速看完成度
 1. `START_HERE_CURRENT.md`
-2. `foundation/README.md`
-3. `foundation/day21/FINAL_SUBMISSION.md`
-4. `foundation/day28/README.md`
-5. `foundation/day35/README.md`
+2. `POST_DAY35_MASTER_REVIEW_AND_ROADMAP.md`
+3. `foundation/README.md`
+4. `foundation/day21/FINAL_SUBMISSION.md`
+5. `foundation/day28/README.md`
+6. `foundation/day35/README.md`
 
 ### 情况 C：你想开始做代码评审
 - `docs/PROGRESS.md` 中的"当前开放项"

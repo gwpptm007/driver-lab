@@ -29,19 +29,22 @@
 ### 入口 1：整体判断
 - `docs/CURRENT_PROJECT_REVIEW.md`
 
-### 入口 2：当前进度
+### 入口 2：总评审与后续路线
+- `POST_DAY35_MASTER_REVIEW_AND_ROADMAP.md`
+
+### 入口 3：当前进度
 - `docs/PROGRESS.md`
 
-### 入口 3：W3 收口
+### 入口 4：W3 收口
 - `foundation/day21/FINAL_SUBMISSION.md`
 
-### 入口 4：W4 收口
+### 入口 5：W4 收口
 - `foundation/day28/README.md`
 
-### 入口 5：W5 收口
+### 入口 6：W5 收口
 - `foundation/day35/README.md`
 
-如果你只想花最少时间评审当前仓库，这 5 个入口已经够用了。
+如果你只想花最少时间评审当前仓库，这 6 个入口已经够用了。
 
 ---
 
@@ -80,6 +83,7 @@
 ### 方式 C：看是否具备后续扩展基础
 看：
 - W4 / W5 的脚本、records、输出物
+- `POST_DAY35_MASTER_REVIEW_AND_ROADMAP.md`
 - `EXTENSION_ROADMAP.md`
 
 ---
