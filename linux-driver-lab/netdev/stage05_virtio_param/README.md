@@ -1,16 +1,30 @@
 # stage05_virtio_param
 
 ## 阶段定位
-virtio-net 对照 + 平台参数化
 
-## 阶段说明
-本阶段不做大迁移，先做对照分析和工程参数化。
+Stage05 的核心是两件事：
 
-## 核心任务
-- [ ] 精读 virtio-net 主路径
-- [ ] 对照自研 ring 与 vring
-- [ ] 把 env/scripts 参数化
-- [ ] 准备 ARM64 迁移差异清单
+- `virtio-net` 对照学习
+- 平台参数化准备
 
-## 当前状态
-本阶段当前只落了目录骨架与说明文档，后续将按阶段逐步实现。
+它不新增一套教学网卡实现，而是把 `stage01 ~ stage04` 建立起来的：
+
+- `net_device`
+- `skb`
+- NAPI
+- ring / descriptor
+- RX replenishment
+
+映射到真实的成熟实现 `virtio-net` 上；同时把后续 ARM64 迁移需要的平台差异先抽到 env / scripts 层。
+
+## 本阶段产出
+
+- `virtio_net.c` 阅读地图
+- `stage04 ↔ virtio-net` 对照报告
+- 平台矩阵
+- 可 source 的 resolved env
+- 阶段总报告
+
+## 一句话总结
+
+> stage05 不是重写驱动，而是把 stage04 的教学坐标系升级成能与 `virtio-net` 对话、并能迁移到多平台的工程化坐标系。
