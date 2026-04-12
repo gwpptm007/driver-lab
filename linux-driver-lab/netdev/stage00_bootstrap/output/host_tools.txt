@@ -1,0 +1,6 @@
+OK  bash -> /usr/bin/bash
+OK  make -> /usr/bin/make
+OK  gcc -> /usr/bin/gcc
+OK  ip -> /usr/sbin/ip
+OK  ethtool -> /usr/sbin/ethtool
+OK  perf -> /usr/bin/perf
