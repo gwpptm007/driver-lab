@@ -60,7 +60,7 @@ map_hit() {
     map_hit 'probe' 'virtnet_probe\s*\('
     map_hit 'open' 'virtnet_open\s*\('
     map_hit 'close' 'virtnet_close\s*\('
-    map_hit 'xmit' 'virtnet_xmit\s*\('
+    map_hit 'xmit' 'start_xmit\s*\('
     map_hit 'poll' 'virtnet_poll\s*\('
     map_hit 'refill' 'try_fill_recv\s*\('
 } > "$OUT_FILE"

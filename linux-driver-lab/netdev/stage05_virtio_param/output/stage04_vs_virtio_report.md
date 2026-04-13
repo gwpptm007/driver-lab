@@ -1,8 +1,8 @@
 # stage04 vs virtio-net 对照报告
 
-- stage04 driver: /mnt/data/stage05_work/netdev/stage04_ring_dma/driver/netdev_stage04.c
+- stage04 driver: /home/wq7/workspace/driver-lab/linux-driver-lab/netdev/stage04_ring_dma/driver/netdev_stage04.c
 - stage04 visible: yes
-- virtio-net source: not found in current environment
+- virtio-net source: /home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/src/drivers/net/virtio_net.c
 
 ## northbound 继续保留
 
