@@ -94,13 +94,23 @@ enum stage04_desc_owner {
 };
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 8, 0)
+/* 6.8+: returns flags via return value */
 #define STAGE04_U64_UPDATE_BEGIN(syncp, flags) \
 	do { (flags) = u64_stats_update_begin_irqsave((syncp)); } while (0)
 #define STAGE04_U64_FETCH_BEGIN(syncp, start) \
 	do { (start) = u64_stats_fetch_begin((syncp)); } while (0)
 #define STAGE04_U64_FETCH_RETRY(syncp, start) \
 	u64_stats_fetch_retry((syncp), (start))
+#elif LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0)
+/* 5.15-6.7: 1-arg form, returns void */
+#define STAGE04_U64_UPDATE_BEGIN(syncp, flags) \
+	u64_stats_update_begin_irqsave((syncp))
+#define STAGE04_U64_FETCH_BEGIN(syncp, start) \
+	do { (start) = u64_stats_fetch_begin((syncp)); } while (0)
+#define STAGE04_U64_FETCH_RETRY(syncp, start) \
+	u64_stats_fetch_retry((syncp), (start))
 #else
+/* 5.14 and older: 2-arg form */
 #define STAGE04_U64_UPDATE_BEGIN(syncp, flags) \
 	u64_stats_update_begin_irqsave((syncp), (flags))
 #define STAGE04_U64_FETCH_BEGIN(syncp, start) \

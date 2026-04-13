@@ -75,7 +75,7 @@ build-module: prepare
 		echo "[stage04] build-module requires matching kernel headers."; \
 		exit 2; \
 	fi
-	$(MAKE) -C $(KDIR) M=$(DRIVER_DIR) modules
+	$(MAKE) -C $(KDIR) M=$(DRIVER_DIR) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) modules
 	@cp -f $(DRIVER_DIR)/$(MODULE_NAME).ko $(OUTPUT_DIR)/ 2>/dev/null || true
 	@echo "[stage04] built module: $(OUTPUT_DIR)/$(MODULE_NAME).ko"
 
