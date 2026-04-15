@@ -42,8 +42,12 @@
 3. `docs/02_MIGRATION_STRATEGY.md`
 4. `docs/04_BUILD_AND_RUN_FLOW.md`
 5. `docs/05_DIFF_AND_ACCEPTANCE.md`
-6. `include/netdev_kcompat.h`
-7. `scripts/smoke.sh`
+6. `docs/STAGE06_CLOSEOUT_EXECUTION_CHECKLIST.md`
+7. `docs/STAGE06_ACCEPTANCE_CHECKLIST.md`
+8. `docs/STAGE06_MIGRATION_MAPPING.md`
+9. `docs/STAGE06_KNOWN_ISSUES.md`
+10. `include/netdev_kcompat.h`
+11. `scripts/smoke.sh`
 
 ## 常用命令
 
@@ -63,3 +67,16 @@ make smoke
 stage06 的目标不是“从零再学一遍网络驱动”，而是：
 
 > **把前面已经学会、已经测过的 netdev 主线迁到 ARM64，并把整个实验方法做成平台可配置、可比较、可复盘的版本。**
+
+
+## 本次最新补充
+
+本次在不改动主代码基线的前提下，补进了 stage06 收口所需的关键执行文档：
+
+- `docs/STAGE06_CLOSEOUT_EXECUTION_CHECKLIST.md`
+- `docs/STAGE06_ACCEPTANCE_CHECKLIST.md`
+- `docs/STAGE06_MIGRATION_MAPPING.md`
+- `docs/STAGE06_KNOWN_ISSUES.md`
+- `reports/README.md`
+
+这些文档的作用是把当前已经形成的 ARM64 迁移框架，进一步收成“可复现、可验收、可继续承接 stage07”的阶段节点。

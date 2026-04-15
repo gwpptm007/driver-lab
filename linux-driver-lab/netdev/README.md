@@ -72,3 +72,16 @@
 这条线不是“从 ARM64 开始学网络驱动”，而是：
 
 > 先把 netdev 本体学清楚，再把它迁到 ARM64，并把整个实验做成平台可配置、可观测、可评审的作品线。
+
+
+## 当前最新推进建议
+
+如果以当前完整基线继续往前走，建议路线明确为：
+
+1. 先把 `stage06_arm64_migration` 真正收口
+2. 再开 `stage07_real_queue_model`
+
+对应文档入口：
+
+- `stage06_arm64_migration/docs/STAGE06_CLOSEOUT_EXECUTION_CHECKLIST.md`
+- `docs/10_STAGE06_CLOSEOUT_AND_STAGE07_DIRECTION.md`

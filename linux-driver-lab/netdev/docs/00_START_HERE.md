@@ -9,6 +9,7 @@
 3. `03_DEVICE_ROUTE_DECISION.md`
 4. `06_ACCEPTANCE_AND_MILESTONES.md`
 5. `08_PLATFORM_STRATEGY.md`
+6. `10_STAGE06_CLOSEOUT_AND_STAGE07_DIRECTION.md`
 
 ## 先回答的三个问题
 
@@ -40,3 +41,11 @@
 - `stage01~stage04`：专注 netdev 本体
 - `stage05`：`virtio-net` 对照 + 平台参数化
 - `stage06`：ARM64 迁移与跨平台收口
+
+
+## 当前下一步建议
+
+如果你是按当前最新完整项目继续推进，建议优先读：
+
+- `stage06_arm64_migration/docs/STAGE06_CLOSEOUT_EXECUTION_CHECKLIST.md`
+- `docs/10_STAGE06_CLOSEOUT_AND_STAGE07_DIRECTION.md`

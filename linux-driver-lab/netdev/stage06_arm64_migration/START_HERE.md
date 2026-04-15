@@ -59,3 +59,21 @@ make smoke
 - 生成平台矩阵
 - 生成迁移差异报告
 - 生成 stage06 阶段报告
+### 第六步
+看新增的 3 份收口文档：
+
+- `docs/STAGE06_CLOSEOUT_EXECUTION_CHECKLIST.md`
+- `docs/STAGE06_ACCEPTANCE_CHECKLIST.md`
+- `docs/STAGE06_MIGRATION_MAPPING.md`
+
+这三份文档分别回答：
+- 现在先改什么
+- 怎么判断 stage06 真正完成
+- 哪些逻辑不变、哪些是平台差异
+
+### 第七步
+再看：
+
+- `docs/STAGE06_KNOWN_ISSUES.md`
+
+它把当前真实踩过的 ARM64 / rootfs / kernel config / 路径问题收成了问题清单。

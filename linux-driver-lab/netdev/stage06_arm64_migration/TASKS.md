@@ -57,3 +57,13 @@ NAPI poll 在 ARM64 上正常工作 ✅
 1. 把 smoke test 集成到 `make smoke TARGET=qemu-arm64` 入口（当前需要手动跑 QEMU）
 2. ARM64 rootfs 生成脚本化（整合到 Makefile）
 3. 把 ARM64 smoke 结果同步回本地 records/
+
+
+## 当前专家建议的收口重点
+
+- [ ] 清理 `check_platform_env.sh` 与 `resolve_platform_env.sh` 中的个人路径 fallback
+- [ ] 把 build / dry-run / smoke 入口继续抽象成更通用的 profile 入口
+- [ ] 新增并维护正式验收表：`docs/STAGE06_ACCEPTANCE_CHECKLIST.md`
+- [ ] 新增迁移映射说明：`docs/STAGE06_MIGRATION_MAPPING.md`
+- [ ] 新增问题清单：`docs/STAGE06_KNOWN_ISSUES.md`
+- [ ] 明确 `output/`、`records/`、`reports/` 的职责边界

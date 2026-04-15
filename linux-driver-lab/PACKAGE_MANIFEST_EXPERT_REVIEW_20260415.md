@@ -31,3 +31,29 @@
 4. `docs/ARCHITECTURE_LAYERING_EXPERT.md`
 5. `docs/COMPLETION_MATRIX_EXPERT.md`
 6. `docs/NEXT_STEP_EXECUTION_PLAN_EXPERT.md`
+
+## 本轮继续补充（stage06/stage07 规划）
+
+### 新增文档
+
+1. `netdev/stage06_arm64_migration/docs/STAGE06_CLOSEOUT_EXECUTION_CHECKLIST.md`
+2. `netdev/stage06_arm64_migration/docs/STAGE06_ACCEPTANCE_CHECKLIST.md`
+3. `netdev/stage06_arm64_migration/docs/STAGE06_MIGRATION_MAPPING.md`
+4. `netdev/stage06_arm64_migration/docs/STAGE06_KNOWN_ISSUES.md`
+5. `netdev/docs/10_STAGE06_CLOSEOUT_AND_STAGE07_DIRECTION.md`
+6. `netdev/stage06_arm64_migration/reports/README.md`
+
+### 更新文档
+
+1. `netdev/stage06_arm64_migration/README.md`
+2. `netdev/stage06_arm64_migration/START_HERE.md`
+3. `netdev/stage06_arm64_migration/TASKS.md`
+4. `netdev/README.md`
+5. `netdev/docs/00_START_HERE.md`
+
+### 本轮目标
+
+- 把“下一步先做什么”正式沉淀到工程里
+- 把 stage06 的收口动作写成可执行清单
+- 把 stage06 的验收、迁移映射、已知问题独立成文
+- 明确 stage07 的推荐方向，避免后续推进跑偏
