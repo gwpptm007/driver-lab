@@ -1,4 +1,4 @@
-# 当前仓库总入口（按 day35 基线整理）
+# 当前仓库总入口（按最新完整项目基线整理）
 
 这个文件不是讲某一天，而是帮助你在 **day01 ~ day35 已经存在的大量材料里快速建立全局视角**。
 
@@ -6,14 +6,23 @@
 
 ## 1. 先给一句话结论
 
-当前这套 `linux-driver-lab` 已经完成了下面这条主线：
+当前这套 `linux-driver-lab` 已经形成了下面这条主线：
 
 ```text
+Foundation:
 字符设备基础
     -> platform / DT / IRQ / regmap / ftrace
     -> baseline / 裁剪 / perf / 回归收口
     -> PCIe BAR / MMIO / MSI / 用户态工具
     -> coherent DMA / mmap / bench / perf / ftrace / stability
+
+Netdev:
+最小 net_device 骨架
+    -> skb 软件收发
+    -> NAPI / poll
+    -> ring / DMA / RX replenishment
+    -> virtio-net 对照 / 平台参数化
+    -> ARM64 迁移与跨平台收口
 ```
 
 也就是说：
@@ -32,19 +41,34 @@
 ### 入口 2：总评审与后续路线
 - `POST_DAY35_MASTER_REVIEW_AND_ROADMAP.md`
 
-### 入口 3：当前进度
+### 入口 3：最新专家评审报告
+- `docs/EXPERT_REVIEW_CURRENT_BASELINE.md`
+
+### 入口 4：架构分层图
+- `docs/ARCHITECTURE_LAYERING_EXPERT.md`
+
+### 入口 5：当前完成度矩阵
+- `docs/COMPLETION_MATRIX_EXPERT.md`
+
+### 入口 6：下一步执行计划
+- `docs/NEXT_STEP_EXECUTION_PLAN_EXPERT.md`
+
+### 入口 7：当前进度
 - `docs/PROGRESS.md`
 
-### 入口 4：W3 收口
+### 入口 8：W3 收口
 - `foundation/day21/FINAL_SUBMISSION.md`
 
-### 入口 5：W4 收口
+### 入口 9：W4 收口
 - `foundation/day28/README.md`
 
-### 入口 6：W5 收口
+### 入口 10：W5 收口
 - `foundation/day35/README.md`
 
-如果你只想花最少时间评审当前仓库，这 6 个入口已经够用了。
+### 入口 11：第二阶段主线
+- `netdev/README.md`
+
+如果你只想花最少时间评审当前仓库，这 11 个入口已经足够建立完整判断。
 
 ---
 

@@ -1,0 +1,33 @@
+# PACKAGE_MANIFEST_EXPERT_REVIEW_20260415
+
+本次“专家评审口径”补充内容如下：
+
+## 新增文档
+
+1. `POST_DAY35_MASTER_REVIEW_AND_ROADMAP.md`
+2. `docs/EXPERT_REVIEW_CURRENT_BASELINE.md`
+3. `docs/ARCHITECTURE_LAYERING_EXPERT.md`
+4. `docs/COMPLETION_MATRIX_EXPERT.md`
+5. `docs/NEXT_STEP_EXECUTION_PLAN_EXPERT.md`
+6. `PACKAGE_MANIFEST_EXPERT_REVIEW_20260415.md`
+
+## 更新文档
+
+1. `README.md`
+2. `START_HERE_CURRENT.md`
+
+## 本次包的目标
+
+- 把“最新完整项目”的专家评审结论补成正式文档
+- 修复原来顶层引用缺失的总评文件
+- 提供架构分层图、完成度矩阵和下一步执行计划
+- 保持原工程源码、records、output、脚本结构不变
+
+## 推荐阅读顺序
+
+1. `START_HERE_CURRENT.md`
+2. `POST_DAY35_MASTER_REVIEW_AND_ROADMAP.md`
+3. `docs/EXPERT_REVIEW_CURRENT_BASELINE.md`
+4. `docs/ARCHITECTURE_LAYERING_EXPERT.md`
+5. `docs/COMPLETION_MATRIX_EXPERT.md`
+6. `docs/NEXT_STEP_EXECUTION_PLAN_EXPERT.md`

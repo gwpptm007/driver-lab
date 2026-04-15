@@ -11,17 +11,30 @@ linux-driver-lab/
 ├── README.md
 ├── START_HERE_CURRENT.md             当前仓库总入口
 ├── EXTENSION_ROADMAP.md             扩展学习路线图（后续新建主题）
+├── NEXT_PHASE.md                    下一阶段方向说明
 ├── POST_DAY35_MASTER_REVIEW_AND_ROADMAP.md  ⭐ 评审结论 + 执行路线总文档
+├── docs/EXPERT_REVIEW_CURRENT_BASELINE.md   ⭐ 最新专家评审报告
+├── docs/ARCHITECTURE_LAYERING_EXPERT.md     ⭐ 架构分层图
+├── docs/COMPLETION_MATRIX_EXPERT.md         ⭐ 完成度矩阵
+├── docs/NEXT_STEP_EXECUTION_PLAN_EXPERT.md  ⭐ 下一步执行计划
 ├── docs/                              项目文档
-├── foundation/                        ⭐ 基础学习区（day01~day35 已收拢）
+├── foundation/                        ⭐ 第一阶段基础学习区（day01~day35 已收拢）
 │   ├── README.md                      foundation 学习路径说明
 │   ├── day01/ ~ day07/               W1：字符设备基础闭环
 │   ├── day08/ ~ day14/               W2：platform / DT / IRQ / regmap / ftrace
 │   ├── day15/ ~ day21/               W3：baseline / 裁剪 / perf / 回归 / 提交收口
 │   ├── day22/ ~ day28/               W4：PCIe 基本功作品线
 │   └── day29/ ~ day35/               W5：DMA / mmap / bench / perf / ftrace / stability
-└── w06_*/                            扩展学习区（后续新建）
-    └── ...
+└── netdev/                            ⭐ 第二阶段主线（stage00~stage06）
+    ├── README.md                      netdev 路线入口
+    ├── docs/                          总体设计、里程碑、风险、平台策略
+    ├── stage00_bootstrap/            启动与环境检查
+    ├── stage01_netdev_skeleton/      最小 net_device 骨架
+    ├── stage02_skb_path/             skb 收发闭环
+    ├── stage03_napi_poll/            NAPI / poll / irq 模型
+    ├── stage04_ring_dma/             ring / DMA / replenishment
+    ├── stage05_virtio_param/         virtio-net 对照 + 平台参数化
+    └── stage06_arm64_migration/      ARM64 迁移与跨平台收口
 ```
 
 ---
@@ -30,14 +43,18 @@ linux-driver-lab/
 
 1. `START_HERE_CURRENT.md`
 2. `POST_DAY35_MASTER_REVIEW_AND_ROADMAP.md` — 当前最完整的评审与路线建议
-3. `foundation/README.md` — 基础学习区入口
-4. `docs/CURRENT_PROJECT_REVIEW.md`
-5. `docs/PROGRESS.md`
+3. `docs/EXPERT_REVIEW_CURRENT_BASELINE.md` — 最新专家评审报告
+4. `docs/ARCHITECTURE_LAYERING_EXPERT.md` — 架构分层图
+5. `docs/COMPLETION_MATRIX_EXPERT.md` — 当前完成度矩阵
+6. `docs/NEXT_STEP_EXECUTION_PLAN_EXPERT.md` — 下一步执行计划
+7. `foundation/README.md` — 基础学习区入口
+8. `docs/CURRENT_PROJECT_REVIEW.md`
+9. `docs/PROGRESS.md`
 
 如果你是第一次接触本仓库，再补：
 
-5. `../kernel-src/README.md`
-6. 本文件（`README.md`）
+10. `../kernel-src/README.md`
+11. 本文件（`README.md`）
 
 ---
 
@@ -60,11 +77,18 @@ chmod +x build.sh
 ./build.sh
 ```
 
-### 扩展学习（后续）
+### 第二阶段主线（netdev/）
 
-- `w06_spi_i2c/` — SPI / I2C 总线驱动（规划中）
-- `w07_gpio/` — GPIO subsystem（规划中）
-- 更多主题陆续添加...
+- `netdev/README.md` — 第二阶段总入口
+- `netdev/docs/00_START_HERE.md` — netdev 方向入口
+- `netdev/stage04_ring_dma/` — 当前最有代表性的代码高点
+- `netdev/stage06_arm64_migration/` — ARM64 迁移与平台收口
+
+### 后续扩展（规划中）
+
+- `w06_spi_i2c/` — SPI / I2C 总线驱动
+- `w07_gpio/` — GPIO subsystem
+- 更多主题后续添加...
 
 ---
 
@@ -85,10 +109,13 @@ chmod +x build.sh
 ### 情况 B：你想快速看完成度
 1. `START_HERE_CURRENT.md`
 2. `POST_DAY35_MASTER_REVIEW_AND_ROADMAP.md`
-3. `foundation/README.md`
-4. `foundation/day21/FINAL_SUBMISSION.md`
-5. `foundation/day28/README.md`
-6. `foundation/day35/README.md`
+3. `docs/EXPERT_REVIEW_CURRENT_BASELINE.md`
+4. `docs/ARCHITECTURE_LAYERING_EXPERT.md`
+5. `docs/COMPLETION_MATRIX_EXPERT.md`
+6. `foundation/day21/FINAL_SUBMISSION.md`
+7. `foundation/day28/README.md`
+8. `foundation/day35/README.md`
+9. `netdev/README.md`
 
 ### 情况 C：你想开始做代码评审
 - `docs/PROGRESS.md` 中的"当前开放项"
