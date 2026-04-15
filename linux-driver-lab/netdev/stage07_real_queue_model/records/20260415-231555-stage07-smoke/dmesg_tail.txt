@@ -1,0 +1,5 @@
+# stage07 smoke test dmesg — 2026-04-15
+
+[21942.238064] netdev_stage07: loading out-of-tree module taints kernel.
+[21942.238272] netdev_stage07: module verification failed: signature and/or required key missing - tainting kernel
+[21942.258127] stage07 loaded: ifname=nds7 ring_size=128 napi_weight=32 rx_buf_size=2048

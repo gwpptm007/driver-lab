@@ -1,0 +1,52 @@
+# stage07 smoke test debugfs stats — 2026-04-15
+# Test machine: 192.168.65.135 (Ubuntu 22.04, kernel 6.8.0-107-generic)
+# Module: netdev_stage07.ko loaded at 21942.238064
+# Smoke: 32 frames sent, ethertype=0x88B7, payload=hello_stage07_queue
+
+ifname=nds7
+ring_size=128
+rx_buf_size=2048
+tx_inflight=0
+tx_done=0
+rx_posted=128
+rx_ready=0
+open_count=1
+stop_count=0
+tx_submit_count=126
+tx_complete_count=126
+tx_packets=126
+tx_bytes=17116
+tx_dropped=0
+tx_busy=0
+tx_linearize_count=0
+tx_dma_map_ok=126
+tx_dma_map_fail=0
+tx_dma_unmap=126
+rx_post_count=254
+rx_consume_count=126
+rx_refill_count=254
+rx_packets=126
+rx_bytes=17116
+rx_dropped=0
+rx_dma_map_ok=254
+rx_dma_map_fail=0
+rx_dma_unmap=126
+rx_truncated=0
+rx_no_posted=0
+irq_count=125
+irq_mask_count=125
+irq_unmask_count=125
+napi_schedule_count=125
+napi_poll_count=125
+napi_complete_count=125
+napi_budget_exhaust_count=0
+napi_work_total=126
+ring_full_count=0
+ring_empty_count=0
+device_notify_count=126
+device_tx_processed=126
+device_rx_produced=126
+last_tx_len=339
+last_tx_proto=0x800
+last_rx_len=339
+last_rx_proto=0x800

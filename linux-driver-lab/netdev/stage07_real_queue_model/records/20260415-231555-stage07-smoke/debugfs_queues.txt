@@ -1,0 +1,36 @@
+# stage07 smoke test debugfs queues — 2026-04-15
+
+TX submit=127 notify=127 complete=127 inflight=0 done=0
+  tx[0] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[1] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[2] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[3] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[4] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[5] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[6] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[7] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[8] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[9] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[10] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[11] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[12] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[13] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[14] desc=FREE slot=FREE len=0 skb=0000000000000000
+  tx[15] desc=FREE slot=FREE len=0 skb=0000000000000000
+RX post=127 device=127 consume=127 posted=128 ready=0
+  rx[0] desc=POSTED slot=POSTED len=0 skb=00000000caeac441
+  rx[1] desc=POSTED slot=POSTED len=0 skb=00000000d061a7c9
+  rx[2] desc=POSTED slot=POSTED len=0 skb=00000000f3c85103
+  rx[3] desc=POSTED slot=POSTED len=0 skb=0000000005b0fb3a
+  rx[4] desc=POSTED slot=POSTED len=0 skb=00000000dcb766f3
+  rx[5] desc=POSTED slot=POSTED len=0 skb=00000000b22e9c65
+  rx[6] desc=POSTED slot=POSTED len=0 skb=0000000005b0fb3a
+  rx[7] desc=POSTED slot=POSTED len=0 skb=0000000053a69288
+  rx[8] desc=POSTED slot=POSTED len=0 skb=000000004e43504f
+  rx[9] desc=POSTED slot=POSTED len=0 skb=000000002b9074a8
+  rx[10] desc=POSTED slot=POSTED len=0 skb=000000004b44e309
+  rx[11] desc=POSTED slot=POSTED len=0 skb=000000007658d8f9
+  rx[12] desc=POSTED slot=POSTED len=0 skb=000000006c80a3c4
+  rx[13] desc=POSTED slot=POSTED len=0 skb=00000000eca77c68
+  rx[14] desc=POSTED slot=POSTED len=0 skb=00000000c79a8568
+  rx[15] desc=POSTED slot=POSTED len=0 skb=00000000b6589711

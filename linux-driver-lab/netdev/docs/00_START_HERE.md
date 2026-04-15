@@ -49,3 +49,12 @@
 
 - `stage06_arm64_migration/docs/STAGE06_CLOSEOUT_EXECUTION_CHECKLIST.md`
 - `docs/10_STAGE06_CLOSEOUT_AND_STAGE07_DIRECTION.md`
+
+
+## 如果你准备直接进入下一阶段
+
+建议继续阅读：
+
+- `10_STAGE06_CLOSEOUT_AND_STAGE07_DIRECTION.md`
+- `11_STAGE07_REAL_QUEUE_MODEL_EXECUTION_PLAN.md`
+- `../stage07_real_queue_model/START_HERE.md`

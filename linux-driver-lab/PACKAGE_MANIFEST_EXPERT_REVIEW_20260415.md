@@ -57,3 +57,55 @@
 - 把 stage06 的收口动作写成可执行清单
 - 把 stage06 的验收、迁移映射、已知问题独立成文
 - 明确 stage07 的推荐方向，避免后续推进跑偏
+
+
+## 2026-04-15 追加更新（stage07）
+
+新增：
+- `linux-driver-lab/netdev/stage07_real_queue_model/README.md`
+- `linux-driver-lab/netdev/stage07_real_queue_model/START_HERE.md`
+- `linux-driver-lab/netdev/stage07_real_queue_model/TASKS.md`
+- `linux-driver-lab/netdev/stage07_real_queue_model/DIRECTORY_TREE.md`
+- `linux-driver-lab/netdev/stage07_real_queue_model/docs/*`
+- `linux-driver-lab/netdev/stage07_real_queue_model/driver/*`
+- `linux-driver-lab/netdev/stage07_real_queue_model/include/*`
+- `linux-driver-lab/netdev/stage07_real_queue_model/scripts/*`
+- `linux-driver-lab/netdev/stage07_real_queue_model/tools/README.md`
+- `linux-driver-lab/netdev/stage07_real_queue_model/records/README.md`
+- `linux-driver-lab/netdev/stage07_real_queue_model/reports/README.md`
+- `linux-driver-lab/netdev/stage07_real_queue_model/workdir/README.md`
+- `linux-driver-lab/netdev/docs/11_STAGE07_REAL_QUEUE_MODEL_EXECUTION_PLAN.md`
+
+更新：
+- `linux-driver-lab/netdev/README.md`
+- `linux-driver-lab/netdev/docs/00_START_HERE.md`
+- `linux-driver-lab/README.md`
+
+## 2026-04-15 追加更新（stage07 v1 落地）
+
+本轮不是只保留 stage07 目录骨架，而是把第一版真实实现补进工程：
+
+新增/补强：
+- `linux-driver-lab/netdev/stage07_real_queue_model/driver/netdev_stage07.c`
+- `linux-driver-lab/netdev/stage07_real_queue_model/include/netdev_stage07_compat.h`
+- `linux-driver-lab/netdev/stage07_real_queue_model/tools/send_stage07_frame.c`
+- `linux-driver-lab/netdev/stage07_real_queue_model/tools/recv_stage07_frame.c`
+- `linux-driver-lab/netdev/stage07_real_queue_model/tools/Makefile`
+- `linux-driver-lab/netdev/stage07_real_queue_model/scripts/build.sh`
+- `linux-driver-lab/netdev/stage07_real_queue_model/scripts/run.sh`
+- `linux-driver-lab/netdev/stage07_real_queue_model/scripts/smoke.sh`
+- `linux-driver-lab/netdev/stage07_real_queue_model/scripts/stats_check.sh`
+- `linux-driver-lab/netdev/stage07_real_queue_model/scripts/trace_smoke.sh`
+
+更新：
+- `linux-driver-lab/netdev/stage07_real_queue_model/README.md`
+- `linux-driver-lab/netdev/stage07_real_queue_model/START_HERE.md`
+- `linux-driver-lab/netdev/stage07_real_queue_model/TASKS.md`
+- `linux-driver-lab/netdev/stage07_real_queue_model/driver/README.md`
+- `linux-driver-lab/netdev/stage07_real_queue_model/docs/00_USER_GUIDE.md`
+- `linux-driver-lab/README.md`
+
+本轮目标：
+- 让 stage07 从“规划/骨架”进入“第一版核心代码已落地”状态
+- 在代码里明确 submit / notify / complete / post / consume / refill 六段生命周期
+- 补齐 debugfs 观测、userspace tools 与 smoke 脚本
