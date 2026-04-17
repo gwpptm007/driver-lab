@@ -1,14 +1,12 @@
-# stage07 / START HERE
+# START_HERE — stage07_real_queue_model
 
 ## 现在先看什么
 
-1. `docs/01_STAGE_GOAL_AND_BOUNDARY.md`
-2. `docs/02_QUEUE_MODEL_AND_DATA_STRUCTURES.md`
-3. `docs/03_NOTIFY_IRQ_NAPI_COMPLETION.md`
-4. `driver/netdev_stage07.c`
-5. `docs/04_VIRTIO_MAPPING.md`
-6. `docs/06_ACCEPTANCE_AND_MILESTONES.md`
-7. `TASKS.md`
+1. `docs/01_STAGE_OVERVIEW.md` — 目标、队列模型、数据结构、virtio映射
+2. `docs/02_USER_GUIDE.md` — 使用方式、build/run、统计项
+3. `docs/03_ACCEPTANCE.md` — 验收标准和检查单
+4. `driver/netdev_stage07.c` — 代码实现
+5. `docs/04_DEEP_LEARNING.md` — 深度分析
 
 ## 这次已经落了什么
 
@@ -33,7 +31,7 @@
 - 与 `virtio-net` 的结构映射
 
 ### Q3：这次 v1 的真实落点是什么？
-已经把“单队列真实化”的第一跳落出来了：
+已经把"单队列真实化"的第一跳落出来了：
 - 提交和完成分开
 - post 和 consume 分开
 - device/backend 和 CPU/NAPI 的边界分开
@@ -43,3 +41,12 @@
 - 跑通 smoke
 - 固定观测项
 - 再把 queue helper 和 virtio 映射解释打磨得更清楚
+
+## 快速测试
+
+```bash
+./scripts/build.sh
+./scripts/run.sh reload
+./scripts/smoke.sh
+./scripts/stats_check.sh
+```

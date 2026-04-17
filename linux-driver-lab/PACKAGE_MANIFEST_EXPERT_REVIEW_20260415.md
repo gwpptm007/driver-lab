@@ -109,3 +109,29 @@
 - 让 stage07 从“规划/骨架”进入“第一版核心代码已落地”状态
 - 在代码里明确 submit / notify / complete / post / consume / refill 六段生命周期
 - 补齐 debugfs 观测、userspace tools 与 smoke 脚本
+
+
+## 2026-04-16 追加更新（stage08）
+
+本轮开始 stage08，新增：
+
+- `linux-driver-lab/netdev/stage08_async_backend_transport/README.md`
+- `linux-driver-lab/netdev/stage08_async_backend_transport/START_HERE.md`
+- `linux-driver-lab/netdev/stage08_async_backend_transport/TASKS.md`
+- `linux-driver-lab/netdev/stage08_async_backend_transport/DIRECTORY_TREE.md`
+- `linux-driver-lab/netdev/stage08_async_backend_transport/docs/*`
+- `linux-driver-lab/netdev/stage08_async_backend_transport/driver/Makefile`
+- `linux-driver-lab/netdev/stage08_async_backend_transport/driver/netdev_stage08.c`
+- `linux-driver-lab/netdev/stage08_async_backend_transport/include/*`
+- `linux-driver-lab/netdev/stage08_async_backend_transport/scripts/*`
+- `linux-driver-lab/netdev/stage08_async_backend_transport/tools/*`
+- `linux-driver-lab/netdev/docs/12_STAGE08_ASYNC_BACKEND_TRANSPORT_EXECUTION_PLAN.md`
+
+更新：
+- `linux-driver-lab/netdev/README.md`
+- `linux-driver-lab/netdev/docs/00_START_HERE.md`
+
+本轮目标：
+- 以 stage07 收尾为前提，启动 stage08
+- 让下一阶段不只是文档，而是进入“已建仓 + 第一版异步 backend 代码已落地”状态
+- 明确 stage08 的 front/back 边界、doorbell 语义与 timeline 观测方向

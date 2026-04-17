@@ -1,15 +1,30 @@
 # stage03_napi_poll / START_HERE
 
-建议按下面顺序进入 stage03：
+## 优先阅读
 
-1. 先看 `README.md`
-2. 再看 `docs/01_STAGE_GOAL_AND_BOUNDARY.md`
-3. 再看 `docs/02_NAPI_MOTIVATION_AND_MODEL.md`
-4. 再看 `docs/03_PENDING_QUEUE_AND_POLL_PATH.md`
-5. 然后读 `driver/netdev_stage03.c`
-6. 最后再看 `docs/05_TEST_AND_ACCEPTANCE.md`
+**[docs/02_USER_GUIDE.md](docs/02_USER_GUIDE.md)** — 本阶段使用指南
+
+## 阅读顺序
+
+1. `docs/01_STAGE_OVERVIEW.md` — 阶段目标与边界
+2. `docs/02_USER_GUIDE.md` — 使用指南（首先读这个）
+3. `docs/03_ACCEPTANCE.md` — 验收标准
+4. `docs/04_DEEP_LEARNING.md` — 深度原理
+5. `driver/netdev_stage03.c`
 
 ## 这阶段最重要的一句话
 
-> stage03 不是“学会调用 napi API”，而是学会：
-> **为什么要把 RX 处理从‘每包立刻处理’切到‘先排队、后 poll 批处理’。**
+> stage03 不是"学会调用 napi API"，而是学会：
+> **为什么要把 RX 处理从"每包立刻处理"切到"先排队、后 poll 批处理"。**
+
+## 快速执行
+
+```bash
+cd linux-driver-lab/netdev/stage03_napi_poll
+make report
+make build-userspace
+make build-module
+sudo make load
+sudo make smoke
+sudo make unload
+```

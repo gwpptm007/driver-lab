@@ -28,3 +28,11 @@ Stage05 的核心是两件事：
 ## 一句话总结
 
 > stage05 不是重写驱动，而是把 stage04 的教学坐标系升级成能与 `virtio-net` 对话、并能迁移到多平台的工程化坐标系。
+
+## 核心文档
+
+- [START_HERE.md](START_HERE.md) — 阅读顺序和快速开始
+- [docs/01_STAGE_OVERVIEW.md](docs/01_STAGE_OVERVIEW.md) — 目标与迁移策略
+- [docs/02_USER_GUIDE.md](docs/02_USER_GUIDE.md) — 使用指南
+- [docs/03_ACCEPTANCE.md](docs/03_ACCEPTANCE.md) — 验收标准
+- [docs/04_DEEP_LEARNING.md](docs/04_DEEP_LEARNING.md) — 深度分析
