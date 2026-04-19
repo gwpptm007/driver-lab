@@ -1,0 +1,200 @@
+[ 4621.018388]  __fput_sync+0x1c/0x30
+[ 4621.018390]  __x64_sys_close+0x3e/0x90
+[ 4621.018393]  x64_sys_call+0x19ad/0x2480
+[ 4621.018395]  do_syscall_64+0x81/0x170
+[ 4621.018397]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018400]  ? post_alloc_hook+0xcc/0x120
+[ 4621.018403]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018405]  ? get_page_from_freelist+0x1f5/0x650
+[ 4621.018408]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018411]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018413]  ? xas_find+0x74/0x1f0
+[ 4621.018416]  ? set_ptes.constprop.0+0x21/0xa0
+[ 4621.018420]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018422]  ? next_uptodate_folio+0xa1/0x300
+[ 4621.018425]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018427]  ? filemap_map_pages+0x427/0x500
+[ 4621.018433]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018435]  ? do_read_fault+0x112/0x200
+[ 4621.018438]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018440]  ? do_fault+0xf0/0x260
+[ 4621.018443]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018446]  ? handle_pte_fault+0x114/0x1d0
+[ 4621.018449]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018451]  ? __handle_mm_fault+0x64f/0x790
+[ 4621.018456]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018459]  ? __count_memcg_events+0x80/0x130
+[ 4621.018463]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018466]  ? count_memcg_events.constprop.0+0x2a/0x50
+[ 4621.018469]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018471]  ? handle_mm_fault+0xad/0x380
+[ 4621.018474]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018476]  ? arch_exit_to_user_mode_prepare.constprop.0+0x1a/0xe0
+[ 4621.018479]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018482]  ? irqentry_exit_to_user_mode+0x38/0x1e0
+[ 4621.018485]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018487]  ? irqentry_exit+0x43/0x50
+[ 4621.018489]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018491]  ? exc_page_fault+0x94/0x1b0
+[ 4621.018494]  entry_SYSCALL_64_after_hwframe+0x78/0x80
+[ 4621.018496] RIP: 0033:0x7721f9514fe7
+[ 4621.018500] Code: ff e8 0d 16 02 00 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 f3 0f 1e fa 64 8b 04 25 18 00 00 00 85 c0 75 10 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 41 c3 48 83 ec 18 89 7c 24 0c e8 f3 b9 f7 ff
+[ 4621.018502] RSP: 002b:00007ffcfe85e068 EFLAGS: 00000246 ORIG_RAX: 0000000000000003
+[ 4621.018504] RAX: ffffffffffffffda RBX: 0000000000000040 RCX: 00007721f9514fe7
+[ 4621.018505] RDX: 0000000000000000 RSI: 000062af35093060 RDI: 0000000000000003
+[ 4621.018506] RBP: 0000000000000003 R08: 00007721f95d1460 R09: 000000007fffffff
+[ 4621.018508] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffcfe85e10e
+[ 4621.018509] R13: 00007ffcfe85e100 R14: 00007ffcfe85e0a0 R15: 00007ffcfe85e080
+[ 4621.018513]  </TASK>
+[ 4621.018515] BUG: Bad page state in process send_stage11_fr  pfn:14aef4
+[ 4621.018517] page:0000000066056d3e refcount:0 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x14aef4
+[ 4621.018518] flags: 0x17ffffc0000000(node=0|zone=2|lastcpupid=0x1fffff)
+[ 4621.018520] page_type: 0xffffffff()
+[ 4621.018522] raw: 0017ffffc0000000 dead000000000040 ffff890e87963800 0000000000000000
+[ 4621.018524] raw: 0000000000000000 0000000000000001 00000000ffffffff 0000000000000000
+[ 4621.018525] page dumped because: page_pool leak
+[ 4621.018527] Modules linked in: netdev_stage11_soft(OE) intel_rapl_msr vsock_loopback intel_rapl_common vmw_vsock_virtio_transport_common snd_ens1371 snd_ac97_codec vmw_vsock_vmci_transport vsock gameport ac97_bus snd_pcm kvm_amd snd_seq_midi ccp snd_seq_midi_event crct10dif_pclmul polyval_clmulni vmw_balloon snd_rawmidi kvm binfmt_misc polyval_generic ghash_clmulni_intel irqbypass sha256_ssse3 sha1_ssse3 aesni_intel crypto_simd snd_seq cryptd snd_seq_device nls_iso8859_1 snd_timer input_leds joydev snd serio_raw soundcore vmw_vmci mac_hid sch_fq_codel vmwgfx drm_ttm_helper ttm msr parport_pc ppdev lp parport efi_pstore ip_tables x_tables autofs4 hid_generic usbhid hid crc32_pclmul psmouse mptspi xhci_pci ahci mptscsih xhci_pci_renesas e1000 mptbase i2c_piix4 libahci pata_acpi scsi_transport_spi
+[ 4621.018585] CPU: 2 PID: 4939 Comm: send_stage11_fr Tainted: G    B      OE      6.8.0-107-generic #107~22.04.1-Ubuntu
+[ 4621.018588] Hardware name: VMware, Inc. VMware Virtual Platform/440BX Desktop Reference Platform, BIOS 6.00 11/12/2020
+[ 4621.018590] Call Trace:
+[ 4621.018591]  <TASK>
+[ 4621.018593]  dump_stack_lvl+0x76/0xa0
+[ 4621.018596]  dump_stack+0x10/0x20
+[ 4621.018599]  bad_page+0x76/0x120
+[ 4621.018602]  free_page_is_bad_report+0x86/0xa0
+[ 4621.018605]  free_unref_page_prepare+0x2c3/0x4e0
+[ 4621.018607]  ? schedule+0x33/0x110
+[ 4621.018611]  free_unref_page+0x34/0x180
+[ 4621.018615]  page_frag_free+0xbd/0xe0
+[ 4621.018618]  skb_free_head+0x61/0xd0
+[ 4621.018621]  skb_release_data+0x159/0x200
+[ 4621.018625]  kfree_skb_reason+0x55/0x140
+[ 4621.018628]  skb_queue_purge_reason+0xf2/0x130
+[ 4621.018631]  packet_release+0x2e2/0x450
+[ 4621.018636]  __sock_release+0x3d/0xc0
+[ 4621.018639]  sock_close+0x15/0x30
+[ 4621.018641]  __fput+0xa0/0x2e0
+[ 4621.018644]  __fput_sync+0x1c/0x30
+[ 4621.018647]  __x64_sys_close+0x3e/0x90
+[ 4621.018649]  x64_sys_call+0x19ad/0x2480
+[ 4621.018652]  do_syscall_64+0x81/0x170
+[ 4621.018654]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018656]  ? post_alloc_hook+0xcc/0x120
+[ 4621.018659]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018661]  ? get_page_from_freelist+0x1f5/0x650
+[ 4621.018664]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018666]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018668]  ? xas_find+0x74/0x1f0
+[ 4621.018670]  ? set_ptes.constprop.0+0x21/0xa0
+[ 4621.018673]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018675]  ? next_uptodate_folio+0xa1/0x300
+[ 4621.018679]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018682]  ? filemap_map_pages+0x427/0x500
+[ 4621.018689]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018692]  ? do_read_fault+0x112/0x200
+[ 4621.018696]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018698]  ? do_fault+0xf0/0x260
+[ 4621.018702]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018705]  ? handle_pte_fault+0x114/0x1d0
+[ 4621.018708]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018711]  ? __handle_mm_fault+0x64f/0x790
+[ 4621.018716]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018718]  ? __count_memcg_events+0x80/0x130
+[ 4621.018722]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018724]  ? count_memcg_events.constprop.0+0x2a/0x50
+[ 4621.018727]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018730]  ? handle_mm_fault+0xad/0x380
+[ 4621.018733]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018736]  ? arch_exit_to_user_mode_prepare.constprop.0+0x1a/0xe0
+[ 4621.018739]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018742]  ? irqentry_exit_to_user_mode+0x38/0x1e0
+[ 4621.018745]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018748]  ? irqentry_exit+0x43/0x50
+[ 4621.018751]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.018754]  ? exc_page_fault+0x94/0x1b0
+[ 4621.018758]  entry_SYSCALL_64_after_hwframe+0x78/0x80
+[ 4621.018761] RIP: 0033:0x7721f9514fe7
+[ 4621.018766] Code: ff e8 0d 16 02 00 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 f3 0f 1e fa 64 8b 04 25 18 00 00 00 85 c0 75 10 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 41 c3 48 83 ec 18 89 7c 24 0c e8 f3 b9 f7 ff
+[ 4621.018768] RSP: 002b:00007ffcfe85e068 EFLAGS: 00000246 ORIG_RAX: 0000000000000003
+[ 4621.018771] RAX: ffffffffffffffda RBX: 0000000000000040 RCX: 00007721f9514fe7
+[ 4621.018773] RDX: 0000000000000000 RSI: 000062af35093060 RDI: 0000000000000003
+[ 4621.018774] RBP: 0000000000000003 R08: 00007721f95d1460 R09: 000000007fffffff
+[ 4621.018776] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffcfe85e10e
+[ 4621.018778] R13: 00007ffcfe85e100 R14: 00007ffcfe85e0a0 R15: 00007ffcfe85e080
+[ 4621.018783]  </TASK>
+[ 4621.018786] BUG: Bad page state in process send_stage11_fr  pfn:114197
+[ 4621.018789] page:00000000ff016e16 refcount:0 mapcount:0 mapping:0000000000000000 index:0x0 pfn:0x114197
+[ 4621.018791] flags: 0x17ffffc0000000(node=0|zone=2|lastcpupid=0x1fffff)
+[ 4621.018793] page_type: 0xffffffff()
+[ 4621.018796] raw: 0017ffffc0000000 dead000000000040 ffff890e87963800 0000000000000000
+[ 4621.018798] raw: 0000000000000000 0000000000000001 00000000ffffffff 0000000000000000
+[ 4621.018847] page dumped because: page_pool leak
+[ 4621.018849] Modules linked in: netdev_stage11_soft(OE) intel_rapl_msr vsock_loopback intel_rapl_common vmw_vsock_virtio_transport_common snd_ens1371 snd_ac97_codec vmw_vsock_vmci_transport vsock gameport ac97_bus snd_pcm kvm_amd snd_seq_midi ccp snd_seq_midi_event crct10dif_pclmul polyval_clmulni vmw_balloon snd_rawmidi kvm binfmt_misc polyval_generic ghash_clmulni_intel irqbypass sha256_ssse3 sha1_ssse3 aesni_intel crypto_simd snd_seq cryptd snd_seq_device nls_iso8859_1 snd_timer input_leds joydev snd serio_raw soundcore vmw_vmci mac_hid sch_fq_codel vmwgfx drm_ttm_helper ttm msr parport_pc ppdev lp parport efi_pstore ip_tables x_tables autofs4 hid_generic usbhid hid crc32_pclmul psmouse mptspi xhci_pci ahci mptscsih xhci_pci_renesas e1000 mptbase i2c_piix4 libahci pata_acpi scsi_transport_spi
+[ 4621.018917] CPU: 2 PID: 4939 Comm: send_stage11_fr Tainted: G    B      OE      6.8.0-107-generic #107~22.04.1-Ubuntu
+[ 4621.018920] Hardware name: VMware, Inc. VMware Virtual Platform/440BX Desktop Reference Platform, BIOS 6.00 11/12/2020
+[ 4621.018922] Call Trace:
+[ 4621.018924]  <TASK>
+[ 4621.018926]  dump_stack_lvl+0x76/0xa0
+[ 4621.018930]  dump_stack+0x10/0x20
+[ 4621.018933]  bad_page+0x76/0x120
+[ 4621.018936]  free_page_is_bad_report+0x86/0xa0
+[ 4621.018939]  free_unref_page_prepare+0x2c3/0x4e0
+[ 4621.018942]  ? schedule+0x33/0x110
+[ 4621.018946]  free_unref_page+0x34/0x180
+[ 4621.018952]  page_frag_free+0xbd/0xe0
+[ 4621.018955]  skb_free_head+0x61/0xd0
+[ 4621.018959]  skb_release_data+0x159/0x200
+[ 4621.018964]  kfree_skb_reason+0x55/0x140
+[ 4621.018968]  skb_queue_purge_reason+0xf2/0x130
+[ 4621.018972]  packet_release+0x2e2/0x450
+[ 4621.018978]  __sock_release+0x3d/0xc0
+[ 4621.018983]  sock_close+0x15/0x30
+[ 4621.018987]  __fput+0xa0/0x2e0
+[ 4621.018992]  __fput_sync+0x1c/0x30
+[ 4621.018996]  __x64_sys_close+0x3e/0x90
+[ 4621.018999]  x64_sys_call+0x19ad/0x2480
+[ 4621.019003]  do_syscall_64+0x81/0x170
+[ 4621.019007]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019010]  ? post_alloc_hook+0xcc/0x120
+[ 4621.019015]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019018]  ? get_page_from_freelist+0x1f5/0x650
+[ 4621.019023]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019026]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019029]  ? xas_find+0x74/0x1f0
+[ 4621.019033]  ? set_ptes.constprop.0+0x21/0xa0
+[ 4621.019036]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019038]  ? next_uptodate_folio+0xa1/0x300
+[ 4621.019043]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019045]  ? filemap_map_pages+0x427/0x500
+[ 4621.019052]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019054]  ? do_read_fault+0x112/0x200
+[ 4621.019057]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019059]  ? do_fault+0xf0/0x260
+[ 4621.019062]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019064]  ? handle_pte_fault+0x114/0x1d0
+[ 4621.019067]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019069]  ? __handle_mm_fault+0x64f/0x790
+[ 4621.019073]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019076]  ? __count_memcg_events+0x80/0x130
+[ 4621.019081]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019083]  ? count_memcg_events.constprop.0+0x2a/0x50
+[ 4621.019086]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019088]  ? handle_mm_fault+0xad/0x380
+[ 4621.019091]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019093]  ? arch_exit_to_user_mode_prepare.constprop.0+0x1a/0xe0
+[ 4621.019096]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019099]  ? irqentry_exit_to_user_mode+0x38/0x1e0
+[ 4621.019102]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019105]  ? irqentry_exit+0x43/0x50
+[ 4621.019108]  ? srso_alias_return_thunk+0x5/0xfbef5
+[ 4621.019110]  ? exc_page_fault+0x94/0x1b0
+[ 4621.019114]  entry_SYSCALL_64_after_hwframe+0x78/0x80
+[ 4621.019117] RIP: 0033:0x7721f9514fe7
+[ 4621.019123] Code: ff e8 0d 16 02 00 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 00 f3 0f 1e fa 64 8b 04 25 18 00 00 00 85 c0 75 10 b8 03 00 00 00 0f 05 <48> 3d 00 f0 ff ff 77 41 c3 48 83 ec 18 89 7c 24 0c e8 f3 b9 f7 ff
+[ 4621.019125] RSP: 002b:00007ffcfe85e068 EFLAGS: 00000246 ORIG_RAX: 0000000000000003
+[ 4621.019128] RAX: ffffffffffffffda RBX: 0000000000000040 RCX: 00007721f9514fe7
+[ 4621.019130] RDX: 0000000000000000 RSI: 000062af35093060 RDI: 0000000000000003
+[ 4621.019132] RBP: 0000000000000003 R08: 00007721f95d1460 R09: 000000007fffffff
+[ 4621.019134] R10: 0000000000000000 R11: 0000000000000246 R12: 00007ffcfe85e10e
+[ 4621.019135] R13: 00007ffcfe85e100 R14: 00007ffcfe85e0a0 R15: 00007ffcfe85e080
+[ 4621.019141]  </TASK>

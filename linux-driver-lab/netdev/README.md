@@ -62,11 +62,12 @@
 
 ## 建议阅读顺序
 
-1. `docs/01_START_HERE.md`
-2. `docs/02_DIRECTION_AND_PLAN.md`
-3. `docs/03_ARCHITECTURE_AND_PLATFORM.md`
-4. `docs/04_MILESTONES_AND_RISKS.md`
-5. `docs/05_STAGE06_STAGE07_PLAN.md`
+1. `docs/00_START_HERE.md`
+2. `docs/01_DIRECTION_AND_SCOPE.md`
+3. `docs/02_MASTER_PLAN_AND_PHASES.md`
+4. `docs/03_DEVICE_ROUTE_DECISION.md`
+5. `docs/06_ACCEPTANCE_AND_MILESTONES.md`
+6. `docs/08_PLATFORM_STRATEGY.md`
 
 ## 一句话总结
 
@@ -74,28 +75,3 @@
 
 > 先把 netdev 本体学清楚，再把它迁到 ARM64，并把整个实验做成平台可配置、可观测、可评审的作品线。
 
-
-## 当前最新推进建议
-
-如果以当前完整基线继续往前走，建议路线明确为：
-
-1. 先把 `stage06_arm64_migration` 真正收口
-2. 再开 `stage07_real_queue_model`
-
-对应文档入口：
-
-- `stage06_arm64_migration/docs/STAGE06_CLOSEOUT_EXECUTION_CHECKLIST.md`
-- `docs/05_STAGE06_STAGE07_PLAN.md`
-
-
-## 当前最新推进建议（stage08）
-
-如果 stage07 作为上一阶段收尾，那么当前新的主战场应是：
-
-1. 冻结 stage07 为上一阶段成果
-2. 启动 `stage08_async_backend_transport`
-3. 先把 front/back、doorbell、backend worker、timeline 做实
-
-对应入口：
-
-- `stage08_async_backend_transport/START_HERE.md`

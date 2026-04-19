@@ -1,0 +1,3 @@
+timeline PASSED: 2 queue(s) with doorbell_to_backend_ns > 0
+q0: submit_ns=4620877102382 doorbell_ns=4620877102593 backend_wakeup_ns=4620877314410 backend_done_ns=4620877314791 irq_ns=4620877358585 poll_ns=4620877363765 complete_ns=4620877364556 consume_ns=4620877373283 submit_to_doorbell_ns=211 doorbell_to_backend_ns=211817 backend_to_irq_ns=43794 irq_to_poll_ns=5180
+q1: submit_ns=4620848958080 doorbell_ns=4620848958220 backend_wakeup_ns=4620848960635 backend_done_ns=4620848961076 irq_ns=4620848980022 poll_ns=4620848985061 complete_ns=4620848974941 consume_ns=4620848979610 submit_to_doorbell_ns=140 doorbell_to_backend_ns=2415 backend_to_irq_ns=18946 irq_to_poll_ns=5039
