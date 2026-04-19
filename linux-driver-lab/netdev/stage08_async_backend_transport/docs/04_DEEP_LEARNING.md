@@ -405,6 +405,114 @@ cat /sys/kernel/debug/netdev_stage08/timeline
 
 ---
 
-## 十一、一句话总结
+## 十一、nds8 是怎么被创建出来的
+
+### 11.1 从 ifconfig 看到的特征解释
+
+```bash
+nds8: flags=4291<UP,BROADCAST,RUNNING,NOARP,MULTICAST>  mtu 1500
+        ether 76:7d:02:43:ff:13  txqueuelen 1000  (Ethernet)
+        RX packets 1309  dropped 1053
+        TX packets 1309
+```
+
+| 字段 | 值 | 说明 |
+|------|-----|------|
+| `flags=4291` | 含 `NOARP` | 无 ARP 协议，不是真实物理网卡 |
+| `ether` | 76:7d:02:43:ff:13 | 驱动硬编码的固定 MAC，不是真实厂商号 |
+| `inet` | **无** | 没有 IP 地址，因为设备根本不需要 TCP/IP 栈 |
+| `RX packets = TX packets` | 1309 | 所有 TX 帧都通过驱动内部环回到 RX |
+
+**为什么没有 IPv4 地址？** 因为测试工具（`send_stage08_frame` / `recv_stage08_frame`）直接用 **AF_PACKET SOCK_RAW** 发送原始以太网帧，走链路层，根本不需要 IP。
+
+### 11.2 创建流程：4 步从零到 ifconfig 可见
+
+**第 1 步：insmod → `stage08_init()` 调用 `alloc_netdev()`**
+
+```c
+// netdev_stage08.c:1819
+stage08_dev = alloc_netdev(
+    sizeof(struct stage08_priv),  // priv 数据区大小
+    ifname,                       // "nds8"
+    NET_NAME_UNKNOWN,             // 命名空间：虚拟设备用 UNKNOWN
+    stage08_setup                 // 初始化回调
+);
+```
+
+**第 2 步：`stage08_setup()` — 设置以太网属性**
+
+```c
+static void stage08_setup(struct net_device *ndev)
+{
+    ether_setup(ndev);                // Linux 提供：ETH_HLEN=14, addr_len=6, type=ETHER
+    ndev->netdev_ops = &stage08_netdev_ops;
+    ndev->flags |= IFF_NOARP;      // ★ 不需要 ARP，Linux 不会分配 IP
+    ndev->features |= NETIF_F_HIGHDMA;
+    eth_hw_addr_random(ndev);        // ★ 随机生成本地 MAC，不是真实厂商号
+}
+```
+
+关键标志位：
+- `IFF_NOARP` → Linux 知道这个设备不需要 ARP/IP，直接阻断 IP 层配置
+- `eth_hw_addr_random()` → MAC 是驱动随机生成的（76:7d:02:43:ff:13），不是真实网卡的
+
+**第 3 步：初始化驱动私有数据 + NAPI + workqueue**
+
+```c
+priv = netdev_priv(stage08_dev);              // 从 net_device 拿到 priv 指针
+stage08_prepare_dma_caps(ndev);               // DMA 能力（虚拟设备保留此接口）
+STAGE08_NETIF_NAPI_ADD(ndev, &priv->napi, stage08_poll, napi_weight);
+priv->backend_wq = alloc_ordered_workqueue("stage08_backend", WQ_MEM_RECLAIM);
+INIT_WORK(&priv->backend_work, stage08_backend_workfn);
+stage08_alloc_queues(priv);                   // 分配 TX/RX ring + 预填充 RX buffers
+```
+
+**第 4 步：`register_netdev()` → nds8 正式出现**
+
+```c
+register_netdev(stage08_dev);  // ★ 把 netdev 加入内核网络设备链表
+                                 // 之后 ip link / ifconfig 就能看到 nds8 了
+```
+
+### 11.3 完整流程图
+
+```
+insmod netdev_stage08.ko
+    ↓
+stage08_init()
+    ├── alloc_netdev(sizeof_priv, "nds8", stage08_setup)
+    │       ↓
+    │   stage08_setup()
+    │       ├── ether_setup()           // ETH_HLEN=14, addr_len=6, type=ETHER
+    │       ├── IFF_NOARP 标志         // ★ 无 ARP，不需要 IP
+    │       └── eth_hw_addr_random()   // ★ 随机 MAC，不是真实厂商号
+    │
+    ├── netif_napi_add()              // 注册 NAPI poll 函数
+    ├── alloc_ordered_workqueue()      // 创建 backend workqueue
+    ├── stage08_alloc_queues()         // 分配 TX/RX ring，预填充 RX buffers
+    │
+    └── register_netdev()              // ★ nds8 正式加入内核网络栈
+           ↓
+ifconfig / ip link show  →  nds8 出现！
+```
+
+### 11.4 为什么 RX dropped = 1053
+
+这是驱动内部统计，不是真正"丢包"：
+
+```
+RX packets 1309  dropped 1053
+TX packets 1309
+```
+
+- TX packets = 1309：驱动发出 1309 帧
+- RX packets = 1309：驱动内部环回收到 1309 帧
+- RX dropped = 1053：驱动在某些测试场景下把 1053 帧标记为 `rx_dropped`（可能是 RX buffer slot 不足、或测试帧格式不对时的计数）
+
+数值相等说明**环回链路是通的**，dropped 是驱动的自我计数，不等同于物理网口的丢包。
+
+---
+
+## 十二、一句话总结
 
 > **stage08 的核心收获是：理解了"前后端边界"和"异步完成模型"——提交（submit）和完成（complete）不在同一个调用上下文里，doorbell_pending 是它们的握手信号，workqueue 是异步处理的载体，timeline 让这个异步链路变得可观测。**

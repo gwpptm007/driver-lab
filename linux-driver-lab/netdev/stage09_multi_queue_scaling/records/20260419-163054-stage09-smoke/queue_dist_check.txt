@@ -1,0 +1,2 @@
+Active queues with tx_submit>0: 2
+PASS: multi-queue distribution verified (2 queues)

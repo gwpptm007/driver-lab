@@ -245,6 +245,18 @@ struct stage08_priv {
 
     struct stage08_timeline timeline;  // timeline 统计
 
+    /* Lifecycle stats */
+    atomic64_t open_count;
+    atomic64_t stop_count;
+
+    /* Test-frame stats */
+    atomic64_t test_tx_submit_count;
+    atomic64_t test_backend_tx_processed;
+    atomic64_t test_backend_rx_produced;
+    atomic64_t test_rx_consume_count;
+    atomic64_t last_test_proto;
+    atomic64_t last_test_seq;
+
     /* TX stats */
     atomic64_t tx_submit_count;
     atomic64_t tx_complete_count;
@@ -354,9 +366,155 @@ static struct net_device *stage08_dev;
  * 这是驱动内部的时间戳获取函数，
  * 用于填充 timeline 结构。
  */
+#define STAGE08_TEST_ETHERTYPE 0x88B8
+#define STAGE08_TEST_MAGIC "STAGE08"
+#define STAGE08_TEST_MAGIC_LEN 7
+
+struct stage08_test_info {
+    bool matched;
+    u16 proto;
+    s32 seq;
+};
+
+/*
+ * 【学习】stage08_now_ns — 获取当前纳秒时间戳
+ *
+ * 使用 ktime_get_ns() 获取原始硬件计数器，不受时间调整影响。
+ * 这是 timeline 差分测量的基础，确保各阶段延迟精确可测量。
+ */
 static inline u64 stage08_now_ns(void)
 {
     return ktime_get_ns();
+}
+
+/*
+ * 【学习】stage08_parse_test_bytes — 解析测试帧的 payload
+ *
+ * 测试帧的 payload 格式：STAGE08 seq=N user=xxx
+ * 这个函数负责：
+ * 1. 检查 ETH_HLEN 偏移后是否有 STAGE08 magic
+ * 2. 提取 seq 序号
+ * 3. 验证 ethertype 是否为 0x88B8
+ *
+ * 返回值：info->matched=true 表示这是合法的测试帧
+ */
+static bool stage08_parse_test_bytes(const unsigned char *data, u32 len,
+                     struct stage08_test_info *info)
+{
+    const unsigned char *payload;
+    u32 payload_len;
+    u32 i;
+    unsigned int seq = 0;
+    bool seen_digit = false;
+    const char prefix[] = STAGE08_TEST_MAGIC " seq=";
+
+    memset(info, 0, sizeof(*info));
+    info->seq = -1;
+
+    if (!data || len < ETH_HLEN + STAGE08_TEST_MAGIC_LEN)
+        return false;
+
+    info->proto = ((u16)data[12] << 8) | data[13];
+    if (info->proto != STAGE08_TEST_ETHERTYPE)
+        return false;
+
+    payload = data + ETH_HLEN;
+    payload_len = len - ETH_HLEN;
+    if (payload_len < STAGE08_TEST_MAGIC_LEN ||
+        memcmp(payload, STAGE08_TEST_MAGIC, STAGE08_TEST_MAGIC_LEN) != 0)
+        return false;
+
+    if (payload_len >= sizeof(prefix) - 1 &&
+        memcmp(payload, prefix, sizeof(prefix) - 1) == 0) {
+        for (i = sizeof(prefix) - 1; i < payload_len; ++i) {
+            if (payload[i] < '0' || payload[i] > '9')
+                break;
+            seen_digit = true;
+            seq = seq * 10 + (unsigned int)(payload[i] - '0');
+        }
+        if (seen_digit)
+            info->seq = (s32)seq;
+    }
+
+    info->matched = true;
+    return true;
+}
+
+/*
+ * 【学习】stage08_account_test_submit — 记录测试帧的发送
+ *
+ * 只统计 magic 匹配的测试帧，用于 smoke test 的精确验证。
+ * test_tx_submit_count 记录本次测试中 submit 的测试帧总数。
+ */
+static void stage08_account_test_submit(struct stage08_priv *priv,
+                    const unsigned char *data, u32 len)
+{
+    struct stage08_test_info info;
+
+    if (!stage08_parse_test_bytes(data, len, &info))
+        return;
+
+    atomic64_inc(&priv->test_tx_submit_count);
+    atomic64_set(&priv->last_test_proto, info.proto);
+    atomic64_set(&priv->last_test_seq, info.seq);
+}
+
+/*
+ * 【学习】stage08_account_test_backend_tx — 记录 backend 处理的测试帧（TX 侧）
+ *
+ * backend 在批处理中消费 TX slot 时调用。
+ * test_backend_tx_processed 证明 backend 确实处理了这些帧。
+ */
+static void stage08_account_test_backend_tx(struct stage08_priv *priv,
+                        const unsigned char *data, u32 len)
+{
+    struct stage08_test_info info;
+
+    if (!stage08_parse_test_bytes(data, len, &info))
+        return;
+
+    atomic64_inc(&priv->test_backend_tx_processed);
+    atomic64_set(&priv->last_test_proto, info.proto);
+    atomic64_set(&priv->last_test_seq, info.seq);
+}
+
+/*
+ * 【学习】stage08_account_test_backend_rx — 记录 backend 产生的测试帧（RX 侧）
+ *
+ * backend 完成 memcpy（TX→RX）后调用。
+ * test_backend_rx_produced 证明 backend 产生了对应的 RX 帧。
+ */
+static void stage08_account_test_backend_rx(struct stage08_priv *priv,
+                        const unsigned char *data, u32 len)
+{
+    struct stage08_test_info info;
+
+    if (!stage08_parse_test_bytes(data, len, &info))
+        return;
+
+    atomic64_inc(&priv->test_backend_rx_produced);
+    atomic64_set(&priv->last_test_proto, info.proto);
+    atomic64_set(&priv->last_test_seq, info.seq);
+}
+
+/*
+ * 【学习】stage08_account_test_consume — 记录被协议栈消费的测试帧
+ *
+ * napi_poll -> consume_rx_one -> netif_receive_skb 链路末端调用。
+ * test_rx_consume_count 证明 RX 帧最终被协议栈接收。
+ * 这四个 account 函数形成完整链路：submit → backend_tx → backend_rx → consume
+ */
+static void stage08_account_test_consume(struct stage08_priv *priv,
+                     const unsigned char *data, u32 len)
+{
+    struct stage08_test_info info;
+
+    if (!stage08_parse_test_bytes(data, len, &info))
+        return;
+
+    atomic64_inc(&priv->test_rx_consume_count);
+    atomic64_set(&priv->last_test_proto, info.proto);
+    atomic64_set(&priv->last_test_seq, info.seq);
 }
 
 /*
@@ -604,6 +762,8 @@ static void stage08_reset_queue_state(struct stage08_priv *priv)
     priv->doorbell_pending = false;
     priv->backend_running = false;
     memset(&priv->timeline, 0, sizeof(priv->timeline));
+    atomic64_set(&priv->last_test_proto, 0);
+    atomic64_set(&priv->last_test_seq, -1);
     spin_unlock_irqrestore(&priv->state_lock, flags);
 }
 
@@ -707,6 +867,8 @@ static void stage08_backend_workfn(struct work_struct *work)
         dma_sync_single_for_device(&priv->ndev->dev, rxs->dma_addr, rxs->buf_len, DMA_FROM_DEVICE);
         memcpy(rxs->skb->data, txs->skb->data, copy_len);
         dma_sync_single_for_cpu(&priv->ndev->dev, rxs->dma_addr, copy_len, DMA_FROM_DEVICE);
+        stage08_account_test_backend_tx(priv, txs->skb->data, txd->data_len);
+        stage08_account_test_backend_rx(priv, rxs->skb->data, copy_len);
 
         /*
          * 【学习】标记 RX slot 为 DONE，更新 device_idx
@@ -940,6 +1102,7 @@ static int stage08_consume_rx_one(struct stage08_priv *priv)
 
     /* 【学习】skb_put + eth_type_trans + netif_receive_skb */
     skb_put(saved.skb, saved.data_len);
+    stage08_account_test_consume(priv, saved.skb->data, saved.data_len);
     proto = eth_type_trans(saved.skb, priv->ndev);
     netif_receive_skb(saved.skb);
 
@@ -1319,6 +1482,35 @@ static const struct file_operations stage08_stats_fops = {
     .release = single_release,
 };
 
+static int stage08_test_stats_show(struct seq_file *m, void *v)
+{
+    struct net_device *ndev = m->private;
+    struct stage08_priv *priv = netdev_priv(ndev);
+
+#define TP64(name) seq_printf(m, #name "=%lld\n", atomic64_read(&priv->name))
+    TP64(test_tx_submit_count);
+    TP64(test_backend_tx_processed);
+    TP64(test_backend_rx_produced);
+    TP64(test_rx_consume_count);
+#undef TP64
+    seq_printf(m, "last_test_proto=0x%llx\n", atomic64_read(&priv->last_test_proto));
+    seq_printf(m, "last_test_seq=%lld\n", atomic64_read(&priv->last_test_seq));
+    return 0;
+}
+
+static int stage08_test_stats_open(struct inode *inode, struct file *file)
+{
+    return single_open(file, stage08_test_stats_show, inode->i_private);
+}
+
+static const struct file_operations stage08_test_stats_fops = {
+    .owner = THIS_MODULE,
+    .open = stage08_test_stats_open,
+    .read = seq_read,
+    .llseek = seq_lseek,
+    .release = single_release,
+};
+
 /*
  * 【学习】debugfs queues show
  *
@@ -1448,6 +1640,7 @@ static void stage08_debugfs_init(struct stage08_priv *priv)
     }
 
     debugfs_create_file("stats", 0444, priv->dbg_dir, priv->ndev, &stage08_stats_fops);
+    debugfs_create_file("test_stats", 0444, priv->dbg_dir, priv->ndev, &stage08_test_stats_fops);
     debugfs_create_file("queues", 0444, priv->dbg_dir, priv->ndev, &stage08_queues_fops);
     debugfs_create_file("timeline", 0444, priv->dbg_dir, priv->ndev, &stage08_timeline_fops);
 }

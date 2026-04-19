@@ -1,0 +1,200 @@
+[    4.263011] hid-generic 0003:0E0F:0003.0001: input,hidraw0: USB HID v1.10 Mouse [VMware VMware Virtual USB Mouse] on usb-0000:03:00.0-1/input0
+[    4.501135] e1000 0000:02:02.0 eth1: (PCI:66MHz:32-bit) 00:0c:29:f8:f6:78
+[    4.501144] e1000 0000:02:02.0 eth1: Intel(R) PRO/1000 Network Connection
+[    4.853773] e1000 0000:02:03.0 eth2: (PCI:66MHz:32-bit) 00:0c:29:f8:f6:82
+[    4.853782] e1000 0000:02:03.0 eth2: Intel(R) PRO/1000 Network Connection
+[    4.886370] e1000 0000:02:03.0 ens35: renamed from eth2
+[    4.892690] e1000 0000:02:02.0 ens34: renamed from eth1
+[    4.908458] e1000 0000:02:01.0 ens33: renamed from eth0
+[    5.108503] EXT4-fs (sda3): mounted filesystem b6dfcf48-79dd-42f6-867f-0e7878e613e9 ro with ordered data mode. Quota mode: none.
+[    5.218999] systemd[1]: Inserted module 'autofs4'
+[    5.254584] systemd[1]: systemd 249.11-0ubuntu3.19 running in system mode (+PAM +AUDIT +SELINUX +APPARMOR +IMA +SMACK +SECCOMP +GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +IPTC +KMOD +LIBCRYPTSETUP +LIBFDISK +PCRE2 -PWQUALITY -P11KIT -QRENCODE +BZIP2 +LZ4 +XZ +ZLIB +ZSTD -XKBCOMMON +UTMP +SYSVINIT default-hierarchy=unified)
+[    5.254723] systemd[1]: Detected virtualization vmware.
+[    5.254727] systemd[1]: Detected architecture x86-64.
+[    5.255308] systemd[1]: Hostname set to <wq7-virtual-machine>.
+[    5.299525] block sda: the capability attribute has been deprecated.
+[    5.349640] systemd[1]: Configuration file /run/systemd/system/netplan-ovs-cleanup.service is marked world-inaccessible. This has no effect as configuration data is accessible via APIs without restrictions. Proceeding anyway.
+[    5.365778] systemd[1]: /lib/systemd/system/snapd.service:23: Unknown key name 'RestartMode' in section 'Service', ignoring.
+[    5.404974] systemd[1]: Queued start job for default target Graphical Interface.
+[    5.413637] systemd[1]: Created slice Slice /system/modprobe.
+[    5.414024] systemd[1]: Created slice Slice /system/systemd-fsck.
+[    5.414242] systemd[1]: Created slice User and Session Slice.
+[    5.414297] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+[    5.414427] systemd[1]: Set up automount Arbitrary Executable File Formats File System Automount Point.
+[    5.414462] systemd[1]: Reached target User and Group Name Lookups.
+[    5.414470] systemd[1]: Reached target Remote File Systems.
+[    5.414477] systemd[1]: Reached target Slice Units.
+[    5.414485] systemd[1]: Reached target Mounting snaps.
+[    5.414500] systemd[1]: Reached target Local Verity Protected Volumes.
+[    5.414589] systemd[1]: Listening on Syslog Socket.
+[    5.414753] systemd[1]: Listening on fsck to fsckd communication Socket.
+[    5.414802] systemd[1]: Listening on initctl Compatibility Named Pipe.
+[    5.414957] systemd[1]: Listening on Journal Audit Socket.
+[    5.415024] systemd[1]: Listening on Journal Socket (/dev/log).
+[    5.415102] systemd[1]: Listening on Journal Socket.
+[    5.415405] systemd[1]: Listening on udev Control Socket.
+[    5.415478] systemd[1]: Listening on udev Kernel Socket.
+[    5.416312] systemd[1]: Mounting Huge Pages File System...
+[    5.417358] systemd[1]: Mounting POSIX Message Queue File System...
+[    5.418727] systemd[1]: Mounting Kernel Debug File System...
+[    5.419837] systemd[1]: Mounting Kernel Trace File System...
+[    5.422495] systemd[1]: Starting Journal Service...
+[    5.423523] systemd[1]: Starting Set the console keyboard layout...
+[    5.424990] systemd[1]: Starting Create List of Static Device Nodes...
+[    5.426672] systemd[1]: Starting Load Kernel Module configfs...
+[    5.427671] systemd[1]: Starting Load Kernel Module drm...
+[    5.428605] systemd[1]: Starting Load Kernel Module efi_pstore...
+[    5.429523] systemd[1]: Starting Load Kernel Module fuse...
+[    5.429671] systemd[1]: Condition check resulted in File System Check on Root Device being skipped.
+[    5.431330] systemd[1]: Starting Load Kernel Modules...
+[    5.433038] systemd[1]: Starting Remount Root and Kernel File Systems...
+[    5.434360] systemd[1]: Starting Coldplug All udev Devices...
+[    5.436453] systemd[1]: Mounted Huge Pages File System.
+[    5.436533] systemd[1]: Mounted POSIX Message Queue File System.
+[    5.436607] systemd[1]: Mounted Kernel Debug File System.
+[    5.436681] systemd[1]: Mounted Kernel Trace File System.
+[    5.437106] systemd[1]: Finished Create List of Static Device Nodes.
+[    5.437562] systemd[1]: modprobe@configfs.service: Deactivated successfully.
+[    5.437856] systemd[1]: Finished Load Kernel Module configfs.
+[    5.438090] systemd[1]: modprobe@drm.service: Deactivated successfully.
+[    5.438461] systemd[1]: Finished Load Kernel Module drm.
+[    5.438693] systemd[1]: modprobe@efi_pstore.service: Deactivated successfully.
+[    5.439057] systemd[1]: Finished Load Kernel Module efi_pstore.
+[    5.439349] systemd[1]: modprobe@fuse.service: Deactivated successfully.
+[    5.439698] systemd[1]: Finished Load Kernel Module fuse.
+[    5.441454] systemd[1]: Mounting FUSE Control File System...
+[    5.444936] EXT4-fs (sda3): re-mounted b6dfcf48-79dd-42f6-867f-0e7878e613e9 r/w.
+[    5.444977] systemd[1]: Mounting Kernel Configuration File System...
+[    5.447189] systemd[1]: Finished Remount Root and Kernel File Systems.
+[    5.447554] systemd[1]: Mounted FUSE Control File System.
+[    5.447616] systemd[1]: Mounted Kernel Configuration File System.
+[    5.448916] systemd[1]: Activating swap /swapfile...
+[    5.450906] systemd[1]: Mounting VMware vmblock fuse mount...
+[    5.451453] systemd[1]: Condition check resulted in Platform Persistent Storage Archival being skipped.
+[    5.452105] Adding 2097148k swap on /swapfile.  Priority:-2 extents:6 across:2260988k 
+[    5.452639] lp: driver loaded but no devices found
+[    5.453731] systemd[1]: Starting Load/Save Random Seed...
+[    5.456348] systemd[1]: Starting Create System Users...
+[    5.457243] systemd[1]: Activated swap /swapfile.
+[    5.459152] systemd[1]: Reached target Swaps.
+[    5.460005] systemd[1]: Mounted VMware vmblock fuse mount.
+[    5.461136] systemd[1]: Finished Set the console keyboard layout.
+[    5.462308] ppdev: user-space parallel port driver
+[    5.482949] systemd[1]: Finished Load/Save Random Seed.
+[    5.483216] systemd[1]: Condition check resulted in First Boot Complete being skipped.
+[    5.485221] systemd[1]: Finished Create System Users.
+[    5.486305] systemd[1]: Starting Create Static Device Nodes in /dev...
+[    5.491466] vmwgfx 0000:00:0f.0: vgaarb: deactivate vga console
+[    5.491590] Console: switching to colour dummy device 80x25
+[    5.492399] vmwgfx 0000:00:0f.0: [drm] FIFO at 0x00000000fe000000 size is 8192 kiB
+[    5.492418] vmwgfx 0000:00:0f.0: [drm] VRAM at 0x00000000e8000000 size is 131072 kiB
+[    5.492429] vmwgfx 0000:00:0f.0: [drm] Running on SVGA version 2.
+[    5.492436] vmwgfx 0000:00:0f.0: [drm] Capabilities: rect copy, cursor, cursor bypass, cursor bypass 2, 8bit emulation, alpha cursor, extended fifo, multimon, pitchlock, irq mask, display topology, gmr, traces, gmr2, screen object 2, command buffers, command buffers 2, gbobject, dx, hp cmd queue, no bb restriction, cap2 register, 
+[    5.492442] vmwgfx 0000:00:0f.0: [drm] Capabilities2: grow otable, intra surface copy, dx2, gb memsize 2, screendma reg, otable ptdepth2, non ms to ms stretchblt, cursor mob, mshint, cb max size 4mb, dx3, frame type, trace full fb, extra regs, lo staging, 
+[    5.492444] vmwgfx 0000:00:0f.0: [drm] DMA map mode: Caching DMA mappings.
+[    5.492542] vmwgfx 0000:00:0f.0: [drm] Legacy memory limits: VRAM = 4096 kB, FIFO = 256 kB, surface = 0 kB
+[    5.492544] vmwgfx 0000:00:0f.0: [drm] MOB limits: max mob size = 262144 kB, max mob pages = 65536
+[    5.492546] vmwgfx 0000:00:0f.0: [drm] Max GMR ids is 64
+[    5.492548] vmwgfx 0000:00:0f.0: [drm] Max number of GMR pages is 65536
+[    5.492549] vmwgfx 0000:00:0f.0: [drm] Maximum display memory size is 262144 kiB
+[    5.496739] vmwgfx 0000:00:0f.0: [drm] Screen Target display unit initialized
+[    5.498066] systemd[1]: Finished Create Static Device Nodes in /dev.
+[    5.498171] systemd[1]: Reached target Preparation for Local File Systems.
+[    5.498500] vmwgfx 0000:00:0f.0: [drm] Fifo max 0x00040000 min 0x00001000 cap 0x0000077f
+[    5.500011] systemd[1]: Mounting Prepare /run/qemu to allow still running qemu binaries of former builds (after package upgrades) to fallback-load modules from there...
+[    5.501776] systemd[1]: Mounting Mount unit for bare, revision 5...
+[    5.503170] vmwgfx 0000:00:0f.0: [drm] Using command buffers with DMA pool.
+[    5.503197] vmwgfx 0000:00:0f.0: [drm] Available shader model: Legacy.
+[    5.503575] systemd[1]: Mounting Mount unit for core22, revision 1612...
+[    5.504692] systemd[1]: Mounting Mount unit for core22, revision 2411...
+[    5.505197] [drm] Initialized vmwgfx 2.20.0 20211206 for 0000:00:0f.0 on minor 0
+[    5.505647] loop0: detected capacity change from 0 to 8
+[    5.506066] loop1: detected capacity change from 0 to 152112
+[    5.506246] systemd[1]: Mounting Mount unit for firefox, revision 7901...
+[    5.507560] loop2: detected capacity change from 0 to 151512
+[    5.507606] systemd[1]: Mounting Mount unit for firefox, revision 7967...
+[    5.509307] fbcon: vmwgfxdrmfb (fb0) is primary device
+[    5.510083] loop3: detected capacity change from 0 to 521368
+[    5.510512] systemd[1]: Mounting Mount unit for gnome-42-2204, revision 176...
+[    5.511061] loop4: detected capacity change from 0 to 522136
+[    5.511110] Console: switching to colour frame buffer device 160x50
+[    5.512818] vmwgfx 0000:00:0f.0: [drm] fb0: vmwgfxdrmfb frame buffer device
+[    5.512909] loop5: detected capacity change from 0 to 1034424
+[    5.513075] systemd[1]: Mounting Mount unit for gnome-42-2204, revision 247...
+[    5.514944] loop6: detected capacity change from 0 to 1088256
+[    5.514994] systemd[1]: Mounting Mount unit for gtk-common-themes, revision 1535...
+[    5.517508] loop7: detected capacity change from 0 to 187776
+[    5.518195] systemd[1]: Mounting Mount unit for snap-store, revision 1113...
+[    5.519849] systemd[1]: Mounting Mount unit for snap-store, revision 1216...
+[    5.521301] systemd[1]: Mounting Mount unit for snapd, revision 25935...
+[    5.522810] systemd[1]: Mounting Mount unit for snapd, revision 26382...
+[    5.522929] loop8: detected capacity change from 0 to 26472
+[    5.527243] systemd[1]: Mounting Mount unit for snapd-desktop-integration, revision 178...
+[    5.532583] systemd[1]: Starting Rule-based Manager for Device Events and Files...
+[    5.534680] loop9: detected capacity change from 0 to 24984
+[    5.539270] loop10: detected capacity change from 0 to 98480
+[    5.544682] systemd[1]: Finished Load Kernel Modules.
+[    5.545176] loop11: detected capacity change from 0 to 99056
+[    5.550335] systemd[1]: Mounted Prepare /run/qemu to allow still running qemu binaries of former builds (after package upgrades) to fallback-load modules from there.
+[    5.552059] systemd[1]: Mounted Mount unit for bare, revision 5.
+[    5.552148] systemd[1]: Mounted Mount unit for core22, revision 1612.
+[    5.552265] systemd[1]: Mounted Mount unit for core22, revision 2411.
+[    5.552325] systemd[1]: Mounted Mount unit for firefox, revision 7901.
+[    5.552494] systemd[1]: Mounted Mount unit for firefox, revision 7967.
+[    5.552558] systemd[1]: Mounted Mount unit for gnome-42-2204, revision 176.
+[    5.552619] systemd[1]: Mounted Mount unit for gnome-42-2204, revision 247.
+[    5.552677] systemd[1]: Mounted Mount unit for gtk-common-themes, revision 1535.
+[    5.552735] systemd[1]: Mounted Mount unit for snap-store, revision 1113.
+[    5.552791] systemd[1]: Mounted Mount unit for snap-store, revision 1216.
+[    5.552852] systemd[1]: Mounted Mount unit for snapd, revision 25935.
+[    5.552926] systemd[1]: Mounted Mount unit for snapd, revision 26382.
+[    5.553160] loop12: detected capacity change from 0 to 1000
+[    5.565844] systemd[1]: Starting Apply Kernel Variables...
+[    5.568512] systemd[1]: Mounted Mount unit for snapd-desktop-integration, revision 178.
+[    5.568588] systemd[1]: Reached target Mounted snaps.
+[    5.581928] systemd[1]: Finished Apply Kernel Variables.
+[    5.599593] systemd[1]: Started Journal Service.
+[    5.644384] systemd-journald[402]: Received client request to flush runtime journal.
+[    5.689628] systemd-journald[402]: File /var/log/journal/ea98a4086ea24ac6b53ad50c9e0971c1/system.journal corrupted or uncleanly shut down, renaming and replacing.
+[    6.066462] vmw_vmci 0000:00:07.7: MMIO register access is available
+[    6.067599] vmw_vmci 0000:00:07.7: Using capabilities 0x3c
+[    6.079681] Guest personality initialized and is active
+[    6.089320] VMCI host device registered (name=vmci, major=10, minor=261)
+[    6.089324] Initialized host personality
+[    6.164614] Bluetooth: Core ver 2.22
+[    6.165675] NET: Registered PF_BLUETOOTH protocol family
+[    6.165678] Bluetooth: HCI device and connection manager initialized
+[    6.165683] Bluetooth: HCI socket layer initialized
+[    6.165698] Bluetooth: L2CAP socket layer initialized
+[    6.165706] Bluetooth: SCO socket layer initialized
+[    6.325155] usbcore: registered new interface driver btusb
+[    6.353955] Bluetooth: hci0: unexpected cc 0x0c12 length: 2 < 3
+[    6.353991] Bluetooth: hci0: Opcode 0x0c12 failed: -38
+[    6.367258] cryptd: max_cpu_qlen set to 1000
+[    6.407070] audit: type=1400 audit(1776481280.865:2): apparmor="STATUS" operation="profile_load" profile="unconfined" name="lsb_release" pid=790 comm="apparmor_parser"
+[    6.407200] audit: type=1400 audit(1776481280.865:3): apparmor="STATUS" operation="profile_load" profile="unconfined" name="nvidia_modprobe" pid=791 comm="apparmor_parser"
+[    6.407205] audit: type=1400 audit(1776481280.865:4): apparmor="STATUS" operation="profile_load" profile="unconfined" name="nvidia_modprobe//kmod" pid=791 comm="apparmor_parser"
+[    6.408834] audit: type=1400 audit(1776481280.868:5): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/bin/man" pid=796 comm="apparmor_parser"
+[    6.408840] audit: type=1400 audit(1776481280.868:6): apparmor="STATUS" operation="profile_load" profile="unconfined" name="man_filter" pid=796 comm="apparmor_parser"
+[    6.408844] audit: type=1400 audit(1776481280.868:7): apparmor="STATUS" operation="profile_load" profile="unconfined" name="man_groff" pid=796 comm="apparmor_parser"
+[    6.410784] audit: type=1400 audit(1776481280.870:8): apparmor="STATUS" operation="profile_load" profile="unconfined" name="ubuntu_pro_apt_news" pid=793 comm="apparmor_parser"
+[    6.410858] audit: type=1400 audit(1776481280.870:9): apparmor="STATUS" operation="profile_load" profile="unconfined" name="tcpdump" pid=797 comm="apparmor_parser"
+[    6.412874] audit: type=1400 audit(1776481280.871:10): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/NetworkManager/nm-dhcp-client.action" pid=792 comm="apparmor_parser"
+[    6.412883] audit: type=1400 audit(1776481280.871:11): apparmor="STATUS" operation="profile_load" profile="unconfined" name="/usr/lib/NetworkManager/nm-dhcp-helper" pid=792 comm="apparmor_parser"
+[    6.419076] AVX2 version of gcm_enc/dec engaged.
+[    6.421731] AES CTR mode by8 optimization enabled
+[    6.595292] NET: Registered PF_VSOCK protocol family
+[    6.628781] kvm_amd: Nested Virtualization enabled
+[    6.628784] kvm_amd: Nested Paging enabled
+[    6.949118] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[    6.949122] Bluetooth: BNEP filters: protocol multicast
+[    6.949126] Bluetooth: BNEP socket layer initialized
+[    7.249165] e1000: ens33 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: None
+[    7.260524] e1000: ens34 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: None
+[    7.271533] e1000: ens35 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: None
+[    9.494923] loop13: detected capacity change from 0 to 8
+[   10.073549] rfkill: input handler disabled
+[   28.878430] systemd-journald[402]: File /var/log/journal/ea98a4086ea24ac6b53ad50c9e0971c1/user-1000.journal corrupted or uncleanly shut down, renaming and replacing.
+[  234.430006] netdev_stage09: loading out-of-tree module taints kernel.
+[  234.430012] netdev_stage09: module verification failed: signature and/or required key missing - tainting kernel
+[  234.431666] netdev_stage09: loaded ifname=nds9 num_queues=2 ring_size=128 napi_weight=64 backend_batch=64

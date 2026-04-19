@@ -1,41 +1,27 @@
 // SPDX-License-Identifier: GPL-2.0
 /*
- * recv_stage08_frame.c — 接收指定接口上的原始以太网帧
+ * recv_stage08_frame.c — 接收并精确匹配 stage08 测试帧
  *
- * 【学习要点】
- *
- * 1. AF_PACKET / SOCK_RAW 接收模式
- *    - 绑定到特定 ethertype（0x88B8）
- *    - 只接收匹配该 ethertype 的帧
- *    - 帧包含完整的以太网头
- *
- * 2. recvfrom() 与 recv() 的区别
- *    - recvfrom() 获取发送者地址（ sockaddr_ll）
- *    - recv() 只返回数据
- *    - 这里用 recvfrom() 是为了获取包来源信息
- *
- * 3. PACKET_IGNORE_OUTGOING 套接字选项
- *    - 避免接收到本机发出的帧（回环）
- *    - 重要：发送和接收用同一个 ethertype 时需要设置
- *
- * 4. SO_RCVTIMEO 接收超时
- *    - 避免 recvfrom() 永久阻塞
- *    - 超时后返回 -1，errno = EAGAIN/EWOULDBLOCK
- *
- * 5. 帧解析
- *    - ETH_HLEN (14) 字节是以太网头
- *    - 前 6 字节：目标 MAC
- *    - 中间 6 字节：源 MAC
- *    - 后 2 字节：ethertype（大端序）
- *    - 剩余：payload
- *
- * 【用法】
- *   ./recv_stage08_frame <ifname> [ethertype] [max_frames] [timeout_sec]
- *
- * 【例子】
- *   ./recv_stage08_frame nds8 0x88B8 32 5
- *     -> 在 nds8 上最多接收 32 帧，超时 5 秒
+ * v2 版本的重点：
+ * 1. 只把 ethertype=0x88B8 且 payload 前缀为 "STAGE08" 的帧计入成功
+ * 2. 输出统一摘要行，供 smoke.sh 做硬判定
+ * 3. 返回码有语义：
+ *    0=达到预期帧数, 2=超时但数量不足, 3=参数错误, 4=socket/权限错误
  */
+
+#define _GNU_SOURCE
+#include <arpa/inet.h>
+#include <errno.h>
+#include <linux/if_packet.h>
+#include <net/ethernet.h>
+#include <net/if.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/ioctl.h>
+#include <sys/socket.h>
+#include <sys/time.h>
+#include <unistd.h>
 
 #ifndef PACKET_IGNORE_OUTGOING
 #define PACKET_IGNORE_OUTGOING 23
@@ -43,18 +29,45 @@
 
 #define DEFAULT_ETHERTYPE 0x88B8
 #define MAX_FRAME_SIZE 2048
+#define TEST_MAGIC "STAGE08"
+#define TEST_MAGIC_LEN 7
 
 static void usage(const char *prog)
 {
     fprintf(stderr,
-        "Usage: %s <ifname> [ethertype] [max_frames] [timeout_sec]\n",
+        "Usage: %s <ifname> [ethertype] [expected_frames] [timeout_sec]\n",
         prog);
+}
+
+static int parse_seq(const unsigned char *payload, size_t payload_len)
+{
+    const char prefix[] = TEST_MAGIC " seq=";
+    size_t i;
+    int seq = -1;
+    unsigned int v = 0;
+    int seen_digit = 0;
+
+    if (payload_len < sizeof(prefix) - 1)
+        return -1;
+    if (memcmp(payload, prefix, sizeof(prefix) - 1) != 0)
+        return -1;
+
+    for (i = sizeof(prefix) - 1; i < payload_len; ++i) {
+        if (payload[i] < '0' || payload[i] > '9')
+            break;
+        seen_digit = 1;
+        v = v * 10 + (unsigned int)(payload[i] - '0');
+    }
+    if (seen_digit)
+        seq = (int)v;
+    return seq;
 }
 
 int main(int argc, char **argv)
 {
     int fd = -1;
     int one = 1;
+    int rc = 0;
     struct ifreq ifr;
     struct sockaddr_ll bind_addr;
     unsigned char frame[MAX_FRAME_SIZE + 1];
@@ -63,76 +76,51 @@ int main(int argc, char **argv)
     struct timeval tv;
     const char *ifname;
     unsigned int ethertype = DEFAULT_ETHERTYPE;
-    unsigned int max_frames = 1;
+    unsigned int expected_frames = 1;
     unsigned int timeout_sec = 5;
-    unsigned int received = 0;
+    unsigned int total_received = 0;
+    unsigned int matched_proto = 0;
+    unsigned int matched_magic = 0;
+
+    setvbuf(stdout, NULL, _IOLBF, 0);
 
     if (argc < 2) {
         usage(argv[0]);
-        return 1;
+        return 3;
     }
 
     ifname = argv[1];
     if (argc >= 3)
         ethertype = (unsigned int)strtoul(argv[2], NULL, 0);
     if (argc >= 4)
-        max_frames = (unsigned int)strtoul(argv[3], NULL, 0);
+        expected_frames = (unsigned int)strtoul(argv[3], NULL, 0);
     if (argc >= 5)
         timeout_sec = (unsigned int)strtoul(argv[4], NULL, 0);
-    if (!max_frames)
-        max_frames = 1;
+    if (!expected_frames)
+        expected_frames = 1;
 
-    /*
-     * 【学习】创建 AF_PACKET 原始套接字
-     * - ethertype 指定了要接收的帧类型
-     * - htons()：主机字节序转网络字节序（大端）
-     *
-     * 这里 ethertype = 0x88B8 是自定义值，
-     * 表示只接收本实验驱动发出的帧
-     */
+    printf("recv start: ifname=%s proto=0x%04x expected=%u timeout=%u\n",
+           ifname, ethertype & 0xffff, expected_frames, timeout_sec);
+
     fd = socket(AF_PACKET, SOCK_RAW, htons((unsigned short)ethertype));
     if (fd < 0) {
         perror("socket(AF_PACKET)");
-        return 1;
+        return 4;
     }
 
-    /*
-     * 【学习】PACKET_IGNORE_OUTGOING
-     * - 设置后，本机发出的同协议帧不会触发接收
-     * - 避免 send + recv 在同一进程中产生回环
-     */
     (void)setsockopt(fd, SOL_PACKET, PACKET_IGNORE_OUTGOING, &one, sizeof(one));
-
-    /*
-     * 【学习】SO_RCVTIMEO
-     * - 设置 recvfrom() 超时时间
-     * - tv.tv_sec：秒
-     * - tv.tv_usec：微秒
-     * - 超时后返回 -1，errno = EAGAIN
-     */
     tv.tv_sec = (long)timeout_sec;
     tv.tv_usec = 0;
     (void)setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
 
-    /*
-     * 【学习】获取接口索引
-     * SIOCGIFINDEX ioctl 获取 ifindex，
-     * 后面 bind() 需要用到
-     */
     memset(&ifr, 0, sizeof(ifr));
     snprintf(ifr.ifr_name, sizeof(ifr.ifr_name), "%s", ifname);
     if (ioctl(fd, SIOCGIFINDEX, &ifr) < 0) {
         perror("ioctl(SIOCGIFINDEX)");
         close(fd);
-        return 1;
+        return 4;
     }
 
-    /*
-     * 【学习】bind() 绑定到指定接口
-     * - sockaddr_ll 结构指定了接口和协议
-     * - 绑定后，只有从该接口收到的匹配 ethertype 的帧才会到达
-     * - 注意：bind() 的 sll_protocol 会覆盖 socket() 创建时的协议
-     */
     memset(&bind_addr, 0, sizeof(bind_addr));
     bind_addr.sll_family = AF_PACKET;
     bind_addr.sll_protocol = htons((unsigned short)ethertype);
@@ -140,45 +128,61 @@ int main(int argc, char **argv)
     if (bind(fd, (struct sockaddr *)&bind_addr, sizeof(bind_addr)) < 0) {
         perror("bind(AF_PACKET)");
         close(fd);
-        return 1;
+        return 4;
     }
 
-    /*
-     * 【学习】recvfrom() 接收帧
-     * - 返回值：接收到的字节数
-     * - rx_addr：发送者的链路层地址（ sockaddr_ll）
-     * - rx_addr_len：地址长度（会被设置）
-     *
-     * 【学习】以太网帧解析
-     * - frame[0..5]：目标 MAC
-     * - frame[6..11]：源 MAC
-     * - frame[12..13]：ethertype（大端序）
-     * - frame[14..]：payload
-     *
-     * ETH_HLEN = 14，是以太网头的固定长度
-     */
-    while (received < max_frames) {
+    while (matched_magic < expected_frames) {
         ssize_t n;
+        unsigned short onwire_proto = 0;
+        int seq = -1;
+        const unsigned char *payload = NULL;
+        size_t payload_len = 0;
+
         rx_addr_len = sizeof(rx_addr);
         n = recvfrom(fd, frame, MAX_FRAME_SIZE, 0,
                  (struct sockaddr *)&rx_addr, &rx_addr_len);
         if (n < 0) {
-            if (errno == EAGAIN || errno == EWOULDBLOCK)
+            if (errno == EAGAIN || errno == EWOULDBLOCK) {
+                rc = 2;
                 break;
+            }
             perror("recvfrom");
             close(fd);
-            return 1;
+            return 4;
         }
+
+        total_received++;
         frame[n] = '\0';
-        printf("[recv_stage08_frame] #%u len=%zd ifindex=%d protocol=0x%04x payload=\"%s\"\n",
-               received + 1, n, rx_addr.sll_ifindex,
-               ntohs(rx_addr.sll_protocol),
-               (n > ETH_HLEN) ? (char *)(frame + ETH_HLEN) : "");
-        received++;
+
+        if (n >= ETH_HLEN) {
+            onwire_proto = (unsigned short)(((unsigned short)frame[12] << 8) | frame[13]);
+            payload = frame + ETH_HLEN;
+            payload_len = (size_t)n - ETH_HLEN;
+        }
+
+        if (onwire_proto == (ethertype & 0xffff))
+            matched_proto++;
+
+        if (payload && payload_len >= TEST_MAGIC_LEN &&
+            memcmp(payload, TEST_MAGIC, TEST_MAGIC_LEN) == 0) {
+            seq = parse_seq(payload, payload_len);
+            matched_magic++;
+            printf("matched frame #%u len=%zd ifindex=%d protocol=0x%04x seq=%d payload=\"%.*s\"\n",
+                   matched_magic, n, rx_addr.sll_ifindex, onwire_proto,
+                   seq, (int)payload_len, (const char *)payload);
+        } else {
+            printf("ignored frame total=%u len=%zd ifindex=%d protocol=0x%04x\n",
+                   total_received, n, rx_addr.sll_ifindex, onwire_proto);
+        }
     }
 
-    printf("[recv_stage08_frame] received %u frame(s) on %s ethertype=0x%04x\n",
-           received, ifname, ethertype & 0xffff);
+    if (matched_magic >= expected_frames)
+        rc = 0;
+
+    printf("received %u frame(s), matched_proto=%u, matched_magic=%u, timeout=%u, expected=%u, proto=0x%04x\n",
+           total_received, matched_proto, matched_magic,
+           rc == 2 ? 1U : 0U, expected_frames, ethertype & 0xffff);
+    fflush(stdout);
     close(fd);
-    return 0;
+    return rc;
 }

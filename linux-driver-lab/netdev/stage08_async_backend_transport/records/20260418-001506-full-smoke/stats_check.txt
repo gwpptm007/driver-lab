@@ -1,0 +1,17 @@
+tx_submit_count delta=32 (need >= 32)
+tx_complete_count delta=32 (need >= 32)
+doorbell_count delta=32 (need >= 1)
+backend_schedule_count delta=32 (need >= 1)
+backend_run_count delta=3 (need >= 1)
+backend_tx_processed delta=32 (need >= 32)
+backend_rx_produced delta=32 (need >= 32)
+rx_consume_count delta=32 (need >= 32)
+irq_count delta=2 (need >= 1)
+napi_poll_count delta=2 (need >= 1)
+
+tx_inflight after=0 (need == 0)
+tx_done after=0 (need == 0)
+rx_ready after=0 (need == 0)
+doorbell_pending after=0 (need == 0)
+backend_running after=0 (need == 0)
+[stage08] stats check passed

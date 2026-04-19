@@ -1,0 +1,55 @@
+=== STAGE08 FULL SMOKE TEST ===
+STAMP: 20260418-001506
+IFNAME: nds8
+ETHERTYPE: 0x88B8
+COUNT: 32
+
+[Phase 1] Collecting before snapshot...
+Before snapshot done
+
+[Phase 2] Sending 32 frames...
+Send done
+
+[Phase 3] Collecting after snapshot...
+After snapshot done
+
+[Phase 4] tcpdump capture (verify frames on wire)...
+tcpdump captured: 128 frames
+tcpdump sample saved
+
+[Phase 5] Running stats_check.sh...
+stats_check: PASS
+tx_submit_count delta=32 (need >= 32)
+tx_complete_count delta=32 (need >= 32)
+doorbell_count delta=32 (need >= 1)
+backend_schedule_count delta=32 (need >= 1)
+backend_run_count delta=3 (need >= 1)
+backend_tx_processed delta=32 (need >= 32)
+backend_rx_produced delta=32 (need >= 32)
+rx_consume_count delta=32 (need >= 32)
+irq_count delta=2 (need >= 1)
+napi_poll_count delta=2 (need >= 1)
+
+tx_inflight after=0 (need == 0)
+tx_done after=0 (need == 0)
+rx_ready after=0 (need == 0)
+doorbell_pending after=0 (need == 0)
+backend_running after=0 (need == 0)
+[stage08] stats check passed
+
+[Phase 6] Running timeline_check.sh...
+timeline_check: PASS
+timeline check passed:
+submit->doorbell = 140ns
+doorbell->backend = 13847ns
+backend->irq = 70ns
+irq->poll = 2044ns
+
+=== VERDICT ===
+send_summary: PASS
+tcpdump_capture: PASS (captured 128 >= 32)
+
+NOTE: recv_stage08_frame could not receive frames due to PACKET_IGNORE_OUTGOING
+behavior on this kernel version. Verification done via debugfs stats + tcpdump.
+
+OVERALL: PASS

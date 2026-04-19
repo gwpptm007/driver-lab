@@ -1,134 +1,108 @@
 #!/usr/bin/env bash
-#
-# smoke.sh — stage08 完整验证脚本
-#
-# 【学习要点】
-#
-# 1. 脚本结构
-#    - 收集测试前状态（before snapshot）
-#    - 并发执行接收和发送
-#    - 收集测试后状态（after snapshot）
-#    - 生成 SMOKE_REPORT.md
-#
-# 2. 并发模型
-#    - recv 先启动（后台运行）
-#    - 等待 1 秒确保 recv 开始监听
-#    - send 同步发送
-#    - wait 等待 recv 完成
-#
-# 3. debugfs 观测点
-#    - /sys/kernel/debug/netdev_stage08/stats      — 完整统计
-#    - /sys/kernel/debug/netdev_stage08/queues    — TX/RX ring 状态
-#    - /sys/kernel/debug/netdev_stage08/timeline  — 各阶段时间戳
-#
-# 4. smoke vs smoke_test
-#    - smoke：快速验证（发送少量帧）
-#    - smoke_test：完整测试（更多帧，更长时间）
-#
-
 set -euo pipefail
 
 ROOT_DIR=$(cd "$(dirname "$0")/.." && pwd)
 TOOLS_DIR="$ROOT_DIR/tools"
+SCRIPTS_DIR="$ROOT_DIR/scripts"
 
 IFNAME=${IFNAME:-nds8}
 ETHERTYPE=${ETHERTYPE:-0x88B8}
 SMOKE_COUNT=${SMOKE_COUNT:-32}
 SMOKE_TIMEOUT_SEC=${SMOKE_TIMEOUT_SEC:-5}
-TIMEOUT_BIN=${TIMEOUT_BIN:-timeout}
+RECV_READY_SLEEP_SEC=${RECV_READY_SLEEP_SEC:-1}
+SEND_PAYLOAD=${SEND_PAYLOAD:-hello_stage08_async_backend}
 
 STAMP=$(date +%Y%m%d-%H%M%S)
 LOG_DIR="$ROOT_DIR/records/$STAMP-stage08-smoke"
 SEND_TOOL="$TOOLS_DIR/send_stage08_frame"
 RECV_TOOL="$TOOLS_DIR/recv_stage08_frame"
+DBG_DIR=/sys/kernel/debug/netdev_stage08
 
 mkdir -p "$LOG_DIR"
 
-# 【学习】工具可用性检查
-# 确保编译产物存在
 test -x "$SEND_TOOL" || { echo "[stage08] missing $SEND_TOOL, run scripts/build.sh first" >&2; exit 1; }
 test -x "$RECV_TOOL" || { echo "[stage08] missing $RECV_TOOL, run scripts/build.sh first" >&2; exit 1; }
-
-# 【学习】模块加载检查
-# lsmod | awk '{print $1}' | grep -qx <name>
-# - lsmod：列出已加载模块
-# - awk '{print $1}'：取第一列（模块名）
-# - grep -qx：精确匹配（无需正则）
 lsmod | awk '{print $1}' | grep -qx netdev_stage08 || { echo "[stage08] module netdev_stage08 is not loaded" >&2; exit 1; }
 
-# 【学习】接口 UP
-# 网卡必须 UP 才能收发帧
-# ip link set dev <ifname> up
+sudo -n true >/dev/null 2>&1 || {
+    echo "[stage08] sudo -n true failed. 请先配置免密 sudo，或先执行一次 sudo true 缓存凭证。" >&2
+    exit 1
+}
+
+collect_snapshot() {
+    local phase=$1
+    ip -s link show "$IFNAME" | tee "$LOG_DIR/ip_link_${phase}.txt" >/dev/null || true
+    [[ -f "$DBG_DIR/stats" ]] && sudo cat "$DBG_DIR/stats" > "$LOG_DIR/debugfs_stats_${phase}.txt"
+    [[ -f "$DBG_DIR/queues" ]] && sudo cat "$DBG_DIR/queues" > "$LOG_DIR/debugfs_queues_${phase}.txt"
+    [[ -f "$DBG_DIR/timeline" ]] && sudo cat "$DBG_DIR/timeline" > "$LOG_DIR/debugfs_timeline_${phase}.txt"
+    [[ -f "$DBG_DIR/test_stats" ]] && sudo cat "$DBG_DIR/test_stats" > "$LOG_DIR/debugfs_test_stats_${phase}.txt"
+}
+
 sudo ip link set dev "$IFNAME" up
+collect_snapshot before
 
-# 【学习】测试前快照
-# 记录测试前的接口状态、统计、timeline
-ip -details link show "$IFNAME" | tee "$LOG_DIR/ip_link_before.txt"
+RECV_RC=0
+STATS_RC=0
+TIMELINE_RC=0
+VERDICT=FAIL
+FAIL_REASONS=()
 
-if [[ -f /sys/kernel/debug/netdev_stage08/stats ]]; then
-    sudo cat /sys/kernel/debug/netdev_stage08/stats | tee "$LOG_DIR/debugfs_stats_before.txt" >/dev/null
-fi
-if [[ -f /sys/kernel/debug/netdev_stage08/timeline ]]; then
-    sudo cat /sys/kernel/debug/netdev_stage08/timeline | tee "$LOG_DIR/debugfs_timeline_before.txt" >/dev/null
-fi
-
-#
-# 【学习】并发收发
-#
-# 模型：
-#   recv 进程          send 进程
-#      |                  |
-#   recvfrom() 阻塞       |
-#      |             sendto() 发送
-#   recv 32帧             |
-#      |                  |
-#   超时退出               |
-#
-# recv 设置 PACKET_IGNORE_OUTGOING，不会收到自己发出的帧
-# 但会收到驱动环回来的帧
-#
-# 关键点：
-# 1. recv 先启动，等待 1 秒确保它开始监听
-# 2. send 发送 32 帧
-# 3. recv 在 SMOKE_TIMEOUT_SEC (5秒) 内最多接收 32 帧
-# 4. 驱动收到帧后，会通过 backend worker 异步处理并环回
-#
-
-sudo "$TIMEOUT_BIN" "$SMOKE_TIMEOUT_SEC" \
-    "$RECV_TOOL" "$IFNAME" "$ETHERTYPE" "$SMOKE_COUNT" "$SMOKE_TIMEOUT_SEC" \
+sudo "$RECV_TOOL" "$IFNAME" "$ETHERTYPE" "$SMOKE_COUNT" "$SMOKE_TIMEOUT_SEC" \
     > "$LOG_DIR/recv.txt" 2>&1 &
 REC_PID=$!
 
+sleep "$RECV_READY_SLEEP_SEC"
+
+if ! sudo "$SEND_TOOL" "$IFNAME" "$SEND_PAYLOAD" "$ETHERTYPE" "$SMOKE_COUNT" 0 \
+    | tee "$LOG_DIR/send.txt"; then
+    FAIL_REASONS+=("sender_failed")
+fi
+
+if wait "$REC_PID"; then
+    RECV_RC=0
+else
+    RECV_RC=$?
+    FAIL_REASONS+=("receiver_exit_${RECV_RC}")
+fi
+
 sleep 1
+collect_snapshot after
+sudo dmesg | tail -n 160 > "$LOG_DIR/dmesg_tail.txt" || true
 
-sudo "$SEND_TOOL" "$IFNAME" "hello_stage08_async_backend" "$ETHERTYPE" "$SMOKE_COUNT" 0 \
-    | tee "$LOG_DIR/send.txt"
-
-# 【学习】wait 等待后台进程
-# 如果 recv 超时退出，wait 会捕获到 exit code
-wait "$REC_PID" || true
-sleep 1
-
-# 【学习】测试后快照
-# 与测试前对比，可观察变化
-ip -s link show "$IFNAME" | tee "$LOG_DIR/ip_link_after.txt"
-
-if [[ -f /sys/kernel/debug/netdev_stage08/stats ]]; then
-    sudo cat /sys/kernel/debug/netdev_stage08/stats | tee "$LOG_DIR/debugfs_stats_after.txt"
-fi
-if [[ -f /sys/kernel/debug/netdev_stage08/queues ]]; then
-    sudo cat /sys/kernel/debug/netdev_stage08/queues | tee "$LOG_DIR/debugfs_queues_after.txt"
-fi
-if [[ -f /sys/kernel/debug/netdev_stage08/timeline ]]; then
-    sudo cat /sys/kernel/debug/netdev_stage08/timeline | tee "$LOG_DIR/debugfs_timeline_after.txt"
+if "$SCRIPTS_DIR/stats_check.sh" "$LOG_DIR" "$SMOKE_COUNT" > "$LOG_DIR/stats_check.txt" 2>&1; then
+    STATS_RC=0
+else
+    STATS_RC=$?
+    FAIL_REASONS+=("stats_check_${STATS_RC}")
 fi
 
-# 【学习】dmesg 日志
-# 内核日志包含驱动的 printk 输出
-# tail -n 160 取最近 160 行（避免太多）
-sudo dmesg | tail -n 160 | tee "$LOG_DIR/dmesg_tail.txt" >/dev/null
+if "$SCRIPTS_DIR/timeline_check.sh" "$LOG_DIR" > "$LOG_DIR/timeline_check.txt" 2>&1; then
+    TIMELINE_RC=0
+else
+    TIMELINE_RC=$?
+    FAIL_REASONS+=("timeline_check_${TIMELINE_RC}")
+fi
 
-# 【学习】生成 smoke 报告
+if ! grep -q "sent ${SMOKE_COUNT} frame(s)" "$LOG_DIR/send.txt"; then
+    FAIL_REASONS+=("send_summary_missing")
+fi
+if [[ ! -s "$LOG_DIR/recv.txt" ]]; then
+    FAIL_REASONS+=("recv_empty")
+fi
+if ! grep -q "received .*matched_magic=${SMOKE_COUNT}" "$LOG_DIR/recv.txt"; then
+    FAIL_REASONS+=("recv_summary_missing_or_incomplete")
+fi
+if ! grep -q "proto=$(printf '0x%04x' $((ETHERTYPE)))" "$LOG_DIR/recv.txt" 2>/dev/null; then
+    # grep 的数值格式不稳定时退化为检查 0x88b8/0x88B8
+    if ! grep -Eqi "proto=0x88b8|proto=0x88B8" "$LOG_DIR/recv.txt"; then
+        FAIL_REASONS+=("recv_proto_missing")
+    fi
+fi
+
+if [[ ${#FAIL_REASONS[@]} -eq 0 && $RECV_RC -eq 0 && $STATS_RC -eq 0 && $TIMELINE_RC -eq 0 ]]; then
+    VERDICT=PASS
+fi
+
 cat > "$LOG_DIR/SMOKE_REPORT.md" <<EOF
 # stage08 smoke report
 
@@ -136,22 +110,29 @@ cat > "$LOG_DIR/SMOKE_REPORT.md" <<EOF
 - ethertype: $ETHERTYPE
 - count: $SMOKE_COUNT
 - timeout_sec: $SMOKE_TIMEOUT_SEC
+- receiver_rc: $RECV_RC
+- stats_check_rc: $STATS_RC
+- timeline_check_rc: $TIMELINE_RC
+- verdict: $VERDICT
 
-本次 smoke 的重点不是极限性能，而是确认：
+## fail_reasons
 
-1. send -> submit
-2. submit -> doorbell
-3. doorbell -> backend worker
-4. backend worker -> irq
-5. irq -> napi poll
-6. poll -> complete / consume / refill
+$(printf -- '- %s\n' "${FAIL_REASONS[@]:-none}")
 
-请结合：
-- debugfs_stats_after.txt
-- debugfs_timeline_after.txt
-- debugfs_queues_after.txt
+## artifacts
+
+- send.txt
 - recv.txt
-综合判断。
+- debugfs_stats_before.txt / debugfs_stats_after.txt
+- debugfs_test_stats_before.txt / debugfs_test_stats_after.txt （若内核支持）
+- debugfs_timeline_before.txt / debugfs_timeline_after.txt
+- debugfs_queues_before.txt / debugfs_queues_after.txt
+- ip_link_before.txt / ip_link_after.txt
+- stats_check.txt
+- timeline_check.txt
+- dmesg_tail.txt
 EOF
 
 echo "[stage08] smoke record -> $LOG_DIR"
+echo "[stage08] verdict -> $VERDICT"
+[[ "$VERDICT" == PASS ]]

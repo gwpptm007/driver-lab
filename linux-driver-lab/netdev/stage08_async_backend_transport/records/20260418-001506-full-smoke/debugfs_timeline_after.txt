@@ -1,0 +1,12 @@
+last_submit_ns=7270137782423
+last_doorbell_ns=7270137782563
+last_backend_wakeup_ns=7270137796410
+last_backend_done_ns=7270137799236
+last_irq_ns=7270137799306
+last_poll_ns=7270137801350
+last_complete_ns=7270137808534
+last_consume_ns=7270137820988
+delta_submit_to_doorbell_ns=140
+delta_doorbell_to_backend_ns=13847
+delta_backend_to_irq_ns=70
+delta_irq_to_poll_ns=2044

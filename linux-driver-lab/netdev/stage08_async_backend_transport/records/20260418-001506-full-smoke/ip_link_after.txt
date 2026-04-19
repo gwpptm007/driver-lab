@@ -1,0 +1,2 @@
+5: nds8: <BROADCAST,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN mode DEFAULT group default qlen 1000
+    link/ether 76:7d:02:43:ff:13 brd ff:ff:ff:ff:ff:ff
