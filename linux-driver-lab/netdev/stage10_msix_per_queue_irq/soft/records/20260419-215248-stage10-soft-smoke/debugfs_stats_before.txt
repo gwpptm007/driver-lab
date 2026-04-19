@@ -1,0 +1,3 @@
+ifname=nds10s num_queues=2 ring_size=128 napi_weight=64 backend_batch=64 open=1 stop=0
+q0: tx_submit=842 tx_complete=842 tx_packets=842 tx_bytes=104056 tx_busy=0 tx_drop=0 rx_post=969 rx_consume=842 rx_packets=842 rx_bytes=104056 rx_drop=0 doorbell=893 backend_run=618 backend_tx=842 backend_rx=842 irq=597 napi_poll=519 napi_complete=519 napi_work=842 test_tx=266 test_rx=0
+q1: tx_submit=627 tx_complete=627 tx_packets=627 tx_bytes=69422 tx_busy=0 tx_drop=0 rx_post=754 rx_consume=627 rx_packets=627 rx_bytes=69422 rx_drop=0 doorbell=642 backend_run=550 backend_tx=627 backend_rx=627 irq=539 napi_poll=525 napi_complete=525 napi_work=627 test_tx=0 test_rx=0

@@ -1,0 +1,2 @@
+vector check PASSED: 2/2 vectors with handle_count delta >= 1
+  handle deltas: 17 15

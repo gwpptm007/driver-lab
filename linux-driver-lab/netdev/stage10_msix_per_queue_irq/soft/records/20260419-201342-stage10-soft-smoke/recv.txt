@@ -1,0 +1,2 @@
+match proto=0x88ba magic=STAGE10
+received 1 frame(s), matched_proto=1, matched_magic=1, timeout=0

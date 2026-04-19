@@ -1,0 +1,2 @@
+vector0: qid=0 target_cpu=0 raise=31 handle=31 schedule=31 last_raise_cpu=0 last_handle_cpu=0 last_raise_ns=179592469139 last_handle_ns=179592471231
+vector1: qid=1 target_cpu=1 raise=5 handle=5 schedule=5 last_raise_cpu=2 last_handle_cpu=2 last_raise_ns=175983606237 last_handle_ns=175983623276

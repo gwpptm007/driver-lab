@@ -1,0 +1,1 @@
+vector check PASSED: 2 vectors with handle_count >= 1
