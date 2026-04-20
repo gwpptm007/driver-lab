@@ -1,0 +1,10 @@
+driver: netdev_stage12
+version: 1.0
+firmware-version:
+expansion-rom-version:
+bus-info: platform
+supports-statistics: yes
+supports-test: no
+supports-eeprom-access: no
+supports-register-dump: no
+supports-priv-flags: no

@@ -1,0 +1,2 @@
+q0: pool=00000000138e113e pp_alloc=199 pp_recycle=0 pp_build_skb_fail=0 posted=127 ready=0
+q1: pool=00000000d08a8fef pp_alloc=143 pp_recycle=0 pp_build_skb_fail=0 posted=127 ready=0

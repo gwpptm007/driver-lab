@@ -1,0 +1,14 @@
+NIC statistics:
+     tx_packets: 88
+     tx_bytes: 14148
+     tx_submit_count: 88
+     tx_complete_count: 88
+     tx_dropped: 0
+     rx_packets: 88
+     rx_bytes: 14148
+     rx_consume_count: 88
+     rx_dropped: 0
+     rx_page_alloc: 342
+     rx_build_skb_fail: 0
+     test_tx_submit: 0
+     test_rx_consume: 0
