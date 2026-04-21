@@ -1,0 +1,6 @@
+5: nds13s: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UNKNOWN mode DEFAULT group default qlen 1000
+    link/ether f2:f8:61:15:ca:cc brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast           
+          4033      26      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+          4033      26      0       0       0       0 

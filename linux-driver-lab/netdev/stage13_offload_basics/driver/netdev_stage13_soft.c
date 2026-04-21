@@ -393,7 +393,7 @@ static int stage13_alloc_ring(struct stage13_ring *r, u16 size)
     return 0;
 }
 
-static void stage13_free_ring(struct net_device *ndev, struct stage13_ring *r, bool is_rx)
+static void stage13_free_ring(struct net_device *ndev, struct stage13_ring *r, struct page_pool *pp, bool is_rx)
 {
     u16 i;
     if (!r->slots)
@@ -401,9 +401,10 @@ static void stage13_free_ring(struct net_device *ndev, struct stage13_ring *r, b
     for (i = 0; i < r->size; ++i) {
         struct stage13_buf_slot *s = &r->slots[i];
         if (s->page) {
-            /* RX: 释放 page 回 page_pool */
-            if (is_rx)
-                put_page(s->page);
+            /* RX: 槽中的 page 可能在 napi_poll 路径中被消费并通过
+             * build_skb destructor 异步释放。此处不调用 put_page，
+             * 只清除 slot 指针。page_pool_destroy 会处理泄漏的页。
+             * napi_disable 已确保此时无 napi_poll 正在访问 slot。 */
             s->page = NULL;
         }
         kfree(s->buf);
@@ -434,22 +435,6 @@ static void stage13_reset_queue(struct stage13_queue *q)
 /*========================================================
  *     RX buffer 管理 — page_pool 版本
  *========================================================*/
-
-/* 释放 RX slot 中的 page（经过 page_pool 回收链路） */
-static void stage13_release_rx_page(struct stage13_queue *q,
-                                    struct stage13_buf_slot *slot)
-{
-    if (!slot->page)
-        return;
-    /* 绕过 page_pool，直接 put_page 归 page 回 pool */
-    put_page(slot->page);
-    atomic64_inc(&q->stats.pp_recycle);
-    slot->page = NULL;
-    slot->buf = NULL;
-    slot->data_len = 0;
-    slot->last_seq = 0;
-    slot->state = S12_SLOT_FREE;
-}
 
 /* 为 RX slot 补充一个 page（从 page_pool 分配） */
 static int stage13_refill_rx_slot(struct stage13_queue *q, u16 idx)
@@ -598,25 +583,25 @@ static int stage13_consume_rx_one(struct stage13_queue *q)
         return 0;
 
     /* 使用 build_skb() 从 page 构建 skb
-     * build_skb 不调用 get_page，page refcount 保持 1
-     * 成功后 skb destructor 的 put_page 将 refcount 1→0，page 正确归池
-     * 失败时 page refcount=1，直接 page_pool_recycle_direct 归还
+     * build_skb 内部调用 get_page(page) 将 refcount 1→2，page 存入 skb->frags[0]
+     * 使用 skb_mark_for_recycle() 将 skb 标记为可回收，使 skb destructor
+     * 调用 page_pool_put_full_page() 通过 page_pool 归还页（而非回 buddy allocator）
      */
     skb = build_skb(buf, priv->rx_buf_size);
     if (!skb) {
-        /* build_skb 失败：page 未被使用，直接回收 */
+        /* build_skb 失败：page 未被使用，通过 page_pool 归还 */
         page_pool_recycle_direct(q->pp, page);
         atomic64_inc(&q->stats.pp_build_skb_fail);
-        /* slot 清理 */
         memset(s, 0, sizeof(*s));
         memset(d, 0, sizeof(*d));
         r->consume_idx = stage13_next_idx(r->consume_idx, r->size);
         q->rx_ready--;
-        /* 立即 refill */
         stage13_refill_rx_slot(q, idx);
         return 0;
     }
 
+    skb_mark_for_recycle(skb);
+    skb->dev = ndev;
     skb_put(skb, len);
     skb->protocol = eth_type_trans(skb, ndev);
     if (stage13_is_test_frame(skb))
@@ -628,10 +613,7 @@ static int stage13_consume_rx_one(struct stage13_queue *q)
     } else {
         netif_receive_skb(skb);
     }
-    /* build_skb 成功：destructor put_page 将 refcount 1→0，page 归池
-     * 不需要显式 recycle */
 
-    /* slot 清理（page 已由 skb destructor 持有） */
     memset(s, 0, sizeof(*s));
     memset(d, 0, sizeof(*d));
     r->consume_idx = stage13_next_idx(r->consume_idx, r->size);
@@ -641,7 +623,6 @@ static int stage13_consume_rx_one(struct stage13_queue *q)
     atomic64_inc(&q->stats.rx_packets);
     atomic64_add(len, &q->stats.rx_bytes);
 
-    /* 立即 refill，保持 posted 水位 */
     stage13_refill_rx_slot(q, idx);
     return 1;
 }
@@ -1146,8 +1127,9 @@ static int stage13_stats_show(struct seq_file *m, void *v)
         seq_printf(m,
                    "q%u: tx_submit=%lld tx_complete=%lld tx_packets=%lld tx_bytes=%lld tx_busy=%lld tx_drop=%lld "
                    "rx_post=%lld rx_ready=%lld rx_consume=%lld rx_packets=%lld rx_bytes=%lld rx_drop=%lld "
-                   "doorbell=%lld backend_run=%lld backend_tx=%lld backend_rx=%lld "
+                   "doorbell=%lld backend_schedule=%lld backend_run=%lld backend_tx=%lld backend_rx=%lld "
                    "irq=%lld napi_poll=%lld napi_complete=%lld napi_work=%lld test_tx=%lld test_rx=%lld "
+                   "tx_csum_partial=%lld tx_gso=%lld rx_gro=%lld feature_set=%lld "
                    "pp_alloc=%lld pp_recycle=%lld pp_build_skb_fail=%lld\n",
                    q->qid,
                    atomic64_read(&q->stats.tx_submit_count),
@@ -1163,6 +1145,7 @@ static int stage13_stats_show(struct seq_file *m, void *v)
                    atomic64_read(&q->stats.rx_bytes),
                    atomic64_read(&q->stats.rx_dropped),
                    atomic64_read(&q->stats.doorbell_count),
+                   atomic64_read(&q->stats.backend_schedule_count),
                    atomic64_read(&q->stats.backend_run_count),
                    atomic64_read(&q->stats.backend_tx_processed),
                    atomic64_read(&q->stats.backend_rx_produced),
@@ -1486,14 +1469,19 @@ static int __init stage13_soft_init(void)
     stage13_soft_ndev = ndev;
     pr_info("%s: loaded ifname=%s num_queues=%u ring_size=%u napi_weight=%u backend_batch=%u\n",
             DRV_NAME, ndev->name, priv->num_queues, priv->ring_size,
-            priv->napi_weight, priv->backend_batch, (unsigned long long)ndev->features);
+            priv->napi_weight, priv->backend_batch);
     return 0;
 err:
+    /* 与 stage13_soft_exit 对称：先 napi_disable 再 free_ring */
+    for (i = 0; i < priv->num_queues; ++i) {
+        if (priv->queues[i].napi.dev)
+            napi_disable(&priv->queues[i].napi);
+    }
     for (i = 0; i < priv->num_queues; ++i) {
         if (priv->queues[i].napi.dev)
             netif_napi_del(&priv->queues[i].napi);
-        stage13_free_ring(ndev, &priv->queues[i].txq, false);
-        stage13_free_ring(ndev, &priv->queues[i].rxq, true);
+        stage13_free_ring(ndev, &priv->queues[i].txq, NULL, false);
+        stage13_free_ring(ndev, &priv->queues[i].rxq, priv->queues[i].pp, true);
         stage13_destroy_page_pool(&priv->queues[i]);
     }
     if (priv->irq_wq)
@@ -1512,17 +1500,26 @@ static void __exit stage13_soft_exit(void)
         return;
     priv = netdev_priv(stage13_soft_ndev);
     stage13_debugfs_deinit(priv);
-    unregister_netdev(stage13_soft_ndev);
-    flush_workqueue(priv->backend_wq);
-    flush_workqueue(priv->irq_wq);
-    destroy_workqueue(priv->backend_wq);
-    destroy_workqueue(priv->irq_wq);
+    /* 正确顺序：
+     * 1. netif_tx_disable 防止新 xmit
+     * 2. cancel_work_sync 确保 backend/irq work 不再运行
+     * 3. napi_disable 等待 NAPI kthread 完全退出（必须在 unregister_netdev 之前，
+     *    否则 unregister_netdev 内部也会调 napi_disable，形成嵌套等待死锁风险）
+     * 4. unregister_netdev（内部会清理剩余的 NAPI 实例）
+     * 5. destroy_workqueue / free_ring / page_pool */
+    netif_tx_disable(stage13_soft_ndev);
     for (i = 0; i < priv->num_queues; ++i) {
         cancel_work_sync(&priv->queues[i].backend_work);
         cancel_work_sync(&priv->queues[i].irq_work);
-        netif_napi_del(&priv->queues[i].napi);
-        stage13_free_ring(stage13_soft_ndev, &priv->queues[i].txq, false);
-        stage13_free_ring(stage13_soft_ndev, &priv->queues[i].rxq, true);
+    }
+    for (i = 0; i < priv->num_queues; ++i)
+        napi_disable(&priv->queues[i].napi);
+    unregister_netdev(stage13_soft_ndev);
+    destroy_workqueue(priv->backend_wq);
+    destroy_workqueue(priv->irq_wq);
+    for (i = 0; i < priv->num_queues; ++i) {
+        stage13_free_ring(stage13_soft_ndev, &priv->queues[i].txq, NULL, false);
+        stage13_free_ring(stage13_soft_ndev, &priv->queues[i].rxq, priv->queues[i].pp, true);
         stage13_destroy_page_pool(&priv->queues[i]);
     }
     free_netdev(stage13_soft_ndev);
