@@ -1,0 +1,3 @@
+xdp_prog=0000000000000000 prog_set=0 prog_clear=0
+q0: xdp_pass=0 xdp_drop=0 xdp_tx=0 xdp_redirect=0 xdp_err=0
+q1: xdp_pass=0 xdp_drop=0 xdp_tx=0 xdp_redirect=0 xdp_err=0

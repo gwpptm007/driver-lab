@@ -29,6 +29,12 @@
 - `stage06_arm64_migration/`：ARM64 迁移与跨平台收口
 - `stage07_real_queue_model/`：单队列 queue lifecycle 收口
 - `stage08_async_backend_transport/`：前后端分离 + doorbell + 异步 backend
+- `stage09_multi_queue_scaling/`：多队列与队列分发模型
+- `stage10_msix_per_queue_irq/`：per-queue IRQ / MSI-X
+- `stage11_page_pool_rx/`：page_pool 与 RX recycle
+- `stage12_ethtool_control_plane/`：ethtool / control plane
+- `stage13_offload_basics/`：checksum/GRO/GSO 等 offload 基础
+- `stage14_xdp_basics/`：XDP 入口与 fast path 起点
 
 ## 当前明确的阶段原则
 
@@ -75,3 +81,26 @@
 
 > 先把 netdev 本体学清楚，再把它迁到 ARM64，并把整个实验做成平台可配置、可观测、可评审的作品线。
 
+
+
+## stage14 之后的组织方式
+
+当 `stage14_xdp_basics/` 完成后，第二阶段的线性 stage 主线就可以认为已经收口。
+
+后续不建议继续扩成：
+
+- `stage15`
+- `stage16`
+- `stage17`
+
+而是切换到：
+
+- `track-real-driver/`
+- `track-virtual-net/`
+- `track-perf-debug/`
+- `track-storage-block/`
+- `track-driver-core-pm/`
+
+当前最推荐的下一个落地方向是：
+
+- `../track-real-driver/lab-virtio-net-source-dive/`

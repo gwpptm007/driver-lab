@@ -44,3 +44,28 @@
 - 稳定性与最终报告
 
 ## 后续扩展
+
+
+## 第二阶段 netdev 主线（stage00~stage14）
+
+- stage00：bootstrap
+- stage01：netdev skeleton
+- stage02：skb path
+- stage03：napi poll
+- stage04：ring dma
+- stage05：virtio param
+- stage06：arm64 migration
+- stage07：real queue model
+- stage08：async backend transport
+- stage09：multi-queue scaling
+- stage10：MSI-X / per-queue IRQ
+- stage11：page_pool / RX recycle
+- stage12：ethtool / control plane
+- stage13：offload basics
+- stage14：XDP entry / fast path
+
+## stage14 之后
+
+- 不再继续线性 stage15/stage16
+- 改为 `track / lab / project` 组织
+- 当前首个推荐专题：`track-real-driver/lab-virtio-net-source-dive/`

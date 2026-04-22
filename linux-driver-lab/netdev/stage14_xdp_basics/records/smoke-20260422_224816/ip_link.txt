@@ -1,0 +1,2 @@
+5: nds14s: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UNKNOWN mode DEFAULT group default qlen 1000
+    link/ether a2:f0:79:5e:c5:4d brd ff:ff:ff:ff:ff:ff

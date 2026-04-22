@@ -1,0 +1,1 @@
+ifname=nds14s features=0x106401d4809 hw_csum=1 rx_csum=1 sg=1 gso_sw=1 gro_enabled=1 last_features=0x106401d4009 xdp_prog=0000000000000000

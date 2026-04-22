@@ -1,0 +1,25 @@
+NIC statistics:
+     tx_packets: 87
+     tx_bytes: 14062
+     tx_submit_count: 87
+     tx_complete_count: 87
+     tx_dropped: 0
+     rx_packets: 87
+     rx_bytes: 14062
+     rx_consume_count: 87
+     rx_dropped: 0
+     rx_page_alloc: 341
+     rx_build_skb_fail: 0
+     test_tx_submit: 0
+     test_rx_consume: 0
+     tx_csum_partial: 24
+     tx_gso_packets: 0
+     rx_gro_packets: 87
+     feature_set_count: 0
+     xdp_pass: 0
+     xdp_drop: 0
+     xdp_tx: 0
+     xdp_redirect: 0
+     xdp_err: 0
+     xdp_prog_set: 0
+     xdp_prog_clear: 0

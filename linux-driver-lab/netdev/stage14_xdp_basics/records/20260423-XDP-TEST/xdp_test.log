@@ -1,0 +1,26 @@
+# XDP 测试结果 - 2026-04-23
+
+## 测试 1: XDP_PASS
+ip link set dev nds14s xdp obj bpf/xdp_pass_kern.o sec xdp_pass
+ip link show nds14s:
+  xdp qdisc mq prog/xdp id 40
+
+ethtool -S nds14s:
+  xdp_pass: 3
+  xdp_prog_set: 1
+
+## 测试 2: XDP_DROP 替换 XDP_PASS
+ip link set dev nds14s xdp off
+ip link set dev nds14s xdp obj bpf/xdp_drop_kern.o sec xdp_drop
+ip link show nds14s:
+  xdp qdisc mq prog/xdp id 48
+
+ethtool -S nds14s:
+  xdp_pass: 6
+  xdp_drop: 1
+  xdp_prog_set: 2
+  xdp_prog_clear: 1
+
+## 结论
+- Bug #1 (XDP_DROP 语义): xdp_drop=1, tcpdump 看不到包 ✓
+- Bug #2 (program 替换引用): xdp_prog_set=2, xdp_prog_clear=1, 无泄漏 ✓

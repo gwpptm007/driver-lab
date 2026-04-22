@@ -521,3 +521,34 @@
 - 若干虚拟化、性能、PCIe、driver core 的专题 Track
 
 这才是后续最合理、最专业、也最适合作为长期驱动成长路线的规划。
+
+
+## 11. 基于当前实际推进结果的命名修正（stage14 之后）
+
+结合当前仓库已经实际推进到：
+
+- `netdev/stage10_msix_per_queue_irq`
+- `netdev/stage11_page_pool_rx`
+- `netdev/stage12_ethtool_control_plane`
+- `netdev/stage13_offload_basics`
+- `netdev/stage14_xdp_basics`
+
+可以正式确认：
+
+### 11.1 `stage14` 是 netdev 线性 stage 主线的收口点
+
+后面不建议继续命名为 `stage15 stage16 stage17`，而应切换到：
+
+- `track-*`
+- `lab-*`
+- `project-*`
+
+### 11.2 当前最合理的下一个包名
+
+- `track-real-driver/lab-virtio-net-source-dive/`
+
+### 11.3 为什么第一个选它
+
+1. 它与 `netdev/stage00~stage14` 连续性最强
+2. 它能把“教学型自研 netdev”平滑过渡到“真实 Linux NIC 驱动源码阅读”
+3. `virtio_net` 作为真实驱动第一站，比一开始就并行读多个复杂物理 NIC 更合适

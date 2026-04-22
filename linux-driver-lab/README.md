@@ -25,7 +25,7 @@ linux-driver-lab/
 │   ├── day15/ ~ day21/               W3：baseline / 裁剪 / perf / 回归 / 提交收口
 │   ├── day22/ ~ day28/               W4：PCIe 基本功作品线
 │   └── day29/ ~ day35/               W5：DMA / mmap / bench / perf / ftrace / stability
-└── netdev/                            ⭐ 第二阶段主线（stage00~stage06）
+├── netdev/                            ⭐ 第二阶段主线（stage00~stage14）
     ├── README.md                      netdev 路线入口
     ├── docs/                          总体设计、里程碑、风险、平台策略
     ├── stage00_bootstrap/            启动与环境检查
@@ -34,7 +34,17 @@ linux-driver-lab/
     ├── stage03_napi_poll/            NAPI / poll / irq 模型
     ├── stage04_ring_dma/             ring / DMA / replenishment
     ├── stage05_virtio_param/         virtio-net 对照 + 平台参数化
-    └── stage06_arm64_migration/      ARM64 迁移与跨平台收口
+    ├── stage06_arm64_migration/      ARM64 迁移与跨平台收口
+    ├── stage07_real_queue_model/     单队列 queue lifecycle 收口
+    ├── stage08_async_backend_transport/ 前后端分离 + doorbell + 异步 backend
+    ├── stage09_multi_queue_scaling/  多队列与分发模型
+    ├── stage10_msix_per_queue_irq/   per-queue IRQ / MSI-X
+    ├── stage11_page_pool_rx/         page_pool 与 RX recycle
+    ├── stage12_ethtool_control_plane/ ethtool / control plane
+    ├── stage13_offload_basics/       offload 基础
+    └── stage14_xdp_basics/           XDP 入口与 fast path 起点
+├── track-real-driver/                 ⭐ 第三阶段专题研究起点
+│   └── lab-virtio-net-source-dive/   真实 virtio_net 驱动源码深潜
 ```
 
 ---
@@ -81,14 +91,17 @@ chmod +x build.sh
 
 - `netdev/README.md` — 第二阶段总入口
 - `netdev/docs/00_START_HERE.md` — netdev 方向入口
-- `netdev/stage04_ring_dma/` — 当前最有代表性的代码高点
-- `netdev/stage06_arm64_migration/` — ARM64 迁移与平台收口
+- `netdev/stage10_msix_per_queue_irq/` — per-queue IRQ / MSI-X
+- `netdev/stage11_page_pool_rx/` — page_pool 与 RX recycle
+- `netdev/stage12_ethtool_control_plane/` — ethtool / control plane
+- `netdev/stage13_offload_basics/` — offload 基础
+- `netdev/stage14_xdp_basics/` — XDP 入口
 
-### 后续扩展（规划中）
+### 第三阶段专题研究（stage14 之后）
 
-- `w06_spi_i2c/` — SPI / I2C 总线驱动
-- `w07_gpio/` — GPIO subsystem
-- 更多主题后续添加...
+- `track-real-driver/` — 真实 Linux 驱动源码与 patch 线
+- `track-real-driver/lab-virtio-net-source-dive/` — 当前最推荐的下一个 Lab
+- 后续再扩展 `track-virtual-net/`、`track-perf-debug/`、`track-storage-block/` 等
 
 ---
 
@@ -125,4 +138,4 @@ chmod +x build.sh
 
 ## 项目一句话定位
 
-> 这不是"学几个驱动 API"的目录，而是一套从最小驱动骨架，一直走到 PCIe / DMA / perf / 稳定性报告的实验型驱动学习项目。
+> 这不是"学几个驱动 API"的目录，而是一套从最小驱动骨架、平台/PCIe/DMA、netdev 主线，一直推进到真实驱动源码专题研究的实验型驱动学习项目。

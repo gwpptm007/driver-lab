@@ -1,0 +1,2 @@
+vector check FAILED: only 0/2 vectors with handle_count delta >= 1 (need >= 2)
+  handle deltas: 0 0

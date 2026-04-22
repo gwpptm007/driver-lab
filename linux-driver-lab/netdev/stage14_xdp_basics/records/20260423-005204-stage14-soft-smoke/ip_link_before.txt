@@ -1,0 +1,7 @@
+5: nds14s: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 xdp qdisc mq state UNKNOWN mode DEFAULT group default qlen 1000
+    link/ether 06:a6:6f:3c:b9:f0 brd ff:ff:ff:ff:ff:ff
+    prog/xdp id 48 
+    RX:  bytes packets errors dropped  missed   mcast           
+         24985     156      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+         42229     263      0       0       0       0 
