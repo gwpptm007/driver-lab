@@ -1,0 +1,7 @@
+# sample trace note
+
+真实 trace 时建议记录：
+- 触发动作：ping / iperf / netperf / 自定义发包
+- 观察到的函数：poll / start_xmit / callback 类入口
+- 和文档里的路径图是否对得上
+- 哪个点还需要继续追

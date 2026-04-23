@@ -31,3 +31,24 @@
 - `track-real-driver/lab-virtio-net-source-dive/`
 
 它承接你已经完成的 `netdev/stage00~stage14`，把“自己写教学驱动”推进到“阅读真实 Linux NIC 驱动源码”。
+
+
+## 当前这个 Lab 怎么进入
+
+- `track-real-driver/lab-virtio-net-source-dive/START_HERE.md`
+- 先跑符号索引脚本，再看 probe/TX/RX，再做 stage 映射
+
+
+## 进入真实驱动专题时，建议从这里开始
+
+- `track-real-driver/lab-virtio-net-source-dive/START_HERE.md`
+- `track-real-driver/lab-virtio-net-source-dive/docs/11_ROUND1_ARCH_CHECKLIST.md`
+- `track-real-driver/lab-virtio-net-source-dive/docs/12_ROUND2_TXRX_CHECKLIST.md`
+- `track-real-driver/lab-virtio-net-source-dive/docs/13_ROUND3_FEATURE_XDP_CHECKLIST.md`
+
+
+## 当你想快速看当前 virtio_net 专题成果时
+
+- `track-real-driver/lab-virtio-net-source-dive/docs/25_FINAL_SYNTHESIS_REPORT.md`
+- `track-real-driver/lab-virtio-net-source-dive/docs/26_SHARE_DECK_SCRIPT.md`
+- `track-real-driver/lab-virtio-net-source-dive/docs/27_PATCH_TRACING_PRIORITY_PLAN.md`

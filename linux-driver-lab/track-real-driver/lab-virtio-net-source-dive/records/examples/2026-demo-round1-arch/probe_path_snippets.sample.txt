@@ -1,0 +1,10 @@
+# sample only
+
+建议在真实记录里重点摘以下类型的代码片段：
+1. driver registration
+2. probe/remove 入口
+3. netdev alloc/init/register
+4. queue / napi 初始化
+5. feature negotiation 相关入口
+
+这份文件只是提示“该摘什么”，不是源码精确结果。
