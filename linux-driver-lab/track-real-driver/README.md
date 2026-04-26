@@ -2,114 +2,73 @@
 
 > stage14 之后的第一条正式 Track：真实 Linux 驱动源码与补丁线。
 
-## 定位
+## 本 Track 包含四个 Lab + 一个收尾项目，按推荐顺序排列：
 
-在 `netdev/stage00~stage14` 中，你已经完成了教学型 soft NIC 主线：
+| # | Lab/Project | 定位 | 状态 |
+|---|-------------|------|------|
+| 1 | `lab-virtio-net-source-dive/` | 源码研究 — 理解 virtio_net 驱动结构 | ✅ 已完成 Round1~3 |
+| 2 | `lab-virtio-net-runtime-observe/` | 运行时观测 — 验证 TX/RX 路径事件链 | ✅ 已测试 |
+| 3 | `lab-virtio-net-ethtool-stats-mini-patch/` | 小补丁实验 — before/after 对照 | ✅ 已测试 |
+| 4 | `lab-virtio-net-queue-poll-observe/` | NAPI poll 链观测 — napi_poll → netif_receive_skb | ✅ 已测试 |
+| 5 | `project-virtio-net-patch-and-trace/` | 收尾小项目 — poll_count stat patch + trace 证据链 | ✅ patch 已生成 |
 
-- `net_device`
-- `sk_buff`
-- NAPI
-- ring / descriptor
-- multi-queue
-- MSI-X / per-queue IRQ
-- page_pool
-- ethtool / control plane
-- offload
-- XDP 入口
+### 推荐推进顺序
 
-从这里继续往后推进，如果还沿用 `stage15 stage16 ...` 命名，会逐渐把“课程式推进”和“真实工业驱动研究”混在一起。
+先把 `virtio_net` 看懂，再进入更偏”验证/补丁”的实验：
 
-因此从 stage14 之后，正式切换为：
+```
+lab-virtio-net-source-dive
+  → lab-virtio-net-runtime-observe
+    → lab-virtio-net-ethtool-stats-mini-patch
+      → lab-virtio-net-queue-poll-observe
+        → project-virtio-net-patch-and-trace (收尾项目)
+```
 
-- `track`
-- `lab`
-- `project`
+### 各 Lab 说明
 
-## 当前建议的第一个 Lab
-
-- `lab-virtio-net-source-dive/`
-
-它的职责，是把你已经写过的教学驱动与 Linux 内核中的真实 `virtio_net` 驱动建立一一映射。
-
-
-## 本 Track 的推荐推进顺序
-
-1. `lab-virtio-net-source-dive/`
-2. `lab-real-driver-ethtool-stats/`
-3. `lab-real-driver-small-patch/`
-
-先把 `virtio_net` 看懂，再进入更偏“验证/补丁”的实验。
-
-
-## 当前落地建议
-
-不要把 `lab-virtio-net-source-dive` 只做成“放几篇文档”的静态目录，建议至少完成：
-
+**1. lab-virtio-net-source-dive**
+- 把教学驱动与 Linux 内核中的真实 `virtio_net` 驱动建立一一映射
 - Round1：架构 / probe / netdev / queue / napi
 - Round2：TX / RX / trace
 - Round3：feature / ethtool / XDP / mapping
 
-这样它才算是一个真正的可交付 Lab。
+**2. lab-virtio-net-runtime-observe**
+- 把 TX/RX 路径理解、queue/NAPI 事件推进理解、stats/workload 对照落成运行期证据
+- Idle baseline vs ping workload 对照
+- trace point: netif_receive_skb
 
+**3. lab-virtio-net-ethtool-stats-mini-patch**
+- 第一个真实小 patch
+- 第一个 before/after 驱动实验
+- 第一个低风险 control-plane/stats 实验
 
-## 当前这条 Track 的最小闭环
+**4. lab-virtio-net-queue-poll-observe**
+- 把 queue / callback / napi schedule / poll 事件链跑出运行期证据
+- 为后续更细 tracing 或轻量观测 patch 选点
+- trace point: napi_poll → netif_receive_skb 链
 
-就当前阶段而言，`lab-virtio-net-source-dive` 至少要做到：
+**5. project-virtio-net-patch-and-trace (收尾项目)**
+- 整合前面四个 Lab 的成果，形成一个完整的 patch + trace 项目
+- 选点：`virtnet_poll()` 入口添加 `poll_count` 统计
+- 直接对应 `queue-poll-observe` 中观测到的 napi_poll 调用链
+- 交付 patch 文件 + before/after 证据 + trace 说明
 
-- 有 3 轮推进顺序
-- 有辅助扫描脚本
-- 有示范性 records / reports
-- 有一份可用于评审/分享的总结提纲
+### 测试结果
 
-做到这里，才算从“目录规划”推进成“可交付专题实验”。
+```
+lab-virtio-net-runtime-observe:
+  Idle baseline: RX +6, 6 trace events
+  Ping (20): RX +21, 21 trace events, 0% loss, RTT avg 0.593ms
 
+lab-virtio-net-ethtool-stats-mini-patch:
+  10 ping: RX +11, TX +11
 
-## 当前已经从“计划型目录”推进到什么状态
+lab-virtio-net-queue-poll-observe:
+  Ping window (20): 63 trace events, RX +21, TX +22
+  成功捕获 napi_poll → netif_receive_skb 链
 
-`lab-virtio-net-source-dive` 现在已经完成了三层推进：
-
-1. 目录与命名落地
-2. 执行脚本 / 模板 / 样例落地
-3. Round1 正文初稿落地
-
-这意味着它已经不只是一个“以后再写”的空专题，而是可以真正持续沉淀阅读结果的真实 Lab。
-
-
-## 当前已经进入主路径正文阶段
-
-`lab-virtio-net-source-dive` 现在已经不只是：
-- 目录
-- 模板
-- 样例
-- Round1 架构正文
-
-而是进一步进入了：
-- Round2 TX 正文
-- Round2 RX 正文
-- TX/RX 汇总草稿
-
-这说明它已经可以作为一个真正的源码专题持续推进，而不是停留在计划层。
-
-
-## 当前已经接近一版完整专题闭环
-
-`lab-virtio-net-source-dive` 现在已经包含：
-
-- Round1：架构 / probe
-- Round2：TX / RX 主路径
-- Round3：queue/NAPI/IRQ 收口 + feature/offload/XDP 收口
-
-从项目推进角度看，它已经不再只是“读源码计划”，而是接近一版真正可评审的专题闭环。
-
-
-## 当前这条 Track 已经有了第一个可评审专题成品
-
-`lab-virtio-net-source-dive` 现在已经具备：
-- 主题定位
-- 分轮正文
-- 样例与模板
-- 总报告
-- 分享稿
-- patch/tracing 后续优先级
-
-它可以被视为 `track-real-driver` 的第一个成型专题。
+project-virtio-net-patch-and-trace:
+  Patch: virtio_net_poll_count.patch (3 行修改)
+  新增 poll_count stat 到 virtnet_rq_stats / rq_stats_desc / virtnet_poll()
+  记录目录: records/20260425_203801-virtio-net-patch-trace/
+```

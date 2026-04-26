@@ -1,0 +1,1 @@
+ping: SO_BINDTODEVICE eth0: No such device

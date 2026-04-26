@@ -1,0 +1,1 @@
+6: tap-vnet0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 master br-vnet0 state forwarding priority 32 cost 2 

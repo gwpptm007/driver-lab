@@ -1,0 +1,6 @@
+lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
+ens33            UP             00:0c:29:f8:f6:6e <BROADCAST,MULTICAST,UP,LOWER_UP> 
+ens34            UP             00:0c:29:f8:f6:78 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+ens35            UP             00:0c:29:f8:f6:82 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+br-vnet0         DOWN           1e:f6:63:5c:99:02 <NO-CARRIER,BROADCAST,MULTICAST,UP> 
+tap-vnet0        DOWN           6e:71:9a:f3:fc:f8 <NO-CARRIER,BROADCAST,MULTICAST,UP> 

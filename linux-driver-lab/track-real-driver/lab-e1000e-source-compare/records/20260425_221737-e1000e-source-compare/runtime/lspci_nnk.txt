@@ -1,0 +1,15 @@
+02:01.0 Ethernet controller [0200]: Intel Corporation 82545EM Gigabit Ethernet Controller (Copper) [8086:100f] (rev 01)
+	DeviceName: Ethernet0
+	Subsystem: VMware PRO/1000 MT Single Port Adapter [15ad:0750]
+	Kernel driver in use: e1000
+	Kernel modules: e1000
+02:02.0 Ethernet controller [0200]: Intel Corporation 82545EM Gigabit Ethernet Controller (Copper) [8086:100f] (rev 01)
+	DeviceName: Ethernet1
+	Subsystem: VMware PRO/1000 MT Single Port Adapter [15ad:0750]
+	Kernel driver in use: e1000
+	Kernel modules: e1000
+02:03.0 Ethernet controller [0200]: Intel Corporation 82545EM Gigabit Ethernet Controller (Copper) [8086:100f] (rev 01)
+	DeviceName: Ethernet2
+	Subsystem: VMware PRO/1000 MT Single Port Adapter [15ad:0750]
+	Kernel driver in use: e1000
+	Kernel modules: e1000

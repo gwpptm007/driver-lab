@@ -1,0 +1,67 @@
+# probe path snippets
+
+## /home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/src/drivers/net/ethernet/intel/e1000e/netdev.c
+986:		/* adjust length to remove Ethernet CRC */
+1415:				/* remove the CRC */
+2745:	/* remove VID from filter table */
+3806: * e1000_flush_tx_ring - remove all descriptors from the tx_ring
+3841: * e1000_flush_rx_ring - remove all descriptors from the rx_ring
+3874: * e1000_flush_desc_rings - remove all descriptors from the descriptor rings
+4703:	cpu_latency_qos_remove_request(&adapter->pm_qos_req);
+4767:	cpu_latency_qos_remove_request(&adapter->pm_qos_req);
+7373: * e1000_probe - Device Initialization Routine
+7379: * e1000_probe initializes an adapter identified by a pci_dev structure.
+7383:static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+7435:		goto err_alloc_etherdev;
+7438:	netdev = alloc_etherdev(sizeof(struct e1000_adapter));
+7440:		goto err_alloc_etherdev;
+7686:	err = register_netdev(netdev);
+7719:err_alloc_etherdev:
+7729: * e1000_remove - Device Removal Routine
+7732: * e1000_remove is called by the PCI subsystem to alert the driver
+7734: * Hot-Plug event, or because the driver is going to be removed from
+7737:static void e1000_remove(struct pci_dev *pdev)
+7742:	e1000e_ptp_remove(adapter);
+7765:	unregister_netdev(netdev);
+7945:	.probe    = e1000_probe,
+7946:	.remove   = e1000_remove,
+7972: * e1000_exit_module is called just before the driver is removed
+
+## /home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/src/drivers/net/ethernet/intel/e1000/e1000_main.c
+86:static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent);
+87:static void e1000_remove(struct pci_dev *pdev);
+183:	.probe    = e1000_probe,
+184:	.remove   = e1000_remove,
+243: * e1000_exit_module is called just before the driver is removed
+263:		e_err(probe, "Unable to allocate interrupt Error: %d\n", err);
+877:		e_err(probe, "Unknown MAC Type\n");
+911: * e1000_probe - Device Initialization Routine
+917: * e1000_probe initializes an adapter identified by a pci_dev structure.
+921:static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+955:		goto err_alloc_etherdev;
+958:	netdev = alloc_etherdev(sizeof(struct e1000_adapter));
+960:		goto err_alloc_etherdev;
+1078:		e_err(probe, "EEPROM initialization failed\n");
+1090:		e_err(probe, "The EEPROM Checksum Is Not Valid\n");
+1103:			e_err(probe, "EEPROM Read Error\n");
+1109:		e_err(probe, "Invalid MAC Address\n");
+1201:	err = register_netdev(netdev);
+1208:	e_info(probe, "(PCI%s:%dMHz:%d-bit) %pM\n",
+1220:	e_info(probe, "Intel(R) PRO/1000 Network Connection\n");
+1241:err_alloc_etherdev:
+1250: * e1000_remove - Device Removal Routine
+1253: * e1000_remove is called by the PCI subsystem to alert the driver
+1255: * Hot-Plug event, or because the driver is going to be removed from
+1258:static void e1000_remove(struct pci_dev *pdev)
+1268:	unregister_netdev(netdev);
+1304:		e_err(probe, "Unable to allocate memory for queues\n");
+1544:			e_err(probe, "Unable to allocate aligned memory "
+1576:			e_err(probe, "Allocation for Tx Queue %u failed\n", i);
+1736:			e_err(probe, "Unable to allocate aligned memory for "
+1768:			e_err(probe, "Allocation for Rx Queue %u failed\n", i);
+3529:			e_err(probe, "Jumbo Frames not supported.\n");
+4446:			/* adjust length to remove Ethernet CRC, this must be
+4850:		e_err(probe, "Error in setting MWI\n");
+4983:	/* remove VID from filter table */
+5055:	e_err(probe, "Unsupported Speed/Duplex configuration\n");
+

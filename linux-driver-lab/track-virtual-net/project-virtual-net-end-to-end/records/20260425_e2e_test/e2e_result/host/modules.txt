@@ -1,0 +1,7 @@
+bridge                425984  0
+stp                    12288  1 bridge
+llc                    16384  2 bridge,stp
+vhost_net              32768  0
+vhost                  69632  1 vhost_net
+vhost_iotlb            16384  1 vhost
+tap                    28672  1 vhost_net

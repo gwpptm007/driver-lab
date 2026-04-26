@@ -1,0 +1,24 @@
+01:00:5e:00:00:01 dev ens33 self permanent
+33:33:00:00:00:01 dev ens33 self permanent
+33:33:ff:79:cf:8d dev ens33 self permanent
+33:33:00:00:00:fb dev ens33 self permanent
+01:00:5e:00:00:fb dev ens33 self permanent
+01:00:5e:00:00:01 dev ens34 self permanent
+33:33:00:00:00:01 dev ens34 self permanent
+01:00:5e:00:00:01 dev ens35 self permanent
+33:33:00:00:00:01 dev ens35 self permanent
+33:33:00:00:00:01 dev br-vnet0 self permanent
+01:00:5e:00:00:6a dev br-vnet0 self permanent
+33:33:00:00:00:6a dev br-vnet0 self permanent
+01:00:5e:00:00:01 dev br-vnet0 self permanent
+01:00:5e:00:00:fb dev br-vnet0 self permanent
+33:33:ff:5c:99:02 dev br-vnet0 self permanent
+33:33:00:00:00:fb dev br-vnet0 self permanent
+1e:f6:63:5c:99:02 dev br-vnet0 vlan 1 master br-vnet0 permanent
+1e:f6:63:5c:99:02 dev br-vnet0 master br-vnet0 permanent
+6e:71:9a:f3:fc:f8 dev tap-vnet0 vlan 1 master br-vnet0 permanent
+6e:71:9a:f3:fc:f8 dev tap-vnet0 master br-vnet0 permanent
+33:33:00:00:00:01 dev tap-vnet0 self permanent
+01:00:5e:00:00:01 dev tap-vnet0 self permanent
+33:33:ff:f3:fc:f8 dev tap-vnet0 self permanent
+33:33:00:00:00:fb dev tap-vnet0 self permanent

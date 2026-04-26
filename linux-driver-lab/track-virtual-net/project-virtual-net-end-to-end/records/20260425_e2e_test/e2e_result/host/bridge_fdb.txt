@@ -1,0 +1,40 @@
+01:00:5e:00:00:01 dev ens33 self permanent
+33:33:00:00:00:01 dev ens33 self permanent
+33:33:ff:79:cf:8d dev ens33 self permanent
+33:33:00:00:00:fb dev ens33 self permanent
+01:00:5e:00:00:fb dev ens33 self permanent
+01:00:5e:00:00:01 dev ens34 self permanent
+33:33:00:00:00:01 dev ens34 self permanent
+33:33:ff:78:9a:d7 dev ens34 self permanent
+33:33:00:00:00:fb dev ens34 self permanent
+01:00:5e:00:00:01 dev ens35 self permanent
+33:33:00:00:00:01 dev ens35 self permanent
+33:33:00:00:00:fb dev ens35 self permanent
+33:33:ff:7f:dc:2e dev ens35 self permanent
+33:33:00:00:00:01 dev br-vnet0 self permanent
+01:00:5e:00:00:6a dev br-vnet0 self permanent
+33:33:00:00:00:6a dev br-vnet0 self permanent
+01:00:5e:00:00:01 dev br-vnet0 self permanent
+01:00:5e:00:00:fb dev br-vnet0 self permanent
+33:33:ff:5c:99:02 dev br-vnet0 self permanent
+33:33:00:00:00:fb dev br-vnet0 self permanent
+1e:f6:63:5c:99:02 dev br-vnet0 vlan 1 master br-vnet0 permanent
+1e:f6:63:5c:99:02 dev br-vnet0 master br-vnet0 permanent
+5a:be:d3:19:5d:1f dev tap-vnet-a vlan 1 master br-vnet0 permanent
+5a:be:d3:19:5d:1f dev tap-vnet-a master br-vnet0 permanent
+33:33:00:00:00:01 dev tap-vnet-a self permanent
+01:00:5e:00:00:01 dev tap-vnet-a self permanent
+33:33:ff:19:5d:1f dev tap-vnet-a self permanent
+33:33:00:00:00:fb dev tap-vnet-a self permanent
+56:1c:35:8d:e9:d2 dev tap-vnet-b vlan 1 master br-vnet0 permanent
+56:1c:35:8d:e9:d2 dev tap-vnet-b master br-vnet0 permanent
+33:33:00:00:00:01 dev tap-vnet-b self permanent
+01:00:5e:00:00:01 dev tap-vnet-b self permanent
+33:33:ff:8d:e9:d2 dev tap-vnet-b self permanent
+33:33:00:00:00:fb dev tap-vnet-b self permanent
+6e:71:9a:f3:fc:f8 dev tap-vnet0 vlan 1 master br-vnet0 permanent
+6e:71:9a:f3:fc:f8 dev tap-vnet0 master br-vnet0 permanent
+33:33:00:00:00:01 dev tap-vnet0 self permanent
+01:00:5e:00:00:01 dev tap-vnet0 self permanent
+33:33:ff:f3:fc:f8 dev tap-vnet0 self permanent
+33:33:00:00:00:fb dev tap-vnet0 self permanent

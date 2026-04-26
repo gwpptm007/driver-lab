@@ -1,0 +1,6 @@
+94a95
+> 	u64 poll_count;
+116a118
+> 	{ "poll_count",		VIRTNET_RQ_STAT(poll_count) },
+1528a1531
+> 	rq->stats.poll_count++;

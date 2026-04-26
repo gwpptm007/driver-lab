@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+KERNEL_SRC=${1:-${KERNEL_SRC:-/home/wq7/workspace/kernel-src/linux-5.15.10}}
+OUT_FILE=${2:-reports/e1000e_function_index.md}
+mkdir -p "$(dirname "$OUT_FILE")"
+
+{
+  echo "# e1000/e1000e function index"
+  echo
+  for f in "$KERNEL_SRC/drivers/net/ethernet/intel/e1000e/netdev.c"            "$KERNEL_SRC/drivers/net/ethernet/intel/e1000/e1000_main.c"; do
+      if [[ -f "$f" ]]; then
+          echo "## $f"
+          echo '```text'
+          grep -nE '^(static )?(int|void|bool|u16|u32|u64|netdev_tx_t) [a-zA-Z0-9_]+\(' "$f" || true
+          echo '```'
+          echo
+      fi
+  done
+} > "$OUT_FILE"
+
+echo "$OUT_FILE"

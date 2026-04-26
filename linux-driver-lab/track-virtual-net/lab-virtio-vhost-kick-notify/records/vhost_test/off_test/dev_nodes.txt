@@ -1,0 +1,2 @@
+crw-rw-rw- 1 root root 10, 200  4月 25 17:06 /dev/net/tun
+crw-rw---- 1 root kvm  10, 238  4月 25 17:06 /dev/vhost-net

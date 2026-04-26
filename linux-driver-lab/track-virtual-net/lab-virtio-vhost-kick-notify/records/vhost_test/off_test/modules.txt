@@ -1,0 +1,3 @@
+bridge                425984  0
+stp                    12288  1 bridge
+llc                    16384  2 bridge,stp

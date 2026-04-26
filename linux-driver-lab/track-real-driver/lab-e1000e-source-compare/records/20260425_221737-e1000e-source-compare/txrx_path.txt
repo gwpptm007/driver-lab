@@ -1,0 +1,326 @@
+# tx/rx seed
+
+## /home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/src/drivers/net/ethernet/intel/e1000e/netdev.c
+14:#include <linux/interrupt.h>
+176:	for (i = 0; i < adapter->rx_ps_pages; i++) {
+197:	struct e1000_ring *tx_ring = adapter->tx_ring;
+198:	struct e1000_tx_desc *tx_desc;
+204:	struct e1000_ring *rx_ring = adapter->rx_ring;
+205:	union e1000_rx_desc_packet_split *rx_desc_ps;
+206:	union e1000_rx_desc_extended *rx_desc;
+241:	buffer_info = &tx_ring->buffer_info[tx_ring->next_to_clean];
+243:		0, tx_ring->next_to_use, tx_ring->next_to_clean,
+250:	if (!netif_msg_tx_done(adapter))
+251:		goto rx_ring_summary;
+285:	for (i = 0; tx_ring->desc && (i < tx_ring->count); i++) {
+287:		tx_desc = E1000_TX_DESC(*tx_ring, i);
+288:		buffer_info = &tx_ring->buffer_info[i];
+289:		u0 = (struct my_u0 *)tx_desc;
+290:		if (i == tx_ring->next_to_use && i == tx_ring->next_to_clean)
+292:		else if (i == tx_ring->next_to_use)
+294:		else if (i == tx_ring->next_to_clean)
+316:rx_ring_summary:
+320:		0, rx_ring->next_to_use, rx_ring->next_to_clean);
+323:	if (!netif_msg_rx_status(adapter))
+327:	switch (adapter->rx_ps_pages) {
+356:		for (i = 0; i < rx_ring->count; i++) {
+358:			buffer_info = &rx_ring->buffer_info[i];
+359:			rx_desc_ps = E1000_RX_DESC_PS(*rx_ring, i);
+360:			u1 = (struct my_u1 *)rx_desc_ps;
+362:			    le32_to_cpu(rx_desc_ps->wb.middle.status_error);
+364:			if (i == rx_ring->next_to_use)
+366:			else if (i == rx_ring->next_to_clean)
+422:		for (i = 0; i < rx_ring->count; i++) {
+425:			buffer_info = &rx_ring->buffer_info[i];
+426:			rx_desc = E1000_RX_DESC_EXT(*rx_ring, i);
+427:			u1 = (struct my_u1 *)rx_desc;
+428:			staterr = le32_to_cpu(rx_desc->wb.upper.status_error);
+430:			if (i == rx_ring->next_to_use)
+432:			else if (i == rx_ring->next_to_clean)
+458:						       adapter->rx_buffer_len,
+471:	if (ring->next_to_clean > ring->next_to_use)
+472:		return ring->next_to_clean - ring->next_to_use - 1;
+474:	return ring->count + ring->next_to_clean - ring->next_to_use - 1;
+498:	spin_lock_irqsave(&adapter->systim_lock, flags);
+500:	spin_unlock_irqrestore(&adapter->systim_lock, flags);
+507: * e1000e_rx_hwtstamp - utility function which checks for Rx time stamp
+516:static void e1000e_rx_hwtstamp(struct e1000_adapter *adapter, u32 status,
+520:	u64 rxstmp;
+534:	rxstmp = (u64)er32(RXSTMPL);
+535:	rxstmp |= (u64)er32(RXSTMPH) << 32;
+536:	e1000e_systim_to_hwtstamp(adapter, skb_hwtstamps(skb), rxstmp);
+555:	e1000e_rx_hwtstamp(adapter, staterr, skb);
+562:	napi_gro_receive(&adapter->napi, skb);
+566: * e1000_rx_checksum - Receive Checksum Offload
+571:static void e1000_rx_checksum(struct e1000_adapter *adapter, u32 status_err,
+603:static void e1000e_update_rdt_wa(struct e1000_ring *rx_ring, unsigned int i)
+605:	struct e1000_adapter *adapter = rx_ring->adapter;
+609:	writel(i, rx_ring->tail);
+611:	if (unlikely(i != readl(rx_ring->tail))) {
+620:static void e1000e_update_tdt_wa(struct e1000_ring *tx_ring, unsigned int i)
+622:	struct e1000_adapter *adapter = tx_ring->adapter;
+626:	writel(i, tx_ring->tail);
+628:	if (unlikely(i != readl(tx_ring->tail))) {
+638: * e1000_alloc_rx_buffers - Replace used receive buffers
+639: * @rx_ring: Rx descriptor ring
+640: * @cleaned_count: number to reallocate
+643:static void e1000_alloc_rx_buffers(struct e1000_ring *rx_ring,
+644:				   int cleaned_count, gfp_t gfp)
+646:	struct e1000_adapter *adapter = rx_ring->adapter;
+649:	union e1000_rx_desc_extended *rx_desc;
+653:	unsigned int bufsz = adapter->rx_buffer_len;
+655:	i = rx_ring->next_to_use;
+656:	buffer_info = &rx_ring->buffer_info[i];
+658:	while (cleaned_count--) {
+668:			adapter->alloc_rx_buff_failed++;
+675:						  adapter->rx_buffer_len,
+679:			adapter->rx_dma_failed++;
+683:		rx_desc = E1000_RX_DESC_EXT(*rx_ring, i);
+684:		rx_desc->read.buffer_addr = cpu_to_le64(buffer_info->dma);
+694:				e1000e_update_rdt_wa(rx_ring, i);
+696:				writel(i, rx_ring->tail);
+699:		if (i == rx_ring->count)
+701:		buffer_info = &rx_ring->buffer_info[i];
+704:	rx_ring->next_to_use = i;
+708: * e1000_alloc_rx_buffers_ps - Replace used receive buffers; packet split
+709: * @rx_ring: Rx descriptor ring
+710: * @cleaned_count: number to reallocate
+713:static void e1000_alloc_rx_buffers_ps(struct e1000_ring *rx_ring,
+714:				      int cleaned_count, gfp_t gfp)
+716:	struct e1000_adapter *adapter = rx_ring->adapter;
+719:	union e1000_rx_desc_packet_split *rx_desc;
+725:	i = rx_ring->next_to_use;
+726:	buffer_info = &rx_ring->buffer_info[i];
+728:	while (cleaned_count--) {
+729:		rx_desc = E1000_RX_DESC_PS(*rx_ring, i);
+733:			if (j >= adapter->rx_ps_pages) {
+735:				rx_desc->read.buffer_addr[j + 1] =
+742:					adapter->alloc_rx_buff_failed++;
+753:					adapter->rx_dma_failed++;
+761:			rx_desc->read.buffer_addr[j + 1] =
+765:		skb = __netdev_alloc_skb_ip_align(netdev, adapter->rx_ps_bsize0,
+769:			adapter->alloc_rx_buff_failed++;
+775:						  adapter->rx_ps_bsize0,
+779:			adapter->rx_dma_failed++;
+780:			/* cleanup skb */
+786:		rx_desc->read.buffer_addr[0] = cpu_to_le64(buffer_info->dma);
+796:				e1000e_update_rdt_wa(rx_ring, i << 1);
+798:				writel(i << 1, rx_ring->tail);
+802:		if (i == rx_ring->count)
+804:		buffer_info = &rx_ring->buffer_info[i];
+808:	rx_ring->next_to_use = i;
+812: * e1000_alloc_jumbo_rx_buffers - Replace used jumbo receive buffers
+813: * @rx_ring: Rx descriptor ring
+814: * @cleaned_count: number of buffers to allocate this pass
+818:static void e1000_alloc_jumbo_rx_buffers(struct e1000_ring *rx_ring,
+819:					 int cleaned_count, gfp_t gfp)
+821:	struct e1000_adapter *adapter = rx_ring->adapter;
+824:	union e1000_rx_desc_extended *rx_desc;
+830:	i = rx_ring->next_to_use;
+831:	buffer_info = &rx_ring->buffer_info[i];
+833:	while (cleaned_count--) {
+843:			adapter->alloc_rx_buff_failed++;
+853:				adapter->alloc_rx_buff_failed++;
+864:				adapter->alloc_rx_buff_failed++;
+869:		rx_desc = E1000_RX_DESC_EXT(*rx_ring, i);
+870:		rx_desc->read.buffer_addr = cpu_to_le64(buffer_info->dma);
+872:		if (unlikely(++i == rx_ring->count))
+874:		buffer_info = &rx_ring->buffer_info[i];
+877:	if (likely(rx_ring->next_to_use != i)) {
+878:		rx_ring->next_to_use = i;
+880:			i = (rx_ring->count - 1);
+889:			e1000e_update_rdt_wa(rx_ring, i);
+891:			writel(i, rx_ring->tail);
+895:static inline void e1000_rx_hash(struct net_device *netdev, __le32 rss,
+903: * e1000_clean_rx_irq - Send received data up the network stack
+904: * @rx_ring: Rx descriptor ring
+906: * @work_to_do: how many packets we can clean
+908: * the return value indicates whether actual cleaning was done, there
+909: * is no guarantee that everything was cleaned
+911:static bool e1000_clean_rx_irq(struct e1000_ring *rx_ring, int *work_done,
+914:	struct e1000_adapter *adapter = rx_ring->adapter;
+918:	union e1000_rx_desc_extended *rx_desc, *next_rxd;
+922:	int cleaned_count = 0;
+923:	bool cleaned = false;
+924:	unsigned int total_rx_bytes = 0, total_rx_packets = 0;
+926:	i = rx_ring->next_to_clean;
+927:	rx_desc = E1000_RX_DESC_EXT(*rx_ring, i);
+928:	staterr = le32_to_cpu(rx_desc->wb.upper.status_error);
+929:	buffer_info = &rx_ring->buffer_info[i];
+937:		dma_rmb();	/* read descriptor and rx_buffer_info after status DD */
+945:		if (i == rx_ring->count)
+947:		next_rxd = E1000_RX_DESC_EXT(*rx_ring, i);
+948:		prefetch(next_rxd);
+950:		next_buffer = &rx_ring->buffer_info[i];
+952:		cleaned = true;
+953:		cleaned_count++;
+955:				 adapter->rx_buffer_len, DMA_FROM_DEVICE);
+958:		length = le16_to_cpu(rx_desc->wb.upper.length);
+989:			 * but keep the FCS bytes out of the total_rx_bytes
+993:				total_rx_bytes -= 4;
+998:		total_rx_bytes += length;
+999:		total_rx_packets++;
+1007:				napi_alloc_skb(&adapter->napi, length);
+
+## /home/wq7/workspace/driver-lab/kernel-src/linux-5.15.10/src/drivers/net/ethernet/intel/e1000/e1000_main.c
+70:int e1000_setup_all_tx_resources(struct e1000_adapter *adapter);
+71:int e1000_setup_all_rx_resources(struct e1000_adapter *adapter);
+72:void e1000_free_all_tx_resources(struct e1000_adapter *adapter);
+73:void e1000_free_all_rx_resources(struct e1000_adapter *adapter);
+74:static int e1000_setup_tx_resources(struct e1000_adapter *adapter,
+75:				    struct e1000_tx_ring *txdr);
+76:static int e1000_setup_rx_resources(struct e1000_adapter *adapter,
+77:				    struct e1000_rx_ring *rxdr);
+78:static void e1000_free_tx_resources(struct e1000_adapter *adapter,
+79:				    struct e1000_tx_ring *tx_ring);
+80:static void e1000_free_rx_resources(struct e1000_adapter *adapter,
+81:				    struct e1000_rx_ring *rx_ring);
+92:static void e1000_configure_tx(struct e1000_adapter *adapter);
+93:static void e1000_configure_rx(struct e1000_adapter *adapter);
+95:static void e1000_clean_all_tx_rings(struct e1000_adapter *adapter);
+96:static void e1000_clean_all_rx_rings(struct e1000_adapter *adapter);
+97:static void e1000_clean_tx_ring(struct e1000_adapter *adapter,
+98:				struct e1000_tx_ring *tx_ring);
+99:static void e1000_clean_rx_ring(struct e1000_adapter *adapter,
+100:				struct e1000_rx_ring *rx_ring);
+101:static void e1000_set_rx_mode(struct net_device *netdev);
+104:static void e1000_82547_tx_fifo_stall_task(struct work_struct *work);
+105:static netdev_tx_t e1000_xmit_frame(struct sk_buff *skb,
+109:static irqreturn_t e1000_intr(int irq, void *data);
+110:static bool e1000_clean_tx_irq(struct e1000_adapter *adapter,
+111:			       struct e1000_tx_ring *tx_ring);
+112:static int e1000_clean(struct napi_struct *napi, int budget);
+113:static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
+114:			       struct e1000_rx_ring *rx_ring,
+116:static bool e1000_clean_jumbo_rx_irq(struct e1000_adapter *adapter,
+117:				     struct e1000_rx_ring *rx_ring,
+119:static void e1000_alloc_dummy_rx_buffers(struct e1000_adapter *adapter,
+120:					 struct e1000_rx_ring *rx_ring,
+121:					 int cleaned_count)
+124:static void e1000_alloc_rx_buffers(struct e1000_adapter *adapter,
+125:				   struct e1000_rx_ring *rx_ring,
+126:				   int cleaned_count);
+127:static void e1000_alloc_jumbo_rx_buffers(struct e1000_adapter *adapter,
+128:					 struct e1000_rx_ring *rx_ring,
+129:					 int cleaned_count);
+135:static void e1000_tx_timeout(struct net_device *dev, unsigned int txqueue);
+146:static int e1000_vlan_rx_add_vid(struct net_device *netdev,
+148:static int e1000_vlan_rx_kill_vid(struct net_device *netdev,
+158:static void e1000_netpoll (struct net_device *netdev);
+253:static int e1000_request_irq(struct e1000_adapter *adapter)
+256:	irq_handler_t handler = e1000_intr;
+257:	int irq_flags = IRQF_SHARED;
+260:	err = request_irq(adapter->pdev->irq, handler, irq_flags, netdev->name,
+263:		e_err(probe, "Unable to allocate interrupt Error: %d\n", err);
+269:static void e1000_free_irq(struct e1000_adapter *adapter)
+273:	free_irq(adapter->pdev->irq, netdev);
+277: * e1000_irq_disable - Mask off interrupt generation on the NIC
+280:static void e1000_irq_disable(struct e1000_adapter *adapter)
+286:	synchronize_irq(adapter->pdev->irq);
+290: * e1000_irq_enable - Enable default interrupt generation settings
+293:static void e1000_irq_enable(struct e1000_adapter *adapter)
+314:			e1000_vlan_rx_add_vid(netdev, htons(ETH_P_8021Q), vid);
+322:			e1000_vlan_rx_kill_vid(netdev, htons(ETH_P_8021Q),
+366:	e1000_set_rx_mode(netdev);
+371:	e1000_configure_tx(adapter);
+373:	e1000_configure_rx(adapter);
+376:	 * next_to_use != next_to_clean
+378:	for (i = 0; i < adapter->num_rx_queues; i++) {
+379:		struct e1000_rx_ring *ring = &adapter->rx_ring[i];
+380:		adapter->alloc_rx_buf(adapter, ring,
+394:	napi_enable(&adapter->napi);
+396:	e1000_irq_enable(adapter);
+400:	/* fire a link change interrupt to start the watchdog */
+500:	netif_tx_disable(netdev);
+519:	napi_disable(&adapter->napi);
+521:	e1000_irq_disable(adapter);
+523:	/* Setting DOWN must be after irq_disable to prevent
+524:	 * a screaming interrupt.  Setting DOWN also prevents
+533:	e1000_clean_all_tx_rings(adapter);
+534:	e1000_clean_all_rx_rings(adapter);
+554:	u32 pba = 0, tx_space, min_tx_space, min_rx_space;
+595:			adapter->tx_fifo_head = 0;
+596:			adapter->tx_head_addr = pba << E1000_TX_HEAD_ADDR_SHIFT;
+597:			adapter->tx_fifo_size =
+599:			atomic_set(&adapter->tx_fifo_stall, 0);
+614:		tx_space = pba >> 16;
+620:		min_tx_space = (hw->max_frame_size +
+621:				sizeof(struct e1000_tx_desc) -
+623:		min_tx_space = ALIGN(min_tx_space, 1024);
+624:		min_tx_space >>= 10;
+626:		min_rx_space = hw->max_frame_size;
+627:		min_rx_space = ALIGN(min_rx_space, 1024);
+628:		min_rx_space >>= 10;
+634:		if (tx_space < min_tx_space &&
+635:		    ((min_tx_space - tx_space) < pba)) {
+636:			pba = pba - (min_tx_space - tx_space);
+650:			if (pba < min_rx_space)
+651:				pba = min_rx_space;
+817:	adapter->rx_csum = !!(features & NETIF_F_RXCSUM);
+830:	.ndo_start_xmit		= e1000_xmit_frame,
+831:	.ndo_set_rx_mode	= e1000_set_rx_mode,
+833:	.ndo_tx_timeout		= e1000_tx_timeout,
+837:	.ndo_vlan_rx_add_vid	= e1000_vlan_rx_add_vid,
+838:	.ndo_vlan_rx_kill_vid	= e1000_vlan_rx_kill_vid,
+840:	.ndo_poll_controller	= e1000_netpoll,
+1015:	netif_napi_add(netdev, &adapter->napi, e1000_clean, 64);
+1114:			  e1000_82547_tx_fifo_stall_task);
+1231:	kfree(adapter->tx_ring);
+1232:	kfree(adapter->rx_ring);
+1272:	kfree(adapter->tx_ring);
+1273:	kfree(adapter->rx_ring);
+1298:	adapter->rx_buffer_len = MAXIMUM_ETHERNET_VLAN_SIZE;
+1300:	adapter->num_tx_queues = 1;
+1301:	adapter->num_rx_queues = 1;
+1309:	e1000_irq_disable(adapter);
+1327:	adapter->tx_ring = kcalloc(adapter->num_tx_queues,
+1328:				   sizeof(struct e1000_tx_ring), GFP_KERNEL);
+1329:	if (!adapter->tx_ring)
+1332:	adapter->rx_ring = kcalloc(adapter->num_rx_queues,
+1333:				   sizeof(struct e1000_rx_ring), GFP_KERNEL);
+1334:	if (!adapter->rx_ring) {
+1335:		kfree(adapter->tx_ring);
+1350: * for transmit and receive operations are allocated, the interrupt
+1367:	err = e1000_setup_all_tx_resources(adapter);
+1369:		goto err_setup_tx;
+1372:	err = e1000_setup_all_rx_resources(adapter);
+1374:		goto err_setup_rx;
+1384:	/* before we allocate an interrupt, we must be ready to handle it.
+1385:	 * Setting DEBUG_SHIRQ in the kernel makes it fire an interrupt
+1386:	 * as soon as we call pci_request_irq, so we have to setup our
+1387:	 * clean_rx handler before we do so.
+1391:	err = e1000_request_irq(adapter);
+1393:		goto err_req_irq;
+1398:	napi_enable(&adapter->napi);
+1400:	e1000_irq_enable(adapter);
+1404:	/* fire a link status change interrupt to start the watchdog */
+1409:err_req_irq:
+1411:	e1000_free_all_rx_resources(adapter);
+1412:err_setup_rx:
+1413:	e1000_free_all_tx_resources(adapter);
+1414:err_setup_tx:
+1448:	e1000_free_irq(adapter);
+1450:	e1000_free_all_tx_resources(adapter);
+1451:	e1000_free_all_rx_resources(adapter);
+1459:		e1000_vlan_rx_kill_vid(netdev, htons(ETH_P_8021Q),
+1492: * e1000_setup_tx_resources - allocate Tx resources (Descriptors)
+1494: * @txdr:    tx descriptor ring (for a specific queue) to setup
+1498:static int e1000_setup_tx_resources(struct e1000_adapter *adapter,
+1499:				    struct e1000_tx_ring *txdr)
+1504:	size = sizeof(struct e1000_tx_buffer) * txdr->count;
+1505:	txdr->buffer_info = vzalloc(size);
+1506:	if (!txdr->buffer_info)
+1511:	txdr->size = txdr->count * sizeof(struct e1000_tx_desc);
+1512:	txdr->size = ALIGN(txdr->size, 4096);
+1514:	txdr->desc = dma_alloc_coherent(&pdev->dev, txdr->size, &txdr->dma,
+1516:	if (!txdr->desc) {
+1517:setup_tx_desc_die:
+1518:		vfree(txdr->buffer_info);
+1523:	if (!e1000_check_64k_bound(adapter, txdr->desc, txdr->size)) {
+1524:		void *olddesc = txdr->desc;
+1525:		dma_addr_t olddma = txdr->dma;
+1526:		e_err(tx_err, "txdr align check failed: %u bytes at %p\n",
+1527:		      txdr->size, txdr->desc);
+1529:		txdr->desc = dma_alloc_coherent(&pdev->dev, txdr->size,
+1530:						&txdr->dma, GFP_KERNEL);
+

@@ -1,0 +1,3 @@
+20: tap-vnet-a: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 master br-vnet0 state disabled priority 32 cost 2 
+21: tap-vnet-b: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 master br-vnet0 state disabled priority 32 cost 2 
+27: tap-vnet0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 master br-vnet0 state disabled priority 32 cost 2 

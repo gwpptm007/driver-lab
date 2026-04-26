@@ -1,0 +1,1 @@
+6: tap-vnet0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 master br-vnet0 state disabled priority 32 cost 2 

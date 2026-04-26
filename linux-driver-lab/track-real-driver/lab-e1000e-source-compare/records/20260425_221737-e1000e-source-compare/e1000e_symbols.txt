@@ -1,0 +1,283 @@
+120:static void __ew32_prepare(struct e1000_hw *hw)
+128:void __ew32(struct e1000_hw *hw, unsigned long reg, u32 val)
+141:static void e1000_regdump(struct e1000_hw *hw, struct e1000_reg_info *reginfo)
+170:static void e1000e_dump_ps_pages(struct e1000_adapter *adapter,
+192:static void e1000e_dump(struct e1000_adapter *adapter)
+469:static int e1000_desc_unused(struct e1000_ring *ring)
+491:static void e1000e_systim_to_hwtstamp(struct e1000_adapter *adapter,
+516:static void e1000e_rx_hwtstamp(struct e1000_adapter *adapter, u32 status,
+549:static void e1000_receive_skb(struct e1000_adapter *adapter,
+571:static void e1000_rx_checksum(struct e1000_adapter *adapter, u32 status_err,
+603:static void e1000e_update_rdt_wa(struct e1000_ring *rx_ring, unsigned int i)
+620:static void e1000e_update_tdt_wa(struct e1000_ring *tx_ring, unsigned int i)
+643:static void e1000_alloc_rx_buffers(struct e1000_ring *rx_ring,
+713:static void e1000_alloc_rx_buffers_ps(struct e1000_ring *rx_ring,
+818:static void e1000_alloc_jumbo_rx_buffers(struct e1000_ring *rx_ring,
+911:static bool e1000_clean_rx_irq(struct e1000_ring *rx_ring, int *work_done,
+1059:static void e1000_put_txbuf(struct e1000_ring *tx_ring,
+1084:static void e1000_print_hw_hang(struct work_struct *work)
+1169:static void e1000e_tx_hwtstamp_work(struct work_struct *work)
+1212:static bool e1000_clean_tx_irq(struct e1000_ring *tx_ring)
+1307:static bool e1000_clean_rx_irq_ps(struct e1000_ring *rx_ring, int *work_done,
+1493:static void e1000_consume_page(struct e1000_buffer *bi, struct sk_buff *skb,
+1511:static bool e1000_clean_jumbo_rx_irq(struct e1000_ring *rx_ring, int *work_done,
+1678:static void e1000_clean_rx_ring(struct e1000_ring *rx_ring)
+1740:static void e1000e_downshift_workaround(struct work_struct *work)
+1974:static void e1000_configure_msix(struct e1000_adapter *adapter)
+2034:void e1000e_reset_interrupt_capability(struct e1000_adapter *adapter)
+2053:void e1000e_set_interrupt_capability(struct e1000_adapter *adapter)
+2109:static int e1000_request_msix(struct e1000_adapter *adapter)
+2163:static int e1000_request_irq(struct e1000_adapter *adapter)
+2196:static void e1000_free_irq(struct e1000_adapter *adapter)
+2221:static void e1000_irq_disable(struct e1000_adapter *adapter)
+2244:static void e1000_irq_enable(struct e1000_adapter *adapter)
+2269:void e1000e_get_hw_control(struct e1000_adapter *adapter)
+2295:void e1000e_release_hw_control(struct e1000_adapter *adapter)
+2316:static int e1000_alloc_ring_dma(struct e1000_adapter *adapter,
+2335:int e1000e_setup_tx_resources(struct e1000_ring *tx_ring)
+2369:int e1000e_setup_rx_resources(struct e1000_ring *rx_ring)
+2420:static void e1000_clean_tx_ring(struct e1000_ring *tx_ring)
+2448:void e1000e_free_tx_resources(struct e1000_ring *tx_ring)
+2469:void e1000e_free_rx_resources(struct e1000_ring *rx_ring)
+2546:static void e1000_set_itr(struct e1000_adapter *adapter)
+2620:void e1000e_write_itr(struct e1000_adapter *adapter, u32 itr)
+2639:static int e1000_alloc_queues(struct e1000_adapter *adapter)
+2668:static int e1000e_poll(struct napi_struct *napi, int budget)
+2704:static int e1000_vlan_rx_add_vid(struct net_device *netdev,
+2730:static int e1000_vlan_rx_kill_vid(struct net_device *netdev,
+2762:static void e1000e_vlan_filter_disable(struct e1000_adapter *adapter)
+2786:static void e1000e_vlan_filter_enable(struct e1000_adapter *adapter)
+2804:static void e1000e_vlan_strip_disable(struct e1000_adapter *adapter)
+2819:static void e1000e_vlan_strip_enable(struct e1000_adapter *adapter)
+2830:static void e1000_update_mng_vlan(struct e1000_adapter *adapter)
+2845:static void e1000_restore_vlan(struct e1000_adapter *adapter)
+2855:static void e1000_init_manageability_pt(struct e1000_adapter *adapter)
+2923:static void e1000_configure_tx(struct e1000_adapter *adapter)
+3038:static void e1000_setup_rctl(struct e1000_adapter *adapter)
+3196:static void e1000_configure_rx(struct e1000_adapter *adapter)
+3315:static int e1000e_write_mc_addr_list(struct net_device *netdev)
+3353:static int e1000e_write_uc_addr_list(struct net_device *netdev)
+3410:static void e1000e_set_rx_mode(struct net_device *netdev)
+3461:static void e1000e_setup_rss_hash(struct e1000_adapter *adapter)
+3603:static int e1000e_config_hwtstamp(struct e1000_adapter *adapter,
+3758:static void e1000_configure(struct e1000_adapter *adapter)
+3784:void e1000e_power_up_phy(struct e1000_adapter *adapter)
+3799:static void e1000_power_down_phy(struct e1000_adapter *adapter)
+3814:static void e1000_flush_tx_ring(struct e1000_adapter *adapter)
+3846:static void e1000_flush_rx_ring(struct e1000_adapter *adapter)
+3885:static void e1000_flush_desc_rings(struct e1000_adapter *adapter)
+3918:static void e1000e_systim_reset(struct e1000_adapter *adapter)
+3965:void e1000e_reset(struct e1000_adapter *adapter)
+4215:static void e1000e_trigger_lsc(struct e1000_adapter *adapter)
+4225:void e1000e_up(struct e1000_adapter *adapter)
+4241:static void e1000e_flush_descriptors(struct e1000_adapter *adapter)
+4265:static void e1000e_update_stats(struct e1000_adapter *adapter);
+4272:void e1000e_down(struct e1000_adapter *adapter, bool reset)
+4334:void e1000e_reinit_locked(struct e1000_adapter *adapter)
+4355:static u64 e1000e_sanitize_systim(struct e1000_hw *hw, u64 systim,
+4391:u64 e1000e_read_systim(struct e1000_adapter *adapter,
+4433:static u64 e1000e_cyclecounter_read(const struct cyclecounter *cc)
+4449:static int e1000_sw_init(struct e1000_adapter *adapter)
+4515:static int e1000_test_msi_interrupt(struct e1000_adapter *adapter)
+4582:static int e1000_test_msi(struct e1000_adapter *adapter)
+4620:int e1000e_open(struct net_device *netdev)
+4727:int e1000e_close(struct net_device *netdev)
+4781:static int e1000_set_mac(struct net_device *netdev, void *p)
+4821:static void e1000e_update_phy_task(struct work_struct *work)
+4845:static void e1000_update_phy_info(struct timer_list *t)
+4861:static void e1000e_update_phy_stats(struct e1000_adapter *adapter)
+4936:static void e1000e_update_stats(struct e1000_adapter *adapter)
+5051:static void e1000_phy_read_status(struct e1000_adapter *adapter)
+5089:static void e1000_print_link_info(struct e1000_adapter *adapter)
+5104:static bool e1000e_has_link(struct e1000_adapter *adapter)
+5146:static void e1000e_enable_receives(struct e1000_adapter *adapter)
+5159:static void e1000e_check_82574_phy_workaround(struct e1000_adapter *adapter)
+5182:static void e1000_watchdog(struct timer_list *t)
+5192:static void e1000_watchdog_task(struct work_struct *work)
+5463:static int e1000_tso(struct e1000_ring *tx_ring, struct sk_buff *skb,
+5528:static bool e1000_tx_csum(struct e1000_ring *tx_ring, struct sk_buff *skb,
+5582:static int e1000_tx_map(struct e1000_ring *tx_ring, struct sk_buff *skb,
+5678:static void e1000_tx_queue(struct e1000_ring *tx_ring, int tx_flags, int count)
+5745:static int e1000_transfer_dhcp_info(struct e1000_adapter *adapter,
+5782:static int __e1000_maybe_stop_tx(struct e1000_ring *tx_ring, int size)
+5805:static int e1000_maybe_stop_tx(struct e1000_ring *tx_ring, int size)
+5814:static netdev_tx_t e1000_xmit_frame(struct sk_buff *skb,
+5969:static void e1000_tx_timeout(struct net_device *netdev, unsigned int __always_unused txqueue)
+5978:static void e1000_reset_task(struct work_struct *work)
+6005:void e1000e_get_stats64(struct net_device *netdev,
+6051:static int e1000_change_mtu(struct net_device *netdev, int new_mtu)
+6113:static int e1000_mii_ioctl(struct net_device *netdev, struct ifreq *ifr,
+6187:static int e1000e_hwtstamp_set(struct net_device *netdev, struct ifreq *ifr)
+6222:static int e1000e_hwtstamp_get(struct net_device *netdev, struct ifreq *ifr)
+6230:static int e1000_ioctl(struct net_device *netdev, struct ifreq *ifr, int cmd)
+6246:static int e1000_init_phy_wakeup(struct e1000_adapter *adapter, u32 wufc)
+6320:static void e1000e_flush_lpic(struct pci_dev *pdev)
+6343:static void e1000e_s0ix_entry_flow(struct e1000_adapter *adapter)
+6490:static void e1000e_s0ix_exit_flow(struct e1000_adapter *adapter)
+6614:static int e1000e_pm_freeze(struct device *dev)
+6647:static int __e1000_shutdown(struct pci_dev *pdev, bool runtime)
+6801:static void __e1000e_disable_aspm(struct pci_dev *pdev, u16 state, int locked)
+6874:static void e1000e_disable_aspm(struct pci_dev *pdev, u16 state)
+6887:static void e1000e_disable_aspm_locked(struct pci_dev *pdev, u16 state)
+6892:static int e1000e_pm_thaw(struct device *dev)
+6916:static int __e1000_resume(struct pci_dev *pdev)
+7087:static void e1000_shutdown(struct pci_dev *pdev)
+7136:static void e1000_netpoll(struct net_device *netdev)
+7232:static void e1000_io_resume(struct pci_dev *pdev)
+7249:static void e1000_print_device_info(struct e1000_adapter *adapter)
+7273:static void e1000_eeprom_checks(struct e1000_adapter *adapter)
+7312:static int e1000_set_features(struct net_device *netdev,
+7383:static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+7737:static void e1000_remove(struct pci_dev *pdev)
+66:int e1000_up(struct e1000_adapter *adapter);
+67:void e1000_down(struct e1000_adapter *adapter);
+68:void e1000_reinit_locked(struct e1000_adapter *adapter);
+69:void e1000_reset(struct e1000_adapter *adapter);
+70:int e1000_setup_all_tx_resources(struct e1000_adapter *adapter);
+71:int e1000_setup_all_rx_resources(struct e1000_adapter *adapter);
+72:void e1000_free_all_tx_resources(struct e1000_adapter *adapter);
+73:void e1000_free_all_rx_resources(struct e1000_adapter *adapter);
+74:static int e1000_setup_tx_resources(struct e1000_adapter *adapter,
+76:static int e1000_setup_rx_resources(struct e1000_adapter *adapter,
+78:static void e1000_free_tx_resources(struct e1000_adapter *adapter,
+80:static void e1000_free_rx_resources(struct e1000_adapter *adapter,
+82:void e1000_update_stats(struct e1000_adapter *adapter);
+84:static int e1000_init_module(void);
+85:static void e1000_exit_module(void);
+86:static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent);
+87:static void e1000_remove(struct pci_dev *pdev);
+88:static int e1000_alloc_queues(struct e1000_adapter *adapter);
+89:static int e1000_sw_init(struct e1000_adapter *adapter);
+90:int e1000_open(struct net_device *netdev);
+91:int e1000_close(struct net_device *netdev);
+92:static void e1000_configure_tx(struct e1000_adapter *adapter);
+93:static void e1000_configure_rx(struct e1000_adapter *adapter);
+94:static void e1000_setup_rctl(struct e1000_adapter *adapter);
+95:static void e1000_clean_all_tx_rings(struct e1000_adapter *adapter);
+96:static void e1000_clean_all_rx_rings(struct e1000_adapter *adapter);
+97:static void e1000_clean_tx_ring(struct e1000_adapter *adapter,
+99:static void e1000_clean_rx_ring(struct e1000_adapter *adapter,
+101:static void e1000_set_rx_mode(struct net_device *netdev);
+102:static void e1000_update_phy_info_task(struct work_struct *work);
+103:static void e1000_watchdog(struct work_struct *work);
+104:static void e1000_82547_tx_fifo_stall_task(struct work_struct *work);
+105:static netdev_tx_t e1000_xmit_frame(struct sk_buff *skb,
+107:static int e1000_change_mtu(struct net_device *netdev, int new_mtu);
+108:static int e1000_set_mac(struct net_device *netdev, void *p);
+110:static bool e1000_clean_tx_irq(struct e1000_adapter *adapter,
+112:static int e1000_clean(struct napi_struct *napi, int budget);
+113:static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
+116:static bool e1000_clean_jumbo_rx_irq(struct e1000_adapter *adapter,
+119:static void e1000_alloc_dummy_rx_buffers(struct e1000_adapter *adapter,
+124:static void e1000_alloc_rx_buffers(struct e1000_adapter *adapter,
+127:static void e1000_alloc_jumbo_rx_buffers(struct e1000_adapter *adapter,
+130:static int e1000_ioctl(struct net_device *netdev, struct ifreq *ifr, int cmd);
+131:static int e1000_mii_ioctl(struct net_device *netdev, struct ifreq *ifr,
+133:static void e1000_enter_82542_rst(struct e1000_adapter *adapter);
+134:static void e1000_leave_82542_rst(struct e1000_adapter *adapter);
+135:static void e1000_tx_timeout(struct net_device *dev, unsigned int txqueue);
+136:static void e1000_reset_task(struct work_struct *work);
+137:static void e1000_smartspeed(struct e1000_adapter *adapter);
+138:static int e1000_82547_fifo_workaround(struct e1000_adapter *adapter,
+141:static bool e1000_vlan_used(struct e1000_adapter *adapter);
+142:static void e1000_vlan_mode(struct net_device *netdev,
+144:static void e1000_vlan_filter_on_off(struct e1000_adapter *adapter,
+146:static int e1000_vlan_rx_add_vid(struct net_device *netdev,
+148:static int e1000_vlan_rx_kill_vid(struct net_device *netdev,
+150:static void e1000_restore_vlan(struct e1000_adapter *adapter);
+154:static void e1000_shutdown(struct pci_dev *pdev);
+170:static void e1000_io_resume(struct pci_dev *pdev);
+253:static int e1000_request_irq(struct e1000_adapter *adapter)
+269:static void e1000_free_irq(struct e1000_adapter *adapter)
+280:static void e1000_irq_disable(struct e1000_adapter *adapter)
+293:static void e1000_irq_enable(struct e1000_adapter *adapter)
+301:static void e1000_update_mng_vlan(struct e1000_adapter *adapter)
+329:static void e1000_init_manageability(struct e1000_adapter *adapter)
+343:static void e1000_release_manageability(struct e1000_adapter *adapter)
+361:static void e1000_configure(struct e1000_adapter *adapter)
+385:int e1000_up(struct e1000_adapter *adapter)
+413:void e1000_power_up_phy(struct e1000_adapter *adapter)
+429:static void e1000_power_down_phy(struct e1000_adapter *adapter)
+469:static void e1000_down_and_stop(struct e1000_adapter *adapter)
+489:void e1000_down(struct e1000_adapter *adapter)
+537:void e1000_reinit_locked(struct e1000_adapter *adapter)
+551:void e1000_reset(struct e1000_adapter *adapter)
+707:static void e1000_dump_eeprom(struct e1000_adapter *adapter)
+760:static int e1000_is_need_ioport(struct pci_dev *pdev)
+804:static int e1000_set_features(struct net_device *netdev,
+857:static int e1000_init_hw_struct(struct e1000_adapter *adapter,
+921:static int e1000_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
+1258:static void e1000_remove(struct pci_dev *pdev)
+1296:static int e1000_sw_init(struct e1000_adapter *adapter)
+1325:static int e1000_alloc_queues(struct e1000_adapter *adapter)
+1354:int e1000_open(struct net_device *netdev)
+1431:int e1000_close(struct net_device *netdev)
+1472:static bool e1000_check_64k_bound(struct e1000_adapter *adapter, void *start,
+1498:static int e1000_setup_tx_resources(struct e1000_adapter *adapter,
+1569:int e1000_setup_all_tx_resources(struct e1000_adapter *adapter)
+1593:static void e1000_configure_tx(struct e1000_adapter *adapter)
+1688:static int e1000_setup_rx_resources(struct e1000_adapter *adapter,
+1761:int e1000_setup_all_rx_resources(struct e1000_adapter *adapter)
+1783:static void e1000_setup_rctl(struct e1000_adapter *adapter)
+1852:static void e1000_configure_rx(struct e1000_adapter *adapter)
+1924:static void e1000_free_tx_resources(struct e1000_adapter *adapter,
+1946:void e1000_free_all_tx_resources(struct e1000_adapter *adapter)
+1981:static void e1000_clean_tx_ring(struct e1000_adapter *adapter,
+2016:static void e1000_clean_all_tx_rings(struct e1000_adapter *adapter)
+2031:static void e1000_free_rx_resources(struct e1000_adapter *adapter,
+2053:void e1000_free_all_rx_resources(struct e1000_adapter *adapter)
+2083:static void e1000_clean_rx_ring(struct e1000_adapter *adapter,
+2139:static void e1000_clean_all_rx_rings(struct e1000_adapter *adapter)
+2150:static void e1000_enter_82542_rst(struct e1000_adapter *adapter)
+2168:static void e1000_leave_82542_rst(struct e1000_adapter *adapter)
+2198:static int e1000_set_mac(struct net_device *netdev, void *p)
+2232:static void e1000_set_rx_mode(struct net_device *netdev)
+2340:static void e1000_update_phy_info_task(struct work_struct *work)
+2353:static void e1000_82547_tx_fifo_stall_task(struct work_struct *work)
+2384:bool e1000_has_link(struct e1000_adapter *adapter)
+2425:static void e1000_watchdog(struct work_struct *work)
+2624:static void e1000_set_itr(struct e1000_adapter *adapter)
+2692:static int e1000_tso(struct e1000_adapter *adapter,
+2762:static bool e1000_tx_csum(struct e1000_adapter *adapter,
+2820:static int e1000_tx_map(struct e1000_adapter *adapter,
+2967:static void e1000_tx_queue(struct e1000_adapter *adapter,
+3038:static int e1000_82547_fifo_workaround(struct e1000_adapter *adapter,
+3064:static int __e1000_maybe_stop_tx(struct net_device *netdev, int size)
+3088:static int e1000_maybe_stop_tx(struct net_device *netdev,
+3097:static netdev_tx_t e1000_xmit_frame(struct sk_buff *skb,
+3285:static void e1000_regdump(struct e1000_adapter *adapter)
+3354:static void e1000_dump(struct e1000_adapter *adapter)
+3494:static void e1000_tx_timeout(struct net_device *netdev, unsigned int __always_unused txqueue)
+3503:static void e1000_reset_task(struct work_struct *work)
+3519:static int e1000_change_mtu(struct net_device *netdev, int new_mtu)
+3589:void e1000_update_stats(struct e1000_adapter *adapter)
+3794:static int e1000_clean(struct napi_struct *napi, int budget)
+3825:static bool e1000_clean_tx_irq(struct e1000_adapter *adapter,
+3941:static void e1000_rx_checksum(struct e1000_adapter *adapter, u32 status_err,
+3980:static void e1000_consume_page(struct e1000_rx_buffer *bi, struct sk_buff *skb,
+3996:static void e1000_receive_skb(struct e1000_adapter *adapter, u8 status,
+4018:static void e1000_tbi_adjust_stats(struct e1000_hw *hw,
+4087:static bool e1000_tbi_should_accept(struct e1000_adapter *adapter,
+4127:static bool e1000_clean_jumbo_rx_irq(struct e1000_adapter *adapter,
+4348:static bool e1000_clean_rx_irq(struct e1000_adapter *adapter,
+4561:static void e1000_alloc_rx_buffers(struct e1000_adapter *adapter,
+4676:static void e1000_smartspeed(struct e1000_adapter *adapter)
+4735:static int e1000_ioctl(struct net_device *netdev, struct ifreq *ifr, int cmd)
+4753:static int e1000_mii_ioctl(struct net_device *netdev, struct ifreq *ifr,
+4844:void e1000_pci_set_mwi(struct e1000_hw *hw)
+4853:void e1000_pci_clear_mwi(struct e1000_hw *hw)
+4860:int e1000_pcix_get_mmrbc(struct e1000_hw *hw)
+4866:void e1000_pcix_set_mmrbc(struct e1000_hw *hw, int mmrbc)
+4872:void e1000_io_write(struct e1000_hw *hw, unsigned long port, u32 value)
+4877:static bool e1000_vlan_used(struct e1000_adapter *adapter)
+4886:static void __e1000_vlan_mode(struct e1000_adapter *adapter,
+4902:static void e1000_vlan_filter_on_off(struct e1000_adapter *adapter,
+4931:static void e1000_vlan_mode(struct net_device *netdev,
+4945:static int e1000_vlan_rx_add_vid(struct net_device *netdev,
+4971:static int e1000_vlan_rx_kill_vid(struct net_device *netdev,
+4997:static void e1000_restore_vlan(struct e1000_adapter *adapter)
+5009:int e1000_set_spd_dplx(struct e1000_adapter *adapter, u32 spd, u8 dplx)
+5059:static int __e1000_shutdown(struct pci_dev *pdev, bool *enable_wake)
+5196:static void e1000_shutdown(struct pci_dev *pdev)
+5213:static void e1000_netpoll(struct net_device *netdev)
+5297:static void e1000_io_resume(struct pci_dev *pdev)

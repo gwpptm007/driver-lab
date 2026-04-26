@@ -1,0 +1,7 @@
+2: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:f8:f6:6e brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast           
+       4210963   17914      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+       3740315   16056      0       0       0       0 
+    altname enp2s1
