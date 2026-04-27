@@ -25,3 +25,26 @@
 - records
 - reports
 - acceptance
+
+
+## 当前推进点
+
+当前应从第一站开始：
+
+```text
+lab-vmxnet3-testpmd
+```
+
+这一站已经结合 `docs/00_ENVIRONMENT_PREPARE.md` 中的测试机环境收敛为：
+
+```text
+ens33  = e1000/NAT/SSH 管理口，不动
+ens192 = vmxnet3/0000:0b:00.0，DPDK 测试口
+```
+
+进入方式：
+
+```bash
+cd lab-vmxnet3-testpmd
+cat START_HERE.md
+```

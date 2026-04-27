@@ -1,0 +1,4 @@
+$ ip -br addr
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens33            UP             192.168.65.135/24 fe80::6e4d:b76b:3e79:cf8d/64 
+ens34            UP             fe80::2707:3bac:8778:9ad7/64 

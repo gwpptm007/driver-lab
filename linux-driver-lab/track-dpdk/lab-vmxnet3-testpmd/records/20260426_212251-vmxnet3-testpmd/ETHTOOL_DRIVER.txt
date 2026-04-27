@@ -1,0 +1,1 @@
+$ bash -c ethtool -i ens192 2>/dev/null || true

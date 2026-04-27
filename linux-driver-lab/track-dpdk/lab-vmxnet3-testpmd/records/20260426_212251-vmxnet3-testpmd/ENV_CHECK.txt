@@ -1,0 +1,235 @@
+# ENV_CHECK
+date=2026-04-27 23:09:53
+
+## Lab defaults
+LAB_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-vmxnet3-testpmd
+DPDK_IF=ens192
+DPDK_PCI=0000:0b:00.0
+DPDK_DRIVER=vfio-pci
+MGMT_IF=ens33
+MGMT_PCI=0000:02:01.0
+HUGEPAGES=1024
+HUGEPAGE_MOUNT=/mnt/huge
+
+$ uname -a
+Linux wq7-virtual-machine 6.8.0-110-generic #110~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 27 12:43:08 UTC  x86_64 x86_64 x86_64 GNU/Linux
+$ bash -c lsb_release -a 2>/dev/null || cat /etc/os-release
+Distributor ID:	Ubuntu
+Description:	Ubuntu 22.04.5 LTS
+Release:	22.04
+Codename:	jammy
+$ bash -c id
+uid=1000(wq7) gid=1000(wq7) groups=1000(wq7),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),109(kvm),122(lpadmin),135(lxd),136(sambashare)
+$ bash -c nproc; lscpu | sed -n "1,25p"
+8
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           45 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  8
+On-line CPU(s) list:                     0-7
+Vendor ID:                               AuthenticAMD
+Model name:                              AMD Ryzen 9 7945HX with Radeon Graphics
+CPU family:                              25
+Model:                                   97
+Thread(s) per core:                      1
+Core(s) per socket:                      4
+Socket(s):                               2
+Stepping:                                2
+BogoMIPS:                                4990.62
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext ssbd ibrs ibpb ibrs_enhanced vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves user_shstk avx512_bf16 clzero wbnoinvd arat npt svm_lock nrip_save vmcb_clean flushbyasid decodeassists avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid overflow_recov succor fsrm flush_l1d
+Virtualization:                          AMD-V
+Hypervisor vendor:                       VMware
+Virtualization type:                     full
+L1d cache:                               256 KiB (8 instances)
+L1i cache:                               256 KiB (8 instances)
+L2 cache:                                8 MiB (8 instances)
+L3 cache:                                64 MiB (2 instances)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-7
+$ ip -br addr
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens33            UP             192.168.65.135/24 fe80::6e4d:b76b:3e79:cf8d/64 
+ens34            UP             
+$ ip -br link
+lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
+ens33            UP             00:0c:29:f8:f6:6e <BROADCAST,MULTICAST,UP,LOWER_UP> 
+ens34            UP             00:0c:29:f8:f6:78 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+$ bash -c ethtool -i ens192 2>/dev/null || true
+$ bash -c ethtool -i ens33 2>/dev/null || true
+driver: e1000
+version: 6.8.0-110-generic
+firmware-version: 
+expansion-rom-version: 
+bus-info: 0000:02:01.0
+supports-statistics: yes
+supports-test: yes
+supports-eeprom-access: yes
+supports-register-dump: yes
+supports-priv-flags: no
+$ bash -c lspci -s 0000:0b:00.0 -nn 2>/dev/null || true
+0b:00.0 Ethernet controller [0200]: VMware VMXNET3 Ethernet Controller [15ad:07b0] (rev 01)
+$ bash -c lspci | grep -Ei "ethernet|network|vmxnet|e1000" || true
+02:01.0 Ethernet controller: Intel Corporation 82545EM Gigabit Ethernet Controller (Copper) (rev 01)
+02:02.0 Ethernet controller: Intel Corporation 82545EM Gigabit Ethernet Controller (Copper) (rev 01)
+0b:00.0 Ethernet controller: VMware VMXNET3 Ethernet Controller (rev 01)
+$ bash -c grep Huge /proc/meminfo || true
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+FileHugePages:         0 kB
+HugePages_Total:    1024
+HugePages_Free:     1019
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:         2097152 kB
+$ bash -c mount | grep -E "hugetlbfs|/mnt/huge" || true
+hugetlbfs on /dev/hugepages type hugetlbfs (rw,relatime,pagesize=2M)
+nodev on /mnt/huge type hugetlbfs (rw,relatime,pagesize=2M)
+$ bash -c lsmod | grep -E "vfio|uio|vmxnet3" || true
+vfio_pci               16384  0
+vfio_pci_core          94208  1 vfio_pci
+vfio_iommu_type1       49152  0
+vfio                   69632  3 vfio_pci_core,vfio_iommu_type1,vfio_pci
+iommufd                98304  1 vfio
+uio_pci_generic        12288  0
+uio                    28672  1 uio_pci_generic
+irqbypass              12288  2 vfio_pci_core,kvm
+vmxnet3                94208  0
+$ bash -c cat /proc/cmdline || true
+BOOT_IMAGE=/boot/vmlinuz-6.8.0-110-generic root=UUID=b6dfcf48-79dd-42f6-867f-0e7878e613e9 ro quiet splash
+$ bash -c dmesg | grep -Ei "DMAR|IOMMU|vfio|vmxnet|huge" | tail -n 80 || true
+dmesg: read kernel buffer failed: Operation not permitted
+
+## DPDK tool discovery
+dpdk-devbind: /usr/bin/dpdk-devbind.py
+
+Network devices using DPDK-compatible driver
+============================================
+0000:0b:00.0 'VMXNET3 Ethernet Controller 07b0' drv=uio_pci_generic unused=vmxnet3,vfio-pci
+
+Network devices using kernel driver
+===================================
+0000:02:01.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens33 drv=e1000 unused=vfio-pci,uio_pci_generic *Active*
+0000:02:02.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens34 drv=e1000 unused=vfio-pci,uio_pci_generic 
+
+No 'Baseband' devices detected
+==============================
+
+No 'Crypto' devices detected
+============================
+
+No 'DMA' devices detected
+=========================
+
+No 'Eventdev' devices detected
+==============================
+
+No 'Mempool' devices detected
+=============================
+
+No 'Compress' devices detected
+==============================
+
+No 'Misc (rawdev)' devices detected
+===================================
+
+No 'Regex' devices detected
+===========================
+
+testpmd: /usr/bin/dpdk-testpmd
+
+Usage: /usr/bin/dpdk-testpmd [options]
+
+EAL common options:
+  -c COREMASK         Hexadecimal bitmask of cores to run on
+  -l CORELIST         List of cores to run on
+                      The argument format is <c1>[-c2][,c3[-c4],...]
+                      where c1, c2, etc are core indexes between 0 and 128
+  --lcores COREMAP    Map lcore set to physical cpu set
+                      The argument format is
+                            '<lcores[@cpus]>[<,lcores[@cpus]>...]'
+                      lcores and cpus list are grouped by '(' and ')'
+                      Within the group, '-' is used for range separator,
+                      ',' is used for single number separator.
+                      '( )' can be omitted for single element group,
+                      '@' can be omitted if cpus and lcores have the same value
+  -s SERVICE COREMASK Hexadecimal bitmask of cores to be used as service cores
+  --main-lcore ID     Core ID that is used as main
+  --mbuf-pool-ops-name Pool ops name for mbuf to use
+  -n CHANNELS         Number of memory channels
+  -m MB               Memory to allocate (see also --socket-mem)
+  -r RANKS            Force number of memory ranks (don't detect)
+  -b, --block         Add a device to the blocked list.
+                      Prevent EAL from using this device. The argument
+                      format for PCI devices is <domain:bus:devid.func>.
+  -a, --allow         Add a device to the allow list.
+                      Only use the specified devices. The argument format
+                      for PCI devices is <[domain:]bus:devid.func>.
+                      This option can be present several times.
+                      [NOTE: allow cannot be used with block option]
+  --vdev              Add a virtual device.
+                      The argument format is <driver><id>[,key=val,...]
+                      (ex: --vdev=net_pcap0,iface=eth2).
+  --iova-mode   Set IOVA mode. 'pa' for IOVA_PA
+                      'va' for IOVA_VA
+  -d LIB.so|DIR       Add a driver or driver directory
+                      (can be used multiple times)
+  --vmware-tsc-map    Use VMware TSC map instead of native RDTSC
+  --proc-type         Type of this process (primary|secondary|auto)
+  --syslog            Set syslog facility
+  --log-level=<level> Set global log level
+  --log-level=<type-match>:<level>
+                      Set specific log level
+  --log-level=help    Show log types and levels
+  --trace=<regex-match>
+                      Enable trace based on regular expression trace name.
+                      By default, the trace is disabled.
+		      User must specify this option to enable trace.
+  --trace-dir=<directory path>
+                      Specify trace directory for trace output.
+                      By default, trace output will created at
+                      $HOME directory and parameter must be
+                      specified once only.
+  --trace-bufsz=<int>
+                      Specify maximum size of allocated memory
+                      for trace output for each thread. Valid
+                      unit can be either 'B|K|M' for 'Bytes',
+                      'KBytes' and 'MBytes' respectively.
+                      Default is 1MB and parameter must be
+                      specified once only.
+  --trace-mode=<o[verwrite] | d[iscard]>
+                      Specify the mode of update of trace
+                      output file. Either update on a file can
+                      be wrapped or discarded when file size
+                      reaches its maximum limit.
+                      Default mode is 'overwrite' and parameter
+                      must be specified once only.
+  -v                  Display version information on startup
+  -h, --help          This help
+  --in-memory   Operate entirely in memory. This will
+                      disable secondary process support
+  --base-virtaddr     Base virtual address
+  --telemetry   Enable telemetry support (on by default)
+  --no-telemetry   Disable telemetry support
+  --force-max-simd-bitwidth Force the max SIMD bitwidth
+
+EAL options for DEBUG use only:
+  --huge-unlink       Unlink hugepage files after init
+  --no-huge           Use malloc instead of hugetlbfs
+  --no-pci            Disable PCI
+  --no-hpet           Disable HPET
+  --no-shconf         No shared config (mmap'd files)
+
+EAL Linux options:
+  --socket-mem        Memory to allocate on sockets (comma separated values)
+  --socket-limit      Limit memory allocation on sockets (comma separated values)
+  --huge-dir          Directory where hugetlbfs is mounted
+  --file-prefix       Prefix for hugepage filenames
+  --create-uio-dev    Create /dev/uioX (usually done by hotplug)
+  --vfio-intr         Interrupt mode for VFIO (legacy|msi|msix)
+  --vfio-vf-token     VF token (UUID) shared between SR-IOV PF and VFs
+  --legacy-mem        Legacy memory mode (no dynamic allocation, contiguous segments)
+  --single-file-segments Put all hugepage memory in single files
+  --match-allocations Free hugepages exactly as allocated
+

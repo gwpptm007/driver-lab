@@ -1,0 +1,17 @@
+$ bash -c lspci -vv -s 0000:0b:00.0 2>/dev/null || lspci -s 0000:0b:00.0 -nn
+0b:00.0 Ethernet controller: VMware VMXNET3 Ethernet Controller (rev 01)
+	DeviceName: Ethernet2
+	Subsystem: VMware VMXNET3 Ethernet Controller
+	Physical Slot: 192
+	Control: I/O+ Mem+ BusMaster- SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx+
+	Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+	Interrupt: pin A routed to IRQ 19
+	Region 0: Memory at fd3fc000 (32-bit, non-prefetchable) [size=4K]
+	Region 1: Memory at fd3fd000 (32-bit, non-prefetchable) [size=4K]
+	Region 2: Memory at fd3fe000 (32-bit, non-prefetchable) [size=8K]
+	Region 3: I/O ports at 4000 [size=16]
+	Expansion ROM at fd300000 [virtual] [disabled] [size=64K]
+	Capabilities: <access denied>
+	Kernel driver in use: uio_pci_generic
+	Kernel modules: vmxnet3
+

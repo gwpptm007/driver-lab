@@ -1,3 +1,9 @@
 # records
 
-这里存放 `lab-vhost-user-basic` 的实验记录。
+测试机执行脚本后会在这里生成：
+
+```text
+YYYYMMDD_HHMMSS-vhost-user-basic/
+```
+
+请保留完整目录用于评审。

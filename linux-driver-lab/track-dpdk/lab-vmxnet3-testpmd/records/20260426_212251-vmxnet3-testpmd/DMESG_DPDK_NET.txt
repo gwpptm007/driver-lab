@@ -1,0 +1,2 @@
+$ bash -c dmesg | grep -Ei "dpdk|vfio|uio|vmxnet|iommu|huge|pci" | tail -n 200 || true
+dmesg: read kernel buffer failed: Operation not permitted
