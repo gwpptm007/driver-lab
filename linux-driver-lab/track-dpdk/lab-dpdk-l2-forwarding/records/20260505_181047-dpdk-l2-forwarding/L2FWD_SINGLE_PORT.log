@@ -1,0 +1,63 @@
+# L2FWD_SINGLE_PORT
+
+## command
+# L2FWD_SINGLE_PORT_COMMAND
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/app/build/l2fwd-lite -l 0-1 -n 4 --file-prefix l2fwd_lite -a 0000:0b:00.0 -- --run-seconds 15 --stats-period 2 --burst-size 32 --promisc 1 
+
+## run
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /var/run/dpdk/l2fwd_lite/mp_socket
+EAL: Selected IOVA mode 'PA'
+EAL: No available 1048576 kB hugepages reported
+EAL: Probe PCI driver: net_vmxnet3 (15ad:07b0) device: 0000:0b:00.0 (socket 0)
+TELEMETRY: No legacy callbacks, legacy socket not created
+l2fwd-lite config: nb_mbuf=8192 mbuf_cache=250 rx_desc=1024 tx_desc=1024 burst=32 promisc=1
+initializing port 0
+port 0 started: rx_desc=1024 tx_desc=1024 socket=0 driver=net_vmxnet3
+port 0 MAC: 00:0C:29:F8:F6:82
+available/initialized ports: 1
+notice: only one port is available; running RX/free smoke mode, no L2 peer forwarding.
+enter forwarding loop: run_seconds=15 stats_period=2 burst=32 lcore=0
+
+==== l2fwd-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+===================================
+
+==== l2fwd-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+===================================
+
+==== l2fwd-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+===================================
+
+==== l2fwd-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+===================================
+
+==== l2fwd-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+===================================
+
+==== l2fwd-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+===================================
+
+==== l2fwd-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+===================================
+run_seconds reached, stopping...
+
+==== l2fwd-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+===================================
+
+==== rte_eth_stats ====
+port 0: ipackets=0 opackets=0 ibytes=0 obytes=0 imissed=0 ierrors=0 oerrors=0
+=======================
+stopping port 0
+bye
+
+rc=0

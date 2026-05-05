@@ -1,19 +1,32 @@
 # SUMMARY
 
-## 目标
+## Lab
+
+lab-dpdk-l2-forwarding
+
+## Environment
+
+- Guest:
+- Kernel:
+- DPDK version:
+- DPDK PCI:
+- Driver:
+
+## Result
+
+- PASS_SMOKE / PASS_FORWARDING / FAIL:
+
+## Key evidence
+
+- BUILD:
+- Port init:
+- Forwarding loop:
+- Stats:
+
+## Issues
+
 - 
 
-## 环境
-- 
+## Next
 
-## 命令
 - 
-
-## 结果
-- 
-
-## 问题
-- 
-
-## 下一步
--

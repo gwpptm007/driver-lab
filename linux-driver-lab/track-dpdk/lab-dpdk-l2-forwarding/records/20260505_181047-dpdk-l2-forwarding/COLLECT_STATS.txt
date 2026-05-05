@@ -1,0 +1,122 @@
+# COLLECT_STATS
+
+## env
+LAB_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding
+APP_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/app
+BUILD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/app/build
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/app/build/l2fwd-lite
+DPDK_IF=ens192
+DPDK_PCI=0000:0b:00.0
+DPDK_PCI_1=
+DPDK_DRIVER=uio_pci_generic
+MGMT_IF=ens33
+MGMT_PCI=0000:02:01.0
+HUGEPAGES=1024
+HUGEPAGE_MOUNT=/mnt/huge
+L2FWD_RUN_SECONDS=15
+L2FWD_STATS_PERIOD=2
+L2FWD_LCORES=0-1
+L2FWD_MEMORY_CHANNELS=4
+L2FWD_FILE_PREFIX=l2fwd_lite
+L2FWD_BURST_SIZE=32
+L2FWD_PROMISC=1
+L2FWD_VDEV0=net_null0
+L2FWD_VDEV1=net_null1
+
+## hugepages
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+FileHugePages:         0 kB
+HugePages_Total:    1024
+HugePages_Free:     1013
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:         2097152 kB
+
+## interfaces
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens33            UP             192.168.65.135/24 fe80::6e4d:b76b:3e79:cf8d/64 
+ens34            UP             
+
+## devbind
+
+Network devices using DPDK-compatible driver
+============================================
+0000:0b:00.0 'VMXNET3 Ethernet Controller 07b0' drv=uio_pci_generic unused=vmxnet3
+
+Network devices using kernel driver
+===================================
+0000:02:01.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens33 drv=e1000 unused=uio_pci_generic *Active*
+0000:02:02.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens34 drv=e1000 unused=uio_pci_generic 
+
+No 'Baseband' devices detected
+==============================
+
+No 'Crypto' devices detected
+============================
+
+No 'DMA' devices detected
+=========================
+
+No 'Eventdev' devices detected
+==============================
+
+No 'Mempool' devices detected
+=============================
+
+No 'Compress' devices detected
+==============================
+
+No 'Misc (rawdev)' devices detected
+===================================
+
+No 'Regex' devices detected
+===========================
+
+## l2fwd logs grep
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:8:EAL: Detected CPU lcores: 8
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:9:EAL: Detected NUMA nodes: 1
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:10:EAL: Detected shared linkage of DPDK
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:11:EAL: Multi-process socket /var/run/dpdk/l2fwd_lite/mp_socket
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:12:EAL: Selected IOVA mode 'PA'
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:13:EAL: No available 1048576 kB hugepages reported
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:14:EAL: Probe PCI driver: net_vmxnet3 (15ad:07b0) device: 0000:0b:00.0 (socket 0)
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:16:l2fwd-lite config: nb_mbuf=8192 mbuf_cache=250 rx_desc=1024 tx_desc=1024 burst=32 promisc=1
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:18:port 0 started: rx_desc=1024 tx_desc=1024 socket=0 driver=net_vmxnet3
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:20:available/initialized ports: 1
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:21:notice: only one port is available; running RX/free smoke mode, no L2 peer forwarding.
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:22:enter forwarding loop: run_seconds=15 stats_period=2 burst=32 lcore=0
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:24:==== l2fwd-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:25:port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:28:==== l2fwd-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:29:port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:32:==== l2fwd-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:33:port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:36:==== l2fwd-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:37:port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:40:==== l2fwd-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:41:port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:44:==== l2fwd-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:45:port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:48:==== l2fwd-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:49:port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:53:==== l2fwd-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:54:port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 no_peer_drop=0
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:57:==== rte_eth_stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:58:port 0: ipackets=0 opackets=0 ibytes=0 obytes=0 imissed=0 ierrors=0 oerrors=0
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/records/20260505_181047-dpdk-l2-forwarding/L2FWD_SINGLE_PORT.log:61:bye
+
+## dmesg dpdk/net/uio/vfio recent
+dmesg unavailable without sudo or kernel.dmesg_restrict=1
+
+## record files
+BUILD.log
+COLLECT_STATS.txt
+COMMANDS.md
+ENV_CHECK.txt
+L2FWD_SINGLE_PORT_COMMAND.txt
+L2FWD_SINGLE_PORT.log
+PREPARE_VMXNET3.txt
+RESULT.md
+SUMMARY.md

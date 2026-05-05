@@ -1,0 +1,63 @@
+# POST_CHECK
+date=2026-05-05 17:36:51
+
+## Lab defaults
+LAB_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-virtio-user-vhost
+MGMT_IF=ens33
+MGMT_PCI=0000:02:01.0
+HUGEPAGES=1024
+HUGEPAGE_MOUNT=/mnt/huge
+VHOST_SOCKET=/tmp/dpdk-vhost-user0
+VHOST_QUEUES=1
+VHOST_CLIENT_MODE=0
+VIRTIO_SERVER_MODE=0
+BACKEND_RUNTIME=28
+FRONTEND_RUNTIME=20
+PAIR_WARMUP_SECONDS=6
+BACKEND_CORES=0-1
+FRONTEND_CORES=2-3
+TESTPMD_MEM_CHANNELS=4
+BACKEND_FILE_PREFIX=vhost_backend
+FRONTEND_FILE_PREFIX=virtio_frontend
+TESTPMD_STATS_PERIOD=2
+BACKEND_FORWARD_MODE=rxonly
+FRONTEND_FORWARD_MODE=txonly
+BACKEND_PORT_TOPOLOGY=chained
+FRONTEND_PORT_TOPOLOGY=chained
+NO_PCI=1
+BACKEND_VDEV_EXTRA=
+FRONTEND_VDEV_EXTRA=
+BACKEND_APP_EXTRA=
+FRONTEND_APP_EXTRA=
+
+$ bash -c grep Huge /proc/meminfo || true
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+FileHugePages:         0 kB
+HugePages_Total:    1024
+HugePages_Free:     1014
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:         2097152 kB
+$ bash -c mount | grep -E "hugetlbfs|/mnt/huge" || true
+hugetlbfs on /dev/hugepages type hugetlbfs (rw,relatime,pagesize=2M)
+nodev on /mnt/huge type hugetlbfs (rw,relatime,pagesize=2M)
+$ bash -c ls -l '/tmp/dpdk-vhost-user0' 2>/dev/null || true
+$ bash -c ss -xl 2>/dev/null | grep -E "vhost|dpdk|sock" || true
+u_str LISTEN 0      1                 /run/irqbalance/irqbalance988.sock 16199            * 0          
+u_str LISTEN 0      4096                /run/user/1000/pk-debconf-socket 27787            * 0          
+u_str LISTEN 0      4096                 /run/user/128/pk-debconf-socket 16383            * 0          
+u_str LISTEN 0      4096       /run/user/1000/snapd-session-agent.socket 27791            * 0          
+u_str LISTEN 0      4096        /run/user/128/snapd-session-agent.socket 25603            * 0          
+u_str LISTEN 0      4096   /run/user/1000/speech-dispatcher/speechd.sock 27793            * 0          
+u_str LISTEN 0      4096    /run/user/128/speech-dispatcher/speechd.sock 25605            * 0          
+u_str LISTEN 0      4096                             /run/cups/cups.sock 19295            * 0          
+u_str LISTEN 0      4096                               /run/acpid.socket 17403            * 0          
+u_str LISTEN 0      4096                        /run/avahi-daemon/socket 17405            * 0          
+u_str LISTEN 0      4096                     /run/dbus/system_bus_socket 20481            * 0          
+u_str LISTEN 0      4096                               /run/snapd.socket 20483            * 0          
+u_str LISTEN 0      4096                          /run/snapd-snap.socket 20485            * 0          
+$ bash -c ps -ef | grep -E "dpdk-testpmd|testpmd|vhost_backend|virtio_frontend" | grep -v grep || true
+$ bash -c dmesg | grep -Ei "vhost|virtio|huge|vfio|uio|dpdk" | tail -n 120 || true
+dmesg: read kernel buffer failed: Operation not permitted

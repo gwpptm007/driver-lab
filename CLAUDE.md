@@ -4,19 +4,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Linux driver learning laboratory organized into 35 days (day01-day35) covering 5 weeks (W1-W5) of progressive driver development:
+This is a Linux driver learning laboratory with multiple progressive tracks:
 
-- **W1 (day01-07)**: Character device basics (miscdevice, ioctl, sysfs, debugfs, waitqueue/workqueue, regression testing)
-- **W2 (day08-14)**: Embedded driver patterns (platform_driver, Device Tree, IRQ, regmap, ftrace, bring-up checklist)
-- **W3 (day15-21)**: Kernel trimming and porting (defconfig, rootfs, startup chain, regression)
-- **W4 (day22-28)**: PCIe fundamentals (ivshmem-doorbell device, PCI enumeration, BAR/MMIO, MSI interrupts, user tools)
-- **W5 (day29-35)**: DMA + performance analysis (QEMU EDU device, dma_alloc_coherent, mmap, benchmarking, perf, ftrace, stability)
+| Track | Path | Build |
+|-------|------|-------|
+| `foundation/` | day01-day35 (W1-W5): miscdevice → platform/IRQ → PCIe → DMA/performance | `build.sh` per day |
+| `netdev/` | stage00-stage14: net_device/skb/NAPI → virtio-net → XDP | `make` per stage |
+| `track-dpdk/` | DPDK user-space fastpath (vmxnet3 PMD → vhost-user → virtio-user → fastpath C app) | `meson + ninja` |
+| `track-real-driver/` | virtio-net source code dive | (analysis only) |
+| `track-virtual-net/` | tap/bridge/vhost mechanisms | (analysis only) |
 
 ## Build and Test Commands
 
-### Standard Build Pattern (x86)
-
-Each day directory typically contains a `build.sh` script that performs the complete experiment chain:
+### Foundation Days (W1-W5)
 
 ```bash
 cd linux-driver-lab/foundation/dayXX
@@ -24,13 +24,7 @@ chmod +x build.sh
 ./build.sh
 ```
 
-The build.sh script:
-1. Compiles the driver module (`demo.ko`)
-2. Compiles user-space test programs if present (`test.c`, `test_ioctl.c`)
-3. Prepares minimal rootfs with BusyBox
-4. Generates `/init` script
-5. Packages `rootfs.img` via `cpio | gzip`
-6. Launches QEMU
+`build.sh` executes: driver compile → rootfs prep → QEMU launch. QEMU exit: `Ctrl+a x` (quit) or `Ctrl+a c` then `quit` (monitor).
 
 ### Manual Module Build
 
@@ -39,40 +33,36 @@ make KDIR=/path/to/kernel/build/dir clean
 make KDIR=/path/to/kernel/build/dir
 ```
 
-### QEMU Exit
+### Track-DPDK (meson + ninja)
 
-When QEMU runs with `-nographic` + `console=ttyS0`, exit using:
-- `Ctrl+a`, then `x` to quit directly
-- `Ctrl+a`, then `c` to enter QEMU monitor, type `quit`
+```bash
+cd track-dpdk/project-user-space-fastpath
+./scripts/01_build_app.sh        # meson compile
+sudo ./scripts/03_run_fastpath_single_port.sh  # run
+```
+
+### Netdev Stages
+
+```bash
+cd linux-driver-lab/netdev/stageXX
+make KDIR=/path/to/kernel/build/dir
+```
 
 ## Environment Dependencies
-
-The repository expects a sibling directory structure:
 
 ```
 driver-lab/
 ├── linux-driver-lab/       # This repository
-└── kernel-src/
+└── kernel-src/             # External (sibling directory)
     ├── linux-5.15.10/
-    │   ├── build/x86/      # x86 kernel build directory
-    │   ├── build/arm64/    # arm64 kernel build directory
-    │   └── output/
-    │       ├── x86/bzImage
-    │       └── arm64/Image
-    └── busybox-1.36.1/
-        └── output/
-            ├── x86/_install/bin/busybox
-            └── arm64/_install/bin/busybox
+    │   ├── build/x86/      # KDIR for module build
+    │   └── output/x86/bzImage  # KERNEL_IMG
+    └── busybox-1.36.1/output/x86/_install  # BUSYBOX_INSTALL
 ```
 
-Key paths (configurable via environment variables):
-- `KDIR`: Kernel build directory (`../kernel-src/linux-5.15.10/build/x86` or `/build/arm64`)
-- `KERNEL_IMG`: Kernel image (`../kernel-src/linux-5.15.10/output/x86/bzImage` or `/arm64/Image`)
-- `BUSYBOX_INSTALL`: BusyBox installation (`../kernel-src/busybox-1.36.1/output/x86/_install`)
+Key env vars: `KDIR`, `KERNEL_IMG`, `BUSYBOX_INSTALL`.
 
-### Cross-compilation (ARM64)
-
-For ARM64 experiments (day08-14), set cross-compiler variables:
+### ARM64 Cross-compilation (W2, stage06)
 
 ```bash
 export ARCH=arm64
@@ -80,139 +70,101 @@ export CROSS_COMPILE=aarch64-linux-gnu-
 ./build.sh
 ```
 
-Required tools: `qemu-system-aarch64`, `dtc` (device-tree-compiler), `aarch64-linux-gnu-gcc`
+Required: `qemu-system-aarch64`, `dtc`, `aarch64-linux-gnu-gcc`.
 
 ## Code Architecture
 
-### Standard Day Directory Structure
+### Foundation Day Structure
 
 ```
 dayXX/
-├── demo.c                 # Main driver source
-├── Makefile               # Module compilation rules
-├── build.sh               # Complete experiment script
-├── test.c / test_ioctl.c  # User-space test programs
-├── demo_ioctl.h           # ioctl command definitions
-├── README.md              # Day-specific learning goals and tasks
-├── START_HERE.md          # Quick start guide (later weeks)
-├── docs/                  # Detailed documentation (later weeks)
-├── records/               # Raw evidence/logs (later weeks)
-├── output/                # Processed results (later weeks)
-└── rootfs/                # Temporary rootfs directory (generated)
+├── demo.c                 # Driver source
+├── Makefile               # Module build rules
+├── build.sh               # Full experiment + QEMU
+├── test.c / test_ioctl.c  # Userspace test programs
+├── demo_ioctl.h           # Shared ioctl definitions
+├── README.md              # Learning goals
+├── docs/                  # Detailed documentation
+├── records/               # Raw evidence/logs (timestamped)
+└── output/                # Processed results
 ```
 
-### Driver Patterns
+### Driver Patterns by Week
 
-**Early days (01-07)**: Use `miscdevice` for simple character devices:
-- `misc_register()` for device registration
-- `struct file_operations` for VFS callbacks
-- `/dev/demo` device node created automatically
+| Week | Days | Pattern |
+|------|------|---------|
+| W1 | 01-07 | `miscdevice` + `misc_register()` |
+| W2 | 08-14 | `platform_driver` + Device Tree + `of_property_read_*` |
+| W4 | 22-28 | `pci_register_driver` + BAR/MMIO + MSI |
+| W5 | 29-35 | `dma_alloc_coherent` + `mmap` + perf/ftrace |
 
-**W2 (08-14)**: Platform driver model:
-- `platform_driver_register()` with `probe`/`remove`
-- `of_match_ptr` for Device Tree matching
-- `of_property_read_*` for reg/irq parsing
-- `request_irq()` with top-half handlers
-- `workqueue` for bottom-half deferred work
-- `regmap` for register abstraction
+### Netdev Stage Structure
 
-**W4 (22-28)**: PCI driver model:
-- `pci_register_driver()` with `pci_driver` struct
-- `pci_enable_device()`, `pci_request_regions()`, `pci_iomap()`
-- BAR resource management and MMIO access
-- `pci_alloc_irq_vectors()`, `request_irq()` for MSI
-- User tools for device interaction
+```
+stageXX/
+├── demo.c                 # Netdev driver source
+├── Makefile               # Uses kernel build system
+├── test.c                 # Userspace test (optional)
+├── README.md              # Stage-specific goals
+└── scripts/               # Helper scripts (optional)
+```
 
-**W5 (29-35)**: DMA and performance:
-- `dma_set_mask_and_coherent()`
-- `dma_alloc_coherent()` for DMA buffers
-- `mmap()` file operation for zero-copy userspace access
-- Benchmarking with throughput/latency metrics
-- `perf record/report` for hotspots
-- `ftrace function_graph` for call path analysis
+### Track-DPDK Structure
+
+```
+track-dpdk/
+├── lab-vmxnet3-testpmd/   # DPDK environment validation
+├── lab-vhost-user-basic/  # vhost-user socket experiments
+├── lab-virtio-user-vhost/ # virtio-user + vhost-user pairing
+├── lab-dpdk-l2-forwarding/# L2fwd C app (meson build)
+├── project-user-space-fastpath/  # fastpath C app (meson build)
+│   └── app/main.c         # EAL init, mbuf pool, rx_burst/tx_burst, classify/rewrite
+└── docs/                  # Consolidated documentation
+```
+
+### Device Tree Injection (W2 / stage05-06)
+
+ARM64 experiments use `inject_virt_dt.py`:
+1. `qemu-system-aarch64 -machine virt,dumpdtb=virt-base.dtb`
+2. `dtc -I dtb -O dts -o virt-base.dts`
+3. `python inject_virt_dt.py --input virt-base.dts --fragment demo.fragment.dtsi --output virt-new.dts`
+4. `dtc -I dts -O dtb -o virt-new.dtb`
 
 ## Key Implementation Details
 
-### Device Tree Injection (day08-14)
+### Module Unloading Safety
 
-ARM64 experiments use `inject_virt_dt.py` to inject test device fragments:
-1. Dump QEMU virt base DTB: `qemu-system-aarch64 -machine virt,dumpdtb=virt-base.dtb`
-2. Decompile: `dtc -I dtb -O dts -o virt-base.dts`
-3. Inject fragment: `python inject_virt_dt.py --input virt-base.dts --fragment demo.fragment.dtsi --output virt-new.dts`
-4. Recompile: `dtc -I dts -O dtb -o virt-new.dtb`
+Symmetric resource management: free in reverse order of allocation. Test with `insmod/rmmod` cycles (200-1000 iterations).
 
-### Evidence Collection Pattern
+### Evidence Collection
 
-From day17 onward, maintain organized evidence:
-- `records/`: Raw outputs (dmesg, lspci, trace logs, benchmark results)
-- `output/`: Processed summaries and analysis
-- Each run gets timestamped records (e.g., `compare-20260314-231137.md`)
+From day17/W3 onward:
+- `records/`: Raw outputs (dmesg, lspci, trace logs, benchmarks)
+- `output/`: Processed summaries, timestamped (`compare-20260314-231137.md`)
 
 ### Rootfs Generation
 
-Always use static-linked BusyBox for minimal rootfs. Check with `file` command:
-```bash
-file path/to/busybox  # Should NOT show "dynamically linked"
-```
+Static-linked BusyBox required. Check: `file busybox` shows "statically linked". Package: `find . | cpio -o -H newc | gzip -9 > ../rootfs.img`
 
-Rootfs packaging:
-```bash
-cd rootfs
-find . | cpio -o -H newc | gzip -9 > ../rootfs.img
-```
+## Documentation Structure (`docs/`)
 
-## Testing and Regression
+After consolidation, docs are organized as:
 
-### Basic Verification Steps
+| File | Content |
+|------|---------|
+| `01_PROGRAMS.md` | Current phase, track positioning, next steps |
+| `02_EXPERT_REVIEW.md` | Expert review conclusions and execution plans |
+| `03_PROGRESS.md` | Current progress and completion matrix |
+| `04_ARCHITECTURE.md` | Architecture layering and completion matrix |
+| `05_START_HERE.md` | Quick start and GitHub usage |
+| `06_TEST_GUIDE.md` | Test record templates |
+| `07_FOUNDATION_REVIEWS.md` | W1-W5 week reviews and plans |
 
-1. Check module loaded: `lsmod | grep demo`
-2. Check device node: `ls -l /dev/demo`
-3. Verify functionality: `echo hello > /dev/demo` (varies by day)
-4. Check kernel logs: `dmesg | tail`
-5. Verify no Oops/warning/panic
+### Recommended Reading Order
 
-### Regression Testing
-
-- Day06 includes regression scripts for insmod/rmmod cycling and concurrent stress testing
-- W3 focuses on baseline freezing and automated regression
-- Use scripts in each day for standardized testing when available
-
-## Important Development Notes
-
-### Build Script Design
-
-The `build.sh` scripts are designed to be the single entry point for each day's experiment. They:
-- Handle relative path resolution to support different repository layouts
-- Support environment variable overrides (KDIR, KERNEL_IMG, BUSYBOX_INSTALL)
-- Detect and use static-linked BusyBox automatically
-- Provide clear error messages with hints for missing dependencies
-
-### Module Unloading Safety
-
-Always implement symmetric resource management:
-- What's allocated in `probe/init` must be freed in `remove/exit`
-- Order: free in reverse order of allocation
-- Test with `insmod/rmmod` cycles (200-1000 iterations) for stability
-
-### Code Organization
-
-- Driver source: `demo.c` or descriptive names (`demo_pdrv.c`, `demo_irq.c`)
-- ioctl definitions: `demo_ioctl.h` shared with userspace test programs
-- Test programs: compile with `gcc -static` for minimal rootfs compatibility
-
-### Reading Order for New Users
-
-For understanding the project structure and learning path:
-1. `linux-driver-lab/START_HERE_CURRENT.md` - Current project status and navigation
+1. `linux-driver-lab/START_HERE_CURRENT.md` - Current status
 2. `linux-driver-lab/README.md` - Overall roadmap
-3. `linux-driver-lab/foundation/README.md` - Foundation learning path
-4. `linux-driver-lab/docs/PROGRESS.md` - Current progress and open items
-5. Individual `foundation/dayXX/README.md` files for specific topics
-
-### W4-W5 Integration
-
-W4 (PCIe basics with ivshmem-doorbell) and W5 (DMA/performance with QEMU EDU) are designed as complementary:
-- W4: PCI enumeration, BAR/MMIO, MSI interrupts, remove symmetry
-- W5: DMA coherent buffers, mmap zero-copy, benchmarking, perf/ftrace analysis, stability
-
-The evidence collection pattern from W3 should be carried forward into W4/W5.
+3. `foundation/README.md` - Day01-35 learning path
+4. `netdev/README.md` - Stage00-14 network driver主线
+5. `track-dpdk/README.md` - DPDK user-space networking
+6. `docs/03_PROGRESS.md` - Current progress and open items

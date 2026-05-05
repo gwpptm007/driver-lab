@@ -1,0 +1,147 @@
+# ENV_CHECK
+
+## project env
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath
+APP_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app
+BUILD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build/fastpath-lite
+DPDK_IF=ens192
+DPDK_PCI=0000:0b:00.0
+DPDK_PCI_1=
+DPDK_DRIVER=uio_pci_generic
+MGMT_IF=ens33
+MGMT_PCI=0000:02:01.0
+HUGEPAGES=1024
+HUGEPAGE_MOUNT=/mnt/huge
+FASTPATH_LCORES=0-1
+FASTPATH_MEMORY_CHANNELS=4
+FASTPATH_FILE_PREFIX=fastpath_lite
+FASTPATH_RUN_SECONDS=20
+FASTPATH_STATS_PERIOD=2
+FASTPATH_BURST_SIZE=32
+FASTPATH_PROMISC=1
+FASTPATH_UDP_ONLY=1
+FASTPATH_SWAP_MAC=1
+FASTPATH_REWRITE_ENABLE=0
+FASTPATH_EXTRA_APP_ARGS=
+FASTPATH_VDEV0=net_null0
+FASTPATH_VDEV1=net_null1
+
+## OS
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.5 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+
+Linux wq7-virtual-machine 6.8.0-110-generic #110~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 27 12:43:08 UTC  x86_64 x86_64 x86_64 GNU/Linux
+
+## CPU
+8
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           45 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  8
+On-line CPU(s) list:                     0-7
+Vendor ID:                               AuthenticAMD
+Model name:                              AMD Ryzen 9 7945HX with Radeon Graphics
+CPU family:                              25
+Model:                                   97
+Thread(s) per core:                      1
+Core(s) per socket:                      4
+Socket(s):                               2
+Stepping:                                2
+BogoMIPS:                                4990.63
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext ssbd ibrs ibpb ibrs_enhanced vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves user_shstk avx512_bf16 clzero wbnoinvd arat npt svm_lock nrip_save vmcb_clean flushbyasid decodeassists avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid overflow_recov succor fsrm flush_l1d
+Virtualization:                          AMD-V
+Hypervisor vendor:                       VMware
+Virtualization type:                     full
+L1d cache:                               256 KiB (8 instances)
+L1i cache:                               256 KiB (8 instances)
+L2 cache:                                8 MiB (8 instances)
+L3 cache:                                64 MiB (2 instances)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-7
+Vulnerability Gather data sampling:      Not affected
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             Not affected
+Vulnerability L1tf:                      Not affected
+Vulnerability Mds:                       Not affected
+
+## commands
+gcc: /usr/bin/gcc
+pkg-config: /usr/bin/pkg-config
+meson: /usr/bin/meson
+ninja: /usr/bin/ninja
+make: /usr/bin/make
+python3: /usr/bin/python3
+ip: /usr/sbin/ip
+lspci: /usr/bin/lspci
+libdpdk: 21.11.9
+dpdk-devbind: /usr/bin/dpdk-devbind.py
+
+## hugepages
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+FileHugePages:         0 kB
+HugePages_Total:    1024
+HugePages_Free:     1013
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:         2097152 kB
+hugetlbfs on /dev/hugepages type hugetlbfs (rw,relatime,pagesize=2M)
+nodev on /mnt/huge type hugetlbfs (rw,relatime,pagesize=2M)
+
+## network
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens33            UP             192.168.65.135/24 fe80::6e4d:b76b:3e79:cf8d/64 
+ens34            UP             
+
+## PCI
+02:01.0 Ethernet controller [0200]: Intel Corporation 82545EM Gigabit Ethernet Controller (Copper) [8086:100f] (rev 01)
+02:02.0 Ethernet controller [0200]: Intel Corporation 82545EM Gigabit Ethernet Controller (Copper) [8086:100f] (rev 01)
+0b:00.0 Ethernet controller [0200]: VMware VMXNET3 Ethernet Controller [15ad:07b0] (rev 01)
+
+## dpdk-devbind status
+
+Network devices using DPDK-compatible driver
+============================================
+0000:0b:00.0 'VMXNET3 Ethernet Controller 07b0' drv=uio_pci_generic unused=vmxnet3
+
+Network devices using kernel driver
+===================================
+0000:02:01.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens33 drv=e1000 unused=uio_pci_generic *Active*
+0000:02:02.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens34 drv=e1000 unused=uio_pci_generic 
+
+No 'Baseband' devices detected
+==============================
+
+No 'Crypto' devices detected
+============================
+
+No 'DMA' devices detected
+=========================
+
+No 'Eventdev' devices detected
+==============================
+
+No 'Mempool' devices detected
+=============================
+
+No 'Compress' devices detected
+==============================
+
+No 'Misc (rawdev)' devices detected
+===================================
+
+No 'Regex' devices detected
+===========================

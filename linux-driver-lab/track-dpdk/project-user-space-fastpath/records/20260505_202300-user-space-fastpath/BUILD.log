@@ -1,0 +1,66 @@
+# BUILD
+
+## project env
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath
+APP_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app
+BUILD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build/fastpath-lite
+DPDK_IF=ens192
+DPDK_PCI=0000:0b:00.0
+DPDK_PCI_1=
+DPDK_DRIVER=uio_pci_generic
+MGMT_IF=ens33
+MGMT_PCI=0000:02:01.0
+HUGEPAGES=1024
+HUGEPAGE_MOUNT=/mnt/huge
+FASTPATH_LCORES=0-1
+FASTPATH_MEMORY_CHANNELS=4
+FASTPATH_FILE_PREFIX=fastpath_lite
+FASTPATH_RUN_SECONDS=20
+FASTPATH_STATS_PERIOD=2
+FASTPATH_BURST_SIZE=32
+FASTPATH_PROMISC=1
+FASTPATH_UDP_ONLY=1
+FASTPATH_SWAP_MAC=1
+FASTPATH_REWRITE_ENABLE=0
+FASTPATH_EXTRA_APP_ARGS=
+FASTPATH_VDEV0=net_null0
+FASTPATH_VDEV1=net_null1
+
+## dependency check
+/usr/bin/meson
+/usr/bin/ninja
+/usr/bin/pkg-config
+21.11.9
+
+## make
+make: Entering directory '/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app'
+rm -rf build
+meson setup build --wipe || meson setup build
+Directory does not contain a valid build tree:
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build
+The Meson build system
+Version: 0.61.2
+Source dir: /home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app
+Build dir: /home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build
+Build type: native build
+Project name: fastpath-lite
+Project version: undefined
+C compiler for the host machine: cc (gcc 11.4.0 "cc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0")
+C linker for the host machine: cc ld.bfd 2.38
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Found pkg-config: /usr/bin/pkg-config (0.29.2)
+Run-time dependency libdpdk found: YES 21.11.9
+Build targets in project: 1
+
+Found ninja-1.10.1 at /usr/bin/ninja
+ninja -C build
+ninja: Entering directory `build'
+[1/2] Compiling C object fastpath-lite.p/main.c.o
+[2/2] Linking target fastpath-lite
+make: Leaving directory '/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app'
+
+## binary
+-rwxrwxr-x 1 wq7 wq7 220K  5月  5 20:23 /home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build/fastpath-lite
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build/fastpath-lite: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=cbe23dcd010c2f12a89e5d7be398f033cd5d5887, for GNU/Linux 3.2.0, with debug_info, not stripped

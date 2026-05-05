@@ -1,0 +1,114 @@
+# PREPARE_VMXNET3
+
+## env
+LAB_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding
+APP_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/app
+BUILD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/app/build
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/app/build/l2fwd-lite
+DPDK_IF=ens192
+DPDK_PCI=0000:0b:00.0
+DPDK_PCI_1=
+DPDK_DRIVER=uio_pci_generic
+MGMT_IF=ens33
+MGMT_PCI=0000:02:01.0
+HUGEPAGES=1024
+HUGEPAGE_MOUNT=/mnt/huge
+L2FWD_RUN_SECONDS=15
+L2FWD_STATS_PERIOD=2
+L2FWD_LCORES=0-1
+L2FWD_MEMORY_CHANNELS=4
+L2FWD_FILE_PREFIX=l2fwd_lite
+L2FWD_BURST_SIZE=32
+L2FWD_PROMISC=1
+L2FWD_VDEV0=net_null0
+L2FWD_VDEV1=net_null1
+
+## setup hugepages
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+FileHugePages:         0 kB
+HugePages_Total:    1024
+HugePages_Free:     1014
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:         2097152 kB
+
+## load driver
+uio_pci_generic        12288  0
+uio                    28672  1 uio_pci_generic
+
+## before bind
+
+Network devices using DPDK-compatible driver
+============================================
+0000:0b:00.0 'VMXNET3 Ethernet Controller 07b0' drv=uio_pci_generic unused=vmxnet3
+
+Network devices using kernel driver
+===================================
+0000:02:01.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens33 drv=e1000 unused=uio_pci_generic *Active*
+0000:02:02.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens34 drv=e1000 unused=uio_pci_generic 
+
+No 'Baseband' devices detected
+==============================
+
+No 'Crypto' devices detected
+============================
+
+No 'DMA' devices detected
+=========================
+
+No 'Eventdev' devices detected
+==============================
+
+No 'Mempool' devices detected
+=============================
+
+No 'Compress' devices detected
+==============================
+
+No 'Misc (rawdev)' devices detected
+===================================
+
+No 'Regex' devices detected
+===========================
+
+## bring interface down if exists
+
+## bind 0000:0b:00.0 to uio_pci_generic
+Notice: 0000:0b:00.0 already bound to driver uio_pci_generic, skipping
+
+## after bind
+
+Network devices using DPDK-compatible driver
+============================================
+0000:0b:00.0 'VMXNET3 Ethernet Controller 07b0' drv=uio_pci_generic unused=vmxnet3
+
+Network devices using kernel driver
+===================================
+0000:02:01.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens33 drv=e1000 unused=uio_pci_generic *Active*
+0000:02:02.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens34 drv=e1000 unused=uio_pci_generic 
+
+No 'Baseband' devices detected
+==============================
+
+No 'Crypto' devices detected
+============================
+
+No 'DMA' devices detected
+=========================
+
+No 'Eventdev' devices detected
+==============================
+
+No 'Mempool' devices detected
+=============================
+
+No 'Compress' devices detected
+==============================
+
+No 'Misc (rawdev)' devices detected
+===================================
+
+No 'Regex' devices detected
+===========================

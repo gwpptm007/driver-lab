@@ -1,0 +1,2 @@
+# L2FWD_SINGLE_PORT_COMMAND
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/lab-dpdk-l2-forwarding/app/build/l2fwd-lite -l 0-1 -n 4 --file-prefix l2fwd_lite -a 0000:0b:00.0 -- --run-seconds 15 --stats-period 2 --burst-size 32 --promisc 1 

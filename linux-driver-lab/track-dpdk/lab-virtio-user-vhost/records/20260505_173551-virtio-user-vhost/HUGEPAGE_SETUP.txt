@@ -1,0 +1,34 @@
+# HUGEPAGE_SETUP
+date=2026-05-05 17:36:05
+
+## Before
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+FileHugePages:         0 kB
+HugePages_Total:    1024
+HugePages_Free:     1019
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:         2097152 kB
+hugetlbfs on /dev/hugepages type hugetlbfs (rw,relatime,pagesize=2M)
+nodev on /mnt/huge type hugetlbfs (rw,relatime,pagesize=2M)
+
+## Apply
+HUGEPAGES=1024
+HUGEPAGE_MOUNT=/mnt/huge
+
+## After
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+FileHugePages:         0 kB
+HugePages_Total:    1024
+HugePages_Free:     1019
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:         2097152 kB
+hugetlbfs on /dev/hugepages type hugetlbfs (rw,relatime,pagesize=2M)
+nodev on /mnt/huge type hugetlbfs (rw,relatime,pagesize=2M)
+Filesystem      Size  Used Avail Use% Mounted on
+nodev              0     0     0    - /mnt/huge

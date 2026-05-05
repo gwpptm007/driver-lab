@@ -1,0 +1,106 @@
+# COLLECT_STATS
+
+## date
+2026年 05月 05日 星期二 20:24:46 CST
+
+## project env
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath
+APP_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app
+BUILD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build/fastpath-lite
+DPDK_IF=ens192
+DPDK_PCI=0000:0b:00.0
+DPDK_PCI_1=
+DPDK_DRIVER=uio_pci_generic
+MGMT_IF=ens33
+MGMT_PCI=0000:02:01.0
+HUGEPAGES=1024
+HUGEPAGE_MOUNT=/mnt/huge
+FASTPATH_LCORES=0-1
+FASTPATH_MEMORY_CHANNELS=4
+FASTPATH_FILE_PREFIX=fastpath_lite
+FASTPATH_RUN_SECONDS=20
+FASTPATH_STATS_PERIOD=2
+FASTPATH_BURST_SIZE=32
+FASTPATH_PROMISC=1
+FASTPATH_UDP_ONLY=1
+FASTPATH_SWAP_MAC=1
+FASTPATH_REWRITE_ENABLE=0
+FASTPATH_EXTRA_APP_ARGS=
+FASTPATH_VDEV0=net_null0
+FASTPATH_VDEV1=net_null1
+
+## app binary
+-rwxrwxr-x 1 wq7 wq7 220K  5月  5 20:23 /home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build/fastpath-lite
+
+## hugepages
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+FileHugePages:         0 kB
+HugePages_Total:    1024
+HugePages_Free:     1013
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:         2097152 kB
+hugetlbfs on /dev/hugepages type hugetlbfs (rw,relatime,pagesize=2M)
+nodev on /mnt/huge type hugetlbfs (rw,relatime,pagesize=2M)
+
+## dpdk-devbind
+
+Network devices using DPDK-compatible driver
+============================================
+0000:0b:00.0 'VMXNET3 Ethernet Controller 07b0' drv=uio_pci_generic unused=vmxnet3
+
+Network devices using kernel driver
+===================================
+0000:02:01.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens33 drv=e1000 unused=uio_pci_generic *Active*
+0000:02:02.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens34 drv=e1000 unused=uio_pci_generic 
+
+No 'Baseband' devices detected
+==============================
+
+No 'Crypto' devices detected
+============================
+
+No 'DMA' devices detected
+=========================
+
+No 'Eventdev' devices detected
+==============================
+
+No 'Mempool' devices detected
+=============================
+
+No 'Compress' devices detected
+==============================
+
+No 'Misc (rawdev)' devices detected
+===================================
+
+No 'Regex' devices detected
+===========================
+
+## ip link
+lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
+ens33            UP             00:0c:29:f8:f6:6e <BROADCAST,MULTICAST,UP,LOWER_UP> 
+ens34            UP             00:0c:29:f8:f6:78 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+
+## recent app evidence
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:fastpath-lite config: nb_mbuf=8192 mbuf_cache=250 rx_desc=1024 tx_desc=1024 burst=32 run_seconds=20 stats_period=2
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:enter fastpath loop: run_seconds=20 stats_period=2 burst=32 lcore=0
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:==== fastpath-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:==== fastpath-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:==== fastpath-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:==== fastpath-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:==== fastpath-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:==== fastpath-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:==== fastpath-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:==== fastpath-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:==== fastpath-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:==== fastpath-lite software stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:==== rte_eth_stats ====
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/records/20260505_202300-user-space-fastpath/FASTPATH_SINGLE_PORT.log:bye
+
+## dmesg related
+dmesg: read kernel buffer failed: Operation not permitted

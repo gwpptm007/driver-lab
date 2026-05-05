@@ -1,19 +1,25 @@
 # SUMMARY
 
-## 目标
-- 
+## Lab
 
-## 环境
-- 
+lab-virtio-user-vhost
 
-## 命令
-- 
+## Result
 
-## 结果
-- 
+PASS / FAIL / PASS_WITH_WARN
 
-## 问题
-- 
+## Key Evidence
 
-## 下一步
--
+- ENV_CHECK.txt
+- HUGEPAGE_SETUP.txt
+- TESTPMD_COMMANDS.txt
+- TESTPMD_BACKEND.log
+- TESTPMD_FRONTEND.log
+- VHOST_SOCKET.txt
+- REVIEW_BUNDLE.md
+
+## Notes
+
+- RX/TX 为 0 是否正常：默认可接受，按 WARN 记录。
+- 是否影响物理网卡：不应影响，本实验使用 `--no-pci`。
+- 下一步：进入 `lab-dpdk-l2-forwarding`。

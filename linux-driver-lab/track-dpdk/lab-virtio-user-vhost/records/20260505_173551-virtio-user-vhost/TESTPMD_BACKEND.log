@@ -1,0 +1,378 @@
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /var/run/dpdk/vhost_backend/mp_socket
+EAL: Selected IOVA mode 'PA'
+EAL: No available 1048576 kB hugepages reported
+testpmd: create a new mbuf pool <mb_pool_0>: n=155456, size=2176, socket=0
+testpmd: preferred mempool ops selected: ring_mp_mc
+VHOST_CONFIG: vhost-user server: socket created, fd: 26
+VHOST_CONFIG: bind to /tmp/dpdk-vhost-user0
+Set rxonly packet forwarding mode
+Auto-start selected
+Configuring Port 0 (socket 0)
+Port 0: 56:48:4F:53:54:00
+Checking link statuses...
+Done
+No commandline core given, start packet forwarding
+rxonly packet forwarding - ports=1 - cores=1 - streams=1 - NUMA support enabled, MP allocation mode: native
+Logical Core 1 (socket 0) forwards packets on 1 streams:
+  RX P=0/Q=0 (socket 0) -> TX P=0/Q=0 (socket 0) peer=02:00:00:00:00:00
+
+  rxonly packet forwarding packets/burst=32
+  nb forwarding cores=1 - nb forwarding ports=1
+  port 0: RX queue number: 1 Tx queue number: 1
+    Rx offloads=0x0 Tx offloads=0x0
+    RX queue: 0
+      RX desc=0 - RX free threshold=0
+      RX threshold registers: pthresh=0 hthresh=0  wthresh=0
+      RX Offloads=0x0
+    TX queue: 0
+      TX desc=0 - TX free threshold=0
+      TX threshold registers: pthresh=0 hthresh=0  wthresh=0
+      TX offloads=0x0 - TX RS bit threshold=0
+[2J[1;1H
+Port statistics ====================================
+  ######################## NIC statistics for port 0  ########################
+  RX-packets: 0          RX-missed: 0          RX-bytes:  0
+  RX-errors: 0
+  RX-nombuf:  0         
+  TX-packets: 0          TX-errors: 0          TX-bytes:  0
+
+  Throughput (since last show)
+  Rx-pps:            0          Rx-bps:            0
+  Tx-pps:            0          Tx-bps:            0
+  ############################################################################
+VHOST_CONFIG: new vhost user connection is 213
+VHOST_CONFIG: new device, handle is 0, path is /tmp/dpdk-vhost-user0
+VHOST_CONFIG: read message VHOST_USER_SET_OWNER
+VHOST_CONFIG: read message VHOST_USER_GET_FEATURES
+VHOST_CONFIG: read message VHOST_USER_GET_PROTOCOL_FEATURES
+VHOST_CONFIG: read message VHOST_USER_SET_PROTOCOL_FEATURES
+VHOST_CONFIG: negotiated Vhost-user protocol features: 0x10009
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_CALL
+VHOST_CONFIG: vring call idx:0 file:214
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_CALL
+VHOST_CONFIG: vring call idx:1 file:215
+VHOST_CONFIG: read message VHOST_USER_SET_FEATURES
+VHOST_CONFIG: negotiated Virtio features: 0x950008000
+VHOST_CONFIG: read message VHOST_USER_SET_STATUS
+VHOST_CONFIG: New device status(0x0000000b):
+	-RESET: 0
+	-ACKNOWLEDGE: 1
+	-DRIVER: 1
+	-FEATURES_OK: 1
+	-DRIVER_OK: 0
+	-DEVICE_NEED_RESET: 0
+	-FAILED: 0
+VHOST_CONFIG: read message VHOST_USER_GET_STATUS
+VHOST_CONFIG: read message VHOST_USER_GET_STATUS
+VHOST_CONFIG: read message VHOST_USER_SET_MEM_TABLE
+VHOST_CONFIG: guest memory region size: 0x200000
+	 guest physical addr: 0x100200000
+	 guest virtual  addr: 0x100200000
+	 host  virtual  addr: 0x7378f9c00000
+	 mmap addr : 0x7378f9c00000
+	 mmap size : 0x200000
+	 mmap align: 0x200000
+	 mmap off  : 0x0
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_NUM
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_BASE
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ADDR
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_KICK
+VHOST_CONFIG: vring kick idx:0 file:217
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_NUM
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_BASE
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ADDR
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_KICK
+VHOST_CONFIG: vring kick idx:1 file:218
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ENABLE
+VHOST_CONFIG: set queue enable: 1 to qp idx: 0
+
+Port 0: queue state event
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ENABLE
+VHOST_CONFIG: set queue enable: 1 to qp idx: 1
+
+Port 0: queue state event
+VHOST_CONFIG: read message VHOST_USER_SET_STATUS
+VHOST_CONFIG: New device status(0x0000000f):
+	-RESET: 0
+	-ACKNOWLEDGE: 1
+	-DRIVER: 1
+	-FEATURES_OK: 1
+	-DRIVER_OK: 1
+	-DEVICE_NEED_RESET: 0
+	-FAILED: 0
+VHOST_CONFIG: virtio is now ready for processing.
+
+Port 0: link state change event
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ENABLE
+VHOST_CONFIG: set queue enable: 0 to qp idx: 0
+
+Port 0: queue state event
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ENABLE
+VHOST_CONFIG: set queue enable: 0 to qp idx: 1
+
+Port 0: queue state event
+VHOST_CONFIG: read message VHOST_USER_SET_MEM_TABLE
+VHOST_CONFIG: guest memory region size: 0x200000
+	 guest physical addr: 0x100200000
+	 guest virtual  addr: 0x100200000
+	 host  virtual  addr: 0x7378f9c00000
+	 mmap addr : 0x7378f9c00000
+	 mmap size : 0x200000
+	 mmap align: 0x200000
+	 mmap off  : 0x0
+VHOST_CONFIG: guest memory region size: 0x200000
+	 guest physical addr: 0x100400000
+	 guest virtual  addr: 0x100400000
+	 host  virtual  addr: 0x7378f9a00000
+	 mmap addr : 0x7378f9a00000
+	 mmap size : 0x200000
+	 mmap align: 0x200000
+	 mmap off  : 0x0
+VHOST_CONFIG: guest memory region size: 0x200000
+	 guest physical addr: 0x100600000
+	 guest virtual  addr: 0x100600000
+	 host  virtual  addr: 0x7378f9800000
+	 mmap addr : 0x7378f9800000
+	 mmap size : 0x200000
+	 mmap align: 0x200000
+	 mmap off  : 0x0
+VHOST_CONFIG: guest memory region size: 0x200000
+	 guest physical addr: 0x100800000
+	 guest virtual  addr: 0x100800000
+	 host  virtual  addr: 0x7378f9600000
+	 mmap addr : 0x7378f9600000
+	 mmap size : 0x200000
+	 mmap align: 0x200000
+	 mmap off  : 0x0
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ENABLE
+VHOST_CONFIG: set queue enable: 1 to qp idx: 0
+
+Port 0: queue state event
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ENABLE
+VHOST_CONFIG: set queue enable: 1 to qp idx: 1
+
+Port 0: queue state event
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ENABLE
+VHOST_CONFIG: set queue enable: 0 to qp idx: 0
+
+Port 0: queue state event
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ENABLE
+VHOST_CONFIG: set queue enable: 0 to qp idx: 1
+
+Port 0: queue state event
+VHOST_CONFIG: read message VHOST_USER_SET_MEM_TABLE
+VHOST_CONFIG: guest memory region size: 0x200000
+	 guest physical addr: 0x100200000
+	 guest virtual  addr: 0x100200000
+	 host  virtual  addr: 0x7378f9c00000
+	 mmap addr : 0x7378f9c00000
+	 mmap size : 0x200000
+	 mmap align: 0x200000
+	 mmap off  : 0x0
+VHOST_CONFIG: guest memory region size: 0x200000
+	 guest physical addr: 0x100400000
+	 guest virtual  addr: 0x100400000
+	 host  virtual  addr: 0x7378f9a00000
+	 mmap addr : 0x7378f9a00000
+	 mmap size : 0x200000
+	 mmap align: 0x200000
+	 mmap off  : 0x0
+VHOST_CONFIG: guest memory region size: 0x200000
+	 guest physical addr: 0x100600000
+	 guest virtual  addr: 0x100600000
+	 host  virtual  addr: 0x7378f9800000
+	 mmap addr : 0x7378f9800000
+	 mmap size : 0x200000
+	 mmap align: 0x200000
+	 mmap off  : 0x0
+VHOST_CONFIG: guest memory region size: 0x200000
+	 guest physical addr: 0x100800000
+	 guest virtual  addr: 0x100800000
+	 host  virtual  addr: 0x7378f9600000
+	 mmap addr : 0x7378f9600000
+	 mmap size : 0x200000
+	 mmap align: 0x200000
+	 mmap off  : 0x0
+VHOST_CONFIG: guest memory region size: 0x200000
+	 guest physical addr: 0x100a00000
+	 guest virtual  addr: 0x100a00000
+	 host  virtual  addr: 0x7378f9400000
+	 mmap addr : 0x7378f9400000
+	 mmap size : 0x200000
+	 mmap align: 0x200000
+	 mmap off  : 0x0
+VHOST_CONFIG: guest memory region size: 0x200000
+	 guest physical addr: 0x100c00000
+	 guest virtual  addr: 0x100c00000
+	 host  virtual  addr: 0x7378f9200000
+	 mmap addr : 0x7378f9200000
+	 mmap size : 0x200000
+	 mmap align: 0x200000
+	 mmap off  : 0x0
+VHOST_CONFIG: guest memory region size: 0x200000
+	 guest physical addr: 0x100e00000
+	 guest virtual  addr: 0x100e00000
+	 host  virtual  addr: 0x7378f9000000
+	 mmap addr : 0x7378f9000000
+	 mmap size : 0x200000
+	 mmap align: 0x200000
+	 mmap off  : 0x0
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ENABLE
+VHOST_CONFIG: set queue enable: 1 to qp idx: 0
+
+Port 0: queue state event
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ENABLE
+VHOST_CONFIG: set queue enable: 1 to qp idx: 1
+
+Port 0: queue state event
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ENABLE
+VHOST_CONFIG: set queue enable: 0 to qp idx: 0
+
+Port 0: queue state event
+VHOST_CONFIG: read message VHOST_USER_SET_VRING_ENABLE
+VHOST_CONFIG: set queue enable: 0 to qp idx: 1
+
+Port 0: queue state event
+[2J[1;1H
+Port statistics ====================================
+  ######################## NIC statistics for port 0  ########################
+  RX-packets: 0          RX-missed: 0          RX-bytes:  0
+  RX-errors: 0
+  RX-nombuf:  0         
+  TX-packets: 0          TX-errors: 0          TX-bytes:  0
+
+  Throughput (since last show)
+  Rx-pps:            0          Rx-bps:            0
+  Tx-pps:            0          Tx-bps:            0
+  ############################################################################
+[2J[1;1H
+Port statistics ====================================
+  ######################## NIC statistics for port 0  ########################
+  RX-packets: 0          RX-missed: 0          RX-bytes:  0
+  RX-errors: 0
+  RX-nombuf:  0         
+  TX-packets: 0          TX-errors: 0          TX-bytes:  0
+
+  Throughput (since last show)
+  Rx-pps:            0          Rx-bps:            0
+  Tx-pps:            0          Tx-bps:            0
+  ############################################################################
+[2J[1;1H
+Port statistics ====================================
+  ######################## NIC statistics for port 0  ########################
+  RX-packets: 0          RX-missed: 0          RX-bytes:  0
+  RX-errors: 0
+  RX-nombuf:  0         
+  TX-packets: 0          TX-errors: 0          TX-bytes:  0
+
+  Throughput (since last show)
+  Rx-pps:            0          Rx-bps:            0
+  Tx-pps:            0          Tx-bps:            0
+  ############################################################################
+[2J[1;1H
+Port statistics ====================================
+  ######################## NIC statistics for port 0  ########################
+  RX-packets: 0          RX-missed: 0          RX-bytes:  0
+  RX-errors: 0
+  RX-nombuf:  0         
+  TX-packets: 0          TX-errors: 0          TX-bytes:  0
+
+  Throughput (since last show)
+  Rx-pps:            0          Rx-bps:            0
+  Tx-pps:            0          Tx-bps:            0
+  ############################################################################
+[2J[1;1H
+Port statistics ====================================
+  ######################## NIC statistics for port 0  ########################
+  RX-packets: 0          RX-missed: 0          RX-bytes:  0
+  RX-errors: 0
+  RX-nombuf:  0         
+  TX-packets: 0          TX-errors: 0          TX-bytes:  0
+
+  Throughput (since last show)
+  Rx-pps:            0          Rx-bps:            0
+  Tx-pps:            0          Tx-bps:            0
+  ############################################################################
+[2J[1;1H
+Port statistics ====================================
+  ######################## NIC statistics for port 0  ########################
+  RX-packets: 0          RX-missed: 0          RX-bytes:  0
+  RX-errors: 0
+  RX-nombuf:  0         
+  TX-packets: 0          TX-errors: 0          TX-bytes:  0
+
+  Throughput (since last show)
+  Rx-pps:            0          Rx-bps:            0
+  Tx-pps:            0          Tx-bps:            0
+  ############################################################################
+VHOST_CONFIG: read message VHOST_USER_GET_VRING_BASE
+
+Port 0: link state change event
+VHOST_CONFIG: vring base idx:0 file:0
+VHOST_CONFIG: read message VHOST_USER_GET_VRING_BASE
+VHOST_CONFIG: vring base idx:1 file:0
+VHOST_CONFIG: vhost peer closed
+[2J[1;1H
+Port statistics ====================================
+  ######################## NIC statistics for port 0  ########################
+  RX-packets: 0          RX-missed: 0          RX-bytes:  0
+  RX-errors: 0
+  RX-nombuf:  0         
+  TX-packets: 0          TX-errors: 0          TX-bytes:  0
+
+  Throughput (since last show)
+  Rx-pps:            0          Rx-bps:            0
+  Tx-pps:            0          Tx-bps:            0
+  ############################################################################
+[2J[1;1H
+Port statistics ====================================
+  ######################## NIC statistics for port 0  ########################
+  RX-packets: 0          RX-missed: 0          RX-bytes:  0
+  RX-errors: 0
+  RX-nombuf:  0         
+  TX-packets: 0          TX-errors: 0          TX-bytes:  0
+
+  Throughput (since last show)
+  Rx-pps:            0          Rx-bps:            0
+  Tx-pps:            0          Tx-bps:            0
+  ############################################################################
+[2J[1;1H
+Port statistics ====================================
+  ######################## NIC statistics for port 0  ########################
+  RX-packets: 0          RX-missed: 0          RX-bytes:  0
+  RX-errors: 0
+  RX-nombuf:  0         
+  TX-packets: 0          TX-errors: 0          TX-bytes:  0
+
+  Throughput (since last show)
+  Rx-pps:            0          Rx-bps:            0
+  Tx-pps:            0          Tx-bps:            0
+  ############################################################################
+Telling cores to stop...
+Waiting for lcores to finish...
+
+  ---------------------- Forward statistics for port 0  ----------------------
+  RX-packets: 0              RX-dropped: 0             RX-total: 0
+  TX-packets: 0              TX-dropped: 0             TX-total: 0
+  ----------------------------------------------------------------------------
+
+  +++++++++++++++ Accumulated forward statistics for all ports+++++++++++++++
+  RX-packets: 0              RX-dropped: 0             RX-total: 0
+  TX-packets: 0              TX-dropped: 0             TX-total: 0
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Done.
+
+Stopping port 0...
+Stopping ports...
+Done
+
+Shutting down port 0...
+Closing ports...
+Port 0 is closed
+Done
+
+Bye...

@@ -1,0 +1,28 @@
+# RUNTIME_STATUS
+date=2026-05-05 17:36:15
+testpmd_bin=/usr/bin/dpdk-testpmd
+backend_pid=4458
+backend_vdev=net_vhost0,iface=/tmp/dpdk-vhost-user0,queues=1,client=0
+frontend_vdev=net_virtio_user0,path=/tmp/dpdk-vhost-user0,queues=1,server=0
+vhost_socket=/tmp/dpdk-vhost-user0
+
+frontend_pid=4476
+frontend_start_time=2026-05-05 17:36:16
+
+## Final
+backend_wait_rc=0
+frontend_wait_rc=0
+backend_testpmd_rc=124
+frontend_testpmd_rc=124
+socket_exists_after_exit=no
+
+## Hugepage after pair
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+FileHugePages:         0 kB
+HugePages_Total:    1024
+HugePages_Free:     1014
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:         2097152 kB

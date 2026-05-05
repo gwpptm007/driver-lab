@@ -1,0 +1,5 @@
+# TESTPMD_COMMAND
+
+/usr/bin/dpdk-testpmd -l 0-1 -n 4 --file-prefix=vhost_basic --vdev=net_vhost0\,iface=/tmp/dpdk-vhost-user0\,queues=1\,client=0 --no-pci -- --port-topology=chained --forward-mode=io --auto-start --stats-period=2 
+
+VDEV_ARG=net_vhost0,iface=/tmp/dpdk-vhost-user0,queues=1,client=0

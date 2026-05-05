@@ -2,15 +2,25 @@
 
 ## 目标
 
-不依赖完整 VM，理解用户态 virtio frontend 与 vhost backend。
+本实验验证 DPDK 纯用户态虚拟链路：
 
-## 当前做什么
+```text
+frontend: dpdk-testpmd --vdev=net_virtio_user0,path=/tmp/dpdk-vhost-user0
+                     │
+                     │ vhost-user socket
+                     ↓
+backend : dpdk-testpmd --vdev=net_vhost0,iface=/tmp/dpdk-vhost-user0,client=0
+```
 
-- 建立最小可运行闭环
-- 保存命令、日志、stats
-- 输出 SUMMARY 和 report
+上一站 `lab-vhost-user-basic` 只证明 backend 能创建 socket；本站在此基础上证明 frontend 能接进来。
 
-## 当前不做什么
+## 适用范围
 
-- 不提前扩大范围
-- 不在未跑通基础环境前写复杂功能
+- 复用 hugepage/testpmd 环境
+- 使用 `--no-pci`，不操作物理网卡
+- 不影响 ens33 SSH 管理口
+- 把问题聚焦在 `virtio-user <-> vhost-user` 协商和 testpmd 运行证据上
+
+## 下一步
+
+进入 `lab-dpdk-l2-forwarding` 自写 L2 forwarding 应用替代 testpmd

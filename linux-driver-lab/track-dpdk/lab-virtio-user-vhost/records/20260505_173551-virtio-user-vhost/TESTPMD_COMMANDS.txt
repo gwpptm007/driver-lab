@@ -1,0 +1,11 @@
+# TESTPMD_COMMANDS
+
+## backend
+/usr/bin/dpdk-testpmd -l 0-1 -n 4 --file-prefix=vhost_backend --vdev=net_vhost0\,iface=/tmp/dpdk-vhost-user0\,queues=1\,client=0 --no-pci -- --port-topology=chained --forward-mode=rxonly --auto-start --stats-period=2 
+
+## frontend
+/usr/bin/dpdk-testpmd -l 2-3 -n 4 --file-prefix=virtio_frontend --vdev=net_virtio_user0\,path=/tmp/dpdk-vhost-user0\,queues=1\,server=0 --no-pci -- --port-topology=chained --forward-mode=txonly --auto-start --stats-period=2 
+
+## vdev
+BACKEND_VDEV=net_vhost0,iface=/tmp/dpdk-vhost-user0,queues=1,client=0
+FRONTEND_VDEV=net_virtio_user0,path=/tmp/dpdk-vhost-user0,queues=1,server=0

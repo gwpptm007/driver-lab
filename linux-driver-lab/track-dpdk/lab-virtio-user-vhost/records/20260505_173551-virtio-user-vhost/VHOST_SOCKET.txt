@@ -1,0 +1,12 @@
+# VHOST_SOCKET
+date=2026-05-05 17:36:16
+socket_ready=1
+
+srwxr-xr-x 1 root root 0  5月  5 17:36 /tmp/dpdk-vhost-user0
+/tmp/dpdk-vhost-user0: socket
+
+## ss -xl
+u_str LISTEN 0      128                            /tmp/dpdk-vhost-user0 70192            * 0          
+u_dgr UNCONN 0      0              /var/run/dpdk/vhost_backend/mp_socket 68380            * 0          
+u_seq LISTEN 0      1      /var/run/dpdk/vhost_backend/dpdk_telemetry.v2 70002            * 0          
+u_seq LISTEN 0      1              /var/run/dpdk/vhost_backend/telemetry 70005            * 0          

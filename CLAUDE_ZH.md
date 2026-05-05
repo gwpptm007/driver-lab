@@ -4,19 +4,19 @@
 
 ## 项目概述
 
-这是一个 Linux 驱动学习实验室，按 35 天（day01-day35）组织，覆盖 5 周（W1-W5）的渐进式驱动开发：
+Linux 驱动学习实验室，包含多条渐进式学习路径：
 
-- **W1（day01-07）**：字符设备基础（miscdevice、ioctl、sysfs、debugfs、waitqueue/workqueue、回归测试）
-- **W2（day08-14）**：嵌入式驱动模式（platform_driver、Device Tree、IRQ、regmap、ftrace、启动检查清单）
-- **W3（day15-21）**：内核裁剪与移植（defconfig、rootfs、启动链、回归测试）
-- **W4（day22-28）**：PCIe 基础（ivshmem-doorbell 设备、PCI 枚举、BAR/MMIO、MSI 中断、用户工具）
-- **W5（day29-35）**：DMA + 性能分析（QEMU EDU 设备、dma_alloc_coherent、mmap、性能基准测试、perf、ftrace、稳定性）
+| 路径 | 内容 | 构建方式 |
+|------|------|----------|
+| `foundation/` | day01-day35（W1-W5）：miscdevice → platform/IRQ → PCIe → DMA/性能 | 每日 `build.sh` |
+| `netdev/` | stage00-stage14：net_device/skb/NAPI → virtio-net → XDP | 每 stage `make` |
+| `track-dpdk/` | DPDK 用户态 fastpath（vmxnet3 PMD → vhost-user → virtio-user → fastpath C 应用） | `meson + ninja` |
+| `track-real-driver/` | virtio-net 源码深潜 | （分析为主） |
+| `track-virtual-net/` | tap/bridge/vhost 机制 | （分析为主） |
 
 ## 构建与测试命令
 
-### 标准构建模式（x86）
-
-每个 day 目录通常包含一个 `build.sh` 脚本，执行完整的实验流程：
+### Foundation Days（W1-W5）
 
 ```bash
 cd linux-driver-lab/foundation/dayXX
@@ -24,13 +24,7 @@ chmod +x build.sh
 ./build.sh
 ```
 
-build.sh 脚本执行以下步骤：
-1. 编译驱动模块（`demo.ko`）
-2. 编译用户态测试程序（`test.c`、`test_ioctl.c`）
-3. 准备包含 BusyBox 的最小 rootfs
-4. 生成 `/init` 脚本
-5. 通过 `cpio | gzip` 打包 `rootfs.img`
-6. 启动 QEMU
+`build.sh` 执行：驱动编译 → rootfs 准备 → QEMU 启动。QEMU 退出：`Ctrl+a x`（退出）或 `Ctrl+a c` 然后 `quit`（监视器）。
 
 ### 手动编译模块
 
@@ -39,40 +33,36 @@ make KDIR=/path/to/kernel/build/dir clean
 make KDIR=/path/to/kernel/build/dir
 ```
 
-### QEMU 退出
+### Track-DPDK（meson + ninja）
 
-当 QEMU 使用 `-nographic` + `console=ttyS0` 运行时，退出方式：
-- `Ctrl+a`，然后按 `x` 直接退出
-- `Ctrl+a`，然后按 `c` 进入 QEMU 监视器，输入 `quit`
+```bash
+cd track-dpdk/project-user-space-fastpath
+./scripts/01_build_app.sh        # meson 编译
+sudo ./scripts/03_run_fastpath_single_port.sh  # 运行
+```
+
+### Netdev Stages
+
+```bash
+cd linux-driver-lab/netdev/stageXX
+make KDIR=/path/to/kernel/build/dir
+```
 
 ## 环境依赖
-
-代码库期望的兄弟目录结构：
 
 ```
 driver-lab/
 ├── linux-driver-lab/       # 本代码库
-└── kernel-src/
+└── kernel-src/             # 外部（兄弟目录）
     ├── linux-5.15.10/
-    │   ├── build/x86/      # x86 内核构建目录
-    │   ├── build/arm64/    # arm64 内核构建目录
-    │   └── output/
-    │       ├── x86/bzImage
-    │       └── arm64/Image
-    └── busybox-1.36.1/
-        └── output/
-            ├── x86/_install/bin/busybox
-            └── arm64/_install/bin/busybox
+    │   ├── build/x86/      # KDIR 内核构建目录
+    │   └── output/x86/bzImage  # KERNEL_IMG
+    └── busybox-1.36.1/output/x86/_install  # BUSYBOX_INSTALL
 ```
 
-关键路径（可通过环境变量配置）：
-- `KDIR`：内核构建目录（`../kernel-src/linux-5.15.10/build/x86` 或 `/build/arm64`）
-- `KERNEL_IMG`：内核镜像（`../kernel-src/linux-5.15.10/output/x86/bzImage` 或 `/arm64/Image`）
-- `BUSYBOX_INSTALL`：BusyBox 安装目录（`../kernel-src/busybox-1.36.1/output/x86/_install`）
+关键环境变量：`KDIR`、`KERNEL_IMG`、`BUSYBOX_INSTALL`。
 
-### 交叉编译（ARM64）
-
-对于 ARM64 实验（day08-14），设置交叉编译器变量：
+### ARM64 交叉编译（W2、stage06）
 
 ```bash
 export ARCH=arm64
@@ -80,139 +70,101 @@ export CROSS_COMPILE=aarch64-linux-gnu-
 ./build.sh
 ```
 
-所需工具：`qemu-system-aarch64`、`dtc`（device-tree-compiler）、`aarch64-linux-gnu-gcc`
+所需工具：`qemu-system-aarch64`、`dtc`、`aarch64-linux-gnu-gcc`。
 
 ## 代码架构
 
-### 标准 Day 目录结构
+### Foundation Day 目录结构
 
 ```
 dayXX/
-├── demo.c                 # 驱动主源码
+├── demo.c                 # 驱动源码
 ├── Makefile               # 模块编译规则
 ├── build.sh               # 完整实验脚本
 ├── test.c / test_ioctl.c  # 用户态测试程序
-├── demo_ioctl.h           # ioctl 命令定义
-├── README.md              # 当日学习目标与任务
-├── START_HERE.md          # 快速入门指南（后续周）
-├── docs/                  # 详细文档（后续周）
-├── records/               # 原始证据/日志（后续周）
-├── output/                # 处理后的结果（后续周）
-└── rootfs/                # 临时 rootfs 目录（生成）
+├── demo_ioctl.h           # 共享 ioctl 定义
+├── README.md              # 学习目标
+├── docs/                  # 详细文档
+├── records/               # 原始证据/日志（带时间戳）
+└── output/                # 处理后的结果
 ```
 
-### 驱动模式
+### 驱动模式（按周）
 
-**早期天数（01-07）**：使用 `miscdevice` 实现简单字符设备：
-- `misc_register()` 注册设备
-- `struct file_operations` 实现 VFS 回调
-- `/dev/demo` 设备节点自动创建
+| 周 | 天数 | 模式 |
+|----|------|------|
+| W1 | 01-07 | `miscdevice` + `misc_register()` |
+| W2 | 08-14 | `platform_driver` + Device Tree + `of_property_read_*` |
+| W4 | 22-28 | `pci_register_driver` + BAR/MMIO + MSI |
+| W5 | 29-35 | `dma_alloc_coherent` + `mmap` + perf/ftrace |
 
-**W2（08-14）**：平台驱动模型：
-- `platform_driver_register()` 配合 `probe`/`remove`
-- `of_match_ptr` 用于 Device Tree 匹配
-- `of_property_read_*` 解析寄存器/IRQ
-- `request_irq()` 配合顶半部处理程序
-- `workqueue` 实现底半部延迟工作
-- `regmap` 封装寄存器访问
+### Netdev Stage 结构
 
-**W4（22-28）**：PCI 驱动模型：
-- `pci_register_driver()` 配合 `pci_driver` 结构体
-- `pci_enable_device()`、`pci_request_regions()`、`pci_iomap()`
-- BAR 资源管理与 MMIO 访问
-- `pci_alloc_irq_vectors()`、`request_irq()` 用于 MSI
-- 用户工具进行设备交互
+```
+stageXX/
+├── demo.c                 # Netdev 驱动源码
+├── Makefile               # 使用内核构建系统
+├── test.c                 # 用户态测试（可选）
+├── README.md              # Stage 学习目标
+└── scripts/               # 辅助脚本（可选）
+```
 
-**W5（29-35）**：DMA 与性能：
-- `dma_set_mask_and_coherent()`
-- `dma_alloc_coherent()` 分配 DMA 缓冲区
-- `mmap()` 文件操作实现用户态零拷贝访问
-- 吞吐量/延迟性能基准测试
-- `perf record/report` 分析热点
-- `ftrace function_graph` 分析调用路径
+### Track-DPDK 结构
+
+```
+track-dpdk/
+├── lab-vmxnet3-testpmd/   # DPDK 环境验证
+├── lab-vhost-user-basic/  # vhost-user socket 实验
+├── lab-virtio-user-vhost/ # virtio-user + vhost-user 配对
+├── lab-dpdk-l2-forwarding/# L2fwd C 应用（meson 构建）
+├── project-user-space-fastpath/  # fastpath C 应用（meson 构建）
+│   └── app/main.c         # EAL 初始化、mbuf pool、rx_burst/tx_burst、分类/重写
+└── docs/                  # 整合后的文档
+```
+
+### 设备树注入（W2 / stage05-06）
+
+ARM64 实验使用 `inject_virt_dt.py`：
+1. `qemu-system-aarch64 -machine virt,dumpdtb=virt-base.dtb`
+2. `dtc -I dtb -O dts -o virt-base.dts`
+3. `python inject_virt_dt.py --input virt-base.dts --fragment demo.fragment.dtsi --output virt-new.dts`
+4. `dtc -I dts -O dtb -o virt-new.dtb`
 
 ## 关键实现细节
 
-### 设备树注入（day08-14）
+### 模块卸载安全
 
-ARM64 实验使用 `inject_virt_dt.py` 注入测试设备片段：
-1. 导出 QEMU virt 基础 DTB：`qemu-system-aarch64 -machine virt,dumpdtb=virt-base.dtb`
-2. 反编译：`dtc -I dtb -O dts -o virt-base.dts`
-3. 注入片段：`python inject_virt_dt.py --input virt-base.dts --fragment demo.fragment.dtsi --output virt-new.dts`
-4. 重新编译：`dtc -I dts -O dtb -o virt-new.dtb`
+对称资源管理：按分配的反向顺序释放。用 `insmod/rmmod` 循环（200-1000 次）测试稳定性。
 
-### 证据收集模式
+### 证据收集
 
-从 day17 开始，维护有序的证据：
-- `records/`：原始输出（dmesg、lspci、trace 日志、基准测试结果）
-- `output/`：处理后的摘要和分析
-- 每次运行生成带时间戳的记录（如 `compare-20260314-231137.md`）
+从 day17/W3 开始：
+- `records/`：原始输出（dmesg、lspci、trace 日志、性能基准）
+- `output/`：处理后的摘要，带时间戳（如 `compare-20260314-231137.md`）
 
 ### Rootfs 生成
 
-始终使用静态链接的 BusyBox 构建最小 rootfs。用 `file` 命令检查：
-```bash
-file path/to/busybox  # 不应显示 "dynamically linked"
-```
+必须使用静态链接的 BusyBox。检查：`file busybox` 显示 "statically linked"。打包：`find . | cpio -o -H newc | gzip -9 > ../rootfs.img`
 
-Rootfs 打包：
-```bash
-cd rootfs
-find . | cpio -o -H newc | gzip -9 > ../rootfs.img
-```
+## 文档结构（`docs/`）
 
-## 测试与回归
+整合后 docs 目录组织如下：
 
-### 基本验证步骤
+| 文件 | 内容 |
+|------|------|
+| `01_PROGRAMS.md` | 当前阶段、track 定位、下一步 |
+| `02_EXPERT_REVIEW.md` | 专家评审结论与执行计划 |
+| `03_PROGRESS.md` | 当前进度与完成度矩阵 |
+| `04_ARCHITECTURE.md` | 架构分层与完成度矩阵 |
+| `05_START_HERE.md` | 快速入门与 GitHub 使用说明 |
+| `06_TEST_GUIDE.md` | 测试记录模板 |
+| `07_FOUNDATION_REVIEWS.md` | W1-W5 周评审与计划汇总 |
 
-1. 检查模块加载：`lsmod | grep demo`
-2. 检查设备节点：`ls -l /dev/demo`
-3. 验证功能：`echo hello > /dev/demo`（因日期而异）
-4. 检查内核日志：`dmesg | tail`
-5. 确认无 Oops/warning/panic
+### 推荐阅读顺序
 
-### 回归测试
-
-- Day06 包含 insmod/rmmod 循环和并发压力测试的回归脚本
-- W3 专注于基准冻结和自动化回归
-- 使用各日期中的脚本进行标准化测试
-
-## 重要开发注意事项
-
-### 构建脚本设计
-
-`build.sh` 脚本设计为每个日期实验的单一入口点。它们：
-- 处理相对路径解析以支持不同代码库布局
-- 支持环境变量覆盖（KDIR、KERNEL_IMG、BUSYBOX_INSTALL）
-- 自动检测和使用静态链接的 BusyBox
-- 提供清晰的错误信息和依赖缺失提示
-
-### 模块卸载安全
-
-始终实现对称的资源管理：
-- 在 `probe/init` 中分配的必须在 `remove/exit` 中释放
-- 顺序：按分配的反向顺序释放
-- 用 `insmod/rmmod` 循环（200-1000 次）测试稳定性
-
-### 代码组织
-
-- 驱动源码：`demo.c` 或描述性名称（`demo_pdrv.c`、`demo_irq.c`）
-- ioctl 定义：`demo_ioctl.h` 与用户态测试程序共享
-- 测试程序：用 `gcc -static` 编译以兼容最小 rootfs
-
-### 新用户阅读顺序
-
-理解项目结构和学习路径的顺序：
-1. `linux-driver-lab/START_HERE_CURRENT.md` - 当前项目状态与导航
+1. `linux-driver-lab/START_HERE_CURRENT.md` - 当前状态
 2. `linux-driver-lab/README.md` - 整体路线图
-3. `linux-driver-lab/foundation/README.md` - 基础学习区入口
-4. `linux-driver-lab/docs/PROGRESS.md` - 当前进度与开放项
-5. 各日期的 `foundation/dayXX/README.md` - 具体主题
-
-### W4-W5 整合
-
-W4（PCIe 基础，ivshmem-doorbell）和 W5（DMA/性能，QEMU EDU）设计为互补：
-- W4：PCI 枚举、BAR/MMIO、MSI 中断、remove 对称性
-- W5：DMA 一致性缓冲区、mmap 零拷贝、性能基准测试、perf/ftrace 分析、稳定性
-
-W3 的证据收集模式应延续到 W4/W5。
+3. `foundation/README.md` - day01-35 学习路径
+4. `netdev/README.md` - stage00-14 网络驱动主线
+5. `track-dpdk/README.md` - DPDK 用户态网络
+6. `docs/03_PROGRESS.md` - 当前进度与开放项
