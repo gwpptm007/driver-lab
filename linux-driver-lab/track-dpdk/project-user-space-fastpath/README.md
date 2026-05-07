@@ -49,3 +49,32 @@ cat START_HERE.md
 DPDK 网卡: ens192 / vmxnet3 / 0000:0b:00.0
 默认 DPDK driver: uio_pci_generic
 ```
+
+## 当前验收状态
+
+```text
+PASS_SMOKE
+```
+
+已经确认：
+
+- `fastpath-lite` 编译成功；
+- EAL / mempool / ethdev 初始化成功；
+- `ens192/vmxnet3/0000:0b:00.0` 可以由 DPDK 接管；
+- port 0 可以启动；
+- poll loop 和软件 stats 可以正常输出。
+
+尚未确认：
+
+- 真实 UDP 流量进入 RX；
+- `ipv4/udp/non_udp` 计数被真实报文触发；
+- rewrite 规则被真实流量命中；
+- 双口或 vhost/virtio-user 拓扑下 `tx > 0`。
+
+下一步不要继续堆功能，先进入：
+
+```bash
+cd ../project-fastpath-traffic-test
+cat START_HERE.md
+```
+

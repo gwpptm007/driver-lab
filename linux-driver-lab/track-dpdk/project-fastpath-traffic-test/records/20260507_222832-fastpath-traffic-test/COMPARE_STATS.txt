@@ -1,0 +1,41 @@
+# COMPARE_STATS
+
+record_dir=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-fastpath-traffic-test/records/20260507_222832-fastpath-traffic-test
+log=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-fastpath-traffic-test/records/20260507_222832-fastpath-traffic-test/FASTPATH_RX.log
+
+## extracted software stats
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+==== rte_eth_stats ====
+
+## verdict hint
+last_stats=port=0 rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+verdict=PASS_SMOKE_ONLY reason=rx_is_zero

@@ -1,0 +1,114 @@
+# FASTPATH_RX
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-fastpath-traffic-test
+FASTPATH_PROJECT_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath
+FASTPATH_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build/fastpath-lite
+DPDK_IF=ens192
+DPDK_PCI=0000:0b:00.0
+DPDK_DRIVER=uio_pci_generic
+MGMT_IF=ens33
+MGMT_PCI=0000:02:01.0
+HUGEPAGES=1024
+FASTPATH_RUN_SECONDS=30
+FASTPATH_STATS_PERIOD=2
+FASTPATH_BURST_SIZE=32
+FASTPATH_LCORES=0-1
+FASTPATH_MEMORY_CHANNELS=4
+FASTPATH_FILE_PREFIX=fastpath_traffic_test
+FASTPATH_PROMISC=1
+FASTPATH_UDP_ONLY=1
+FASTPATH_SWAP_MAC=1
+FASTPATH_REWRITE_ENABLE=0
+FASTPATH_EXTRA_APP_ARGS=
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-fastpath-traffic-test/records/20260507_222832-fastpath-traffic-test
+
+## command
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build/fastpath-lite -l 0-1 -n 4 --file-prefix fastpath_traffic_test -a 0000:0b:00.0 -- --run-seconds 30 --stats-period 2 --burst-size 32 --promisc 1 --udp-only 1 --swap-mac 1 --rewrite 0 
+
+## note
+在本脚本运行期间，请从外部 VM/宿主机向 DPDK 口发送 UDP 流量。
+
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /var/run/dpdk/fastpath_traffic_test/mp_socket
+EAL: Selected IOVA mode 'PA'
+EAL: No available 1048576 kB hugepages reported
+EAL: Probe PCI driver: net_vmxnet3 (15ad:07b0) device: 0000:0b:00.0 (socket 0)
+TELEMETRY: No legacy callbacks, legacy socket not created
+fastpath-lite config: nb_mbuf=8192 mbuf_cache=250 rx_desc=1024 tx_desc=1024 burst=32 run_seconds=30 stats_period=2
+policy: promisc=1 udp_only=1 swap_mac=1 rewrite_enable=0
+initializing port 0
+port 0 started: rx_desc=1024 tx_desc=1024 socket=0 driver=net_vmxnet3
+port 0 MAC: 00:0C:29:F8:F6:82
+available/initialized ports: 1
+notice: only one port is available; running RX/classify/free smoke mode, no forwarding peer.
+enter fastpath loop: run_seconds=30 stats_period=2 burst=32 lcore=0
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+run_seconds reached, stopping...
+
+==== fastpath-lite software stats ====
+port 0: rx=0 rx_bytes=0 tx=0 tx_bytes=0 tx_failed=0 arp=0 ipv4=0 udp=0 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== rte_eth_stats ====
+port 0: ipackets=0 opackets=0 ibytes=0 obytes=0 imissed=0 ierrors=0 oerrors=0
+=======================
+stopping port 0
+bye
+rc=0

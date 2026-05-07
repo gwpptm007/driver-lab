@@ -1,0 +1,1 @@
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-user-space-fastpath/app/build/fastpath-lite -l 0-1 -n 4 --file-prefix fastpath_traffic_test -a 0000:0b:00.0 -- --run-seconds 30 --stats-period 2 --burst-size 32 --promisc 1 --udp-only 1 --swap-mac 1 --rewrite 0 

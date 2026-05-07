@@ -68,3 +68,37 @@
 | policy 配置 | promisc/udp_only/swap_mac 配置生效 |
 | 分类统计 | arp/ipv4/udp/non_udp 计数器工作 |
 | rewrite 规则 | --rewrite 参数可解析 |
+
+---
+
+## 后续项目通过标准
+
+### project-fastpath-traffic-test
+
+| 等级 | 证据 |
+|---|---|
+| `PASS_SMOKE` | `FASTPATH_RX.log` 含 port started / enter fastpath loop / stats / bye |
+| `PASS_TRAFFIC` | `COMPARE_STATS.txt` 解析出 `rx > 0` 且 `ipv4 > 0` 或 `udp > 0` |
+| `PASS_REWRITE` | rewrite 配置打开，且 `rewrite > 0` |
+| `PASS_FORWARDING` | 双端口或 vhost/virtio-user 拓扑下 `rx > 0` 且 `tx > 0` |
+
+### project-dpdk-media-gateway-lite
+
+进入条件：`project-fastpath-traffic-test >= PASS_TRAFFIC`。
+
+通过标准：
+
+- 配置文件能驱动方向规则；
+- UDP-only 路径可验证；
+- rewrite 可验证；
+- per-rule/per-port/drop reason stats 可验证；
+- records/reports/interview notes 完整。
+
+### project-dpdk-v17-legacy-review
+
+通过标准：
+
+- 完成 v17 到 modern DPDK 对照；
+- 完成媒体面数据路径迁移说明；
+- 完成面试讲法和简历项目描述。
+
