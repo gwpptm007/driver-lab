@@ -51,7 +51,7 @@ PASS_FORWARDING:
 
 定位：简化版用户态媒体网关。
 
-前置条件：`project-fastpath-traffic-test` 至少达到 `PASS_TRAFFIC`，最好达到 `PASS_FORWARDING`。
+原前置条件是 `project-fastpath-traffic-test` 至少达到 `PASS_TRAFFIC`，但当前选择先推进 v17 legacy review；media gateway 真实流量后续补。
 
 功能方向：
 
@@ -63,7 +63,7 @@ PASS_FORWARDING:
 - 配置文件驱动
 - records + interview notes
 
-### 3. project-dpdk-v17-legacy-review
+### 3. project-dpdk-v17-legacy-review - CURRENT
 
 定位：把既有 DPDK v17 项目经验和当前现代 DPDK track 对齐。
 

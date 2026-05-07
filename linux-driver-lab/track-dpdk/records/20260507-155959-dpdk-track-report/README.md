@@ -1,5 +1,4 @@
 # track-dpdk
-> 目录约定：`track-dpdk/` 根目录只放入口文件和路线文件；阶段性收口材料统一放在 `reports/final/`。
 
 > DPDK 用户态数据面主线
 
@@ -35,10 +34,10 @@ DPDK版本: 21.11.9
 当前主线已经进入“收口/作品化”阶段，推荐先读：
 
 ```bash
-cat reports/final/DPDK_TRACK_REPORT.md
-cat reports/final/DPDK_INTERVIEW_NOTES.md
-cat reports/final/DPDK_RESUME_MATERIAL_FINAL.md
-cat reports/final/DPDK_BACKLOG.md
+cat DPDK_TRACK_REPORT.md
+cat DPDK_INTERVIEW_NOTES.md
+cat DPDK_RESUME_MATERIAL_FINAL.md
+cat DPDK_BACKLOG.md
 ```
 
 如需生成可提交/归档的总结 bundle：
@@ -57,7 +56,7 @@ cat reports/final/DPDK_BACKLOG.md
 3. PASS_REWRITE: rewrite_hit 非 0，并有统计或抓包证明
 ```
 
-这部分放在 `reports/final/DPDK_BACKLOG.md` 中，不影响当前先完成 track 总结与简历材料。
+这部分放在 `DPDK_BACKLOG.md` 中，不影响当前先完成 track 总结与简历材料。
 
 ## 文档结构
 
@@ -65,11 +64,11 @@ cat reports/final/DPDK_BACKLOG.md
 track-dpdk/
 ├── README.md
 ├── ROADMAP_NEXT.md
-├── reports/final/DPDK_TRACK_REPORT.md
-├── reports/final/DPDK_PROJECT_PORTFOLIO.md
-├── reports/final/DPDK_INTERVIEW_NOTES.md
-├── reports/final/DPDK_RESUME_MATERIAL_FINAL.md
-├── reports/final/DPDK_BACKLOG.md
+├── DPDK_TRACK_REPORT.md
+├── DPDK_PROJECT_PORTFOLIO.md
+├── DPDK_INTERVIEW_NOTES.md
+├── DPDK_RESUME_MATERIAL_FINAL.md
+├── DPDK_BACKLOG.md
 ├── docs/
 ├── reports/
 ├── scripts/

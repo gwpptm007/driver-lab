@@ -59,13 +59,13 @@ PASS_REWRITE: rewrite 非 0
 PASS_FORWARDING: 双端口或虚拟拓扑 rx/tx 非 0
 ```
 
-### Phase 7: `project-dpdk-media-gateway-lite` - PLANNED
+### Phase 7: `project-dpdk-media-gateway-lite` - PASS_SMOKE
 
-`project-fastpath-traffic-test` 通过后再开始。
+当前已完成项目型骨架和双 vdev smoke，真实 UDP / forwarding / rewrite 后续补。
 
 目标是把 fastpath-lite 项目化为简化媒体网关：规则表、方向、rewrite、drop reason、per-rule stats。
 
-### Phase 8: `project-dpdk-v17-legacy-review` - PLANNED
+### Phase 8: `project-dpdk-v17-legacy-review` - READY_TO_REVIEW
 
 最后做 DPDK v17 旧项目经验和当前现代 DPDK track 的对照、迁移说明、面试讲法。
 
@@ -74,7 +74,7 @@ PASS_FORWARDING: 双端口或虚拟拓扑 rx/tx 非 0
 当前下一步：
 
 ```bash
-cd track-dpdk/project-fastpath-traffic-test
+cd track-dpdk/project-dpdk-v17-legacy-review
 cat START_HERE.md
 ```
 

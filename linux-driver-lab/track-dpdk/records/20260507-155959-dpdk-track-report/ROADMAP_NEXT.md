@@ -1,6 +1,6 @@
 # ROADMAP_NEXT - track-dpdk 后续推进路线
 
-> 当前决策：`project-dpdk-media-gateway-lite` 的真实流量、forwarding、rewrite 暂时放入 backlog；当前先完成 `reports/final/DPDK_TRACK_REPORT.md`，把 DPDK track 收成一套作品化材料。
+> 当前决策：`project-dpdk-media-gateway-lite` 的真实流量、forwarding、rewrite 暂时放入 backlog；当前先完成 `DPDK_TRACK_REPORT`，把 DPDK track 收成一套作品化材料。
 
 ## 当前状态
 
@@ -14,15 +14,15 @@
 | 6 | `project-fastpath-traffic-test` | `READY_TO_TEST` | 补真实流量、UDP-only、rewrite、stats 对照 |
 | 7 | `project-dpdk-media-gateway-lite` | `PASS_SMOKE` | 双 vdev smoke 已跑，UDP-only drop path 有证据；真实 traffic/forward/rewrite 后补 |
 | 8 | `project-dpdk-v17-legacy-review` | `PASS_REVIEW` | 旧 DPDK v17 经验与 modern DPDK 对照、面试/简历材料 |
-| 9 | `reports/final/DPDK_TRACK_REPORT.md` | `READY` | track 总结、作品线、简历素材、后续 backlog |
+| 9 | `DPDK_TRACK_REPORT` | `READY` | track 总结、作品线、简历素材、后续 backlog |
 
 ## 当前完成路线
 
 ```text
 project-dpdk-v17-legacy-review(PASS_REVIEW)
-  -> reports/final/DPDK_TRACK_REPORT.md(READY)
-  -> reports/final/DPDK_INTERVIEW_NOTES.md(READY)
-  -> reports/final/DPDK_RESUME_MATERIAL_FINAL.md(READY)
+  -> DPDK_TRACK_REPORT(READY)
+  -> DPDK_INTERVIEW_NOTES(READY)
+  -> DPDK_RESUME_MATERIAL_FINAL(READY)
   -> 回补 media-gateway-lite PASS_TRAFFIC / PASS_FORWARDING / PASS_REWRITE
 ```
 
@@ -55,7 +55,7 @@ PMD 接管 -> vhost-user -> virtio-user -> 自写 l2fwd -> fastpath -> traffic-t
 
 ## 后续仍要补的技术债
 
-详见 `reports/final/DPDK_BACKLOG.md`。
+详见 `DPDK_BACKLOG.md`。
 
 ```text
 project-dpdk-media-gateway-lite:

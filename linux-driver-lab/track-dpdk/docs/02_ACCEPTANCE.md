@@ -84,7 +84,7 @@
 
 ### project-dpdk-media-gateway-lite
 
-进入条件：`project-fastpath-traffic-test >= PASS_TRAFFIC`。
+当前状态：`PASS_SMOKE`。真实 `PASS_TRAFFIC / PASS_FORWARDING / PASS_REWRITE` 后续补。
 
 通过标准：
 
@@ -95,6 +95,8 @@
 - records/reports/interview notes 完整。
 
 ### project-dpdk-v17-legacy-review
+
+当前状态：`READY_TO_REVIEW`。
 
 通过标准：
 
