@@ -1,0 +1,43 @@
+LAB=af-xdp-zero-copy-vs-copy
+DATE=2026-05-10T02:24:52+08:00
+HOST=wq7-virtual-machine
+KERNEL=6.8.0-111-generic
+AF_XDP_IFACE=ens192
+AF_XDP_MANAGEMENT_IFACE=ens33
+AF_XDP_PCI=0000:0b:00.0
+AF_XDP_DRIVER=vmxnet3
+AF_XDP_QUEUE=0
+AF_XDP_DURATION=8
+AF_XDP_INTERVAL=1
+
+== before ==
+2: ens192: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:f8:f6:82 brd ff:ff:ff:ff:ff:ff
+    altname enp11s0
+driver: vmxnet3
+version: 1.7.0.0-k-NAPI
+firmware-version: 
+expansion-rom-version: 
+bus-info: 0000:0b:00.0
+supports-statistics: yes
+supports-test: no
+supports-eeprom-access: no
+supports-register-dump: yes
+supports-priv-flags: no
+
+SKIP_REBIND: set AF_XDP_CONFIRM_REBIND=YES to allow driver check/rebind
+
+== after ==
+2: ens192: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:f8:f6:82 brd ff:ff:ff:ff:ff:ff
+    altname enp11s0
+driver: vmxnet3
+version: 1.7.0.0-k-NAPI
+firmware-version: 
+expansion-rom-version: 
+bus-info: 0000:0b:00.0
+supports-statistics: yes
+supports-test: no
+supports-eeprom-access: no
+supports-register-dump: yes
+supports-priv-flags: no

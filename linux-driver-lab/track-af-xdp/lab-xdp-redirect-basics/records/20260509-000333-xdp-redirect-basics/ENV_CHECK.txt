@@ -1,0 +1,108 @@
+LAB=xdp-redirect-basics
+DATE=2026-05-09T00:03:33+08:00
+HOST=wq7-virtual-machine
+KERNEL=6.8.0-110-generic
+AF_XDP_IFACE=ens192
+AF_XDP_MANAGEMENT_IFACE=ens33
+AF_XDP_PCI=0000:0b:00.0
+AF_XDP_MODE=skb
+AF_XDP_DURATION=10
+AF_XDP_INTERVAL=1
+
+== toolchain ==
+clang: /usr/bin/clang
+Ubuntu clang version 14.0.0-1ubuntu1.1
+llvm-objdump: /usr/bin/llvm-objdump
+cc: /usr/bin/cc
+make: /usr/bin/make
+pkg-config: /usr/bin/pkg-config
+bpftool: /usr/sbin/bpftool
+bpftool v7.4.0
+using libbpf v1.4
+features:
+ip: /usr/sbin/ip
+ethtool: /usr/sbin/ethtool
+lspci: /usr/bin/lspci
+
+== libbpf ==
+libbpf.pc: FOUND
+libbpf version: 0.5.0
+libbpf cflags: 
+libbpf libs: -lbpf
+
+== kernel bpf/xdp ==
+Linux wq7-virtual-machine 6.8.0-110-generic #110~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 27 12:43:08 UTC  x86_64 x86_64 x86_64 GNU/Linux
+/sys/fs/bpf: EXISTS
+bpf on /sys/fs/bpf type bpf (rw,nosuid,nodev,noexec,relatime,mode=700)
+
+== iface ==
+iface ens192: FOUND
+ens192           UP             00:0c:29:f8:f6:82 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+driver: vmxnet3
+version: 1.7.0.0-k-NAPI
+firmware-version: 
+expansion-rom-version: 
+bus-info: 0000:0b:00.0
+supports-statistics: yes
+supports-test: no
+supports-eeprom-access: no
+supports-register-dump: yes
+supports-priv-flags: no
+queues:
+/sys/class/net/ens192/queues/rx-0
+/sys/class/net/ens192/queues/rx-1
+/sys/class/net/ens192/queues/rx-2
+/sys/class/net/ens192/queues/rx-3
+/sys/class/net/ens192/queues/rx-4
+/sys/class/net/ens192/queues/rx-5
+/sys/class/net/ens192/queues/rx-6
+/sys/class/net/ens192/queues/rx-7
+/sys/class/net/ens192/queues/tx-0
+/sys/class/net/ens192/queues/tx-1
+/sys/class/net/ens192/queues/tx-2
+/sys/class/net/ens192/queues/tx-3
+/sys/class/net/ens192/queues/tx-4
+/sys/class/net/ens192/queues/tx-5
+/sys/class/net/ens192/queues/tx-6
+/sys/class/net/ens192/queues/tx-7
+
+== pci ==
+0b:00.0 Ethernet controller [0200]: VMware VMXNET3 Ethernet Controller [15ad:07b0] (rev 01)
+	DeviceName: Ethernet2
+	Subsystem: VMware VMXNET3 Ethernet Controller [15ad:07b0]
+	Kernel driver in use: vmxnet3
+	Kernel modules: vmxnet3
+
+== dpdk-devbind ==
+
+Network devices using kernel driver
+===================================
+0000:02:01.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens33 drv=e1000 unused= *Active*
+0000:02:02.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens34 drv=e1000 unused= 
+0000:0b:00.0 'VMXNET3 Ethernet Controller 07b0' if=ens192 drv=vmxnet3 unused= *Active*
+
+No 'Baseband' devices detected
+==============================
+
+No 'Crypto' devices detected
+============================
+
+No 'DMA' devices detected
+=========================
+
+No 'Eventdev' devices detected
+==============================
+
+No 'Mempool' devices detected
+=============================
+
+No 'Compress' devices detected
+==============================
+
+No 'Misc (rawdev)' devices detected
+===================================
+
+No 'Regex' devices detected
+===========================
+
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/records/20260509-000333-xdp-redirect-basics

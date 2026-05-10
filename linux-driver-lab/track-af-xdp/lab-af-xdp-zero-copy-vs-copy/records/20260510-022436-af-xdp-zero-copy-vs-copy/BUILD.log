@@ -1,0 +1,24 @@
+LAB=af-xdp-zero-copy-vs-copy
+DATE=2026-05-10T02:24:36+08:00
+HOST=wq7-virtual-machine
+KERNEL=6.8.0-111-generic
+AF_XDP_IFACE=ens192
+AF_XDP_MANAGEMENT_IFACE=ens33
+AF_XDP_PCI=0000:0b:00.0
+AF_XDP_DRIVER=vmxnet3
+AF_XDP_QUEUE=0
+AF_XDP_DURATION=8
+AF_XDP_INTERVAL=1
+
+rm -rf build
+BPF_OBJ=build/af_xdp_kern.bpf.o
+USER_BIN=build/af_xdp_mode_probe
+BPF_CFLAGS=-O2 -g -Wall -Werror -target bpf -D__TARGET_ARCH_x86 -I/usr/include/x86_64-linux-gnu
+USER_LDLIBS=-lbpf -lelf -lz
+mkdir -p build
+clang -O2 -g -Wall -Werror -target bpf -D__TARGET_ARCH_x86 -I/usr/include/x86_64-linux-gnu -c af_xdp_kern.bpf.c -o build/af_xdp_kern.bpf.o
+cc -O2 -g -Wall -Wextra af_xdp_mode_probe.c -o build/af_xdp_mode_probe -lbpf -lelf -lz
+
+build/af_xdp_kern.bpf.o: ELF 64-bit LSB relocatable, eBPF, version 1 (SYSV), with debug_info, not stripped
+build/af_xdp_mode_probe: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=89ddc0c25f609bc27ddefea0cfe6ad2f3d02db26, for GNU/Linux 3.2.0, with debug_info, not stripped
+BUILD_RESULT=PASS

@@ -13,7 +13,7 @@ project-user-space-fastpath      PASS_SMOKE
 project-fastpath-traffic-test    READY_TO_TEST
 project-dpdk-media-gateway-lite  PASS_SMOKE
 project-dpdk-v17-legacy-review   PASS_REVIEW
-reports/final/DPDK_TRACK_REPORT.md READY
+project-dpdk-track-summary/reports/final/DPDK_TRACK_REPORT.md READY
 ```
 
 ## 当前可对外说明
@@ -31,7 +31,7 @@ media-gateway-lite 尚未完成真实 UDP forwarding / rewrite 闭环。
 ## 后续回补入口
 
 ```text
-reports/final/DPDK_BACKLOG.md
+project-dpdk-track-summary/reports/final/DPDK_BACKLOG.md
 project-dpdk-media-gateway-lite/
 project-fastpath-traffic-test/
 ```

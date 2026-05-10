@@ -1,26 +1,43 @@
 # track-af-xdp
 
-> AF_XDP 用户态网络数据面主线
+> AF_XDP / XDP 用户态快速路径主线。
 
 ## 一句话定位
 
-承接 XDP 与 DPDK，在 Linux kernel networking 和 user-space fastpath 之间建立 AF_XDP 能力。
+承接前面的 `netdev/stage14_xdp_basics` 和 `track-dpdk`：
 
-## 阶段列表
+- `netdev` 解决内核 `net_device/NAPI/skb/XDP` 基础；
+- `track-dpdk` 解决用户态 PMD/hugepage/poll mode；
+- `track-af-xdp` 解决 **Linux 原生 XDP + AF_XDP socket** 的用户态收发路径。
 
-1. `lab-xdp-redirect-basics` — XDP redirect 基础
-2. `lab-af-xdp-socket-rings` — AF_XDP socket rings
-3. `lab-af-xdp-zero-copy-vs-copy` — AF_XDP copy vs zero-copy
-4. `project-af-xdp-mini-forwarder` — AF_XDP mini forwarder 项目
+## 当前阶段
 
-## 推荐方式
+| 阶段 | 目录 | 状态 |
+|---|---|---|
+| Phase 1 | `lab-xdp-redirect-basics` | PASS_BASIC_ATTACH，DROP/REDIRECT 后续补测 |
+| Phase 2 | `lab-af-xdp-socket-rings` | READY_TO_TEST / 测试结果后续分析 |
+| Phase 3 | `lab-af-xdp-zero-copy-vs-copy` | READY_TO_TEST / 测试结果后续分析 |
+| Phase 4 | `project-af-xdp-mini-forwarder` | READY_TO_TEST |
 
-按 `ROADMAP.md` 顺序推进，每个 Lab 都要形成：
+## 推荐推进顺序
 
-- README
-- START_HERE
-- docs
-- scripts
-- records
-- reports
-- acceptance
+```text
+lab-xdp-redirect-basics
+    ↓
+lab-af-xdp-socket-rings
+    ↓
+lab-af-xdp-zero-copy-vs-copy
+    ↓
+project-af-xdp-mini-forwarder  ← 当前已落地
+```
+
+## 当前第四站目标
+
+`project-af-xdp-mini-forwarder` 把前面 lab 能力串成项目型数据面：
+
+- XDP redirect 到 XSKMAP；
+- 用户态 AF_XDP socket；
+- UMEM / FILL / RX / TX / COMPLETION rings；
+- drop 模式验证 RX + recycle；
+- reflect 模式验证 TX + completion；
+- review bundle 记录。

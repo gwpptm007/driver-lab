@@ -1,0 +1,160 @@
+LAB=af-xdp-socket-rings
+DATE=2026-05-10T01:32:09+08:00
+HOST=wq7-virtual-machine
+KERNEL=6.8.0-111-generic
+AF_XDP_IFACE=ens192
+AF_XDP_MANAGEMENT_IFACE=ens33
+AF_XDP_PCI=0000:0b:00.0
+AF_XDP_DRIVER=vmxnet3
+AF_XDP_MODE=skb
+AF_XDP_QUEUE=0
+AF_XDP_DURATION=15
+AF_XDP_INTERVAL=1
+AF_XDP_BIND_MODE=copy
+
+== iface stats ==
+2: ens192: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:f8:f6:82 brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast           
+             0       0      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+         12304     104      0       0       0       0 
+    altname enp11s0
+
+== ethtool stats head ==
+NIC statistics:
+     Tx Queue#: 0
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+       mcast pkts tx: 26
+       mcast bytes tx: 3407
+       bcast pkts tx: 0
+       bcast bytes tx: 0
+       pkts tx err: 0
+       pkts tx discard: 0
+       drv dropped tx total: 0
+          too many frags: 0
+          giant hdr: 0
+          hdr err: 0
+          tso: 0
+       ring full: 0
+       pkts linearized: 0
+       hdr cloned: 0
+       giant hdr: 0
+       xdp xmit: 0
+       xdp xmit err: 0
+     Tx Queue#: 1
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+       mcast pkts tx: 10
+       mcast bytes tx: 700
+       bcast pkts tx: 0
+       bcast bytes tx: 0
+       pkts tx err: 0
+       pkts tx discard: 0
+       drv dropped tx total: 0
+          too many frags: 0
+          giant hdr: 0
+          hdr err: 0
+          tso: 0
+       ring full: 0
+       pkts linearized: 0
+       hdr cloned: 0
+       giant hdr: 0
+       xdp xmit: 0
+       xdp xmit err: 0
+     Tx Queue#: 2
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+       mcast pkts tx: 1
+       mcast bytes tx: 86
+       bcast pkts tx: 0
+       bcast bytes tx: 0
+       pkts tx err: 0
+       pkts tx discard: 0
+       drv dropped tx total: 0
+          too many frags: 0
+          giant hdr: 0
+          hdr err: 0
+          tso: 0
+       ring full: 0
+       pkts linearized: 0
+       hdr cloned: 0
+       giant hdr: 0
+       xdp xmit: 0
+       xdp xmit err: 0
+     Tx Queue#: 3
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+       mcast pkts tx: 25
+       mcast bytes tx: 2630
+       bcast pkts tx: 0
+       bcast bytes tx: 0
+       pkts tx err: 0
+       pkts tx discard: 0
+       drv dropped tx total: 0
+          too many frags: 0
+          giant hdr: 0
+          hdr err: 0
+          tso: 0
+       ring full: 0
+       pkts linearized: 0
+       hdr cloned: 0
+       giant hdr: 0
+       xdp xmit: 0
+       xdp xmit err: 0
+     Tx Queue#: 4
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+       mcast pkts tx: 32
+       mcast bytes tx: 3767
+       bcast pkts tx: 0
+       bcast bytes tx: 0
+       pkts tx err: 0
+       pkts tx discard: 0
+       drv dropped tx total: 0
+          too many frags: 0
+          giant hdr: 0
+          hdr err: 0
+          tso: 0
+       ring full: 0
+       pkts linearized: 0
+       hdr cloned: 0
+       giant hdr: 0
+       xdp xmit: 0
+       xdp xmit err: 0
+     Tx Queue#: 5
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+       mcast pkts tx: 0
+       mcast bytes tx: 0
+       bcast pkts tx: 0
+       bcast bytes tx: 0
+
+== xdp link state ==
+2: ens192: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:f8:f6:82 brd ff:ff:ff:ff:ff:ff promiscuity 0 minmtu 60 maxmtu 9000 addrgenmode eui64 numtxqueues 8 numrxqueues 8 gso_max_size 65536 gso_max_segs 65535 parentbus pci parentdev 0000:0b:00.0 
+    altname enp11s0
+
+== latest AF_XDP logs ==
+--- AF_XDP_SOCKET_SMOKE.log ---
+UMEM_READY frames=4096 frame_size=2048 bytes=8388608
+XSK_SOCKET_READY fd=3
+FILL_RING_READY descriptors=2048
+XDP_ATTACHED ifname=ens192 mode=skb
+XSKMAP_REGISTERED queue=0 fd=3
+AF_XDP_RINGS_READY fq=2048 cq=2048 rx=2048 tx=2048
+AF_XDP_FINAL_STATS rx_packets=0 rx_bytes=0 fill_recycled=0 rx_empty_polls=147 comp_seen=0
+bye

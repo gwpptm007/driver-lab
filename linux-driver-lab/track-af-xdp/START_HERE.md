@@ -1,14 +1,18 @@
-# START_HERE
+# track-af-xdp START_HERE
 
-## 先看
+当前建议直接进入：
 
-1. `README.md`
-2. `ROADMAP.md`
-3. `docs/01_TRACK_GOAL.md`
-4. 第一个 Lab 的 `START_HERE.md`
+```bash
+cd track-af-xdp/project-af-xdp-mini-forwarder
+```
 
-## 当前第一站
+先跑：
 
-```text
-lab-xdp-redirect-basics
+```bash
+./scripts/00_check_env.sh
+./scripts/01_build_app.sh
+sudo AF_XDP_CONFIRM_REBIND=YES ./scripts/02_prepare_kernel_netdev.sh
+sudo ./scripts/03_run_forwarder_drop_smoke.sh
+./scripts/06_collect_stats.sh
+./scripts/07_make_review_bundle.sh
 ```

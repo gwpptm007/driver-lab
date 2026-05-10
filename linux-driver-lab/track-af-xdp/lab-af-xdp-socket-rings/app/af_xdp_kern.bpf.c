@@ -1,10 +1,23 @@
 // SPDX-License-Identifier: GPL-2.0
 /*
- * AF_XDP socket rings lab - kernel/XDP side
+ * af_xdp_kern.bpf.c — AF_XDP 内核侧 XDP program
  *
- * This program redirects packets from an RX queue into an AF_XDP socket
- * registered in xsks_map[rx_queue_index]. If no socket is registered for the
- * queue, packets are passed to the kernel stack.
+ * 功能：
+ *   1. 根据 rx_queue_index 查找 XSKMAP 中对应的 socket fd
+ *   2. 若存在 socket，bpf_redirect_map 跳转到 AF_XDP socket
+ *   3. 若不存在，走 XDP_PASS 送到内核协议栈
+ *
+ * 统计：
+ *   stats_map（PERCPU_ARRAY）记录四类动作的 packet 数和 byte 数：
+ *     STAT_PASS            — 未命中 XSKMAP，直接 PASS
+ *     STAT_REDIRECT       — 成功 redirect 到 socket
+ *     STAT_REDIRECT_MISS  — 查了 XSKMAP 但该队列没有注册 socket
+ *     STAT_ABORTED        — （保留，当前未用到）
+ *
+ * XSKMAP：
+ *   XSKMAP 的 key 是 queue_id，value 是 socket fd。
+ *   BPF program 查 xsks_map[rx_queue_index] 确认是否需要 redirect。
+ *   用户态在启动时通过 bpf_map_update_elem 把 socket fd 写入 XSKMAP。
  */
 #include <linux/bpf.h>
 #include <bpf/bpf_helpers.h>

@@ -1,0 +1,39 @@
+LAB=xdp-redirect-basics
+DATE=2026-05-10T00:46:55+08:00
+HOST=wq7-virtual-machine
+KERNEL=6.8.0-111-generic
+AF_XDP_IFACE=ens192
+AF_XDP_MANAGEMENT_IFACE=ens33
+AF_XDP_PCI=0000:0b:00.0
+AF_XDP_MODE=skb
+AF_XDP_DURATION=10
+AF_XDP_INTERVAL=1
+
+== make show ==
+make: Entering directory '/home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/lab-xdp-redirect-basics/app'
+BPF_OBJ=build/xdp_redirect_basics.bpf.o
+LOADER_BIN=build/xdp_loader
+LIBBPF_CFLAGS=
+LIBBPF_LIBS=-lbpf
+make: Leaving directory '/home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/lab-xdp-redirect-basics/app'
+
+== clean ==
+make: Entering directory '/home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/lab-xdp-redirect-basics/app'
+rm -rf build
+make: Leaving directory '/home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/lab-xdp-redirect-basics/app'
+
+== build ==
+make: Entering directory '/home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/lab-xdp-redirect-basics/app'
+mkdir -p build
+clang -O2 -g -Wall -Werror -target bpf -I/usr/include/x86_64-linux-gnu -c xdp_redirect_basics.bpf.c -o build/xdp_redirect_basics.bpf.o
+cc -O2 -g -Wall -Wextra  xdp_loader.c -o build/xdp_loader -lbpf
+make: Leaving directory '/home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/lab-xdp-redirect-basics/app'
+
+== artifacts ==
+total 52K
+-rwxrwxr-x 1 wq7 wq7  39K  5月 10 00:46 xdp_loader
+-rw-rw-r-- 1 wq7 wq7 9.7K  5月 10 00:46 xdp_redirect_basics.bpf.o
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/lab-xdp-redirect-basics/app/build/xdp_redirect_basics.bpf.o: ELF 64-bit LSB relocatable, eBPF, version 1 (SYSV), with debug_info, not stripped
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/lab-xdp-redirect-basics/app/build/xdp_loader:                ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a4c7a286388e5e0fd8bbbb55cc0bb8d36a45dc84, for GNU/Linux 3.2.0, with debug_info, not stripped
+
+BUILD_RESULT=PASS
