@@ -1,0 +1,18 @@
+tracepoint:irq:softirq_entry
+/args->vec == 2 || args->vec == 3/
+{
+  @softirq_entry[args->vec, cpu] = count();
+}
+
+tracepoint:irq:softirq_exit
+/args->vec == 2 || args->vec == 3/
+{
+  @softirq_exit[args->vec, cpu] = count();
+}
+
+interval:s:1
+{
+  time("%H:%M:%S ");
+  print(@softirq_entry);
+  print(@softirq_exit);
+}

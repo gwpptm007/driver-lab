@@ -1,0 +1,12 @@
+kprobe:napi_poll
+{
+  @napi_poll = count();
+  @napi_cpu[cpu] = count();
+}
+
+interval:s:1
+{
+  time("%H:%M:%S ");
+  print(@napi_poll);
+  print(@napi_cpu);
+}

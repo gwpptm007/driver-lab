@@ -2,17 +2,32 @@
 
 ## 0. 你现在要验证什么
 
-本实验验证 DPDK 纯用户态虚拟链路：
+本实验验证 DPDK 纯用户态虚拟链路（frontend 与 backend 互联闭环）：
 
 ```text
-frontend: dpdk-testpmd --vdev=net_virtio_user0,path=/tmp/dpdk-vhost-user0
-                     │
-                     │ vhost-user socket
-                     ↓
-backend : dpdk-testpmd --vdev=net_vhost0,iface=/tmp/dpdk-vhost-user0,client=0
+frontend testpmd (txonly)           backend testpmd (rxonly)
+┌─────────────────────────┐      ┌─────────────────────────┐
+│  net_virtio_user0       │      │   net_vhost0            │
+│  (virtio-user PMD)      │      │  (vhost-user PMD)       │
+│         │               │      │         │               │
+│    发送数据包           │ UDS   │    接收数据包           │
+│         │               │socket │         │               │
+│         ▼               ◄──────►│         ▼               │
+└─────────────────────────┘  /tmp/ └─────────────────────────┘
+                      vhost.sock
 ```
 
-这一步承接上一站 `lab-vhost-user-basic`：上一站只证明 backend 能创建 socket；这一站要证明 frontend 能接进来。
+**核心原理**（详见 `docs/04_ARCHITECTURE_AND_PRINCIPLES.md`）：
+
+- **frontend (net_virtio_user0)**：DPDK virtio-user PMD，模拟 virtio 前端驱动，在 txonly 模式下不断发送数据包
+- **backend (net_vhost0)**：DPDK vhost-user PMD，实现 virtio backend，在 rxonly 模式下不断接收数据包
+- **UDS socket**：通过 `/tmp/dpdk-vhost-user0` 连接两端，关键是能传递文件描述符（FD），实现跨进程共享内存（零拷贝）
+- **virtqueue**：frontend 和 backend 之间的共享内存区域，包含 available ring 和 used ring
+
+**承接关系**：
+
+- 上一站 `lab-vhost-user-basic`：只证明 backend 能创建 socket
+- **本站在此基础上**：证明 frontend 能接进来，形成完整数据面
 
 ## 1. 推荐执行顺序
 

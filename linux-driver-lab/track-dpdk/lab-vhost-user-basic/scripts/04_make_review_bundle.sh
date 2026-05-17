@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# 脚本: 04_make_review_bundle.sh
+# 功能: 汇总所有记录文件，检查 socket 创建、日志、统计信息，生成审查报告
+# 用法: ./scripts/04_make_review_bundle.sh
+
 set -euo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
 
@@ -9,27 +13,33 @@ append_command_log "${RECORD_DIR}" "$0" "$@"
 OUT="${RECORD_DIR}/REVIEW_BUNDLE.md"
 : > "${OUT}"
 
+# 辅助函数：检查记录文件中是否包含指定关键字
+# 用于判断该步骤是否成功完成（如 socket 是否创建、日志是否有统计信息）
 has_pattern() {
     local file="$1"
     local pattern="$2"
     [[ -f "${file}" ]] && grep -Eiq "${pattern}" "${file}"
 }
 
+# 各记录文件路径
 log="${RECORD_DIR}/TESTPMD_VHOST.log"
 sock="${RECORD_DIR}/VHOST_SOCKET.txt"
 post="${RECORD_DIR}/POST_CHECK.txt"
 cmd="${RECORD_DIR}/TESTPMD_COMMAND.txt"
 
+# 判断 vhost socket 是否成功创建（socket_ready=1）
 socket_status="WARN"
 if has_pattern "${sock}" 'socket_ready=1'; then
     socket_status="PASS"
 fi
 
+# 判断 vhost/testpmd 日志是否包含预期关键字（vhost/net_vhost/Port 等）
 vhost_log_status="WARN"
 if has_pattern "${log}" 'vhost|net_vhost|VHOST|Port [0-9]|Configuring Port|testpmd'; then
     vhost_log_status="PASS"
 fi
 
+# 判断是否执行了 stats 命令（RX-packets/TX-packets 等统计信息）
 stats_status="WARN"
 if has_pattern "${log}" 'show port stats|NIC statistics|port stats|RX-packets|TX-packets'; then
     stats_status="PASS"

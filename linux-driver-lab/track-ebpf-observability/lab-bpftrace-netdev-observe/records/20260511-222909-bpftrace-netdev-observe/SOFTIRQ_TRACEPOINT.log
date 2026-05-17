@@ -1,0 +1,49 @@
+probe_file=/home/wq7/workspace/driver-lab/linux-driver-lab/track-ebpf-observability/lab-bpftrace-netdev-observe/probes/softirq_tracepoint.bt
+duration=10
+iface_hint=ens192
+kernel=6.8.0-111-generic
+date=2026-05-11T22:32:19+08:00
+note=tracepoint-first, no BEGIN/END blocks
+--- bpftrace output ---
+Attaching 3 probes...
+22:32:21 @softirq_entry[3, 6]: 2
+@softirq_exit[3, 6]: 2
+22:32:22 @softirq_entry[3, 3]: 1
+@softirq_entry[3, 6]: 6
+@softirq_exit[3, 3]: 1
+@softirq_exit[3, 6]: 6
+22:32:23 @softirq_entry[3, 3]: 1
+@softirq_entry[3, 6]: 9
+@softirq_exit[3, 3]: 1
+@softirq_exit[3, 6]: 9
+22:32:24 @softirq_entry[3, 3]: 2
+@softirq_entry[3, 6]: 13
+@softirq_exit[3, 3]: 2
+@softirq_exit[3, 6]: 13
+22:32:25 @softirq_entry[3, 3]: 2
+@softirq_entry[3, 6]: 16
+@softirq_exit[3, 3]: 2
+@softirq_exit[3, 6]: 16
+22:32:26 @softirq_entry[3, 3]: 3
+@softirq_entry[3, 6]: 21
+@softirq_exit[3, 3]: 3
+@softirq_exit[3, 6]: 21
+22:32:27 @softirq_entry[3, 3]: 3
+@softirq_entry[3, 6]: 24
+@softirq_exit[3, 3]: 3
+@softirq_exit[3, 6]: 24
+22:32:28 @softirq_entry[3, 3]: 4
+@softirq_entry[3, 6]: 29
+@softirq_exit[3, 3]: 4
+@softirq_exit[3, 6]: 29
+22:32:29 @softirq_entry[3, 3]: 4
+@softirq_entry[3, 6]: 32
+@softirq_exit[3, 3]: 4
+@softirq_exit[3, 6]: 32
+
+
+@softirq_entry[3, 3]: 4
+@softirq_entry[3, 6]: 35
+@softirq_exit[3, 3]: 4
+@softirq_exit[3, 6]: 35
+BPFTRACE_TIMEOUT_RC=124

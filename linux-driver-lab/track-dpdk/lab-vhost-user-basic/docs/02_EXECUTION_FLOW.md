@@ -64,6 +64,129 @@ DPDK vhost backend
 
 都通过后，再进入 `lab-virtio-user-vhost` 把 frontend 接进来。
 
+## UDS vs Raw Socket
+
+本实验使用 **UDS (Unix Domain Socket, AF_UNIX)** 作为 vhost-user 的通信机制。UDS 和 Raw Socket 是完全不同的概念：
+
+| 特性 | UDS (AF_UNIX) | Raw Socket (AF_PACKET) |
+|------|--------------|------------------------|
+| 通信范围 | 仅限本机进程间 | 跨网络设备/跨机器 |
+| 底层标识 | 文件路径（如 `/tmp/vhost.sock`） | MAC 地址 / IP 地址 |
+| 协议栈参与 | 完全不走 TCP/IP 栈 | 绕过部分栈，直接操作底层帧 |
+| 数据单位 | 字节流或数据报 | 原始以太网帧或 IP 包 |
+| DPDK 用途 | 控制面（传文件描述符 FD） | 数据面（处理网络报文） |
+
+### 为什么 vhost-user 选 UDS 而不是 Raw Socket
+
+UDS 的核心优势：可以安全传输文件描述符（FD）
+
+在 Vhost-user 场景中，前端（QEMU/virtio）需要把虚拟机内存的文件描述符传给后端（DPDK），让后端能直接访问虚机的物理内存。这意味着 UDS 传输的不仅是数据，还包括**指向内存地址的文件描述符**——这种能力是 TCP/IP Socket 完全做不到的。
+
+Raw Socket 只能处理网络帧数据，无法实现"传钥匙"这种精细操作。
+
+### UDS 的实现本质
+
+UDS 在内核中的数据路径极短：
+
+```
+应用程序 → 套接字层 → 内核缓冲区（Ring Buffer）直接拷贝 → 另一个应用程序
+```
+
+没有三次握手，没有 ACK，没有路由寻址。内核通过 `scm_sendmsg` 机制转发文件描述符。
+
+### 抽象套接字（Abstract Socket）
+
+UDS 还有一种特殊形态：**Abstract Namespace（抽象套接字）**
+
+| 特性 | 说明 |
+|------|------|
+| 路径特征 | 以 `@` 或空字符 `\0` 开头（如 `@/tmp/vhost.sock`） |
+| 优势 | 不依赖文件系统，完全无视 chroot 和文件路径限制 |
+| 缺陷 | 受 Network Namespace 严格隔离，跨容器 NetNS 无法通信 |
+
+如果进程 A 和 B 在不同容器 NetNS 里，抽象套接字就死活连不上了。本实验使用文件路径式 UDS（`/tmp/dpdk-vhost-user0`），不受此限制。
+
+### UDS 在本实验中的作用
+
+```bash
+--vdev=net_vhost0,iface=/tmp/dpdk-vhost-user0,queues=1,client=0
+```
+
+- `iface=/tmp/dpdk-vhost-user0`：指定 UDS socket 文件路径
+- QEMU 作为 frontend 通过这个 socket 与 DPDK backend 通信
+- `queues=1`：创建一个 virtqueue（Rx/Tx 各一）
+- `client=0`（server 模式）：DPDK 创建 socket 文件，QEMU 去连接
+
+```text
+/tmp/dpdk-vhost-user0  ← 这是一个 UDS socket 文件（不是普通文件！）
+```
+
+查看方式：
+
+```bash
+# 查看 socket 文件类型
+ls -l /tmp/dpdk-vhost-user0   # 显示为 socket 类型
+file /tmp/dpdk-vhost-user0    # 显示为 Unix domain socket
+
+# 查看监听中的 UDS（ss -xl 中的 x 表示 Unix socket，l 表示仅 Listening）
+ss -xl | grep vhost
+# 输出示例：
+# Netid  State   Recv-Q  Send-Q  Local Address:Port   Peer Address:Port
+# u_str  LISTEN  0       0       /tmp/dpdk-vhost-user0  *:*
+```
+
+## ss -xl 参数详解
+
+`ss -xl` 是查询 Unix Domain Sockets 状态的常用命令：
+
+| 参数 | 含义 |
+|------|------|
+| `-x` | 仅显示 Unix Domain Sockets（AF_UNIX），过滤掉 TCP/UDP |
+| `-l` | 仅显示 Listening（监听）状态的套接字 |
+
+### 输出各列含义
+
+```text
+Netid  State   Recv-Q  Send-Q  Local Address:Port   Peer Address:Port
+u_str  LISTEN  0       128     /tmp/dpdk-vhost-user0  *:*
+```
+
+| 列名 | 含义 |
+|------|------|
+| `Netid` | `u_str` = Unix stream socket（类似 TCP可靠连接）；`u_dgr` = Unix datagram |
+| `State` | `LISTEN` = 正在监听；`CONNECTED` = 已连接 |
+| `Recv-Q` | 接收队列中的字节数 |
+| `Send-Q` | 发送队列中的字节数。如果数值很大，说明 Backend 处理太慢，产生拥塞 |
+| `Local Address:Port` | UDS socket 文件路径 |
+| `Peer Address:Port` | 对端地址，`*:*` 表示未连接（等待前端接入） |
+
+### 在 DPDK 开发中的用途
+
+**确认服务端已启动**：如果 testpmd 作为 Vhost-user Server 已启动，但虚拟机连不上，先用 `ss -xl` 确认 socket 是否处于 `LISTEN` 状态。
+
+**验证路径正确性**：检查输出的路径是否与脚本中定义的 `VHOST_SOCKET`（如 `/tmp/dpdk-vhost-user0`）完全一致。
+
+**权限排查**：路径存在但 `ss` 看不到，可能是当前用户没有权限访问该套接字。
+
+### 进阶：查看 Socket 所属进程
+
+```bash
+sudo ss -xlp
+# 输出示例：
+# Netid  State   Recv-Q  Send-Q  Local Address:Port   Peer Address:Port  Process
+# u_str  LISTEN  0       0       /tmp/dpdk-vhost-user0  *:*               users:(("testpmd",pid=1234,fd=5))
+```
+
+加上 `-p` 参数可以看到是哪个进程（PID）持有该 Socket，可以确认是 `testpmd` 还是其他程序。
+
+### Socket 连不上的排查
+
+如果 `ss -xl` 没有任何输出，但你确信程序已启动：
+
+- 可能是大页内存分配失败
+- 可能是权限不足导致程序提前退出
+- 用 `sudo ss -xlp` 再次确认（需要 sudo 权限才能看到进程信息）
+
 ## server/client 模式
 
 | 模式 | client值 | 含义 |
@@ -113,7 +236,7 @@ records/YYYYMMDD_HHMMSS-vhost-user-basic/
 - `dpdk-testpmd` 无法启动，且不是路径配置问题
 - 误操作物理网卡，导致管理口断开
 
-## 故障排查
+## 常见问题快速排查
 
 ### 1. `dpdk-testpmd` 找不到
 

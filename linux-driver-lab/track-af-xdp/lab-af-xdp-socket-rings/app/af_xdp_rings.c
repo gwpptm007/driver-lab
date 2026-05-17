@@ -430,8 +430,8 @@ static void drain_completion(struct xsk_ctx *ctx, struct app_stats *st)
  */
 static void print_stats(const char *tag, const struct app_stats *st)
 {
-    printf("%s rx_packets=%" PRIu64 " rx_bytes=%" PRIu64"
-           " fill_recycled=%" PRIu64 " rx_empty_polls=%" PRIu64"
+    printf("%s rx_packets=%" PRIu64 " rx_bytes=%" PRIu64
+           " fill_recycled=%" PRIu64 " rx_empty_polls=%" PRIu64
            " comp_seen=%" PRIu64 "\n",
            tag, st->rx_packets, st->rx_bytes, st->fill_recycled,
            st->rx_empty_polls, st->comp_seen);

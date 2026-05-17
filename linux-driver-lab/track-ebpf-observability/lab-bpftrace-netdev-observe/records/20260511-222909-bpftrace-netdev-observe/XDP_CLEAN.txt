@@ -1,0 +1,16 @@
+LAB=lab-bpftrace-netdev-observe
+DATE=2026-05-11T22:29:09+08:00
+IFACE=ens192
+
+== before ==
+2: ens192: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:f8:f6:82 brd ff:ff:ff:ff:ff:ff promiscuity 0 minmtu 60 maxmtu 9000 addrgenmode eui64 numtxqueues 8 numrxqueues 8 gso_max_size 65536 gso_max_segs 65535 parentbus pci parentdev 0000:0b:00.0 
+    altname enp11s0
+
+XDP_ATTACHED_BEFORE=NO
+XDP_CLEAN_STATUS=ALREADY_OFF
+
+== after ==
+2: ens192: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:f8:f6:82 brd ff:ff:ff:ff:ff:ff promiscuity 0 minmtu 60 maxmtu 9000 addrgenmode eui64 numtxqueues 8 numrxqueues 8 gso_max_size 65536 gso_max_segs 65535 parentbus pci parentdev 0000:0b:00.0 
+    altname enp11s0

@@ -1,0 +1,12 @@
+tracepoint:net:netif_receive_skb
+{
+  @rx_total = count();
+  @rx_cpu[cpu] = count();
+}
+
+interval:s:1
+{
+  time("%H:%M:%S ");
+  print(@rx_total);
+  print(@rx_cpu);
+}

@@ -93,15 +93,160 @@ drop_non_udp    - udp_only 模式下非 UDP 被丢弃
 drop_no_peer     - 无配对端口被丢弃
 ```
 
-## 5. 构建
+## 5. 构建系统详解
+
+### 5.1 目录结构
+
+```
+app/
+├── meson.build       # Meson 构建配置（告诉构建系统：要编译什么、依赖什么）
+├── main.c            # 源代码
+├── Makefile         # 封装 meson + ninja 的便捷构建入口
+└── build/          # 编译产物目录（meson setup 后自动创建）
+    ├── compile_commands.json
+    └── fastpath-lite  # 最终可执行文件
+```
+
+### 5.2 构建方式
+
+#### 方式一：使用 Makefile（推荐）
 
 ```bash
 cd app
-meson setup build
-ninja -C build
+
+# 清理并重新编译
+make rebuild
+
+# 或分步执行
+make clean    # 删除 build 目录
+make all     # 配置 + 编译
 ```
 
-编译产物：`app/build/fastpath-lite`
+#### 方式二：手动执行 meson + ninja
+
+```bash
+cd app
+
+# 1. 配置（生成 build/ 目录和 ninja 文件）
+meson setup build
+
+# 2. 编译
+ninja -C build
+
+# 3. 查看可执行文件
+ls -lh build/fastpath-lite
+```
+
+### 5.3 Makefile 解析
+
+```makefile
+APP := fastpath-lite              # 项目名
+BUILD_DIR := build                 # 编译产物目录
+
+.PHONY: all clean rebuild         # 声明伪目标（不是真实文件）
+
+all:
+    # meson setup: 配置项目，检测 libdpdk 依赖
+    # --wipe: 如果 build 已存在，清除旧配置重新配置
+    # || meson setup: 备用命令（第一次 build 不存在时自动用这个）
+    meson setup $(BUILD_DIR) --wipe || meson setup $(BUILD_DIR)
+    ninja -C $(BUILD_DIR)          # 用 ninja 编译
+
+clean:
+    rm -rf $(BUILD_DIR)           # 删除编译产物
+
+rebuild: clean all                # rebuild = clean + all
+```
+
+### 5.4 Meson 构建系统
+
+**为什么用 Meson？**
+
+- DPDK 官方推荐的构建方式
+- 比传统 Makefile 更快、更易用
+- 自动检测依赖（pkg-config）
+
+**Meson 核心概念：**
+
+| 概念 | 说明 |
+|------|------|
+| `meson.build` | 构建配置文件，描述项目结构、依赖、源文件 |
+| `meson setup build` | 配置阶段，在 build/ 下生成 ninja 能读的文件 |
+| `ninja -C build` | 编译阶段，ninja 读取配置并编译 |
+
+**Meson 的工作流程：**
+
+```
+meson.build  ──meson setup──►  build/  ──ninja──►  fastpath-lite
+ (源码)        (生成构建文件)      (编译产物)
+```
+
+### 5.5 meson.build 解析
+
+```meson
+project('fastpath-lite', 'c', default_options: ['warning_level=2'])
+#  project()       定义项目名
+#  'c'             使用 C 语言
+#  warning_level=2  编译器警告级别
+
+dpdk_dep = dependency('libdpdk')
+#  dependency()    通过 pkg-config 查找依赖
+#  libdpdk         DPDK 的 pkg-config 名称
+
+executable('fastpath-lite',
+  'main.c',                    # 源文件列表
+  dependencies: dpdk_dep,      # 依赖 libdpdk
+  install: false)              # 不安装到系统路径
+```
+
+### 5.6 Makefile vs Meson 对比
+
+| 操作 | 传统 Makefile | Meson + Ninja |
+|------|--------------|---------------|
+| 配置 | `make` 或手动 | `meson setup build` |
+| 编译 | `make` | `ninja -C build` |
+| 清理 | `make clean` | `rm -rf build` |
+| 依赖检测 | 手动写规则 | 自动通过 pkg-config |
+
+### 5.7 常见问题
+
+**Q：编译失败怎么办？**
+
+```bash
+# 1. 删除 build 目录，重新配置
+rm -rf build
+meson setup build
+ninja -C build
+
+# 2. 使用 Makefile 清理重建
+make rebuild
+```
+
+**Q：如何检查依赖是否安装？**
+
+```bash
+pkg-config --modversion libdpdk
+# 应该显示 DPDK 版本，如 21.11.9
+```
+
+**Q：修改代码后如何重新编译？**
+
+```bash
+# 直接重新编译即可，ninja 会自动检测哪些文件变了
+ninja -C build
+
+# 或用 Makefile
+make all
+```
+
+### 5.8 构建产物
+
+编译成功后：
+
+```
+app/build/fastpath-lite      # 可执行文件
+app/build/compile_commands.json  # 编译命令记录（供 IDE 使用）
+```
 
 ## 6. 运行示例
 

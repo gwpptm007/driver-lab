@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
+# 脚本: 05_make_review_bundle.sh
+# 功能: 汇总所有记录文件，生成审查报告和执行看板
+# 用法: ./scripts/05_make_review_bundle.sh
+
 set -euo pipefail
+# 加载公共函数库
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
 
 RECORD_DIR="$(ensure_record_dir)"
@@ -9,6 +14,7 @@ append_command_log "${RECORD_DIR}" "$0" "$@"
 BUNDLE="${RECORD_DIR}/REVIEW_BUNDLE.md"
 EXEC_BOARD="${LAB_ROOT}/reports/lab-vmxnet3-testpmd_exec_board.md"
 
+# 检查记录文件是否存在，返回 DONE 或 MISSING
 status_of() {
     local file="$1"
     if [[ -s "${RECORD_DIR}/${file}" ]]; then
@@ -18,7 +24,8 @@ status_of() {
     fi
 }
 
-cat > "${BUNDLE}" <<EOF
+# 生成审查包：汇总所有记录文件和检查清单
+cat > "${BUNDLE}" <<'EOF'
 # REVIEW_BUNDLE
 
 ## Lab
@@ -27,7 +34,7 @@ lab-vmxnet3-testpmd
 
 ## Record directory
 
-\`${RECORD_DIR}\`
+`${RECORD_DIR}`
 
 ## Expected test machine
 
@@ -67,9 +74,10 @@ lab-vmxnet3-testpmd
 
 通过后进入：
 
-\`track-dpdk/lab-vhost-user-basic\`
+`track-dpdk/lab-vhost-user-basic`
 EOF
 
+# 生成执行看板：展示各阶段完成状态
 cat > "${EXEC_BOARD}" <<EOF
 # lab-vmxnet3-testpmd_exec_board
 

@@ -1,30 +1,42 @@
 #!/usr/bin/env bash
-# Common helpers for lab-vmxnet3-testpmd.
-# This file is sourced by other scripts.
+# 公共辅助函数库 - lab-vmxnet3-testpmd
+# 其他脚本通过 source 加载此文件
 
 set -euo pipefail
 
+# 实验室名称
 LAB_NAME="vmxnet3-testpmd"
+# 实验室根目录
 LAB_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+# 默认环境变量：DPDK 网卡接口名
 : "${DPDK_IF:=ens192}"
+# 默认环境变量：DPDK 网卡 PCI 地址
 : "${DPDK_PCI:=0000:0b:00.0}"
+# 默认环境变量：DPDK 绑定驱动
 : "${DPDK_DRIVER:=vfio-pci}"
+# 默认环境变量：管理网卡接口名
 : "${MGMT_IF:=ens33}"
+# 默认环境变量：管理网卡 PCI 地址
 : "${MGMT_PCI:=0000:02:01.0}"
+# 默认环境变量：大页数量
 : "${HUGEPAGES:=1024}"
+# 大页挂载点
 : "${HUGEPAGE_MOUNT:=/mnt/huge}"
 
+# 生成时间戳，格式：YYYYMMDD_HHMMSS
 timestamp() {
     date +"%Y%m%d_%H%M%S"
 }
 
+# 创建新的记录目录，格式：records/<timestamp>-<lab_name>
 new_record_dir() {
     local ts
     ts="$(timestamp)"
     echo "${LAB_ROOT}/records/${ts}-${LAB_NAME}"
 }
 
+# 查找最新创建的记录目录
 latest_record_dir() {
     local latest
     latest="$(find "${LAB_ROOT}/records" -maxdepth 1 -type d -name "*-${LAB_NAME}" 2>/dev/null | sort | tail -n 1 || true)"
@@ -35,6 +47,7 @@ latest_record_dir() {
     fi
 }
 
+# 确保记录目录存在，如未指定则创建新目录
 ensure_record_dir() {
     if [[ -n "${RECORD_DIR:-}" ]]; then
         mkdir -p "${RECORD_DIR}"
@@ -48,11 +61,13 @@ ensure_record_dir() {
     echo "${dir}"
 }
 
+# 检查命令是否存在
 need_cmd() {
     local cmd="$1"
     command -v "${cmd}" >/dev/null 2>&1
 }
 
+# 执行命令并捕获输出到指定文件
 run_capture() {
     local out="$1"
     shift
@@ -66,6 +81,7 @@ run_capture() {
     }
 }
 
+# 查找 dpdk-devbind.py 工具路径
 find_devbind() {
     local candidates=(
         "${DPDK_DEVBIND:-}"
@@ -91,6 +107,7 @@ find_devbind() {
     return 1
 }
 
+# 查找 dpdk-testpmd 工具路径
 find_testpmd() {
     local candidates=(
         "${TESTPMD_BIN:-}"
@@ -117,6 +134,7 @@ find_testpmd() {
     return 1
 }
 
+# 要求以 root 权限运行（用于修改系统状态的操作）
 require_root_for_write() {
     if [[ "${EUID}" -ne 0 ]]; then
         echo "ERROR: this action modifies system state; please run with sudo." >&2
@@ -124,6 +142,7 @@ require_root_for_write() {
     fi
 }
 
+# 将执行的命令追加到记录目录的 COMMANDS.md
 append_command_log() {
     local record_dir="$1"
     shift
@@ -137,6 +156,7 @@ append_command_log() {
     } >> "${record_dir}/COMMANDS.md"
 }
 
+# 初始化记录目录中的文件（COMMANDS.md、SUMMARY.md、RESULT.md）
 init_record_files() {
     local record_dir="$1"
     mkdir -p "${record_dir}"
@@ -196,6 +216,7 @@ EOF
 EOF
 }
 
+# 检查 DPDK_PCI 是否与管理网卡相同，防止误操作
 guard_not_mgmt_pci() {
     if [[ "${DPDK_PCI}" == "${MGMT_PCI}" ]]; then
         echo "ERROR: DPDK_PCI=${DPDK_PCI} equals management PCI ${MGMT_PCI}; refuse to continue." >&2
@@ -203,6 +224,7 @@ guard_not_mgmt_pci() {
     fi
 }
 
+# 打印实验室环境变量配置
 print_lab_env() {
     cat <<EOF
 LAB_ROOT=${LAB_ROOT}

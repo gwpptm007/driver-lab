@@ -1,8 +1,48 @@
 #!/usr/bin/env bash
+# 脚本: 02_run_virtio_user_vhost_pair.sh
+# 功能: 同时启动 backend (vhost-user) 和 frontend (virtio-user) testpmd，验证本机互联闭环
+# 用法: sudo ./scripts/02_run_virtio_user_vhost_pair.sh
+#
+# ========== 通信架构 ==========
+# 本脚本同时运行两个 testpmd 实例：
+#
+# 1. backend (net_vhost0, rxonly 模式)
+#    - DPDK vhost-user PMD，在 server 模式下创建 UDS socket
+#    - 轮询接收来自 frontend 的数据包
+#    - 与 frontend 对接后形成完整的 virtio 数据面
+#
+# 2. frontend (net_virtio_user0, txonly 模式)
+#    - DPDK virtio-user PMD，作为 client 连接到 backend 的 socket
+#    - 不断发送数据包给 backend
+#
+# 数据流: frontend (txonly) ──UDS socket──► backend (rxonly)
+#         /tmp/dpdk-vhost-user0
+#
+# ========== 关键参数说明 ==========
+# backend EAL:
+#   -l 0-1              使用 CPU 0-1 核
+#   -n 4                内存通道数
+#   --file-prefix=vhost_backend  文件前缀（与 frontend 隔离）
+#   --vdev=net_vhost0,iface=/tmp/dpdk-vhost-user0,queues=1,client=0
+#                       vhost-user 设备参数
+#   --no-pci            不扫描物理 PCI
+#   --forward-mode=rxonly  只接收模式
+#
+# frontend EAL:
+#   -l 2-3              使用 CPU 2-3 核（与 backend 隔离）
+#   --file-prefix=virtio_frontend
+#   --vdev=net_virtio_user0,path=/tmp/dpdk-vhost-user0,queues=1
+#                       virtio-user 设备参数（连接到 backend 的 socket）
+#   --forward-mode=txonly  只发送模式
+#
+# ==============================================
+
 set -euo pipefail
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/common.sh"
 
+# 需要 root 权限（大页配置需要）
 require_root_for_write
+# 检查 socket 路径是否在安全目录
 safe_socket_path_check
 
 RECORD_DIR="$(ensure_record_dir)"
@@ -29,6 +69,8 @@ mkfifo "${BACKEND_FIFO}" "${FRONTEND_FIFO}"
 
 BACKEND_PID=""
 FRONTEND_PID=""
+
+# 清理函数：退出时杀死两个 testpmd 进程、关闭 FIFO
 cleanup_pair() {
     set +e
     [[ -n "${BACKEND_PID}" ]] && kill "${BACKEND_PID}" 2>/dev/null || true
@@ -37,6 +79,7 @@ cleanup_pair() {
     exec 4>&- 2>/dev/null || true
     rm -f "${BACKEND_FIFO}" "${FRONTEND_FIFO}"
 }
+# EXIT trap：脚本退出时自动执行清理
 trap cleanup_pair EXIT
 
 if testpmd="$(find_testpmd)"; then
@@ -92,17 +135,21 @@ fi
     echo "FRONTEND_VDEV=${FRONTEND_VDEV}"
 } > "${CMD_RECORD}"
 
-# Open FIFOs read/write in the parent first to avoid blocking if a testpmd exits early.
+# 预先打开 FIFO（读写模式），避免 testpmd 提前退出时阻塞
 exec 3<>"${BACKEND_FIFO}"
 exec 4<>"${FRONTEND_FIFO}"
 
+# ========== Step 1: 启动 backend (vhost-user) ==========
+# backend 创建 UDS socket，frontend 稍后会连接它
 (
     set +e
+    # timeout 限制运行时长，<${BACKEND_FIFO} 从管道读取命令
     timeout "${BACKEND_RUNTIME}" "${testpmd}" "${BACKEND_EAL[@]}" -- "${BACKEND_APP[@]}" < "${BACKEND_FIFO}" > "${BACKEND_LOG}" 2>&1
     echo "$?" > "${BACKEND_RC_FILE}"
 ) &
-BACKEND_PID=$!
+BACKEND_PID=$!  # 记录 backend testpmd 的 PID
 
+# 记录 backend 运行时状态
 {
     echo "# RUNTIME_STATUS"
     echo "date=$(date '+%F %T')"
@@ -114,12 +161,16 @@ BACKEND_PID=$!
     echo
 } >> "${RUNTIME_RECORD}"
 
+# ========== Step 2: 等待 backend 创建 UDS socket ==========
+# 轮询检查 socket 是否被创建（最多 40 次 × 0.5 秒 = 20 秒超时）
+# socket 由 backend 的 net_vhost0 驱动在启动时自动创建
 SOCKET_READY=0
 for _ in $(seq 1 40); do
     if [[ -S "${VHOST_SOCKET}" ]]; then
         SOCKET_READY=1
         break
     fi
+    # 如果 backend 进程已退出，不再等待
     if ! pid_alive "${BACKEND_PID}"; then
         break
     fi
@@ -142,11 +193,14 @@ done
     ss -xl 2>/dev/null | grep -E "$(basename "${VHOST_SOCKET}")|vhost|dpdk" || true
 } >> "${SOCK_RECORD}" 2>&1
 
+# socket 未创建则报错退出
 if [[ "${SOCKET_READY}" != "1" ]]; then
     echo "ERROR: backend did not create vhost-user socket. See ${BACKEND_LOG} and ${SOCK_RECORD}" >&2
     exit 3
 fi
 
+# ========== Step 3: 启动 frontend (virtio-user) ==========
+# frontend 作为 client 连接到 backend 创建的 socket
 (
     set +e
     timeout "${FRONTEND_RUNTIME}" "${testpmd}" "${FRONTEND_EAL[@]}" -- "${FRONTEND_APP[@]}" < "${FRONTEND_FIFO}" > "${FRONTEND_LOG}" 2>&1
@@ -154,22 +208,29 @@ fi
 ) &
 FRONTEND_PID=$!
 
+# 记录 frontend 启动信息
 {
     echo "frontend_pid=${FRONTEND_PID}"
     echo "frontend_start_time=$(date '+%F %T')"
     echo
 } >> "${RUNTIME_RECORD}"
 
-# Let both sides negotiate and exchange a short smoke interval.
+# ========== Step 4: 等待两端协商完成 ==========
+# frontend 连接 socket 后，两端需要交换共享内存的文件描述符（FD）
+# 这就是 vhost-user 协议的核心：通过 UDS 传递 FD，实现零拷贝
+# PAIR_WARMUP_SECONDS = 6 秒，等待协商完成
 sleep "${PAIR_WARMUP_SECONDS}"
 
-# Ask both sides for evidence.
+# ========== Step 5: 向两端发送命令收集证据 ==========
+# 通过 FIFO 向 backend (fd 3) 和 frontend (fd 4) 发送交互命令
+# 顺序：先 frontend (quit 先发)，再 backend (quit 后发)
 printf 'show port info all\n' >&3 || true
 printf 'show port info all\n' >&4 || true
 sleep 1
 printf 'show port stats all\n' >&3 || true
 printf 'show port stats all\n' >&4 || true
 sleep 2
+# 先停止 frontend（发送者），再停止 backend（接收者）
 printf 'stop\n' >&4 || true
 printf 'show port stats all\n' >&4 || true
 printf 'quit\n' >&4 || true
@@ -178,6 +239,7 @@ printf 'stop\n' >&3 || true
 printf 'show port stats all\n' >&3 || true
 printf 'quit\n' >&3 || true
 
+# 关闭 FIFO
 exec 4>&-
 exec 3>&-
 

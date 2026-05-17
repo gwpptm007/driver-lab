@@ -1,0 +1,191 @@
+LAB=lab-bpftrace-netdev-observe
+DATE=2026-05-11T22:33:36+08:00
+KERNEL=6.8.0-111-generic
+BPFTRACE_IFACE=ens192
+
+== ip -s link ==
+2: ens192: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:f8:f6:82 brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast           
+             0       0      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+         10324      86      0       0       0       0 
+    altname enp11s0
+
+== ip -d link ==
+2: ens192: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:f8:f6:82 brd ff:ff:ff:ff:ff:ff promiscuity 0 minmtu 60 maxmtu 9000 addrgenmode eui64 numtxqueues 8 numrxqueues 8 gso_max_size 65536 gso_max_segs 65535 parentbus pci parentdev 0000:0b:00.0 
+    altname enp11s0
+
+== ethtool -S ==
+NIC statistics:
+     Tx Queue#: 0
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+       mcast pkts tx: 0
+       mcast bytes tx: 0
+       bcast pkts tx: 0
+       bcast bytes tx: 0
+       pkts tx err: 0
+       pkts tx discard: 0
+       drv dropped tx total: 0
+          too many frags: 0
+          giant hdr: 0
+          hdr err: 0
+          tso: 0
+       ring full: 0
+       pkts linearized: 0
+       hdr cloned: 0
+       giant hdr: 0
+       xdp xmit: 0
+       xdp xmit err: 0
+     Tx Queue#: 1
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+       mcast pkts tx: 0
+       mcast bytes tx: 0
+       bcast pkts tx: 0
+       bcast bytes tx: 0
+       pkts tx err: 0
+       pkts tx discard: 0
+       drv dropped tx total: 0
+          too many frags: 0
+          giant hdr: 0
+          hdr err: 0
+          tso: 0
+       ring full: 0
+       pkts linearized: 0
+       hdr cloned: 0
+       giant hdr: 0
+       xdp xmit: 0
+       xdp xmit err: 0
+     Tx Queue#: 2
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+       mcast pkts tx: 1
+       mcast bytes tx: 669
+       bcast pkts tx: 0
+       bcast bytes tx: 0
+       pkts tx err: 0
+       pkts tx discard: 0
+       drv dropped tx total: 0
+          too many frags: 0
+          giant hdr: 0
+          hdr err: 0
+          tso: 0
+       ring full: 0
+       pkts linearized: 0
+       hdr cloned: 0
+       giant hdr: 0
+       xdp xmit: 0
+       xdp xmit err: 0
+     Tx Queue#: 3
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+       mcast pkts tx: 7
+       mcast bytes tx: 650
+       bcast pkts tx: 0
+       bcast bytes tx: 0
+       pkts tx err: 0
+       pkts tx discard: 0
+       drv dropped tx total: 0
+          too many frags: 0
+          giant hdr: 0
+          hdr err: 0
+          tso: 0
+       ring full: 0
+       pkts linearized: 0
+       hdr cloned: 0
+       giant hdr: 0
+       xdp xmit: 0
+       xdp xmit err: 0
+     Tx Queue#: 4
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+       mcast pkts tx: 0
+       mcast bytes tx: 0
+       bcast pkts tx: 0
+       bcast bytes tx: 0
+       pkts tx err: 0
+       pkts tx discard: 0
+       drv dropped tx total: 0
+          too many frags: 0
+          giant hdr: 0
+          hdr err: 0
+          tso: 0
+       ring full: 0
+       pkts linearized: 0
+       hdr cloned: 0
+       giant hdr: 0
+       xdp xmit: 0
+       xdp xmit err: 0
+     Tx Queue#: 5
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+       mcast pkts tx: 12
+       mcast bytes tx: 880
+       bcast pkts tx: 0
+       bcast bytes tx: 0
+       pkts tx err: 0
+       pkts tx discard: 0
+       drv dropped tx total: 0
+          too many frags: 0
+          giant hdr: 0
+          hdr err: 0
+          tso: 0
+       ring full: 0
+       pkts linearized: 0
+       hdr cloned: 0
+       giant hdr: 0
+       xdp xmit: 0
+       xdp xmit err: 0
+     Tx Queue#: 6
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+       mcast pkts tx: 25
+       mcast bytes tx: 3313
+       bcast pkts tx: 0
+       bcast bytes tx: 0
+       pkts tx err: 0
+       pkts tx discard: 0
+       drv dropped tx total: 0
+          too many frags: 0
+          giant hdr: 0
+          hdr err: 0
+          tso: 0
+       ring full: 0
+       pkts linearized: 0
+       hdr cloned: 0
+       giant hdr: 0
+       xdp xmit: 0
+       xdp xmit err: 0
+     Tx Queue#: 7
+       TSO pkts tx: 0
+       TSO bytes tx: 0
+       ucast pkts tx: 0
+       ucast bytes tx: 0
+
+== softirqs ==
+      NET_TX:          0          0          1          2          3          2          2          1          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0
+      NET_RX:        151        137        140       2348        326        235       3690        180          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0          0
+
+== generated logs ==
+COLLECT_STATS.txt
+RX_TRACEPOINT.log
+SOFTIRQ_TRACEPOINT.log
+TX_TRACEPOINT.log
+XDP_CLEAN.txt

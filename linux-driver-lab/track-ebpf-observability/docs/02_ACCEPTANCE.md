@@ -2,16 +2,22 @@
 
 ## 最低通过
 
-- 第一个 Lab 完成
-- 有 records
-- 有 report
+```text
+lab-bpftrace-netdev-observe 能跑通环境检查和至少一个 bpftrace 观测脚本。
+```
 
 ## 标准通过
 
-- 全部 Lab 完成
-- project 收口
-- 有 share script
+```text
+完成 RX/TX/NAPI/softirq 的 bpftrace records，并能生成 review bundle。
+```
 
-## 优秀通过
+## 项目通过
 
-- 能作为简历/面试/项目展示材料
+```text
+完成 libbpf net observer，并能把事件输出整理成可读报告。
+```
+
+## 不夸大边界
+
+这条 track 的早期 lab 是观测实验，不等价于完整产品。只有 `project-linux-network-observability` 完成后，才适合描述为工具型项目。

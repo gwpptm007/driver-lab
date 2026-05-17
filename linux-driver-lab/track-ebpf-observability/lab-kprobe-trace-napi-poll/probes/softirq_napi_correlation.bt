@@ -1,0 +1,29 @@
+tracepoint:irq:softirq_entry
+/args->vec == 3/
+{
+    @net_rx_softirq_entry = count();
+    @net_rx_softirq_entry_cpu[cpu] = count();
+}
+
+tracepoint:irq:softirq_exit
+/args->vec == 3/
+{
+    @net_rx_softirq_exit = count();
+    @net_rx_softirq_exit_cpu[cpu] = count();
+}
+
+kprobe:napi_poll
+{
+    @napi_poll_calls = count();
+    @napi_poll_cpu[cpu] = count();
+}
+
+interval:s:1
+{
+    print(@net_rx_softirq_entry);
+    print(@net_rx_softirq_entry_cpu);
+    print(@net_rx_softirq_exit);
+    print(@net_rx_softirq_exit_cpu);
+    print(@napi_poll_calls);
+    print(@napi_poll_cpu);
+}

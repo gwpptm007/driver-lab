@@ -1,0 +1,67 @@
+probe_file=/home/wq7/workspace/driver-lab/linux-driver-lab/track-ebpf-observability/lab-bpftrace-netdev-observe/probes/tx_tracepoint.bt
+duration=10
+iface_hint=ens192
+kernel=6.8.0-111-generic
+date=2026-05-11T22:31:02+08:00
+note=tracepoint-first, no BEGIN/END blocks
+--- bpftrace output ---
+Attaching 3 probes...
+22:31:03 @tx_queue_total: 0
+@tx_xmit_total: 0
+
+
+22:31:04 @tx_queue_total: 1
+@tx_xmit_total: 1
+@tx_queue_cpu[3]: 1
+@tx_xmit_cpu[3]: 1
+22:31:05 @tx_queue_total: 3
+@tx_xmit_total: 3
+@tx_queue_cpu[6]: 1
+@tx_queue_cpu[3]: 2
+@tx_xmit_cpu[6]: 1
+@tx_xmit_cpu[3]: 2
+22:31:06 @tx_queue_total: 4
+@tx_xmit_total: 4
+@tx_queue_cpu[6]: 1
+@tx_queue_cpu[3]: 3
+@tx_xmit_cpu[6]: 1
+@tx_xmit_cpu[3]: 3
+22:31:07 @tx_queue_total: 5
+@tx_xmit_total: 5
+@tx_queue_cpu[6]: 1
+@tx_queue_cpu[3]: 4
+@tx_xmit_cpu[6]: 1
+@tx_xmit_cpu[3]: 4
+22:31:08 @tx_queue_total: 6
+@tx_xmit_total: 6
+@tx_queue_cpu[6]: 1
+@tx_queue_cpu[3]: 5
+@tx_xmit_cpu[6]: 1
+@tx_xmit_cpu[3]: 5
+22:31:09 @tx_queue_total: 7
+@tx_xmit_total: 7
+@tx_queue_cpu[6]: 1
+@tx_queue_cpu[3]: 6
+@tx_xmit_cpu[6]: 1
+@tx_xmit_cpu[3]: 6
+22:31:10 @tx_queue_total: 9
+@tx_xmit_total: 9
+@tx_queue_cpu[6]: 1
+@tx_queue_cpu[3]: 8
+@tx_xmit_cpu[6]: 1
+@tx_xmit_cpu[3]: 8
+22:31:11 @tx_queue_total: 10
+@tx_xmit_total: 10
+@tx_queue_cpu[6]: 1
+@tx_queue_cpu[3]: 9
+@tx_xmit_cpu[6]: 1
+@tx_xmit_cpu[3]: 9
+
+
+@tx_queue_cpu[6]: 1
+@tx_queue_cpu[3]: 10
+@tx_queue_total: 11
+@tx_xmit_cpu[6]: 1
+@tx_xmit_cpu[3]: 10
+@tx_xmit_total: 11
+BPFTRACE_TIMEOUT_RC=124
