@@ -1,12 +1,6 @@
 kprobe:vmxnet3_poll,
-kprobe:mlx5e_napi_poll,
-kprobe:ixgbe_poll,
-kprobe:i40e_napi_poll,
-kprobe:ena_io_poll,
-kprobe:virtqueue_napi_complete,
 kprobe:napi_complete_done,
-kprobe:napi_gro_receive
-{
+kprobe:napi_gro_receive{
     @driver_or_napi_helpers[probe] = count();
     @driver_or_napi_cpu[probe, cpu] = count();
 }

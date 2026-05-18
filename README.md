@@ -18,7 +18,7 @@
 ```text
 driver-lab/
 ├── kernel-src/          内核 / BusyBox 环境准备说明与目录骨架
-└── linux-driver-lab/    day01 ~ day35 的代码、脚本、文档、records、阶段报告
+└── linux-driver-lab/    foundation / netdev / track 专题的代码、脚本、文档、records、阶段报告
 ```
 
 ### `kernel-src/`
@@ -36,6 +36,8 @@ driver-lab/
 - **W3：baseline / profile / perf / 回归收口**（day15 ~ day21）
 - **W4：PCIe 基本功作品线**（day22 ~ day28）
 - **W5：DMA / mmap / bench / perf / ftrace / stability**（day29 ~ day35）
+- **netdev 主线**（stage00 ~ stage14）：net_device / skb / NAPI / ring / XDP
+- **专题 track**：real-driver / virtual-net / DPDK / AF_XDP / eBPF observability
 
 也就是说，仓库当前状态已经不再是“入门样例集合”，而是一条比较完整的驱动实验型学习路线。
 
@@ -46,37 +48,42 @@ driver-lab/
 第一次看这个仓库，建议按下面顺序进入：
 
 1. `kernel-src/README.md`
-2. `linux-driver-lab/START_HERE_CURRENT.md`
-3. `linux-driver-lab/docs/CURRENT_PROJECT_REVIEW.md`
-4. `linux-driver-lab/README.md`
-5. 按阶段阅读：
-   - W3 总结入口：`linux-driver-lab/day21/FINAL_SUBMISSION.md`
-   - W4 总结入口：`linux-driver-lab/day28/README.md`
-   - W5 总结入口：`linux-driver-lab/day35/README.md`
+2. `linux-driver-lab/docs/05_START_HERE.md`
+3. `linux-driver-lab/docs/01_PROGRAMS.md`
+4. `linux-driver-lab/docs/03_PROGRESS.md`
+5. `linux-driver-lab/README.md`
+6. 按阶段阅读：
+   - W3 总结入口：`linux-driver-lab/foundation/day21/FINAL_SUBMISSION.md`
+   - W4 总结入口：`linux-driver-lab/foundation/day28/README.md`
+   - W5 总结入口：`linux-driver-lab/foundation/day35/README.md`
+   - netdev 总入口：`linux-driver-lab/netdev/README.md`
+   - track 总览：`linux-driver-lab/docs/01_PROGRAMS.md`
 
 ---
 
 ## 3. 当前仓库最适合怎么用
 
 ### 用法 A：按学习路径逐天推进
-从 `linux-driver-lab/day01` 开始按 day 阅读与复现。
+从 `linux-driver-lab/foundation/day01` 开始按 day 阅读与复现。
 
 ### 用法 B：按阶段复盘
 如果你不是第一次看，建议直接看：
 
-- W1/W2：`linux-driver-lab/docs/W1_REVIEW.md`
-- W3：`linux-driver-lab/docs/W3_REVIEW.md`
-- W4：`linux-driver-lab/day28/README.md`
-- W5：`linux-driver-lab/day35/README.md`
+- W1~W5 总评审：`linux-driver-lab/docs/07_FOUNDATION_REVIEWS.md`
+- W3：`linux-driver-lab/foundation/day21/FINAL_SUBMISSION.md`
+- W4：`linux-driver-lab/foundation/day28/README.md`
+- W5：`linux-driver-lab/foundation/day35/README.md`
+- netdev：`linux-driver-lab/netdev/README.md`
+- track：`linux-driver-lab/docs/01_PROGRAMS.md`
 
 ### 用法 C：做项目评审
 优先看：
 
-- `linux-driver-lab/START_HERE_CURRENT.md`
-- `linux-driver-lab/docs/CURRENT_PROJECT_REVIEW.md`
-- `linux-driver-lab/docs/PROGRESS.md`
+- `linux-driver-lab/docs/05_START_HERE.md`
+- `linux-driver-lab/docs/01_PROGRAMS.md`
+- `linux-driver-lab/docs/03_PROGRESS.md`
 
-这 3 个文件是我这次按当前 day35 基线重新整理后的总览入口。
+这 3 个文件是当前项目总览、阶段定位和完成度矩阵的主要入口。
 
 ---
 

@@ -1,0 +1,13 @@
+kprobe:__napi_poll
+{
+    @napi_poll_calls[probe] = count();
+    @napi_poll_by_cpu[probe, cpu] = count();
+    @napi_poll_by_comm[probe, comm] = count();
+}
+
+interval:s:1
+{
+    print(@napi_poll_calls);
+    print(@napi_poll_by_cpu);
+    print(@napi_poll_by_comm);
+}

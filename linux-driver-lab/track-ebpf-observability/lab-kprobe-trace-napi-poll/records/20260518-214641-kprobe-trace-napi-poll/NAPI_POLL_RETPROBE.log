@@ -1,0 +1,49 @@
+LAB=lab-kprobe-trace-napi-poll
+DATE=2026-05-18T21:46:48+08:00
+This retprobe dynamically selects the first traceable NAPI poll symbol.
+
+## selected probe
+kretprobe:__napi_poll
+
+## generated script
+kretprobe:__napi_poll
+{
+    @napi_poll_returns[probe, retval] = count();
+    @napi_poll_ret_by_cpu[probe, cpu, retval] = count();
+}
+
+interval:s:1
+{
+    print(@napi_poll_returns);
+    print(@napi_poll_ret_by_cpu);
+}
+
+Attaching 2 probes...
+@napi_poll_returns[kretprobe:__napi_poll, 0]: 1
+@napi_poll_returns[kretprobe:__napi_poll, 1]: 6
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 4, 0]: 1
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 4, 1]: 6
+@napi_poll_returns[kretprobe:__napi_poll, 0]: 5
+@napi_poll_returns[kretprobe:__napi_poll, 1]: 12
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 3, 0]: 1
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 4, 0]: 4
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 4, 1]: 12
+@napi_poll_returns[kretprobe:__napi_poll, 0]: 5
+@napi_poll_returns[kretprobe:__napi_poll, 1]: 18
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 3, 0]: 1
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 4, 0]: 4
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 4, 1]: 18
+@napi_poll_returns[kretprobe:__napi_poll, 0]: 11
+@napi_poll_returns[kretprobe:__napi_poll, 1]: 24
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 3, 0]: 2
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 4, 0]: 9
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 4, 1]: 24
+
+
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 3, 0]: 2
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 4, 0]: 9
+@napi_poll_ret_by_cpu[kretprobe:__napi_poll, 4, 1]: 27
+@napi_poll_returns[kretprobe:__napi_poll, 0]: 11
+@napi_poll_returns[kretprobe:__napi_poll, 1]: 27
+RC=124
+TIMEOUT_AS_EXPECTED=1

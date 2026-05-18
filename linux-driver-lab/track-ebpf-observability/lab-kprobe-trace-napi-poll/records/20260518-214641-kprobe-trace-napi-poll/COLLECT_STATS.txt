@@ -1,0 +1,45 @@
+LAB=lab-kprobe-trace-napi-poll
+DATE=2026-05-18T21:47:09+08:00
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-ebpf-observability/lab-kprobe-trace-napi-poll/records/20260518-214641-kprobe-trace-napi-poll
+
+## generated files
+COLLECT_STATS.txt
+driver_poll_dynamic.bt
+DRIVER_POLL_OPTIONAL.log
+ENV_CHECK.txt
+napi_poll_kprobe_dynamic.bt
+NAPI_POLL_KPROBE.log
+napi_poll_retprobe_dynamic.bt
+NAPI_POLL_RETPROBE.log
+NAPI_PROBE_POINTS.txt
+softirq_napi_correlation_dynamic.bt
+SOFTIRQ_NAPI_CORRELATION.log
+
+## iface stats: ens33
+3: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:f8:f6:6e brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast           
+        275327    1217      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+        176443    1105      0       0       0       0 
+    altname enp2s1
+
+## softnet_stat first 16 lines
+     1	00000033 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+     2	0000001a 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001 00000000 00000000
+     3	00000015 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 00000000 00000000
+     4	0000002c 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000003 00000000 00000000
+     5	00000442 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000004 00000000 00000000
+     6	0000002d 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000005 00000000 00000000
+     7	00000072 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000006 00000000 00000000
+     8	0000009d 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000007 00000000 00000000
+
+## dmesg bpf/bpftrace recent
+[    0.847733] ftrace: allocating 58286 entries in 228 pages
+[    0.862022] ftrace: allocated 228 pages with 4 groups
+[    0.868760] RCU Tasks Trace: Setting shift to 7 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=128.
+[    0.997859] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    5.425786] systemd[1]: Mounting Kernel Trace File System...
+[    5.453047] systemd[1]: Mounted Kernel Trace File System.
+[    5.504675] vmwgfx 0000:00:0f.0: [drm] Capabilities: rect copy, cursor, cursor bypass, cursor bypass 2, 8bit emulation, alpha cursor, extended fifo, multimon, pitchlock, irq mask, display topology, gmr, traces, gmr2, screen object 2, command buffers, command buffers 2, gbobject, dx, hp cmd queue, no bb restriction, cap2 register, 
+[    5.504684] vmwgfx 0000:00:0f.0: [drm] Capabilities2: grow otable, intra surface copy, dx2, gb memsize 2, screendma reg, otable ptdepth2, non ms to ms stretchblt, cursor mob, mshint, cb max size 4mb, dx3, frame type, trace full fb, extra regs, lo staging, 

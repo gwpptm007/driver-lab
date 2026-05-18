@@ -12,10 +12,10 @@ tracepoint:irq:softirq_exit
     @net_rx_softirq_exit_cpu[cpu] = count();
 }
 
-kprobe:napi_poll
+kprobe:__napi_poll
 {
-    @napi_poll_calls = count();
-    @napi_poll_cpu[cpu] = count();
+    @napi_poll_calls[probe] = count();
+    @napi_poll_cpu[probe, cpu] = count();
 }
 
 interval:s:1

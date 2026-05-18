@@ -8,7 +8,7 @@ TMP_BT="${RD}/driver_poll_dynamic.bt"
 {
     echo "LAB=${LAB_NAME}"
     echo "DATE=$(date -Iseconds)"
-    echo "This is optional. It dynamically selects available driver/NAPI helper probes."
+    echo "本脚本是补充观测：动态选择可用的驱动 poll 或 NAPI helper 符号。"
     echo
 } > "${OUT}"
 
@@ -18,10 +18,10 @@ if ! command -v bpftrace >/dev/null 2>&1; then
     exit 0
 fi
 
-# Candidate symbols. Some kernels/drivers will not have all of them.
+# 候选符号覆盖常见网卡驱动和通用 NAPI helper；不存在的符号会自动跳过。
 mapfile -t avail < <(
     for sym in vmxnet3_poll mlx5e_napi_poll ixgbe_poll i40e_napi_poll ena_io_poll napi_complete_done napi_gro_receive; do
-        if sudo bpftrace -l "kprobe:${sym}" 2>/dev/null | grep -qx "kprobe:${sym}"; then
+        if kprobe_exists "${sym}"; then
             echo "kprobe:${sym}"
         fi
     done
@@ -33,6 +33,7 @@ if [[ ${#avail[@]} -eq 0 ]]; then
     exit 0
 fi
 
+# 多个 kprobe 共用一个动作块，用 probe 变量区分来源。
 {
     printf '%s' "${avail[0]}"
     for ((i=1; i<${#avail[@]}; i++)); do

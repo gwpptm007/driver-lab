@@ -1,0 +1,42 @@
+LAB=lab-kprobe-trace-napi-poll
+DATE=2026-05-18T21:46:55+08:00
+This is optional. It dynamically selects available driver/NAPI helper probes.
+
+## selected probes
+kprobe:vmxnet3_poll
+kprobe:napi_complete_done
+kprobe:napi_gro_receive
+
+## generated script
+kprobe:vmxnet3_poll,
+kprobe:napi_complete_done,
+kprobe:napi_gro_receive{
+    @driver_or_napi_helpers[probe] = count();
+    @driver_or_napi_cpu[probe, cpu] = count();
+}
+
+interval:s:1
+{
+    print(@driver_or_napi_helpers);
+    print(@driver_or_napi_cpu);
+}
+
+Attaching 4 probes...
+
+
+@driver_or_napi_helpers[kprobe:napi_complete_done]: 2
+@driver_or_napi_cpu[kprobe:napi_complete_done, 3]: 1
+@driver_or_napi_cpu[kprobe:napi_complete_done, 4]: 1
+@driver_or_napi_helpers[kprobe:napi_complete_done]: 2
+@driver_or_napi_cpu[kprobe:napi_complete_done, 3]: 1
+@driver_or_napi_cpu[kprobe:napi_complete_done, 4]: 1
+@driver_or_napi_helpers[kprobe:napi_complete_done]: 2
+@driver_or_napi_cpu[kprobe:napi_complete_done, 3]: 1
+@driver_or_napi_cpu[kprobe:napi_complete_done, 4]: 1
+
+
+@driver_or_napi_cpu[kprobe:napi_complete_done, 3]: 2
+@driver_or_napi_cpu[kprobe:napi_complete_done, 4]: 2
+@driver_or_napi_helpers[kprobe:napi_complete_done]: 4
+RC=124
+TIMEOUT_AS_EXPECTED=1

@@ -1,0 +1,84 @@
+LAB=lab-kprobe-trace-napi-poll
+DATE=2026-05-18T21:47:02+08:00
+This probe always captures NET_RX softirq and adds a NAPI poll kprobe when available.
+
+## selected probes
+tracepoint:irq:softirq_entry
+tracepoint:irq:softirq_exit
+kprobe:__napi_poll
+
+## generated script
+tracepoint:irq:softirq_entry
+/args->vec == 3/
+{
+    @net_rx_softirq_entry = count();
+    @net_rx_softirq_entry_cpu[cpu] = count();
+}
+
+tracepoint:irq:softirq_exit
+/args->vec == 3/
+{
+    @net_rx_softirq_exit = count();
+    @net_rx_softirq_exit_cpu[cpu] = count();
+}
+
+kprobe:__napi_poll
+{
+    @napi_poll_calls[probe] = count();
+    @napi_poll_cpu[probe, cpu] = count();
+}
+
+interval:s:1
+{
+    print(@net_rx_softirq_entry);
+    print(@net_rx_softirq_entry_cpu);
+    print(@net_rx_softirq_exit);
+    print(@net_rx_softirq_exit_cpu);
+    print(@napi_poll_calls);
+    print(@napi_poll_cpu);
+}
+
+Attaching 4 probes...
+@net_rx_softirq_entry: 0
+
+@net_rx_softirq_exit: 0
+
+
+
+@net_rx_softirq_entry: 0
+
+@net_rx_softirq_exit: 0
+
+
+
+@net_rx_softirq_entry: 2
+@net_rx_softirq_entry_cpu[4]: 1
+@net_rx_softirq_entry_cpu[3]: 1
+@net_rx_softirq_exit: 2
+@net_rx_softirq_exit_cpu[3]: 1
+@net_rx_softirq_exit_cpu[4]: 1
+@napi_poll_calls[kprobe:__napi_poll]: 2
+@napi_poll_cpu[kprobe:__napi_poll, 4]: 1
+@napi_poll_cpu[kprobe:__napi_poll, 3]: 1
+@net_rx_softirq_entry: 2
+@net_rx_softirq_entry_cpu[4]: 1
+@net_rx_softirq_entry_cpu[3]: 1
+@net_rx_softirq_exit: 2
+@net_rx_softirq_exit_cpu[3]: 1
+@net_rx_softirq_exit_cpu[4]: 1
+@napi_poll_calls[kprobe:__napi_poll]: 2
+@napi_poll_cpu[kprobe:__napi_poll, 4]: 1
+@napi_poll_cpu[kprobe:__napi_poll, 3]: 1
+
+
+@napi_poll_calls[kprobe:__napi_poll]: 4
+@napi_poll_cpu[kprobe:__napi_poll, 4]: 2
+@napi_poll_cpu[kprobe:__napi_poll, 3]: 2
+@net_rx_softirq_entry: 4
+@net_rx_softirq_entry_cpu[4]: 2
+@net_rx_softirq_entry_cpu[3]: 2
+@net_rx_softirq_exit: 4
+@net_rx_softirq_exit_cpu[3]: 2
+@net_rx_softirq_exit_cpu[4]: 2
+RC=124
+TIMEOUT_AS_EXPECTED=1

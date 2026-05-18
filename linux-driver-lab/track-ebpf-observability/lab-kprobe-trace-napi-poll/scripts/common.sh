@@ -6,8 +6,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LAB_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 RECORD_ROOT="${LAB_DIR}/records"
 REPORT_DIR="${LAB_DIR}/reports"
-PROBE_DIR="${LAB_DIR}/probes"
 
+# 默认观察目标是实验网卡；如果没有流量，可以在运行时覆盖成管理口。
 : "${EBPF_IFACE:=ens192}"
 : "${EBPF_MGMT_IFACE:=ens33}"
 : "${EBPF_DURATION:=10}"
@@ -16,6 +16,7 @@ PROBE_DIR="${LAB_DIR}/probes"
 mkdir -p "${RECORD_ROOT}" "${REPORT_DIR}"
 
 make_record_dir() {
+    # 每轮测试放到独立目录，避免新旧证据混在一起。
     if [[ -n "${EBPF_RECORD_DIR}" ]]; then
         mkdir -p "${EBPF_RECORD_DIR}"
         printf '%s\n' "${EBPF_RECORD_DIR}" > "${RECORD_ROOT}/.last_record_dir"
@@ -30,6 +31,7 @@ make_record_dir() {
 }
 
 last_record_dir() {
+    # 后续脚本沿用 00_check_env.sh 创建的最近一次记录目录。
     if [[ -f "${RECORD_ROOT}/.last_record_dir" ]]; then
         cat "${RECORD_ROOT}/.last_record_dir"
         return
@@ -70,4 +72,29 @@ run_bpftrace() {
         echo "TIMEOUT_AS_EXPECTED=1" >> "${out}"
     fi
     return 0
+}
+
+kprobe_exists() {
+    # 有些环境需要 sudo 才能列出 kprobe；先尝试普通用户，再尝试 sudo。
+    local sym="$1"
+    if bpftrace -l "kprobe:${sym}" 2>/dev/null | grep -qx "kprobe:${sym}"; then
+        return 0
+    fi
+    if command -v sudo >/dev/null 2>&1 && sudo bpftrace -l "kprobe:${sym}" 2>/dev/null | grep -qx "kprobe:${sym}"; then
+        return 0
+    fi
+    return 1
+}
+
+first_available_kprobe() {
+    # 不同内核导出的 NAPI poll 符号不同，本 lab 只选择能被 bpftrace 看到的符号。
+    command -v bpftrace >/dev/null 2>&1 || return 1
+    local sym
+    for sym in "$@"; do
+        if kprobe_exists "${sym}"; then
+            printf '%s\n' "${sym}"
+            return 0
+        fi
+    done
+    return 1
 }

@@ -1,0 +1,56 @@
+LAB=lab-kprobe-trace-napi-poll
+DATE=2026-05-18T21:46:42+08:00
+This probe dynamically selects the first traceable NAPI poll symbol.
+
+## selected probe
+kprobe:__napi_poll
+
+## generated script
+kprobe:__napi_poll
+{
+    @napi_poll_calls[probe] = count();
+    @napi_poll_by_cpu[probe, cpu] = count();
+    @napi_poll_by_comm[probe, comm] = count();
+}
+
+interval:s:1
+{
+    print(@napi_poll_calls);
+    print(@napi_poll_by_cpu);
+    print(@napi_poll_by_comm);
+}
+
+Attaching 2 probes...
+@napi_poll_calls[kprobe:__napi_poll]: 6
+@napi_poll_by_cpu[kprobe:__napi_poll, 4]: 6
+@napi_poll_by_comm[kprobe:__napi_poll, swapper/4]: 6
+@napi_poll_calls[kprobe:__napi_poll]: 14
+@napi_poll_by_cpu[kprobe:__napi_poll, 3]: 1
+@napi_poll_by_cpu[kprobe:__napi_poll, 4]: 13
+@napi_poll_by_comm[kprobe:__napi_poll, swapper/3]: 1
+@napi_poll_by_comm[kprobe:__napi_poll, kworker/4:0]: 1
+@napi_poll_by_comm[kprobe:__napi_poll, swapper/4]: 12
+@napi_poll_calls[kprobe:__napi_poll]: 24
+@napi_poll_by_cpu[kprobe:__napi_poll, 3]: 1
+@napi_poll_by_cpu[kprobe:__napi_poll, 4]: 23
+@napi_poll_by_comm[kprobe:__napi_poll, swapper/3]: 1
+@napi_poll_by_comm[kprobe:__napi_poll, kworker/4:0]: 1
+@napi_poll_by_comm[kprobe:__napi_poll, swapper/4]: 22
+@napi_poll_calls[kprobe:__napi_poll]: 32
+@napi_poll_by_cpu[kprobe:__napi_poll, 3]: 2
+@napi_poll_by_cpu[kprobe:__napi_poll, 4]: 30
+@napi_poll_by_comm[kprobe:__napi_poll, swapper/3]: 2
+@napi_poll_by_comm[kprobe:__napi_poll, ping]: 2
+@napi_poll_by_comm[kprobe:__napi_poll, kworker/4:0]: 2
+@napi_poll_by_comm[kprobe:__napi_poll, swapper/4]: 26
+
+
+@napi_poll_by_comm[kprobe:__napi_poll, swapper/3]: 2
+@napi_poll_by_comm[kprobe:__napi_poll, kworker/4:0]: 2
+@napi_poll_by_comm[kprobe:__napi_poll, ping]: 5
+@napi_poll_by_comm[kprobe:__napi_poll, swapper/4]: 28
+@napi_poll_by_cpu[kprobe:__napi_poll, 3]: 2
+@napi_poll_by_cpu[kprobe:__napi_poll, 4]: 35
+@napi_poll_calls[kprobe:__napi_poll]: 37
+RC=124
+TIMEOUT_AS_EXPECTED=1
