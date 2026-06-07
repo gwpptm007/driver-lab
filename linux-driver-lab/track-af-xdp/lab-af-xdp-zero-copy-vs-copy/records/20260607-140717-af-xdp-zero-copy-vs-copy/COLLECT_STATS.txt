@@ -1,0 +1,86 @@
+LAB=af-xdp-zero-copy-vs-copy
+DATE=2026-06-07T14:13:26+08:00
+HOST=wq7-virtual-machine
+KERNEL=6.8.0-111-generic
+AF_XDP_IFACE=veth-xdp
+AF_XDP_MANAGEMENT_IFACE=ens33
+AF_XDP_PCI=0000:0b:00.0
+AF_XDP_DRIVER=vmxnet3
+AF_XDP_QUEUE=0
+AF_XDP_DURATION=8
+AF_XDP_INTERVAL=1
+
+== iface ==
+10: veth-xdp@veth-peer: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000
+    link/ether 2a:d5:1c:5d:9b:1f brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast           
+          7670      84      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+          7585      71      0       0       0       0 
+
+== xdp state ==
+10: veth-xdp@veth-peer: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000
+
+== bpftool prog brief ==
+	xlated 64B  jited 59B  memlock 4096B
+235: cgroup_skb  tag 6deef7357e7b4530  gpl
+	loaded_at 2026-06-07T12:03:16+0800  uid 0
+	xlated 64B  jited 59B  memlock 4096B
+236: cgroup_device  tag c8b47a902f1cc68b  gpl
+	loaded_at 2026-06-07T12:03:16+0800  uid 0
+	xlated 464B  jited 293B  memlock 4096B
+237: cgroup_device  tag e3dbd137be8d6168  gpl
+	loaded_at 2026-06-07T12:03:16+0800  uid 0
+	xlated 504B  jited 314B  memlock 4096B
+238: cgroup_skb  tag 6deef7357e7b4530  gpl
+	loaded_at 2026-06-07T12:03:16+0800  uid 0
+	xlated 64B  jited 59B  memlock 4096B
+239: cgroup_skb  tag 6deef7357e7b4530  gpl
+	loaded_at 2026-06-07T12:03:16+0800  uid 0
+	xlated 64B  jited 59B  memlock 4096B
+240: cgroup_device  tag ee0e253c78993a24  gpl
+	loaded_at 2026-06-07T12:03:16+0800  uid 0
+	xlated 416B  jited 263B  memlock 4096B
+241: cgroup_device  tag c8b47a902f1cc68b  gpl
+	loaded_at 2026-06-07T12:03:16+0800  uid 0
+	xlated 464B  jited 293B  memlock 4096B
+242: cgroup_skb  tag 6deef7357e7b4530  gpl
+	loaded_at 2026-06-07T12:03:16+0800  uid 0
+	xlated 64B  jited 59B  memlock 4096B
+243: cgroup_skb  tag 6deef7357e7b4530  gpl
+	loaded_at 2026-06-07T12:03:16+0800  uid 0
+	xlated 64B  jited 59B  memlock 4096B
+244: cgroup_device  tag ee0e253c78993a24  gpl
+	loaded_at 2026-06-07T12:03:16+0800  uid 0
+	xlated 416B  jited 263B  memlock 4096B
+245: cgroup_device  tag 8b9c33f36f812014  gpl
+	loaded_at 2026-06-07T12:03:16+0800  uid 0
+	xlated 744B  jited 452B  memlock 4096B
+246: cgroup_skb  tag 6deef7357e7b4530  gpl
+	loaded_at 2026-06-07T12:03:16+0800  uid 0
+	xlated 64B  jited 59B  memlock 4096B
+247: cgroup_skb  tag 6deef7357e7b4530  gpl
+	loaded_at 2026-06-07T12:03:16+0800  uid 0
+	xlated 64B  jited 59B  memlock 4096B
+
+== ethtool -S selected ==
+     rx_queue_0_xdp_packets: 6
+     rx_queue_0_xdp_bytes: 168
+     rx_queue_0_drops: 0
+     rx_queue_0_xdp_redirect: 6
+     rx_queue_0_xdp_drops: 0
+     rx_queue_0_xdp_tx: 0
+     rx_queue_0_xdp_tx_errors: 0
+     tx_queue_0_xdp_xmit: 0
+     tx_queue_0_xdp_xmit_errors: 0
+     rx_pp_alloc_fast: 0
+     rx_pp_alloc_slow: 0
+     rx_pp_alloc_slow_ho: 0
+     rx_pp_alloc_empty: 0
+     rx_pp_alloc_refill: 0
+     rx_pp_alloc_waive: 0
+     rx_pp_recycle_cached: 0
+     rx_pp_recycle_cache_full: 0
+     rx_pp_recycle_ring: 0
+     rx_pp_recycle_ring_full: 0
+     rx_pp_recycle_released_ref: 0

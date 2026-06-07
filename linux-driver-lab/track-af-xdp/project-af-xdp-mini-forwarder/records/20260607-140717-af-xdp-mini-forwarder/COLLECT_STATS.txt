@@ -1,0 +1,33 @@
+PROJECT=af-xdp-mini-forwarder
+DATE=2026-06-07T14:13:27+08:00
+HOST=wq7-virtual-machine
+KERNEL=6.8.0-111-generic
+AF_XDP_IFACE=veth-xdp
+AF_XDP_MANAGEMENT_IFACE=ens33
+AF_XDP_PCI=0000:0b:00.0
+AF_XDP_DRIVER=vmxnet3
+AF_XDP_QUEUE=0
+AF_XDP_DURATION=10
+AF_XDP_INTERVAL=1
+AF_XDP_MODE=skb
+AF_XDP_BIND=copy
+
+== iface stats ==
+10: veth-xdp@veth-peer: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000
+    link/ether 2a:d5:1c:5d:9b:1f brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast           
+          7670      84      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+          7585      71      0       0       0       0 
+
+== xdp state ==
+10: veth-xdp@veth-peer: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default qlen 1000
+    link/ether 2a:d5:1c:5d:9b:1f brd ff:ff:ff:ff:ff:ff promiscuity 0 minmtu 68 maxmtu 65535 
+    veth addrgenmode eui64 numtxqueues 128 numrxqueues 128 gso_max_size 65536 gso_max_segs 65535 
+
+== parsed forwarder stats ==
+FORWARDER_DROP.log: rx=3 rx_bytes=126 tx=0 tx_bytes=0 drop=3 fill=3 tx_full=0 comp=0 empty=83
+FORWARDER_REFLECT.log: rx=3 rx_bytes=126 tx=3 tx_bytes=126 drop=0 fill=3 tx_full=0 comp=3 empty=92
+SUMMARY rx=6 tx=3 comp=3
+PASS_TRAFFIC=YES
+PASS_TX_REFLECT=YES

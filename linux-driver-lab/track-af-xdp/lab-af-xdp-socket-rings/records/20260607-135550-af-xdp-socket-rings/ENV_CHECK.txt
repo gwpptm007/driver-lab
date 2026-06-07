@@ -1,0 +1,83 @@
+LAB=af-xdp-socket-rings
+DATE=2026-06-07T13:55:50+08:00
+HOST=wq7-virtual-machine
+KERNEL=6.8.0-111-generic
+AF_XDP_IFACE=ens192
+AF_XDP_MANAGEMENT_IFACE=ens33
+AF_XDP_PCI=0000:0b:00.0
+AF_XDP_DRIVER=vmxnet3
+AF_XDP_MODE=skb
+AF_XDP_QUEUE=0
+AF_XDP_DURATION=15
+AF_XDP_INTERVAL=1
+AF_XDP_BIND_MODE=copy
+
+== toolchain ==
+clang: /usr/bin/clang
+Ubuntu clang version 14.0.0-1ubuntu1.1
+cc: /usr/bin/cc
+make: /usr/bin/make
+pkg-config: /usr/bin/pkg-config
+bpftool: /usr/sbin/bpftool
+bpftool v7.4.0
+using libbpf v1.4
+features:
+ip: /usr/sbin/ip
+ethtool: /usr/sbin/ethtool
+lspci: /usr/bin/lspci
+
+== libbpf / xsk headers ==
+libbpf.pc: FOUND
+libbpf version: 0.5.0
+libbpf cflags: 
+libbpf libs: -lbpf
+header: /usr/include/bpf/libbpf.h FOUND
+header: /usr/include/bpf/xsk.h FOUND
+header: /usr/include/bpf/bpf_helpers.h FOUND
+
+== iface ==
+iface ens192: FOUND
+ens192           UP             00:0c:29:f8:f6:82 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+2: ens192: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:f8:f6:82 brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast           
+             0       0      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+         18239     150      0       0       0       0 
+    altname enp11s0
+driver: vmxnet3
+version: 1.7.0.0-k-NAPI
+firmware-version: 
+expansion-rom-version: 
+bus-info: 0000:0b:00.0
+supports-statistics: yes
+supports-test: no
+supports-eeprom-access: no
+supports-register-dump: yes
+supports-priv-flags: no
+queues:
+/sys/class/net/ens192/queues/rx-0
+/sys/class/net/ens192/queues/rx-1
+/sys/class/net/ens192/queues/rx-2
+/sys/class/net/ens192/queues/rx-3
+/sys/class/net/ens192/queues/rx-4
+/sys/class/net/ens192/queues/rx-5
+/sys/class/net/ens192/queues/rx-6
+/sys/class/net/ens192/queues/rx-7
+/sys/class/net/ens192/queues/tx-0
+/sys/class/net/ens192/queues/tx-1
+/sys/class/net/ens192/queues/tx-2
+/sys/class/net/ens192/queues/tx-3
+/sys/class/net/ens192/queues/tx-4
+/sys/class/net/ens192/queues/tx-5
+/sys/class/net/ens192/queues/tx-6
+/sys/class/net/ens192/queues/tx-7
+
+== pci ==
+0b:00.0 Ethernet controller [0200]: VMware VMXNET3 Ethernet Controller [15ad:07b0] (rev 01)
+	DeviceName: Ethernet2
+	Subsystem: VMware VMXNET3 Ethernet Controller [15ad:07b0]
+	Kernel driver in use: vmxnet3
+	Kernel modules: vmxnet3
+
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/lab-af-xdp-socket-rings/records/20260607-135550-af-xdp-socket-rings

@@ -1,0 +1,41 @@
+LAB=af-xdp-socket-rings
+DATE=2026-06-07T13:56:48+08:00
+HOST=wq7-virtual-machine
+KERNEL=6.8.0-111-generic
+AF_XDP_IFACE=ens192
+AF_XDP_MANAGEMENT_IFACE=ens33
+AF_XDP_PCI=0000:0b:00.0
+AF_XDP_DRIVER=vmxnet3
+AF_XDP_MODE=skb
+AF_XDP_QUEUE=0
+AF_XDP_DURATION=15
+AF_XDP_INTERVAL=1
+AF_XDP_BIND_MODE=copy
+
+This lab needs packets arriving on ens192 queue 0.
+
+Recommended procedure:
+
+1. 终端 A：在测试机上启动 AF_XDP 收包程序（后台运行）
+   cd /home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/lab-af-xdp-socket-rings
+   sudo AF_XDP_DURATION=30 ./scripts/03_run_af_xdp_socket_smoke.sh
+
+2. 终端 B/C：在同 VMware 网络的另一台主机上发包
+   方式一：ping（需先配 IP）
+     ping <实验机 ens192 的 IP>
+
+   方式二：arping（ARP 层，不需要 IP）
+     arping -I <对端网卡> <实验机 ens192 的 IP>
+
+   方式三：Python UDP 广播（可控、速率可调）
+     python3 - <<'PY'
+import socket, time
+dst=('255.255.255.255', 9000)
+s=socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+for i in range(1000):
+    s.sendto(b'af-xdp-test-%d' % i, dst)
+    time.sleep(0.002)
+PY
+
+3. 回到终端 A：确认 AF_XDP_FINAL_STATS 中 rx_packets > 0

@@ -1,0 +1,6 @@
+COMMAND: sudo ./build/af_xdp_mode_probe --ifname veth-xdp --queue 0 --mode native --zero-copy --duration 8 --interval 1 --obj ./build/af_xdp_kern.bpf.o
+xsk_socket__create: Operation not supported
+af-xdp-rings config: ifname=veth-xdp ifindex=10 queue=0 mode=native bind=zero-copy duration=8 interval=1
+UMEM_READY frames=4096 frame_size=2048 bytes=8388608
+bye
+PROBE_RC=1

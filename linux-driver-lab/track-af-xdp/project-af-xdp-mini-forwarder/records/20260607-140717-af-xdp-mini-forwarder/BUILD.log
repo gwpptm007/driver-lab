@@ -1,0 +1,26 @@
+PROJECT=af-xdp-mini-forwarder
+DATE=2026-06-07T14:10:35+08:00
+HOST=wq7-virtual-machine
+KERNEL=6.8.0-111-generic
+AF_XDP_IFACE=ens192
+AF_XDP_MANAGEMENT_IFACE=ens33
+AF_XDP_PCI=0000:0b:00.0
+AF_XDP_DRIVER=vmxnet3
+AF_XDP_QUEUE=0
+AF_XDP_DURATION=10
+AF_XDP_INTERVAL=1
+AF_XDP_MODE=skb
+AF_XDP_BIND=copy
+
+rm -rf build
+CLANG=clang
+CC=cc
+BPF_OBJ=build/af_xdp_forwarder_kern.bpf.o
+USER_BIN=build/af_xdp_forwarder
+mkdir -p build
+clang -O2 -g -Wall -Werror -target bpf -I/usr/include/x86_64-linux-gnu -c af_xdp_forwarder_kern.bpf.c -o build/af_xdp_forwarder_kern.bpf.o
+cc -O2 -g -Wall -Wextra af_xdp_forwarder.c -o build/af_xdp_forwarder -lbpf -lelf -lz
+
+build/af_xdp_forwarder_kern.bpf.o: ELF 64-bit LSB relocatable, eBPF, version 1 (SYSV), with debug_info, not stripped
+build/af_xdp_forwarder:            ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=36afbe3bf3b40321d1183b16576059f3e518a7a9, for GNU/Linux 3.2.0, with debug_info, not stripped
+BUILD_RESULT=PASS
