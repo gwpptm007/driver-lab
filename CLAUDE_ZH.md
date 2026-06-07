@@ -6,13 +6,15 @@
 
 Linux 驱动学习实验室，包含多条渐进式学习路径：
 
-| 路径 | 内容 | 构建方式 |
-|------|------|----------|
-| `foundation/` | day01-day35（W1-W5）：miscdevice → platform/IRQ → PCIe → DMA/性能 | 每日 `build.sh` |
-| `netdev/` | stage00-stage14：net_device/skb/NAPI → virtio-net → XDP | 每 stage `make` |
-| `track-dpdk/` | DPDK 用户态 fastpath（vmxnet3 PMD → vhost-user → virtio-user → fastpath C 应用） | `meson + ninja` |
-| `track-real-driver/` | virtio-net 源码深潜 | （分析为主） |
-| `track-virtual-net/` | tap/bridge/vhost 机制 | （分析为主） |
+| 路径 | 内容 | 构建方式 | 状态 |
+|------|------|----------|------|
+| `foundation/` | day01-day35（W1-W5）：miscdevice → platform/IRQ → PCIe → DMA/性能 | 每日 `build.sh` | 完成 |
+| `netdev/` | stage00-stage14：net_device/skb/NAPI → virtio-net → XDP | 每 stage `make` | 完成 |
+| `track-af-xdp/` | AF_XDP 四阶段：XDP redirect → socket/rings → zero-copy 探测 → mini forwarder | 每 lab `make` | **四阶段全部 PASS（2026-06-07）** |
+| `track-dpdk/` | DPDK 用户态 fastpath（vmxnet3 PMD → vhost-user → virtio-user → fastpath C 应用） | `meson + ninja` | 完成 |
+| `track-real-driver/` | virtio-net 源码深潜 | （分析为主） | — |
+| `track-virtual-net/` | tap/bridge/vhost 机制 | （分析为主） | — |
+| `track-ebpf-observability/` | eBPF 网络路径可观测性 | （分析为主） | — |
 
 ## 构建与测试命令
 
@@ -162,9 +164,9 @@ ARM64 实验使用 `inject_virt_dt.py`：
 
 ### 推荐阅读顺序
 
-1. `linux-driver-lab/START_HERE_CURRENT.md` - 当前状态
-2. `linux-driver-lab/README.md` - 整体路线图
+1. `linux-driver-lab/README.md` - 整体路线图
+2. `linux-driver-lab/track-af-xdp/README.md` - AF_XDP 主线（四阶段全部 PASS）
 3. `foundation/README.md` - day01-35 学习路径
 4. `netdev/README.md` - stage00-14 网络驱动主线
 5. `track-dpdk/README.md` - DPDK 用户态网络
-6. `docs/03_PROGRESS.md` - 当前进度与开放项
+6. `linux-driver-lab/docs/03_PROGRESS.md` - 当前进度与开放项

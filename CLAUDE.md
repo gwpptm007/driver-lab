@@ -6,13 +6,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a Linux driver learning laboratory with multiple progressive tracks:
 
-| Track | Path | Build |
-|-------|------|-------|
-| `foundation/` | day01-day35 (W1-W5): miscdevice → platform/IRQ → PCIe → DMA/performance | `build.sh` per day |
-| `netdev/` | stage00-stage14: net_device/skb/NAPI → virtio-net → XDP | `make` per stage |
-| `track-dpdk/` | DPDK user-space fastpath (vmxnet3 PMD → vhost-user → virtio-user → fastpath C app) | `meson + ninja` |
-| `track-real-driver/` | virtio-net source code dive | (analysis only) |
-| `track-virtual-net/` | tap/bridge/vhost mechanisms | (analysis only) |
+| Track | Path | Build | Status |
+|-------|------|-------|--------|
+| `foundation/` | day01-day35 (W1-W5): miscdevice → platform/IRQ → PCIe → DMA/performance | `build.sh` per day | Complete |
+| `netdev/` | stage00-stage14: net_device/skb/NAPI → virtio-net → XDP | `make` per stage | Complete |
+| `track-af-xdp/` | AF_XDP 4-phase track: XDP redirect → socket/rings → zero-copy probe → mini forwarder | `make` per lab | **All 4 phases PASS (2026-06-07)** |
+| `track-dpdk/` | DPDK user-space fastpath (vmxnet3 PMD → vhost-user → virtio-user → fastpath C app) | `meson + ninja` | Complete |
+| `track-real-driver/` | virtio-net source code dive | (analysis only) | — |
+| `track-virtual-net/` | tap/bridge/vhost mechanisms | (analysis only) | — |
+| `track-ebpf-observability/` | eBPF network path observability | (analysis only) | — |
 
 ## Build and Test Commands
 
@@ -162,9 +164,9 @@ After consolidation, docs are organized as:
 
 ### Recommended Reading Order
 
-1. `linux-driver-lab/START_HERE_CURRENT.md` - Current status
-2. `linux-driver-lab/README.md` - Overall roadmap
+1. `linux-driver-lab/README.md` - Overall roadmap
+2. `linux-driver-lab/track-af-xdp/README.md` - AF_XDP track (all 4 phases PASS)
 3. `foundation/README.md` - Day01-35 learning path
-4. `netdev/README.md` - Stage00-14 network driver主线
+4. `netdev/README.md` - Stage00-14 network driver
 5. `track-dpdk/README.md` - DPDK user-space networking
-6. `docs/03_PROGRESS.md` - Current progress and open items
+6. `linux-driver-lab/docs/03_PROGRESS.md` - Current progress and open items

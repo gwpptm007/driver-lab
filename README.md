@@ -90,7 +90,8 @@ driver-lab/
 ## 4. 当前项目状态一句话结论
 
 > 当前仓库已经完成从字符设备基础，到 platform/DT/IRQ，再到 PCIe/DMA/性能分析与稳定性验证的主线闭环；
-> 现在更适合作为“阶段性完整作品”来评审，而不是继续把它当成零散 demo 仓库来看。
+> AF_XDP 四阶段实验（XDP redirect → socket/rings → zero-copy → mini forwarder）全部复测通过（2026-06-07）；
+> 现在更适合作为”阶段性完整作品”来评审，而不是继续把它当成零散 demo 仓库来看。
 
 ---
 

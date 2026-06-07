@@ -27,7 +27,7 @@ linux-driver-lab/
 | track-real-driver | `track-real-driver/README.md` | 真实驱动源码与 patch 线 |
 | track-virtual-net | `track-virtual-net/README.md` | vhost/kick/notify 机制 |
 | track-dpdk | `track-dpdk/README.md` | DPDK 用户态网络 fastpath |
-| track-af-xdp | `track-af-xdp/README.md` | Linux 原生 XDP + AF_XDP socket |
+| track-af-xdp | `track-af-xdp/README.md` | Linux 原生 XDP + AF_XDP socket（四阶段全部 PASS） |
 | track-ebpf-observability | `track-ebpf-observability/README.md` | 网络路径观测与定位 |
 
 详细说明 → `docs/01_PROGRAMS.md`

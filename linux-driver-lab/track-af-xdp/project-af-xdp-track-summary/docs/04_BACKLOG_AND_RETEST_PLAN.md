@@ -1,64 +1,61 @@
 # Backlog and Retest Plan
 
-## Backlog 1: lab-xdp-redirect-basics 补测
+> 2026-06-07 更新：Backlog 1-4 全部完成，所有 Phase 已通过复测。
 
-目标：从 `PASS_BASIC_ATTACH` 升级到 `PASS_ACTION / REDIRECT_MODEL_READY`。
+## Backlog 1: lab-xdp-redirect-basics 补测 — DONE
 
-建议执行：
+目标达成：从 `PASS_BASIC_ATTACH` 升级到 `PASS_BASIC=YES, PASS_ACTION=YES, REDIRECT_MODEL_READY=YES`。
 
-```bash
-cd track-af-xdp/lab-xdp-redirect-basics
-./scripts/00_check_env.sh
-./scripts/01_build_app.sh
-sudo AF_XDP_CONFIRM_REBIND=YES ./scripts/02_prepare_kernel_netdev.sh
-sudo ./scripts/03_run_xdp_pass.sh
-sudo AF_XDP_CONFIRM_DROP=YES ./scripts/04_run_xdp_drop.sh
-sudo AF_XDP_CONFIRM_REDIRECT=YES ./scripts/05_run_xdp_redirect_dryrun.sh
-./scripts/06_collect_stats.sh
-./scripts/07_make_review_bundle.sh
-```
+- XDP_PASS: 12 pkts, 628 bytes
+- XDP_DROP: 3 pkts, 126 bytes
+- XDP_REDIRECT: 3 pkts, 126 bytes
+- 使用 veth pair 拓扑注入流量
 
-## Backlog 2: lab-af-xdp-socket-rings 测试
+详见 `lab-xdp-redirect-basics/docs/04_RETEST_20260607.md`
 
-目标：证明 UMEM、AF_XDP socket、FILL/RX/TX/COMPLETION rings 可创建并运行。
+## Backlog 2: lab-af-xdp-socket-rings 测试 — DONE
 
-```bash
-cd track-af-xdp/lab-af-xdp-socket-rings
-./scripts/00_check_env.sh
-./scripts/01_build_app.sh
-sudo AF_XDP_CONFIRM_REBIND=YES ./scripts/02_prepare_kernel_netdev.sh
-sudo ./scripts/03_run_af_xdp_socket_smoke.sh
-./scripts/05_collect_stats.sh
-./scripts/06_make_review_bundle.sh
-```
+目标达成：UMEM、AF_XDP socket、FILL/RX/TX/COMPLETION rings 已验证。
 
-## Backlog 3: zero-copy 探测
+- UMEM_READY: frames=4096, frame_size=2048, bytes=8388608
+- XSK_SOCKET_READY, FILL_RING_READY, XSKMAP_REGISTERED
+- rx_packets=49 (首轮 6663 bytes), rx_packets=3 (脚本轮)
 
-目标：明确 VMware/vmxnet3 环境是否支持 native / zero-copy。
+详见 `lab-af-xdp-socket-rings/docs/04_RETEST_20260607.md`
 
-```bash
-cd track-af-xdp/lab-af-xdp-zero-copy-vs-copy
-./scripts/00_check_env.sh
-./scripts/01_build_app.sh
-sudo AF_XDP_CONFIRM_REBIND=YES ./scripts/02_prepare_kernel_netdev.sh
-sudo ./scripts/03_run_copy_mode_baseline.sh
-sudo ./scripts/04_probe_native_copy.sh
-sudo ./scripts/05_probe_zero_copy.sh
-./scripts/06_compare_modes.sh
-./scripts/08_make_review_bundle.sh
-```
+## Backlog 3: zero-copy 探测 — DONE
 
-## Backlog 4: mini forwarder 项目验证
+目标达成：明确 veth/vmxnet3 环境不支持 zero-copy。
 
-目标：从 `READY_TO_TEST` 推进到 `PASS_DROP_SMOKE / PASS_REFLECT_SMOKE`，后续再补真实 traffic。
+- skb+copy baseline: PROBE_RC=0, rx_packets=3
+- native+copy probe: PROBE_RC=0, rx_packets=3
+- native+zero-copy probe: PROBE_RC=1, `xsk_socket__create: Operation not supported`
 
-```bash
-cd track-af-xdp/project-af-xdp-mini-forwarder
-./scripts/00_check_env.sh
-./scripts/01_build_app.sh
-sudo AF_XDP_CONFIRM_REBIND=YES ./scripts/02_prepare_kernel_netdev.sh
-sudo ./scripts/03_run_forwarder_drop_smoke.sh
-sudo ./scripts/04_run_forwarder_reflect_smoke.sh
-./scripts/06_collect_stats.sh
-./scripts/07_make_review_bundle.sh
-```
+详见 `lab-af-xdp-zero-copy-vs-copy/docs/04_RETEST_20260607.md`
+
+## Backlog 4: mini forwarder 项目验证 — DONE
+
+目标达成：从 `READY_TO_TEST` 推进到全项 PASS。
+
+- DROP: rx=3, dropped=3, fill_recycled=3
+- REFLECT: rx=3, tx=3, comp=3 — 首次验证 TX 和 COMPLETION ring
+
+详见 `project-af-xdp-mini-forwarder/docs/04_RETEST_20260607.md`
+
+## 新 Backlog
+
+### Backlog 5: project-af-xdp-traffic-test
+
+给 mini forwarder 补完整的 veth/namespace 测试闭环：
+- 多流量模式 (UDP flood, 不同包大小)
+- ring occupancy 监控
+- busy poll / need_wakeup 对比
+- pps 基线
+
+### Backlog 6: DPDK vs AF_XDP 对比文档
+
+- PMD vs kernel driver
+- mbuf vs UMEM frame
+- rx_burst/tx_burst vs rings
+- hugepage vs mmap UMEM
+- vhost/virtio-user vs XSKMAP redirect
