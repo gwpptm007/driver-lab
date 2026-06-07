@@ -1,0 +1,147 @@
+probe_file=/home/wq7/workspace/driver-lab/linux-driver-lab/track-ebpf-observability/lab-bpftrace-netdev-observe/probes/tx.bt
+duration=10
+iface_hint=ens33
+kernel=6.8.0-111-generic
+date=2026-06-07T13:12:54+08:00
+note=tracepoint-first, no BEGIN/END blocks
+--- bpftrace output ---
+Attaching 3 probes...
+13:12:56 @tx_queue_total: 10
+@tx_xmit_total: 10
+@tx_queue_cpu[6]: 10
+@tx_xmit_cpu[6]: 10
+13:12:57 @tx_queue_total: 20
+@tx_xmit_total: 20
+@tx_queue_cpu[1]: 1
+@tx_queue_cpu[0]: 5
+@tx_queue_cpu[6]: 14
+@tx_xmit_cpu[1]: 1
+@tx_xmit_cpu[0]: 5
+@tx_xmit_cpu[6]: 14
+13:12:58 @tx_queue_total: 32
+@tx_xmit_total: 32
+@tx_queue_cpu[3]: 1
+@tx_queue_cpu[0]: 5
+@tx_queue_cpu[1]: 11
+@tx_queue_cpu[6]: 15
+@tx_xmit_cpu[3]: 1
+@tx_xmit_cpu[0]: 5
+@tx_xmit_cpu[1]: 11
+@tx_xmit_cpu[6]: 15
+13:12:59 @tx_queue_total: 48
+@tx_xmit_total: 48
+@tx_queue_cpu[3]: 1
+@tx_queue_cpu[4]: 1
+@tx_queue_cpu[2]: 1
+@tx_queue_cpu[7]: 2
+@tx_queue_cpu[0]: 5
+@tx_queue_cpu[6]: 18
+@tx_queue_cpu[1]: 20
+@tx_xmit_cpu[2]: 1
+@tx_xmit_cpu[3]: 1
+@tx_xmit_cpu[4]: 1
+@tx_xmit_cpu[7]: 2
+@tx_xmit_cpu[0]: 5
+@tx_xmit_cpu[6]: 18
+@tx_xmit_cpu[1]: 20
+13:13:00 @tx_queue_total: 63
+@tx_xmit_total: 63
+@tx_queue_cpu[3]: 1
+@tx_queue_cpu[4]: 2
+@tx_queue_cpu[7]: 3
+@tx_queue_cpu[2]: 3
+@tx_queue_cpu[0]: 5
+@tx_queue_cpu[6]: 20
+@tx_queue_cpu[1]: 29
+@tx_xmit_cpu[3]: 1
+@tx_xmit_cpu[4]: 2
+@tx_xmit_cpu[7]: 3
+@tx_xmit_cpu[2]: 3
+@tx_xmit_cpu[0]: 5
+@tx_xmit_cpu[6]: 20
+@tx_xmit_cpu[1]: 29
+13:13:01 @tx_queue_total: 72
+@tx_xmit_total: 72
+@tx_queue_cpu[4]: 2
+@tx_queue_cpu[3]: 3
+@tx_queue_cpu[7]: 3
+@tx_queue_cpu[2]: 3
+@tx_queue_cpu[0]: 9
+@tx_queue_cpu[6]: 22
+@tx_queue_cpu[1]: 30
+@tx_xmit_cpu[4]: 2
+@tx_xmit_cpu[7]: 3
+@tx_xmit_cpu[2]: 3
+@tx_xmit_cpu[3]: 3
+@tx_xmit_cpu[0]: 9
+@tx_xmit_cpu[6]: 22
+@tx_xmit_cpu[1]: 30
+13:13:02 @tx_queue_total: 76
+@tx_xmit_total: 76
+@tx_queue_cpu[3]: 3
+@tx_queue_cpu[7]: 3
+@tx_queue_cpu[2]: 3
+@tx_queue_cpu[4]: 4
+@tx_queue_cpu[0]: 10
+@tx_queue_cpu[6]: 22
+@tx_queue_cpu[1]: 31
+@tx_xmit_cpu[7]: 3
+@tx_xmit_cpu[2]: 3
+@tx_xmit_cpu[3]: 3
+@tx_xmit_cpu[4]: 4
+@tx_xmit_cpu[0]: 10
+@tx_xmit_cpu[6]: 22
+@tx_xmit_cpu[1]: 31
+13:13:03 @tx_queue_total: 79
+@tx_xmit_total: 79
+@tx_queue_cpu[3]: 3
+@tx_queue_cpu[7]: 3
+@tx_queue_cpu[2]: 3
+@tx_queue_cpu[4]: 6
+@tx_queue_cpu[0]: 10
+@tx_queue_cpu[6]: 22
+@tx_queue_cpu[1]: 32
+@tx_xmit_cpu[7]: 3
+@tx_xmit_cpu[2]: 3
+@tx_xmit_cpu[3]: 3
+@tx_xmit_cpu[4]: 6
+@tx_xmit_cpu[0]: 10
+@tx_xmit_cpu[6]: 22
+@tx_xmit_cpu[1]: 32
+13:13:04 @tx_queue_total: 82
+@tx_xmit_total: 82
+@tx_queue_cpu[3]: 3
+@tx_queue_cpu[7]: 3
+@tx_queue_cpu[2]: 3
+@tx_queue_cpu[4]: 8
+@tx_queue_cpu[0]: 11
+@tx_queue_cpu[6]: 22
+@tx_queue_cpu[1]: 32
+@tx_xmit_cpu[7]: 3
+@tx_xmit_cpu[2]: 3
+@tx_xmit_cpu[3]: 3
+@tx_xmit_cpu[4]: 8
+@tx_xmit_cpu[0]: 11
+@tx_xmit_cpu[6]: 22
+@tx_xmit_cpu[1]: 32
+
+
+@tx_queue_cpu[5]: 2
+@tx_queue_cpu[3]: 3
+@tx_queue_cpu[7]: 3
+@tx_queue_cpu[2]: 3
+@tx_queue_cpu[4]: 10
+@tx_queue_cpu[0]: 11
+@tx_queue_cpu[6]: 24
+@tx_queue_cpu[1]: 32
+@tx_queue_total: 88
+@tx_xmit_cpu[5]: 2
+@tx_xmit_cpu[7]: 3
+@tx_xmit_cpu[2]: 3
+@tx_xmit_cpu[3]: 3
+@tx_xmit_cpu[4]: 10
+@tx_xmit_cpu[0]: 11
+@tx_xmit_cpu[6]: 24
+@tx_xmit_cpu[1]: 32
+@tx_xmit_total: 88
+BPFTRACE_TIMEOUT_RC=124

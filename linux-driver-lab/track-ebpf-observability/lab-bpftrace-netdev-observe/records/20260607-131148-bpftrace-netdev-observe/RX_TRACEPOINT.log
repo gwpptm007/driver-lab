@@ -1,0 +1,40 @@
+probe_file=/home/wq7/workspace/driver-lab/linux-driver-lab/track-ebpf-observability/lab-bpftrace-netdev-observe/probes/rx.bt
+duration=10
+iface_hint=ens33
+kernel=6.8.0-111-generic
+date=2026-06-07T13:12:37+08:00
+note=tracepoint-first, no BEGIN/END blocks
+--- bpftrace output ---
+Attaching 2 probes...
+13:12:38 @rx_total: 10
+@rx_cpu[3]: 10
+13:12:39 @rx_total: 19
+@rx_cpu[3]: 19
+13:12:40 @rx_total: 29
+@rx_cpu[3]: 29
+13:12:41 @rx_total: 40
+@rx_cpu[3]: 40
+13:12:42 @rx_total: 50
+@rx_cpu[3]: 50
+13:12:43 @rx_total: 57
+@rx_cpu[0]: 2
+@rx_cpu[3]: 55
+13:12:44 @rx_total: 59
+@rx_cpu[6]: 1
+@rx_cpu[0]: 2
+@rx_cpu[3]: 56
+13:12:45 @rx_total: 60
+@rx_cpu[6]: 1
+@rx_cpu[0]: 2
+@rx_cpu[3]: 57
+13:12:46 @rx_total: 61
+@rx_cpu[6]: 1
+@rx_cpu[0]: 2
+@rx_cpu[3]: 58
+
+
+@rx_cpu[6]: 1
+@rx_cpu[0]: 2
+@rx_cpu[3]: 59
+@rx_total: 62
+BPFTRACE_TIMEOUT_RC=124

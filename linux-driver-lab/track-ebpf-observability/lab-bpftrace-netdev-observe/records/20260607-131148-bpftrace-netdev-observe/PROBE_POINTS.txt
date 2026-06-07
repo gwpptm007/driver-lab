@@ -1,0 +1,42 @@
+LAB=lab-bpftrace-netdev-observe
+DATE=2026-06-07T13:11:55+08:00
+KERNEL=6.8.0-111-generic
+
+== required tracepoints ==
+
+--- tracepoint:net:netif_receive_skb ---
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+sudo: a password is required
+
+--- tracepoint:net:net_dev_queue ---
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+sudo: a password is required
+
+--- tracepoint:net:net_dev_xmit ---
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+sudo: a password is required
+
+--- tracepoint:irq:softirq_entry ---
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+sudo: a password is required
+
+--- tracepoint:irq:softirq_exit ---
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+sudo: a password is required
+
+== optional kprobes ==
+
+--- kprobe:napi_poll ---
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+sudo: a password is required
+
+--- kprobe:netif_receive_skb ---
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+sudo: a password is required
+
+--- kprobe:dev_queue_xmit ---
+sudo: a terminal is required to read the password; either use the -S option to read from standard input or configure an askpass helper
+sudo: a password is required
+
+== note ==
+tracepoint probes are the acceptance path; kprobe probes are optional because BTF/notrace availability differs by kernel/package.

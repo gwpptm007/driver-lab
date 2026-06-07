@@ -1,0 +1,15 @@
+probe_file=/home/wq7/workspace/driver-lab/linux-driver-lab/track-ebpf-observability/lab-bpftrace-netdev-observe/probes/kprobe.bt
+duration=10
+iface_hint=ens33
+kernel=6.8.0-111-generic
+date=2026-06-07T13:13:33+08:00
+note=tracepoint-first, no BEGIN/END blocks
+--- bpftrace output ---
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-ebpf-observability/lab-bpftrace-netdev-observe/probes/kprobe.bt:1:1-17: WARNING: napi_poll is not traceable (either non-existing, inlined, or marked as "notrace"); attaching to it will likely fail
+kprobe:napi_poll
+~~~~~~~~~~~~~~~~
+Attaching 2 probes...
+cannot attach kprobe, Invalid argument
+ERROR: Error attaching probe: 'kprobe:napi_poll'
+BPFTRACE_RC=255
+OPTIONAL_RESULT=NOTE_FAILED_OR_UNSUPPORTED

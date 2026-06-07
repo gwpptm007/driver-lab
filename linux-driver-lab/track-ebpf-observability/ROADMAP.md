@@ -33,7 +33,14 @@ REVIEW_BUNDLE.md 存在
 能够解释 kprobe 与 tracepoint 的适用边界
 ```
 
-状态：`READY_TO_TEST`
+状态：`COMPLETED` (2026-06-07)
+
+测试结果 (kernel 6.8, ens33, ping 50 @ 0.1s):
+- PASS_ENV: YES — bpftrace v0.14, e1000, no XDP
+- PASS_TRACEPOINT_RX: YES — 62 pkts, CPU 3
+- PASS_TRACEPOINT_TX: YES — 88 pkts, TX_QUEUE=TX_XMIT, CPU 0-7
+- PASS_SOFTIRQ: YES — 111 NET_RX softirq on CPU 3, entry=exit
+- KPROBE_OPTIONAL: napi_poll not traceable (kernel 6.8 "notrace") — correctly recorded
 
 ## Phase 2：`lab-kprobe-trace-napi-poll`
 
