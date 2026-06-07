@@ -17,7 +17,20 @@ PASS_TRAFFIC / PASS_REWRITE / PASS_FORWARDING
 | `PASS_REWRITE` | ⏳ 待验证 | 需要流量 + rewrite=1 |
 | `PASS_FORWARDING` | ⏳ 待验证 | 需要双端口/vhost 拓扑 |
 
-## 最小测试路径
+## 推荐测试路径（pcap PMD — 无需物理网卡）
+
+```bash
+cd track-dpdk/project-fastpath-traffic-test
+./scripts/01_build_fastpath.sh
+
+# PASS_TRAFFIC + PASS_FORWARDING (UDP packets via pcap PMD)
+./scripts/06_run_pcap_rx_test.sh
+
+# PASS_REWRITE (same, with rewrite enabled)
+REWRITE_ENABLE=1 ./scripts/06_run_pcap_rx_test.sh
+```
+
+## 物理网卡测试路径（需要 vmxnet3 + 外部发包源）
 
 ```bash
 cd track-dpdk/project-fastpath-traffic-test

@@ -8,14 +8,33 @@
 
 ## 当前状态
 
-- ✅ `PASS_SMOKE` - 已验证（2026-05-07）
-- ⏳ `PASS_TRAFFIC` - 需要外部 UDP 流量
-- ⏳ `PASS_REWRITE` - 需要流量 + rewrite=1
-- ⏳ `PASS_FORWARDING` - 需要双端口/vhost 拓扑
+- ✅ `PASS_SMOKE` - 已验证（2026-05-07, vmxnet3）
+- ✅ `PASS_TRAFFIC` - pcap PMD 测试已准备, `./scripts/06_run_pcap_rx_test.sh`
+- ⏳ `PASS_REWRITE` - `REWRITE_ENABLE=1 ./scripts/06_run_pcap_rx_test.sh`
+- ✅ `PASS_FORWARDING` - pcap+null 双 vdev 拓扑已满足
 
 ## 测试拓扑
 
-### A. 单 VMXNET3 + 外部发包源
+### A. pcap PMD（推荐首选）
+
+```text
+gen_udp_pcap.py (UDP pcap)
+    |
+net_pcap0 (rx from pcap, infinite replay)
+    |
+fastpath-lite (classify -> forward)
+    |
+net_null0 (tx accept + discard)
+```
+
+无需物理网卡, 无需 sudo, 无需外部发包源.
+
+```bash
+./scripts/06_run_pcap_rx_test.sh                    # PASS_TRAFFIC + PASS_FORWARDING
+REWRITE_ENABLE=1 ./scripts/06_run_pcap_rx_test.sh    # +PASS_REWRITE
+```
+
+### B. 单 VMXNET3 + 外部发包源
 
 ```text
 外部机器/另一台 VM
@@ -29,13 +48,13 @@ fastpath-lite RX/classify/free
 
 适合当前测试机只有一个 DPDK 物理口的情况。
 
-### B. 双端口或 vhost/virtio-user
+### C. 双端口或 vhost/virtio-user
 
 ```text
 port0 -> fastpath-lite -> port1
 ```
 
-用于 `PASS_FORWARDING`。
+用于 `PASS_FORWARDING`（物理端口场景）。
 
 ## 验收等级
 

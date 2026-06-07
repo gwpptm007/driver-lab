@@ -26,9 +26,9 @@
 |-------|------|----------|
 | `track-real-driver/` | 真实 Linux NIC 驱动源码与 patch | 4 labs + 1 project 完成 |
 | `track-virtual-net/` | vhost/kick/notify + tap/bridge 协同 | 3 labs + 1 project 完成 |
-| `track-dpdk/` | DPDK 用户态网络 | 规划中 |
-| `track-af-xdp/` | AF_XDP 快速路径 | 规划中 |
-| `track-ebpf-observability/` | eBPF 可观测性 | 规划中 |
+| `track-dpdk/` | DPDK 用户态网络 | 9 phases, media-gateway-lite PASS_TRAFFIC/FORWARDING/REWRITE |
+| `track-af-xdp/` | AF_XDP 快速路径 | 4 phases 全部 PASS (2026-06-07) |
+| `track-ebpf-observability/` | eBPF 可观测性 | 5 phases 全部 COMPLETED (2026-06-07) |
 
 ---
 

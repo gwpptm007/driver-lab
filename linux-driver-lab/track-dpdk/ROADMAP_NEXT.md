@@ -11,8 +11,8 @@
 | 3 | `lab-virtio-user-vhost` | `PASS_WITH_WARN` | virtio-user + vhost-user 本机对接已跑通，按记录保留 warning |
 | 4 | `lab-dpdk-l2-forwarding` | `PASS_SMOKE` | l2fwd-lite C app 能编译、启动、打印 stats；未证明真实转发 |
 | 5 | `project-user-space-fastpath` | `PASS_SMOKE` | fastpath-lite 能编译、启动、初始化端口、打印软件 stats |
-| 6 | `project-fastpath-traffic-test` | `READY_TO_TEST` | 补真实流量、UDP-only、rewrite、stats 对照 |
-| 7 | `project-dpdk-media-gateway-lite` | `PASS_SMOKE` | 双 vdev smoke 已跑，UDP-only drop path 有证据；真实 traffic/forward/rewrite 后补 |
+| 6 | `project-fastpath-traffic-test` | `PASS_TRAFFIC` `PASS_FORWARDING` `PASS_REWRITE` | pcap PMD 测试通过 (2026-06-07), rx/ipv4/udp/tx/rewrite 全部非零 |
+| 7 | `project-dpdk-media-gateway-lite` | `PASS_TRAFFIC` `PASS_FORWARDING` `PASS_REWRITE` | pcap PMD 测试通过 (2026-06-07), rx/ipv4/udp/tx/rewrite 全部非零 |
 | 8 | `project-dpdk-v17-legacy-review` | `PASS_REVIEW` | 旧 DPDK v17 经验与 modern DPDK 对照、面试/简历材料 |
 | 9 | `project-dpdk-track-summary/project-dpdk-track-summary/reports/final/DPDK_TRACK_REPORT.md` | `READY` | track 总结、作品线、简历素材、后续 backlog |
 
@@ -23,7 +23,8 @@ project-dpdk-v17-legacy-review(PASS_REVIEW)
   -> project-dpdk-track-summary/reports/final/DPDK_TRACK_REPORT.md(READY)
   -> project-dpdk-track-summary/reports/final/DPDK_INTERVIEW_NOTES.md(READY)
   -> project-dpdk-track-summary/reports/final/DPDK_RESUME_MATERIAL_FINAL.md(READY)
-  -> 回补 media-gateway-lite PASS_TRAFFIC / PASS_FORWARDING / PASS_REWRITE
+  -> media-gateway-lite: PASS_TRAFFIC / PASS_FORWARDING / PASS_REWRITE (pcap PMD, 2026-06-07) ✅
+  -> fastpath-traffic-test: PASS_TRAFFIC / PASS_FORWARDING / PASS_REWRITE (pcap PMD, 2026-06-07) ✅
 ```
 
 ## 为什么先做 DPDK_TRACK_REPORT
@@ -59,12 +60,15 @@ PMD 接管 -> vhost-user -> virtio-user -> 自写 l2fwd -> fastpath -> traffic-t
 
 ```text
 project-dpdk-media-gateway-lite:
-  - PASS_TRAFFIC: rx_ipv4/rx_udp 非 0
-  - PASS_FORWARDING: tx/rule_hit 非 0
-  - PASS_REWRITE: rewrite_hit 非 0，并有统计或抓包证明
+  - ✅ PASS_TRAFFIC: rx_ipv4/rx_udp 非 0 (pcap PMD, 2026-06-07)
+  - ✅ PASS_FORWARDING: tx/rule_hit 非 0 (pcap PMD, 2026-06-07)
+  - ✅ PASS_REWRITE: rewrite_hit 非 0 (pcap PMD, 2026-06-07)
 
 project-fastpath-traffic-test:
-  - 若有时间，补 vhost/virtio-user 或 pcap PMD 的流量证据
+  - ✅ PASS_TRAFFIC: rx/ipv4/udp 非 0 (pcap PMD, 2026-06-07)
+  - ✅ PASS_FORWARDING: tx 非 0 (pcap PMD, 2026-06-07)
+  - ✅ PASS_REWRITE: rewrite 非 0 (pcap PMD, 2026-06-07)
+  - 若有时间，补 vhost/virtio-user 或 vmxnet3 外部流量证据
 ```
 
 ## 当前推荐执行

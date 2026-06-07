@@ -6,10 +6,53 @@
 
 ## 当前状态
 
-TODO，测试后填写。
+TESTED (2026-06-07, pcap PMD path).
 
-## 预期输出
+## 实测结果
 
-- `PASS_TRAFFIC`: 证明真实 UDP 流量进入 fastpath。
-- `PASS_REWRITE`: 证明 rewrite 被真实流量触发。
-- `PASS_FORWARDING`: 证明双端口或虚拟拓扑下 rx/tx 闭环。
+### Test 1: PASS_TRAFFIC + PASS_FORWARDING
+
+```bash
+./scripts/06_run_pcap_rx_test.sh
+```
+
+| 指标 | 值 |
+|------|-----|
+| port 0 rx | 111,709,760 |
+| port 0 ipv4 | 111,709,760 |
+| port 0 udp | 111,709,760 |
+| port 1 tx | 111,709,760 |
+| rte_eth_stats port0 opackets | 111,709,760 |
+
+**verdict: PASS_SMOKE PASS_TRAFFIC PASS_FORWARDING**
+
+### Test 2: + PASS_REWRITE
+
+```bash
+REWRITE_ENABLE=1 ./scripts/06_run_pcap_rx_test.sh
+```
+
+| 指标 | 值 |
+|------|-----|
+| port 0 rx | 77,210,432 |
+| port 0 ipv4 | 77,210,432 |
+| port 0 udp | 77,210,432 |
+| port 0 rewrite | 77,210,432 |
+| port 1 tx | 77,210,432 |
+| rte_eth_stats port0 opackets | 77,210,432 |
+
+**verdict: PASS_SMOKE PASS_TRAFFIC PASS_FORWARDING PASS_REWRITE**
+
+## 测试拓扑
+
+```text
+gen_udp_pcap.py (500 UDP pcap)
+    -> net_pcap0 (rx from pcap, infinite replay)
+    -> fastpath-lite (classify + forward)
+    -> net_null0 (TX accept + discard)
+```
+
+## 记录位置
+
+- `records/20260607_155955-fastpath-pcap/` — traffic test
+- `records/20260607_160006-fastpath-pcap-rewrite/` — rewrite test

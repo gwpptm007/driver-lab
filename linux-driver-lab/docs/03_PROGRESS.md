@@ -14,6 +14,9 @@
 | netdev 主线 | netdev/stage00~stage14 | ✅ 完成 | stage14 XDP 入口收口 |
 | track-real-driver | 4 labs + 1 project | ✅ 完成 | virtio_net 源码深潜 |
 | track-virtual-net | 3 labs + 1 project | ✅ 完成 | vhost/kick/notify + L2 转发 |
+| track-af-xdp | 4 phases | ✅ 完成 | 全部 PASS (2026-06-07) |
+| track-dpdk | 9 phases | ✅ 完成 | media-gateway-lite PASS_TRAFFIC (pcap PMD) |
+| track-ebpf-observability | 5 phases | ✅ 完成 | 全部 COMPLETED (2026-06-07) |
 
 ---
 

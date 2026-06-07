@@ -28,18 +28,32 @@ def main() -> int:
     if not matches:
         print("verdict=UNKNOWN no fastpath software stats found")
         return 0
+    # Aggregate stats across all ports for verdict determination
+    agg = {"rx": 0, "tx": 0, "ipv4": 0, "udp": 0, "rewrite": 0, "arp": 0, "non_udp": 0,
+           "drop_short": 0, "drop_non_udp": 0, "drop_no_peer": 0, "tx_failed": 0}
+    for m in matches:
+        for k in agg:
+            agg[k] += m.get(k, 0)
+
     last = matches[-1]
     print("last_stats=" + " ".join(f"{k}={v}" for k, v in last.items()))
-    if last["rx"] == 0:
-        print("verdict=PASS_SMOKE_ONLY reason=rx_is_zero")
-    elif last["tx"] > 0:
-        print("verdict=PASS_FORWARDING reason=rx_and_tx_nonzero")
-    elif last["rewrite"] > 0:
-        print("verdict=PASS_REWRITE reason=rx_and_rewrite_nonzero")
-    elif last["udp"] > 0 or last["ipv4"] > 0:
-        print("verdict=PASS_TRAFFIC reason=rx_and_l3_l4_counter_nonzero")
+    print("agg_stats=" + " ".join(f"{k}={v}" for k, v in agg.items()))
+
+    verdicts = []
+    if agg["rx"] == 0:
+        verdicts.append("PASS_SMOKE_ONLY")
     else:
-        print("verdict=PASS_TRAFFIC_PARTIAL reason=rx_nonzero_but_protocol_counters_zero")
+        verdicts.append("PASS_SMOKE")
+        if agg["udp"] > 0 or agg["ipv4"] > 0:
+            verdicts.append("PASS_TRAFFIC")
+        if agg["tx"] > 0:
+            verdicts.append("PASS_FORWARDING")
+        if agg["rewrite"] > 0:
+            verdicts.append("PASS_REWRITE")
+        if not any(v in verdicts for v in ["PASS_TRAFFIC", "PASS_FORWARDING", "PASS_REWRITE"]):
+            verdicts.append("PASS_TRAFFIC_PARTIAL (rx_nonzero_but_protocol_counters_zero)")
+
+    print("verdict=" + " ".join(verdicts))
     return 0
 
 

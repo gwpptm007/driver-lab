@@ -101,10 +101,27 @@ rule 0 rewrite=161830784
 ## P2 - 文档和报告补强
 
 ```text
-1. 将 media-gateway-lite 从 PASS_SMOKE 升级到 PASS_TRAFFIC 后更新 README/ROADMAP。
-2. 将真实流量 records 写入 DPDK_TRACK_REPORT。
-3. 简历 bullet 从“原型/smoke”升级为“真实流量转发/rewrite 验证”。
+1. ✅ 将 media-gateway-lite 从 PASS_SMOKE 升级到 PASS_TRAFFIC, report 已更新.
+2. ✅ 为 fastpath-traffic-test 新增 pcap PMD 测试脚本 (scripts/06_run_pcap_rx_test.sh).
+3. 将真实流量 records 写入 DPDK_TRACK_REPORT。
+4. 简历 bullet 从”原型/smoke”升级为”真实流量转发/rewrite 验证”。
 ```
+
+### fastpath-traffic-test pcap PMD 测试 — DONE (2026-06-07)
+
+测试已运行并全部通过：
+
+```text
+Test 1 (traffic):  rx=111709760 ipv4=111709760 udp=111709760 tx=111709760
+  verdict: PASS_SMOKE PASS_TRAFFIC PASS_FORWARDING
+
+Test 2 (rewrite): rx=77210432 ipv4=77210432 udp=77210432 tx=77210432 rewrite=77210432
+  verdict: PASS_SMOKE PASS_TRAFFIC PASS_FORWARDING PASS_REWRITE
+```
+
+记录位置：
+- `records/20260607_155955-fastpath-pcap/`
+- `records/20260607_160006-fastpath-pcap-rewrite/`
 
 ## 当前不做的事
 
