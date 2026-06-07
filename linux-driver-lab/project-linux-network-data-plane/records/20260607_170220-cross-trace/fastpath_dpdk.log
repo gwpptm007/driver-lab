@@ -1,0 +1,42 @@
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Static memory layout is selected, amount of reserved memory can be adjusted with -m or --socket-mem
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/cross_trace_demo/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+TELEMETRY: No legacy callbacks, legacy socket not created
+fastpath-lite config: nb_mbuf=8192 mbuf_cache=250 rx_desc=1024 tx_desc=1024 burst=32 run_seconds=12 stats_period=5
+policy: promisc=1 udp_only=0 swap_mac=1 rewrite_enable=0
+initializing port 0
+port 0 started: rx_desc=1024 tx_desc=1024 socket=0 driver=net_pcap
+port 0 MAC: 02:70:63:61:70:00
+initializing port 1
+port 1 started: rx_desc=1024 tx_desc=1024 socket=0 driver=net_null
+port 1 MAC: 72:2C:9A:F1:D0:87
+available/initialized ports: 2
+enter fastpath loop: run_seconds=12 stats_period=5 burst=32 lcore=0
+
+==== fastpath-lite software stats ====
+port 0: rx=54438144 rx_bytes=4191737088 tx=54438144 tx_bytes=3484041216 tx_failed=0 arp=0 ipv4=54438144 udp=54438144 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+port 1: rx=54438144 rx_bytes=3484041216 tx=54438144 tx_bytes=4191737088 tx_failed=0 arp=0 ipv4=54438144 udp=54438144 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== fastpath-lite software stats ====
+port 0: rx=110454304 rx_bytes=8504981408 tx=110454304 tx_bytes=7069075456 tx_failed=0 arp=0 ipv4=110454304 udp=110454304 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+port 1: rx=110454304 rx_bytes=7069075456 tx=110454304 tx_bytes=8504981408 tx_failed=0 arp=0 ipv4=110454304 udp=110454304 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+run_seconds reached, stopping...
+
+==== fastpath-lite software stats ====
+port 0: rx=133475712 rx_bytes=10277629824 tx=133475712 tx_bytes=8542445568 tx_failed=0 arp=0 ipv4=133475712 udp=133475712 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+port 1: rx=133475712 rx_bytes=8542445568 tx=133475712 tx_bytes=10277629824 tx_failed=0 arp=0 ipv4=133475712 udp=133475712 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_peer=0
+======================================
+
+==== rte_eth_stats ====
+port 0: ipackets=133475712 opackets=133475712 ibytes=10277629824 obytes=8542445568 imissed=0 ierrors=0 oerrors=0
+port 1: ipackets=133475712 opackets=133475712 ibytes=0 obytes=0 imissed=0 ierrors=0 oerrors=0
+=======================
+stopping port 0
+stopping port 1
+bye

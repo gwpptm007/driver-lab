@@ -1,0 +1,142 @@
+#!/usr/bin/env bpftrace
+//==============================================================================
+// packet_watcher.bt — Linux 网络数据面全栈探头
+//
+// 在同一时刻观测内核网络路径的 N 个关键决策点:
+//   - napi_poll       : NAPI 轮询入口
+//   - netif_receive_skb: skb 进入协议栈
+//   - dev_queue_xmit   : 出站队列
+//   - kfree_skb        : skb 释放 (drop / consume)
+//
+// 用法:
+//   sudo bpftrace packet_watcher.bt [duration_seconds]
+//   默认 15 秒, 按 Ctrl-C 提前退出并打印汇总
+//
+// 配合 DPDK pcap PMD 测试使用:
+//   终端1: sudo bpftrace tools/packet_watcher.bt 15
+//   终端2: ./scripts/run_cross_trace_demo.sh  # 启动 DPDK fastpath
+//
+// 预期: DPDK 处理数百万包, 但内核 kprobe 计数为 0
+//       → 证明 DPDK userspace PMD 完全绕过内核 NAPI/skb 路径
+//==============================================================================
+
+#ifndef DURATION
+#define DURATION 15
+#endif
+
+BEGIN
+{
+  printf("================================================================\n");
+  printf(" packet_watcher.bt — Linux Network Data Plane Watcher\n");
+  printf(" duration: %d seconds\n", DURATION);
+  printf(" probes: napi_poll | netif_receive_skb | dev_queue_xmit | kfree_skb\n");
+  printf("================================================================\n");
+  printf("\n");
+  printf("%-10s %-8s %-28s %s\n", "TIME", "CPU", "EVENT", "INFO");
+  printf("%-10s %-8s %-28s %s\n", "----", "---", "-----", "----");
+}
+
+// --- napi_poll: 中断或 softirq 触发 NAPI 轮询 ---
+kprobe:napi_poll
+{
+  @event_ts[0] = nsecs;
+  printf("%-10u %-8d %-28s budget=%d dev=%s\n",
+    elapsed / 1000000, cpu, "NAPI_POLL_ENTRY",
+    arg1, str(((struct net_device *)arg0)->name));
+  @cnt_napi_poll = count();
+  @cnt_napi_poll_per_cpu[cpu] = count();
+}
+
+// --- netif_receive_skb: skb 进入内核协议栈 ---
+kprobe:netif_receive_skb
+{
+  printf("%-10u %-8d %-28s\n",
+    elapsed / 1000000, cpu, "NETIF_RECEIVE_SKB");
+  @cnt_receive_skb = count();
+  @cnt_receive_skb_per_cpu[cpu] = count();
+}
+
+// --- dev_queue_xmit: skb 排队发出 ---
+kprobe:dev_queue_xmit
+{
+  printf("%-10u %-8d %-28s\n",
+    elapsed / 1000000, cpu, "DEV_QUEUE_XMIT");
+  @cnt_queue_xmit = count();
+}
+
+// --- kfree_skb: skb 释放 (跟踪 drop) ---
+kprobe:kfree_skb
+{
+  printf("%-10u %-8d %-28s\n",
+    elapsed / 1000000, cpu, "KFREE_SKB");
+  @cnt_kfree_skb = count();
+}
+
+// --- XDP redirect (如果可用) ---
+tracepoint:xdp:xdp_redirect
+{
+  printf("%-10u %-8d %-28s\n",
+    elapsed / 1000000, cpu, "XDP_REDIRECT");
+  @cnt_xdp_redirect = count();
+}
+
+END
+{
+  printf("\n");
+  printf("================================================================\n");
+  printf(" SUMMARY (%.2f seconds elapsed)\n", elapsed / 1000000.0);
+  printf("================================================================\n");
+  printf("\n");
+
+  // --- Event counts ---
+  printf("--- Event Totals ---\n");
+  printf("  napi_poll:        %d\n", @cnt_napi_poll);
+  printf("  netif_receive_skb: %d\n", @cnt_receive_skb);
+  printf("  dev_queue_xmit:   %d\n", @cnt_queue_xmit);
+  printf("  kfree_skb:        %d\n", @cnt_kfree_skb);
+  printf("  xdp_redirect:     %d\n", @cnt_xdp_redirect);
+  printf("\n");
+
+  // --- Per-CPU distribution for key events ---
+  if (@cnt_napi_poll > 0) {
+    printf("--- NAPI Poll per-CPU ---\n");
+    print(@cnt_napi_poll_per_cpu);
+    printf("\n");
+  }
+
+  if (@cnt_receive_skb > 0) {
+    printf("--- netif_receive_skb per-CPU ---\n");
+    print(@cnt_receive_skb_per_cpu);
+    printf("\n");
+  }
+
+  // --- Interpretation hints ---
+  printf("--- Interpretation ---\n");
+  if (@cnt_receive_skb > 0 && @cnt_napi_poll > 0) {
+    printf("  RX path active: NAPI poll → netif_receive_skb chain observed.\n");
+  }
+  if (@cnt_queue_xmit > 0) {
+    printf("  TX path active: dev_queue_xmit observed.\n");
+  }
+  if (@cnt_kfree_skb > 0) {
+    printf("  skb frees: %d (may include drops or normal consumption).\n", @cnt_kfree_skb);
+  }
+  if (@cnt_receive_skb == 0 && @cnt_napi_poll == 0) {
+    printf("  No kernel RX path activity detected.\n");
+    printf("  (Expected when DPDK PMD bypasses kernel NAPI/skb path.)\n");
+  }
+  if (@cnt_xdp_redirect > 0) {
+    printf("  XDP redirect observed: %d events.\n", @cnt_xdp_redirect);
+  }
+
+  printf("================================================================\n");
+
+  clear(@event_ts);
+  clear(@cnt_napi_poll);
+  clear(@cnt_napi_poll_per_cpu);
+  clear(@cnt_receive_skb);
+  clear(@cnt_receive_skb_per_cpu);
+  clear(@cnt_queue_xmit);
+  clear(@cnt_kfree_skb);
+  clear(@cnt_xdp_redirect);
+}
