@@ -1,0 +1,23 @@
+# BUILD_APP
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-dpdk-media-gateway-lite
+APP_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-dpdk-media-gateway-lite/app
+MEDIA_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-dpdk-media-gateway-lite/app/build/media-gateway-lite
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-dpdk-media-gateway-lite/records/20260607-145643-media-gateway-lite
+DPDK_IF=ens192
+DPDK_PCI=0000:0b:00.0
+DPDK_DRIVER=uio_pci_generic
+MGMT_IF=ens33
+MGMT_PCI=0000:02:01.0
+MEDIA_RUN_SECONDS=20
+MEDIA_LCORES=0-1
+MEDIA_FILE_PREFIX=media_gateway_lite
+
+## make clean all
+rm -rf build
+mkdir -p build
+cc -O2 -g -Wall -Wextra -include rte_config.h -march=corei7 -I/usr/include/dpdk -I/usr/include/libnl3 -I/usr/include/dpdk/../x86_64-linux-gnu/dpdk -I/usr/include/dpdk main.c gateway_config.c gateway_rule.c gateway_packet.c gateway_port.c gateway_stats.c -o build/media-gateway-lite -Wl,--as-needed -lrte_node -lrte_graph -lrte_flow_classify -lrte_pipeline -lrte_table -lrte_pdump -lrte_port -lrte_fib -lrte_ipsec -lrte_vhost -lrte_stack -lrte_security -lrte_sched -lrte_reorder -lrte_rib -lrte_dmadev -lrte_regexdev -lrte_rawdev -lrte_power -lrte_pcapng -lrte_member -lrte_lpm -lrte_latencystats -lrte_kni -lrte_jobstats -lrte_ip_frag -lrte_gso -lrte_gro -lrte_gpudev -lrte_eventdev -lrte_efd -lrte_distributor -lrte_cryptodev -lrte_compressdev -lrte_cfgfile -lrte_bpf -lrte_bitratestats -lrte_bbdev -lrte_acl -lrte_timer -lrte_hash -lrte_metrics -lrte_cmdline -lrte_pci -lrte_ethdev -lrte_meter -lrte_net -lrte_mbuf -lrte_mempool -lrte_rcu -lrte_ring -lrte_eal -lrte_telemetry -lrte_kvargs -lbsd
+
+## binary
+-rwxrwxr-x 1 wq7 wq7 163K  6月  7 14:56 /home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-dpdk-media-gateway-lite/app/build/media-gateway-lite
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk/project-dpdk-media-gateway-lite/app/build/media-gateway-lite: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=5660b9b617cdc57239dcbf16c032d778c38da41c, for GNU/Linux 3.2.0, with debug_info, not stripped

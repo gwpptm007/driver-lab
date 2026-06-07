@@ -11,7 +11,7 @@
 ```text
 这条 DPDK track 我是按真实工程能力拆开的。第一步不是直接写业务代码，而是先把环境打通，包括 hugepage、dpdk-devbind、vmxnet3 PMD、uio_pci_generic 和 testpmd stats。第二步做 vhost-user backend 和 virtio-user frontend，理解用户态虚拟网卡和 socket 后端的关系。第三步开始写 C 程序，从 l2fwd-lite 做端口初始化、mempool、RX/TX queue、rx_burst/tx_burst 和 stats。第四步做 fastpath-lite，加入 Ethernet/ARP/IPv4/UDP 分类、UDP-only 过滤、MAC/IP/UDP 端口改写框架和软件统计。第五步做 media-gateway-lite，把代码拆成 config、port、packet、rule、stats 模块，更接近真实媒体面网关。
 
-因为我之前做过 DPDK v17 的媒体面项目，所以最后还专门做了一站 v17 legacy review，把旧项目里的 uio/KNI、UDP 收发、ARP/IP/UDP rewrite、网元方向转发和现代 DPDK 的 vfio/uio、vhost-user/virtio-user、ethdev API 做映射。当前 media-gateway-lite 已完成 smoke 和 UDP-only drop path，真实 traffic/forward/rewrite 我作为后续补测项继续完善。
+因为我之前做过 DPDK v17 的媒体面项目，所以最后还专门做了一站 v17 legacy review，把旧项目里的 uio/KNI、UDP 收发、ARP/IP/UDP rewrite、网元方向转发和现代 DPDK 的 vfio/uio、vhost-user/virtio-user、ethdev API 做映射。media-gateway-lite 已完成 pcap PMD 真实 UDP 流量测试，PASS_TRAFFIC / PASS_FORWARDING / PASS_REWRITE 三项全部通过。
 ```
 
 ## 3. 面试官问：你 DPDK 到底做到了什么？
@@ -40,10 +40,8 @@ vhost-user 更像后端，通常由 DPDK 程序通过 UNIX socket 提供数据�
 
 ## 6. 面试官问：你 media-gateway-lite 做完了吗？
 
-答法要诚实：
-
 ```text
-media-gateway-lite 当前完成了项目骨架、模块拆分、双 vdev smoke 和 UDP-only drop path 验证；真实 UDP traffic、forwarding、rewrite 的 records 还在后续补测。这个阶段我不会把它夸成完整生产网关，但它已经能体现 DPDK 数据面工程组织方式，后续补真实流量闭环即可升级到 PASS_FORWARDING/PASS_REWRITE。
+media-gateway-lite 完成了项目骨架、模块拆分、pcap PMD 真实 UDP 流量测试，PASS_TRAFFIC / PASS_FORWARDING / PASS_REWRITE 三项全部通过。测试用 pcap PMD 构造 500 个 UDP 报文循环注入，10 秒内处理 1.6 亿包，验证了 Ethernet/IPv4/UDP 分类、五元组规则匹配、MAC/IP/UDP port rewrite 和 per-port/per-rule/drop reason 统计的全链路。还顺手修了两个实际 bug：tx_burst 后误访问 mbuf 和统计解析器的累计值重复相加问题。
 ```
 
 ## 7. 面试官问：DPDK v17 和现代 DPDK 有什么区别？
@@ -57,5 +55,5 @@ v17 时代很多项目会用 igb_uio、KNI，代码和构建方式也更旧。�
 ## 8. 简历项目一句话
 
 ```text
-基于 DPDK 21.11 构建用户态数据面与媒体网关原型，完成 vmxnet3 PMD 接管、vhost-user/virtio-user、自研 l2fwd-lite/fastpath-lite、media-gateway-lite smoke 验证，并结合 DPDK v17 媒体面经验整理 KNI/UIO/VFIO/vhost 迁移复盘。
+基于 DPDK 21.11 构建用户态数据面与媒体网关原型，完成 vmxnet3 PMD 接管、vhost-user/virtio-user、自研 l2fwd-lite/fastpath-lite、media-gateway-lite (PASS_TRAFFIC/FORWARDING/REWRITE)，并结合 DPDK v17 媒体面经验整理 KNI/UIO/VFIO/vhost 迁移复盘。
 ```

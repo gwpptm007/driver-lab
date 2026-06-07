@@ -1,0 +1,85 @@
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Static memory layout is selected, amount of reserved memory can be adjusted with -m or --socket-mem
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/mgw_record/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+TELEMETRY: No legacy callbacks, legacy socket not created
+media-gateway-lite starting
+available/initialized ports: 2
+port 0 MAC: 02:70:63:61:70:00
+port 1 MAC: B6:B2:10:A0:16:EB
+media-gateway-lite config: nb_mbuf=8192 cache=250 rx_desc=1024 tx_desc=1024 burst=32 run_seconds=10 stats_period=2
+policy: promisc=1 udp_only=1 swap_mac=0 strict_rules=0 nb_rules=1
+rules:
+  rule 0 name=rule0 enabled=1 dir=0:1 match_dst_port=9000 rewrite_dst_mac=52:54:00:00:00:02 rewrite_dst_ip=10.10.20.20 rewrite_dst_port=10000
+port 0 started
+port 0 MAC: 02:70:63:61:70:00
+port 1 started
+port 1 MAC: B6:B2:10:A0:16:EB
+enter media gateway loop on lcore 0
+
+==== media-gateway-lite software stats ====
+port 0: rx=32332960 rx_bytes=2489637920 tx=0 tx_bytes=0 tx_failed=0 drops=0 arp=0 ipv4=32332960 udp=32332960 non_udp=0 rewrite=32332960 drop_short=0 drop_non_udp=0 drop_no_route=0
+  rule 0: hit=32332960 bytes=2489637920 rewrite=32332960
+port 1: rx=32332960 rx_bytes=2069309440 tx=32332960 tx_bytes=2489637920 tx_failed=0 drops=32332960 arp=0 ipv4=32332960 udp=32332960 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_route=32332960
+  rule 0: hit=0 bytes=0 rewrite=0
+===========================================
+
+==== rte_eth_stats ====
+port 0: ipackets=32332960 ibytes=2489637920 opackets=0 obytes=0 imissed=0 ierrors=0 oerrors=0
+port 1: ipackets=32332960 ibytes=0 opackets=32332960 obytes=0 imissed=0 ierrors=0 oerrors=0
+=======================
+
+==== media-gateway-lite software stats ====
+port 0: rx=64778016 rx_bytes=4987907232 tx=0 tx_bytes=0 tx_failed=0 drops=0 arp=0 ipv4=64778016 udp=64778016 non_udp=0 rewrite=64778016 drop_short=0 drop_non_udp=0 drop_no_route=0
+  rule 0: hit=64778016 bytes=4987907232 rewrite=64778016
+port 1: rx=64778016 rx_bytes=4145793024 tx=64778016 tx_bytes=4987907232 tx_failed=0 drops=64778016 arp=0 ipv4=64778016 udp=64778016 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_route=64778016
+  rule 0: hit=0 bytes=0 rewrite=0
+===========================================
+
+==== rte_eth_stats ====
+port 0: ipackets=64778016 ibytes=4987907232 opackets=0 obytes=0 imissed=0 ierrors=0 oerrors=0
+port 1: ipackets=64778016 ibytes=0 opackets=64778016 obytes=0 imissed=0 ierrors=0 oerrors=0
+=======================
+
+==== media-gateway-lite software stats ====
+port 0: rx=97366432 rx_bytes=7497215264 tx=0 tx_bytes=0 tx_failed=0 drops=0 arp=0 ipv4=97366432 udp=97366432 non_udp=0 rewrite=97366432 drop_short=0 drop_non_udp=0 drop_no_route=0
+  rule 0: hit=97366432 bytes=7497215264 rewrite=97366432
+port 1: rx=97366432 rx_bytes=6231451648 tx=97366432 tx_bytes=7497215264 tx_failed=0 drops=97366432 arp=0 ipv4=97366432 udp=97366432 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_route=97366432
+  rule 0: hit=0 bytes=0 rewrite=0
+===========================================
+
+==== rte_eth_stats ====
+port 0: ipackets=97366432 ibytes=7497215264 opackets=0 obytes=0 imissed=0 ierrors=0 oerrors=0
+port 1: ipackets=97366432 ibytes=0 opackets=97366432 obytes=0 imissed=0 ierrors=0 oerrors=0
+=======================
+
+==== media-gateway-lite software stats ====
+port 0: rx=129186720 rx_bytes=9947377440 tx=0 tx_bytes=0 tx_failed=0 drops=0 arp=0 ipv4=129186720 udp=129186720 non_udp=0 rewrite=129186720 drop_short=0 drop_non_udp=0 drop_no_route=0
+  rule 0: hit=129186720 bytes=9947377440 rewrite=129186720
+port 1: rx=129186720 rx_bytes=8267950080 tx=129186720 tx_bytes=9947377440 tx_failed=0 drops=129186720 arp=0 ipv4=129186720 udp=129186720 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_route=129186720
+  rule 0: hit=0 bytes=0 rewrite=0
+===========================================
+
+==== rte_eth_stats ====
+port 0: ipackets=129186720 ibytes=9947377440 opackets=0 obytes=0 imissed=0 ierrors=0 oerrors=0
+port 1: ipackets=129186720 ibytes=0 opackets=129186720 obytes=0 imissed=0 ierrors=0 oerrors=0
+=======================
+
+==== media-gateway-lite software stats ====
+port 0: rx=161830784 rx_bytes=12460970368 tx=0 tx_bytes=0 tx_failed=0 drops=0 arp=0 ipv4=161830784 udp=161830784 non_udp=0 rewrite=161830784 drop_short=0 drop_non_udp=0 drop_no_route=0
+  rule 0: hit=161830784 bytes=12460970368 rewrite=161830784
+port 1: rx=161830784 rx_bytes=10357170176 tx=161830784 tx_bytes=12460970368 tx_failed=0 drops=161830784 arp=0 ipv4=161830784 udp=161830784 non_udp=0 rewrite=0 drop_short=0 drop_non_udp=0 drop_no_route=161830784
+  rule 0: hit=0 bytes=0 rewrite=0
+===========================================
+
+==== rte_eth_stats ====
+port 0: ipackets=161830784 ibytes=12460970368 opackets=0 obytes=0 imissed=0 ierrors=0 oerrors=0
+port 1: ipackets=161830784 ibytes=0 opackets=161830784 obytes=0 imissed=0 ierrors=0 oerrors=0
+=======================
+leaving media gateway loop
+stopping port 0
+stopping port 1
+bye

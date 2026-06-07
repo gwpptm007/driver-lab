@@ -1,8 +1,0 @@
-DONE  README.md
-DONE  ROADMAP_NEXT.md
-DONE  project-dpdk-track-summary/README.md
-DONE  project-dpdk-track-summary/reports/final/DPDK_TRACK_REPORT.md
-DONE  project-dpdk-track-summary/reports/final/DPDK_PROJECT_PORTFOLIO.md
-DONE  project-dpdk-track-summary/reports/final/DPDK_INTERVIEW_NOTES.md
-DONE  project-dpdk-track-summary/reports/final/DPDK_RESUME_MATERIAL_FINAL.md
-DONE  project-dpdk-track-summary/reports/final/DPDK_BACKLOG.md

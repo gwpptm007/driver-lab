@@ -4,7 +4,7 @@
 
 ## P0 - media-gateway-lite 真实流量闭环
 
-### 1. 修 TX 成功后访问 mbuf 的潜在风险
+### 1. 修 TX 成功后访问 mbuf 的潜在风险 — **FIXED (2026-06-07)**
 
 问题：
 
@@ -12,16 +12,16 @@
 sent = rte_eth_tx_burst(..., m, 1);
 if (sent == 1) {
     stats.port[r.out_port].tx++;
-    stats.port[r.out_port].tx_bytes += rte_pktmbuf_pkt_len(m);
+    stats.port[r.out_port].tx_bytes += rte_pktmbuf_pkt_len(m);  // BUG: mbuf 已归 PMD
 }
 ```
 
 `tx_burst` 成功后 mbuf 所有权交给 PMD，后续不应继续访问 `m`。
 
-修法：
+修法（已应用）：
 
 ```c
-uint32_t pkt_len = rte_pktmbuf_pkt_len(m);
+uint32_t pkt_len = rte_pktmbuf_pkt_len(m);  // 在 tx_burst 之前读取
 sent = rte_eth_tx_burst(..., &m, 1);
 if (sent == 1) {
     stats.port[r.out_port].tx++;
@@ -29,57 +29,74 @@ if (sent == 1) {
 }
 ```
 
-### 2. 修 stats parser 累计重复相加问题
+### 2. 修 stats parser 累计重复相加问题 — **FIXED (2026-06-07)**
 
 现象：周期打印的 stats 本身是累计值，解析脚本不应把每个周期都加起来。
 
-修法：
+修法（已应用）：
 
 ```text
 按每个 port / rule 取最后一次 sample
 而不是所有 sample 求和
 ```
 
-### 3. 新增真实 UDP 输入路径
+### 3. 新增真实 UDP 输入路径 — **DONE (2026-06-07)**
 
-优先路径：
-
-```text
-A. pcap PMD: 预生成 UDP pcap -> net_pcap rx -> media-gateway-lite -> net_null tx
-B. vhost/virtio-user: testpmd txonly -> virtio-user -> vhost socket -> media-gateway-lite
-C. 外部 VM/宿主机: 外部发包 -> ens192/vmxnet3 -> media-gateway-lite
-```
-
-验收目标：
+实现路径：**A. pcap PMD**（无需物理网卡，最稳最快的路径）
 
 ```text
-rx > 0
-ipv4 > 0
-udp > 0
+gen_udp_pcap.py (Python stdlib) → udp_test.pcap → net_pcap rx → media-gateway-lite → net_null tx
 ```
 
-## P1 - forwarding / rewrite 证据
+新增工具：
+- `tools/gen_udp_pcap.py`：纯 Python stdlib 生成含 UDP 报文的 pcap 文件
+- `scripts/06_run_pcap_rx_test.sh`：一键运行 pcap PMD 测试
 
-### PASS_FORWARDING
-
-验收目标：
+实测数据（10s run, 500 pcap packets infinite replay）：
 
 ```text
-rule_hit > 0
-tx > 0
-drop_no_route 可解释
-rte_eth_stats 或软件 stats 有对应证据
+rx=161830784  rx_bytes=12460970368
+ipv4=161830784
+udp=161830784
 ```
 
-### PASS_REWRITE
+验收结论：**rx>0, ipv4>0, udp>0 全部满足**。
 
-验收目标：
+---
+
+## P1 - forwarding / rewrite 证据 — **DONE (2026-06-07)**
+
+### PASS_FORWARDING — DONE
+
+同一轮 pcap PMD 测试中，auto bidirectional rules 实现转发：
 
 ```text
-rewrite_hit > 0
-rewrite_bytes > 0
-如果可抓包，抓包里能看到 MAC/IP/UDP port 变化
+port 0 rx=161830784  →  rule 0 hit=161830784  →  port 1 tx=161830784
+rule_hit=161830784
+tx=161830784
+rte_eth_stats: port1 opackets=161830784
 ```
+
+验收结论：**rule_hit>0, tx>0, ethdev stats 与软件 stats 一致**。
+
+### PASS_REWRITE — DONE
+
+使用显式 rewrite 规则测试（`--rule0-rewrite-dst-ip/--rule0-rewrite-dst-mac/--rule0-rewrite-dst-port`）：
+
+```text
+port 0 rewrite=161830784
+rule 0 rewrite=161830784
+```
+
+规则配置：
+```text
+--rule0 0:1 --rule0-dst-port 9000
+  --rule0-rewrite-dst-ip 10.10.20.20
+  --rule0-rewrite-dst-mac 52:54:00:00:00:02
+  --rule0-rewrite-dst-port 10000
+```
+
+验收结论：**rewrite_hit>0, rule_rewrite>0**
 
 ## P2 - 文档和报告补强
 

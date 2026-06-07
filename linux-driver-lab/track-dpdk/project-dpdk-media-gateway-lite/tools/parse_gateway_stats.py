@@ -23,9 +23,18 @@ KEYS = [
 
 
 def parse(paths: list[Path]):
-    totals = {k: 0 for k in KEYS}
-    rule_hit = 0
-    rule_rewrite = 0
+    """解析统计日志，取每个 port/rule 的最后一次采样值。
+
+    网关按周期打印的是累计计数器，不是增量。
+    所以取最后一次采样才是正确的总计，而不是累加所有采样。
+
+    注意：每个 port 下面都会打印 rule_hit/rule_rewrite（per-port 独立计数），
+    需要按 (port_id, rule_id) 追踪，最后跨 port 汇总。
+    """
+    port_last = {}             # port_id -> {key: value}
+    rule_hit_last = {}         # (port_id, rule_id) -> hit
+    rule_rewrite_last = {}     # (port_id, rule_id) -> rewrite
+    current_port = None        # 当前解析的 port 上下文
     samples = 0
 
     for path in paths:
@@ -34,13 +43,23 @@ def parse(paths: list[Path]):
             m = PORT_RE.search(line)
             if m:
                 samples += 1
-                for k in KEYS:
-                    totals[k] += int(m.group(k))
+                port_id = int(m.group("port"))
+                current_port = port_id
+                port_last[port_id] = {k: int(m.group(k)) for k in KEYS}
                 continue
             r = RULE_RE.search(line)
-            if r:
-                rule_hit += int(r.group("hit"))
-                rule_rewrite += int(r.group("rewrite"))
+            if r and current_port is not None:
+                rule_id = int(r.group("rule"))
+                rule_hit_last[(current_port, rule_id)] = int(r.group("hit"))
+                rule_rewrite_last[(current_port, rule_id)] = int(r.group("rewrite"))
+
+    # 汇总所有 port 的最后一次采样值
+    totals = {k: 0 for k in KEYS}
+    for pd in port_last.values():
+        for k in KEYS:
+            totals[k] += pd[k]
+    rule_hit = sum(rule_hit_last.values())
+    rule_rewrite = sum(rule_rewrite_last.values())
 
     return totals, rule_hit, rule_rewrite, samples
 

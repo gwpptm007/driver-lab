@@ -35,7 +35,7 @@ HugePage: 1024 x 2MB
 | 4 | `lab-dpdk-l2-forwarding` | PASS_SMOKE | 从 testpmd 过渡到自写 DPDK C 程序 |
 | 5 | `project-user-space-fastpath` | PASS_SMOKE | fastpath-lite：协议分类、UDP-only、rewrite 框架、软件统计 |
 | 6 | `project-fastpath-traffic-test` | READY_TO_TEST | 为真实 UDP 流量、rewrite、统计对照准备测试框架 |
-| 7 | `project-dpdk-media-gateway-lite` | PASS_SMOKE | 项目型媒体网关原型，双 vdev smoke 与 UDP-only drop path |
+| 7 | `project-dpdk-media-gateway-lite` | **PASS_TRAFFIC / PASS_FORWARDING / PASS_REWRITE** | 媒体网关原型：pcap PMD 真实 UDP 流量、转发、rewrite 全部验证通过 (2026-06-07) |
 | 8 | `project-dpdk-v17-legacy-review` | PASS_REVIEW | v17 经验复盘、现代 DPDK 对照、面试/简历材料 |
 
 ## 4. 能力拆解
@@ -97,14 +97,16 @@ config env
 review bundle
 ```
 
-还需要后续补强：
+已全部验证通过 (2026-06-07, pcap PMD)：
 
 ```text
-真实 IPv4/UDP 流量输入
-真实 port0->port1 转发
-rewrite_hit 非 0
-抓包或 stats 对照
+✓ 真实 IPv4/UDP 流量输入 (rx=161830784, ipv4=161830784, udp=161830784)
+✓ 真实 port0→port1 转发 (tx=161830784, rule_hit=161830784)
+✓ rewrite_hit 非 0 (rewrite=161830784, rule_rewrite=161830784)
+✓ stats 对照 (rte_eth_stats opackets 与软件 stats tx 一致)
 ```
+
+测试路径：`gen_udp_pcap.py → net_pcap rx → media-gateway-lite → net_null tx`，无需物理网卡。
 
 ## 5. 和历史 DPDK v17 项目的关系
 
@@ -132,24 +134,28 @@ uio/ko 环境
 
 ## 6. 当前不足与后续补测
 
-当前最大不足不是结构，而是真实流量证据不足。
-
-`project-dpdk-media-gateway-lite` 已通过 `PASS_SMOKE`，但还没有达到：
+`project-dpdk-media-gateway-lite` 已全部达到验收标准 (2026-06-07)：
 
 ```text
-PASS_TRAFFIC
-PASS_FORWARDING
-PASS_REWRITE
+✓ PASS_TRAFFIC    — pcap PMD 真实 UDP 输入
+✓ PASS_FORWARDING — rule_hit>0, tx>0, ethdev stats 一致
+✓ PASS_REWRITE    — rewrite>0, rule_rewrite>0
 ```
 
-后续补测优先级：
+P0 缺陷已修复：
 
 ```text
-P0: pcap PMD 或 vhost/virtio-user 构造真实 UDP 输入
-P0: 修正 stats parser，按最后一次累计值判断，而不是把周期累计重复相加
-P0: 修正 TX 成功后访问 mbuf 的潜在风险
-P1: 补 rewrite_hit 非 0 的 records
-P1: 补抓包或 TX stats 对照
+✓ 修正 TX 成功后访问 mbuf 的潜在风险 (main.c)
+✓ 修正 stats parser 累计重复相加问题 (parse_gateway_stats.py)
+✓ pcap PMD 构造真实 UDP 输入路径
+```
+
+剩余 P2（非阻塞）：
+
+```text
+- 真实物理网卡 (vmxnet3) 双口转发验证
+- 大规模压测
+- KNI 回注
 ```
 
 ## 7. 简历价值
@@ -171,5 +177,5 @@ P1: 补抓包或 TX stats 对照
 对外状态建议写成：
 
 ```text
-已完成 DPDK 用户态数据面主线，包括 vmxnet3 PMD、vhost-user/virtio-user、自写 l2fwd-lite、fastpath-lite、media-gateway-lite smoke、v17 legacy review；media-gateway-lite 的真实流量 forwarding/rewrite 作为后续补强项。
+已完成 DPDK 用户态数据面主线，包括 vmxnet3 PMD、vhost-user/virtio-user、自写 l2fwd-lite、fastpath-lite、media-gateway-lite (PASS_TRAFFIC/FORWARDING/REWRITE 全部通过)、v17 legacy review。
 ```

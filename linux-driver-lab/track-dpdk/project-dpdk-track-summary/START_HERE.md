@@ -26,4 +26,4 @@
 
 ## 当前边界
 
-`project-dpdk-media-gateway-lite` 当前仍然是 `PASS_SMOKE`，真实 UDP traffic / forwarding / rewrite 后续再补。不要在简历里夸成完整网关吞吐项目。
+`project-dpdk-media-gateway-lite` 已完成 **PASS_TRAFFIC + PASS_FORWARDING + PASS_REWRITE**（2026-06-07, pcap PMD 测试）。真实 UDP 流量、转发和 rewrite 已全部验证通过。

@@ -26,7 +26,7 @@ vmxnet3/testpmd
 | lab-dpdk-l2-forwarding | PASS_SMOKE | 自写 l2fwd-lite |
 | project-user-space-fastpath | PASS_SMOKE | fastpath-lite 框架 |
 | project-fastpath-traffic-test | READY_TO_TEST | traffic/rewrite 验证入口 |
-| project-dpdk-media-gateway-lite | PASS_SMOKE | 双 vdev smoke，真实流量后补 |
+| project-dpdk-media-gateway-lite | **PASS_TRAFFIC / FORWARDING / REWRITE** | pcap PMD 真实流量验证通过 (2026-06-07) |
 | project-dpdk-v17-legacy-review | PASS_REVIEW | 旧经验迁移和面试材料 |
 | DPDK_TRACK_REPORT | READY | 总结收口与作品化材料 |
 
@@ -45,9 +45,10 @@ DPDK 用户态数据面与媒体网关原型：基于 Ubuntu/VMware/DPDK 21.11 �
 ## 后续补强
 
 ```text
-1. media-gateway-lite PASS_TRAFFIC
-2. media-gateway-lite PASS_FORWARDING
-3. media-gateway-lite PASS_REWRITE
-4. pcap PMD / vhost-virtio 真实 UDP 输入路径
-5. 最终简历压缩版
+1. ✓ media-gateway-lite PASS_TRAFFIC (2026-06-07, pcap PMD)
+2. ✓ media-gateway-lite PASS_FORWARDING (2026-06-07)
+3. ✓ media-gateway-lite PASS_REWRITE (2026-06-07)
+4. ✓ pcap PMD 真实 UDP 输入路径 (2026-06-07)
+5. 真实物理网卡双口转发验证 (后续)
+6. 简历最终精简版 (后续)
 ```

@@ -18,28 +18,23 @@ summary 自己维护 reports/、records/、scripts/，和其他 project 风格�
 project-dpdk-track-summary/
 ├── README.md
 ├── START_HERE.md
-├── reports/
-│   ├── README.md
-│   └── final/
-│       ├── DPDK_TRACK_REPORT.md
-│       ├── DPDK_PROJECT_PORTFOLIO.md
-│       ├── DPDK_INTERVIEW_NOTES.md
-│       ├── DPDK_RESUME_MATERIAL_FINAL.md
-│       └── DPDK_BACKLOG.md
-├── scripts/
-│   ├── 00_make_track_report_bundle.sh
-│   └── 01_collect_status_snapshot.sh
-└── records/
+└── reports/
+    └── final/
+        ├── DPDK_TRACK_REPORT.md
+        ├── DPDK_PROJECT_PORTFOLIO.md
+        ├── DPDK_INTERVIEW_NOTES.md
+        ├── DPDK_RESUME_MATERIAL_FINAL.md
+        └── DPDK_BACKLOG.md
 ```
 
-## 当前状态
+## 当前状态 (2026-06-07)
 
 ```text
-DPDK_TRACK_REPORT              READY
-DPDK_PROJECT_PORTFOLIO         READY
-DPDK_INTERVIEW_NOTES           READY
-DPDK_RESUME_MATERIAL_FINAL     READY
-DPDK_BACKLOG                   READY
+DPDK_TRACK_REPORT              UPDATED (PASS_TRAFFIC/FORWARDING/REWRITE)
+DPDK_PROJECT_PORTFOLIO         UPDATED
+DPDK_INTERVIEW_NOTES           UPDATED
+DPDK_RESUME_MATERIAL_FINAL     UPDATED
+DPDK_BACKLOG                   UPDATED (P0/P1 DONE)
 ```
 
 ## 快速查看
@@ -47,19 +42,5 @@ DPDK_BACKLOG                   READY
 ```bash
 cat reports/final/DPDK_TRACK_REPORT.md
 cat reports/final/DPDK_INTERVIEW_NOTES.md
-cat reports/final/DPDK_RESUME_MATERIAL_FINAL.md
 cat reports/final/DPDK_BACKLOG.md
-```
-
-## 生成归档 bundle
-
-```bash
-cd track-dpdk/project-dpdk-track-summary
-./scripts/00_make_track_report_bundle.sh
-```
-
-生成结果会进入：
-
-```text
-project-dpdk-track-summary/records/<timestamp>-dpdk-track-report/
 ```

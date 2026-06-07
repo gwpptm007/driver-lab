@@ -35,13 +35,14 @@ DPDK 用户态数据面与媒体网关原型
 ```text
 已实现完整生产级 DPDK 媒体网关
 已完成高性能压测
-已完成真实流量 rewrite 闭环
+已实现 KNI 回注
 ```
 
 当前准确边界是：
 
 ```text
-media-gateway-lite 当前为 PASS_SMOKE，真实 traffic/forward/rewrite 仍在后续补测。
+media-gateway-lite: PASS_TRAFFIC / PASS_FORWARDING / PASS_REWRITE 全部通过 (pcap PMD, 2026-06-07)。
+未包含: KNI、NAT/ALG、多线程调度、RSS 多队列、大规模压测。
 ```
 
 ## 6. 可放作品集的描述

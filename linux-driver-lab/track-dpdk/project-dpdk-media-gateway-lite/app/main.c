@@ -70,13 +70,16 @@ static void forward_or_drop(uint16_t in_port, struct rte_mbuf *m, struct gw_pack
         return;
     }
 
-    /* 尝试从目标端口发送 */
+    /* 尝试从目标端口发送
+     * 注意：必须在 tx_burst 之前读取 pkt_len，
+     * tx_burst 成功后 PMD 拥有 mbuf 所有权，不能再访问 mbuf 字段 */
+    uint32_t pkt_len = rte_pktmbuf_pkt_len(m);
     struct rte_mbuf *tx_pkts[1] = { m };
     uint16_t sent = rte_eth_tx_burst(r.out_port, 0, tx_pkts, 1);
     if (sent == 1) {
         /* 发送成功：更新目标端口 TX 统计 */
         stats.port[r.out_port].tx++;
-        stats.port[r.out_port].tx_bytes += rte_pktmbuf_pkt_len(m);
+        stats.port[r.out_port].tx_bytes += pkt_len;
     } else {
         /* 发送失败（TX ring 满）：更新失败计数并丢弃 */
         stats.port[r.out_port].tx_failed++;
