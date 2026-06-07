@@ -1,0 +1,1 @@
+sudo AF_XDP_CONFIRM_DROP=YES AF_XDP_IFACE=veth-xdp AF_XDP_MODE=skb AF_XDP_DURATION=8 AF_XDP_INTERVAL=1 ./scripts/04_run_xdp_drop.sh

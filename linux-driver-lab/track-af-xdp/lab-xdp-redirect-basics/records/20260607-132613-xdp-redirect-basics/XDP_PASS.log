@@ -1,56 +1,56 @@
-COMMAND: ./xdp_loader run --ifname ens192 --mode skb --action pass --duration 10 --interval 1 --obj ./xdp_redirect_basics.bpf.o
+COMMAND: ./xdp_loader run --ifname veth-xdp --mode skb --action pass --duration 10 --interval 1 --obj ./xdp_redirect_basics.bpf.o
 libbpf: Error in bpf_create_map_xattr(xsks_map):ERROR: strerror_r(-524)=22(-524). Retrying without BTF.
 attached XDP program
-ifname=ens192 ifindex=2 mode=skb action=pass(2) duration=10 interval=1 obj=./xdp_redirect_basics.bpf.o ncpus=128
+ifname=veth-xdp ifindex=6 mode=skb action=pass(2) duration=10 interval=1 obj=./xdp_redirect_basics.bpf.o ncpus=128
 
-=== xdp stats @ 1778347058 ===
+=== xdp stats @ 1780810097 ===
 action=drop     key=1 packets=0 bytes=0
 action=pass     key=2 packets=0 bytes=0
 action=redirect key=4 packets=0 bytes=0
 
-=== xdp stats @ 1778347059 ===
+=== xdp stats @ 1780810098 ===
 action=drop     key=1 packets=0 bytes=0
-action=pass     key=2 packets=0 bytes=0
+action=pass     key=2 packets=1 bytes=42
 action=redirect key=4 packets=0 bytes=0
 
-=== xdp stats @ 1778347060 ===
+=== xdp stats @ 1780810099 ===
 action=drop     key=1 packets=0 bytes=0
-action=pass     key=2 packets=0 bytes=0
+action=pass     key=2 packets=2 bytes=84
 action=redirect key=4 packets=0 bytes=0
 
-=== xdp stats @ 1778347061 ===
+=== xdp stats @ 1780810100 ===
 action=drop     key=1 packets=0 bytes=0
-action=pass     key=2 packets=0 bytes=0
+action=pass     key=2 packets=4 bytes=196
 action=redirect key=4 packets=0 bytes=0
 
-=== xdp stats @ 1778347062 ===
+=== xdp stats @ 1780810101 ===
 action=drop     key=1 packets=0 bytes=0
-action=pass     key=2 packets=0 bytes=0
+action=pass     key=2 packets=6 bytes=325
 action=redirect key=4 packets=0 bytes=0
 
-=== xdp stats @ 1778347063 ===
+=== xdp stats @ 1780810102 ===
 action=drop     key=1 packets=0 bytes=0
-action=pass     key=2 packets=0 bytes=0
+action=pass     key=2 packets=7 bytes=367
 action=redirect key=4 packets=0 bytes=0
 
-=== xdp stats @ 1778347064 ===
+=== xdp stats @ 1780810103 ===
 action=drop     key=1 packets=0 bytes=0
-action=pass     key=2 packets=0 bytes=0
+action=pass     key=2 packets=9 bytes=502
 action=redirect key=4 packets=0 bytes=0
 
-=== xdp stats @ 1778347065 ===
+=== xdp stats @ 1780810104 ===
 action=drop     key=1 packets=0 bytes=0
-action=pass     key=2 packets=0 bytes=0
+action=pass     key=2 packets=10 bytes=544
 action=redirect key=4 packets=0 bytes=0
 
-=== xdp stats @ 1778347066 ===
+=== xdp stats @ 1780810105 ===
 action=drop     key=1 packets=0 bytes=0
-action=pass     key=2 packets=0 bytes=0
+action=pass     key=2 packets=11 bytes=586
 action=redirect key=4 packets=0 bytes=0
 
-=== xdp stats @ 1778347067 ===
+=== xdp stats @ 1780810106 ===
 action=drop     key=1 packets=0 bytes=0
-action=pass     key=2 packets=0 bytes=0
+action=pass     key=2 packets=12 bytes=628
 action=redirect key=4 packets=0 bytes=0
 detaching XDP program
 detach ok

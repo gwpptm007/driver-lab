@@ -1,0 +1,1 @@
+sudo AF_XDP_CONFIRM_REDIRECT=YES AF_XDP_IFACE=veth-xdp AF_XDP_MODE=skb AF_XDP_REDIRECT_DURATION=5 ./scripts/05_run_xdp_redirect_dryrun.sh

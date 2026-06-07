@@ -1,0 +1,1 @@
+sudo AF_XDP_IFACE=veth-xdp AF_XDP_MODE=skb AF_XDP_DURATION=10 AF_XDP_INTERVAL=1 ./scripts/03_run_xdp_pass.sh

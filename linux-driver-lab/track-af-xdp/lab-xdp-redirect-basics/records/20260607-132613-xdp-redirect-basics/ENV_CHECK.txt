@@ -1,7 +1,7 @@
 LAB=xdp-redirect-basics
-DATE=2026-05-09T00:03:33+08:00
+DATE=2026-06-07T13:26:13+08:00
 HOST=wq7-virtual-machine
-KERNEL=6.8.0-110-generic
+KERNEL=6.8.0-111-generic
 AF_XDP_IFACE=ens192
 AF_XDP_MANAGEMENT_IFACE=ens33
 AF_XDP_PCI=0000:0b:00.0
@@ -31,7 +31,7 @@ libbpf cflags:
 libbpf libs: -lbpf
 
 == kernel bpf/xdp ==
-Linux wq7-virtual-machine 6.8.0-110-generic #110~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 27 12:43:08 UTC  x86_64 x86_64 x86_64 GNU/Linux
+Linux wq7-virtual-machine 6.8.0-111-generic #111~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue Apr 14 17:13:45 UTC  x86_64 x86_64 x86_64 GNU/Linux
 /sys/fs/bpf: EXISTS
 bpf on /sys/fs/bpf type bpf (rw,nosuid,nodev,noexec,relatime,mode=700)
 
@@ -105,4 +105,4 @@ No 'Misc (rawdev)' devices detected
 No 'Regex' devices detected
 ===========================
 
-RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/records/20260509-000333-xdp-redirect-basics
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/lab-xdp-redirect-basics/records/20260607-132613-xdp-redirect-basics

@@ -1,5 +1,5 @@
 LAB=xdp-redirect-basics
-DATE=2026-05-10T01:17:37+08:00
+DATE=2026-06-07T13:26:14+08:00
 HOST=wq7-virtual-machine
 KERNEL=6.8.0-111-generic
 AF_XDP_IFACE=ens192
@@ -31,8 +31,8 @@ make: Leaving directory '/home/wq7/workspace/driver-lab/linux-driver-lab/track-a
 
 == artifacts ==
 total 52K
--rwxrwxr-x 1 wq7 wq7  39K  5月 10 01:17 xdp_loader
--rw-rw-r-- 1 wq7 wq7 9.7K  5月 10 01:17 xdp_redirect_basics.bpf.o
+-rwxrwxr-x 1 wq7 wq7  39K  6月  7 13:26 xdp_loader
+-rw-rw-r-- 1 wq7 wq7 9.7K  6月  7 13:26 xdp_redirect_basics.bpf.o
 /home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/lab-xdp-redirect-basics/app/build/xdp_redirect_basics.bpf.o: ELF 64-bit LSB relocatable, eBPF, version 1 (SYSV), with debug_info, not stripped
 /home/wq7/workspace/driver-lab/linux-driver-lab/track-af-xdp/lab-xdp-redirect-basics/app/build/xdp_loader:                ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a4c7a286388e5e0fd8bbbb55cc0bb8d36a45dc84, for GNU/Linux 3.2.0, with debug_info, not stripped
 

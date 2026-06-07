@@ -1,4 +1,4 @@
-# 07_DEEP_DIVE - 深度原理
+# 03_DEEP_DIVE - 深度原理
 
 ## 本 lab 解决什么问题
 
