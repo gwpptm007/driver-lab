@@ -1,0 +1,320 @@
+PROJECT=project-linux-network-observability
+DATE=2026-06-06T19:37:15+08:00
+DURATION=15
+REPORT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-ebpf-observability/project-linux-network-observability/reports/net-observe-20260606-193715.md
+
+[init] bpf_object__open OK
+[init] bpf_object__load OK
+[init] attached tp_netif_receive_skb
+[init] attached tp_napi_gro_receive_entry
+[init] attached tp_net_dev_queue
+[init] attached tp_net_dev_start_xmit
+[init] attached tp_kfree_skb
+[init] 5 programs attached
+[init] ringbuf ready, waiting events...
+
+[ 8782337 ms] cpu=3   GRO       len=0      ens33
+[ 8782338 ms] cpu=3   RX        len=84     ens33
+[ 8782500 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8782500 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8782604 ms] cpu=3   GRO       len=0      ens33
+[ 8782604 ms] cpu=3   RX        len=84     ens33
+[ 8782714 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8782714 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8782759 ms] cpu=3   GRO       len=0      ens33
+[ 8782759 ms] cpu=3   RX        len=84     ens33
+[ 8782761 ms] cpu=3   GRO       len=0      ens33
+[ 8782761 ms] cpu=3   RX        len=46     ens33
+[ 8782929 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8782929 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8782973 ms] cpu=3   GRO       len=0      ens33
+[ 8782973 ms] cpu=3   RX        len=84     ens33
+[ 8783018 ms] cpu=7   TX-QUEUE  len=110    ens34
+[ 8783018 ms] cpu=7   TX-XMIT   len=110    ens34
+[ 8783024 ms] cpu=6   TX-QUEUE  len=339    ens34
+[ 8783024 ms] cpu=6   TX-XMIT   len=339    ens34
+[ 8783037 ms] cpu=4   TX-QUEUE  len=110    ens34
+[ 8783037 ms] cpu=4   TX-XMIT   len=110    ens34
+[ 8783143 ms] cpu=5   TX-QUEUE  len=86     ens34
+[ 8783143 ms] cpu=5   TX-XMIT   len=86     ens34
+[ 8783144 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8783144 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8783188 ms] cpu=3   GRO       len=0      ens33
+[ 8783188 ms] cpu=3   RX        len=84     ens33
+[ 8783327 ms] cpu=4   TX-QUEUE  len=110    ens34
+[ 8783327 ms] cpu=4   TX-XMIT   len=110    ens34
+[ 8783358 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8783358 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8783570 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8783570 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8783629 ms] cpu=3   GRO       len=0      ens33
+[ 8783629 ms] cpu=3   RX        len=84     ens33
+[ 8783784 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8783784 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8783829 ms] cpu=3   GRO       len=0      ens33
+[ 8783829 ms] cpu=3   RX        len=84     ens33
+[ 8783998 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8783998 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8784058 ms] cpu=3   GRO       len=0      ens33
+[ 8784058 ms] cpu=3   RX        len=46     ens33
+[ 8784150 ms] cpu=5   TX-QUEUE  len=110    ens34
+[ 8784150 ms] cpu=5   TX-XMIT   len=110    ens34
+[ 8784180 ms] cpu=6   TX-QUEUE  len=62     ens34
+[ 8784181 ms] cpu=6   TX-XMIT   len=62     ens34
+[ 8784211 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8784211 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8784256 ms] cpu=3   GRO       len=0      ens33
+[ 8784256 ms] cpu=3   RX        len=84     ens33
+[ 8784427 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8784427 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8784442 ms] cpu=5   TX-QUEUE  len=110    ens34
+[ 8784442 ms] cpu=5   TX-XMIT   len=110    ens34
+[ 8784471 ms] cpu=3   GRO       len=0      ens33
+[ 8784471 ms] cpu=3   RX        len=84     ens33
+[ 8784639 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8784639 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8784686 ms] cpu=3   GRO       len=0      ens33
+[ 8784686 ms] cpu=3   RX        len=84     ens33
+[ 8784760 ms] cpu=3   GRO       len=0      ens33
+[ 8784760 ms] cpu=3   RX        len=46     ens33
+[ 8784849 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8784849 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8784966 ms] cpu=3   GRO       len=0      ens33
+[ 8784966 ms] cpu=3   RX        len=84     ens33
+[ 8785018 ms] cpu=2   TX-QUEUE  len=100    lo
+[ 8785018 ms] cpu=2   TX-XMIT   len=100    lo
+[ 8785018 ms] cpu=2   RX        len=86     lo
+[ 8785018 ms] cpu=2   TX-QUEUE  len=100    lo
+[ 8785018 ms] cpu=2   TX-XMIT   len=100    lo
+[ 8785018 ms] cpu=2   RX        len=86     lo
+[ 8785018 ms] cpu=0   TX-QUEUE  len=89     ens33
+[ 8785018 ms] cpu=0   TX-XMIT   len=89     ens33
+[ 8785018 ms] cpu=0   TX-QUEUE  len=89     ens33
+[ 8785018 ms] cpu=0   TX-XMIT   len=89     ens33
+[ 8785024 ms] cpu=3   GRO       len=0      ens33
+[ 8785024 ms] cpu=3   RX        len=171    ens33
+[ 8785024 ms] cpu=0   TX-QUEUE  len=196    lo
+[ 8785024 ms] cpu=0   TX-XMIT   len=196    lo
+[ 8785024 ms] cpu=0   RX        len=182    lo
+[ 8785025 ms] cpu=3   GRO       len=0      ens33
+[ 8785025 ms] cpu=3   RX        len=243    ens33
+[ 8785025 ms] cpu=0   TX-QUEUE  len=268    lo
+[ 8785025 ms] cpu=0   TX-XMIT   len=268    lo
+[ 8785025 ms] cpu=0   RX        len=254    lo
+[ 8785025 ms] cpu=3   DROP      len=0      <?>      reason=NOT_SPECIFIED    (2)
+[ 8785061 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8785061 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8785105 ms] cpu=3   GRO       len=0      ens33
+[ 8785105 ms] cpu=3   RX        len=84     ens33
+[ 8785137 ms] cpu=4   RX        len=199    ens34
+[ 8785138 ms] cpu=4   TX-QUEUE  len=213    ens34
+[ 8785138 ms] cpu=4   TX-XMIT   len=213    ens34
+[ 8785198 ms] cpu=3   TX-QUEUE  len=339    ens34
+[ 8785198 ms] cpu=3   TX-XMIT   len=339    ens34
+[ 8785274 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8785275 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8785378 ms] cpu=3   GRO       len=0      ens33
+[ 8785378 ms] cpu=3   RX        len=84     ens33
+[ 8785486 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8785486 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8785532 ms] cpu=3   GRO       len=0      ens33
+[ 8785532 ms] cpu=3   RX        len=84     ens33
+[ 8785698 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8785698 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8785761 ms] cpu=3   GRO       len=0      ens33
+[ 8785761 ms] cpu=3   RX        len=46     ens33
+[ 8785890 ms] cpu=3   GRO       len=0      ens33
+[ 8785890 ms] cpu=3   RX        len=84     ens33
+[ 8785898 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8785898 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8785942 ms] cpu=3   GRO       len=0      ens33
+[ 8785942 ms] cpu=3   RX        len=84     ens33
+[ 8786111 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8786111 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8786141 ms] cpu=4   RX        len=93     ens34
+[ 8786141 ms] cpu=4   TX-QUEUE  len=107    ens34
+[ 8786141 ms] cpu=4   TX-XMIT   len=107    ens34
+[ 8786195 ms] cpu=3   GRO       len=0      ens33
+[ 8786195 ms] cpu=3   RX        len=84     ens33
+[ 8786326 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8786326 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8786370 ms] cpu=3   GRO       len=0      ens33
+[ 8786370 ms] cpu=3   RX        len=84     ens33
+[ 8786539 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8786539 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8786607 ms] cpu=3   GRO       len=0      ens33
+[ 8786607 ms] cpu=3   RX        len=84     ens33
+[ 8786751 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8786751 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8786965 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8786965 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8787009 ms] cpu=3   GRO       len=0      ens33
+[ 8787009 ms] cpu=3   RX        len=84     ens33
+[ 8787072 ms] cpu=3   GRO       len=0      ens33
+[ 8787072 ms] cpu=3   RX        len=46     ens33
+[ 8787178 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8787178 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8787222 ms] cpu=3   GRO       len=0      ens33
+[ 8787222 ms] cpu=3   RX        len=84     ens33
+[ 8787299 ms] cpu=4   RX        len=199    ens34
+[ 8787299 ms] cpu=4   TX-QUEUE  len=213    ens34
+[ 8787299 ms] cpu=4   TX-XMIT   len=213    ens34
+[ 8787390 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8787390 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8787437 ms] cpu=3   GRO       len=0      ens33
+[ 8787437 ms] cpu=3   RX        len=84     ens33
+[ 8787601 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8787602 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8787754 ms] cpu=3   GRO       len=0      ens33
+[ 8787754 ms] cpu=3   RX        len=46     ens33
+[ 8787815 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8787815 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8787862 ms] cpu=3   GRO       len=0      ens33
+[ 8787862 ms] cpu=3   RX        len=84     ens33
+[ 8788027 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8788027 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8788073 ms] cpu=3   GRO       len=0      ens33
+[ 8788073 ms] cpu=3   RX        len=84     ens33
+[ 8788179 ms] cpu=3   TX-QUEUE  len=62     ens34
+[ 8788179 ms] cpu=3   TX-XMIT   len=62     ens34
+[ 8788240 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8788240 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8788285 ms] cpu=3   GRO       len=0      ens33
+[ 8788285 ms] cpu=3   RX        len=84     ens33
+[ 8788454 ms] cpu=7   TX-QUEUE  len=98     ens33
+[ 8788454 ms] cpu=7   TX-XMIT   len=98     ens33
+[ 8788758 ms] cpu=3   GRO       len=0      ens33
+[ 8788759 ms] cpu=3   RX        len=46     ens33
+[ 8789019 ms] cpu=4   TX-QUEUE  len=100    lo
+[ 8789019 ms] cpu=4   TX-XMIT   len=100    lo
+[ 8789019 ms] cpu=4   RX        len=86     lo
+[ 8789019 ms] cpu=4   TX-QUEUE  len=100    lo
+[ 8789019 ms] cpu=4   TX-XMIT   len=100    lo
+[ 8789019 ms] cpu=4   RX        len=86     lo
+[ 8789019 ms] cpu=6   TX-QUEUE  len=196    lo
+[ 8789019 ms] cpu=6   TX-XMIT   len=196    lo
+[ 8789019 ms] cpu=6   RX        len=182    lo
+[ 8789020 ms] cpu=6   TX-QUEUE  len=268    lo
+[ 8789020 ms] cpu=6   TX-XMIT   len=268    lo
+[ 8789020 ms] cpu=6   RX        len=254    lo
+[ 8789020 ms] cpu=5   DROP      len=0      <?>      reason=NOT_SPECIFIED    (2)
+[ 8789638 ms] cpu=5   TX-QUEUE  len=339    ens34
+[ 8789638 ms] cpu=5   TX-XMIT   len=339    ens34
+[ 8790078 ms] cpu=3   GRO       len=0      ens33
+[ 8790079 ms] cpu=3   RX        len=46     ens33
+[ 8790153 ms] cpu=4   RX        len=93     ens34
+[ 8790154 ms] cpu=4   TX-QUEUE  len=107    ens34
+[ 8790154 ms] cpu=4   TX-XMIT   len=107    ens34
+[ 8790761 ms] cpu=3   GRO       len=0      ens33
+[ 8790761 ms] cpu=3   RX        len=46     ens33
+[ 8791750 ms] cpu=3   GRO       len=0      ens33
+[ 8791750 ms] cpu=3   RX        len=46     ens33
+[ 8793012 ms] cpu=2   TX-QUEUE  len=97     lo
+[ 8793012 ms] cpu=2   TX-XMIT   len=97     lo
+[ 8793012 ms] cpu=2   RX        len=83     lo
+[ 8793012 ms] cpu=0   TX-QUEUE  len=86     ens33
+[ 8793013 ms] cpu=0   TX-XMIT   len=86     ens33
+[ 8793016 ms] cpu=3   GRO       len=0      ens33
+[ 8793016 ms] cpu=3   RX        len=99     ens33
+[ 8793016 ms] cpu=0   TX-QUEUE  len=124    lo
+[ 8793016 ms] cpu=0   TX-XMIT   len=124    lo
+[ 8793016 ms] cpu=0   RX        len=110    lo
+[ 8793016 ms] cpu=2   TX-QUEUE  len=98     lo
+[ 8793016 ms] cpu=2   TX-XMIT   len=98     lo
+[ 8793016 ms] cpu=2   RX        len=84     lo
+[ 8793017 ms] cpu=0   TX-QUEUE  len=87     ens33
+[ 8793017 ms] cpu=0   TX-XMIT   len=87     ens33
+[ 8793021 ms] cpu=3   GRO       len=0      ens33
+[ 8793021 ms] cpu=3   RX        len=101    ens33
+[ 8793021 ms] cpu=0   TX-QUEUE  len=126    lo
+[ 8793021 ms] cpu=0   TX-XMIT   len=126    lo
+[ 8793021 ms] cpu=0   RX        len=112    lo
+[ 8793021 ms] cpu=2   TX-QUEUE  len=143    lo
+[ 8793021 ms] cpu=2   TX-XMIT   len=143    lo
+[ 8793021 ms] cpu=2   RX        len=129    lo
+[ 8793021 ms] cpu=0   TX-QUEUE  len=215    lo
+[ 8793021 ms] cpu=0   TX-XMIT   len=215    lo
+[ 8793021 ms] cpu=0   RX        len=201    lo
+[ 8793021 ms] cpu=2   TX-QUEUE  len=143    lo
+[ 8793021 ms] cpu=2   TX-XMIT   len=143    lo
+[ 8793021 ms] cpu=2   RX        len=129    lo
+[ 8793022 ms] cpu=0   TX-QUEUE  len=215    lo
+[ 8793022 ms] cpu=0   TX-XMIT   len=215    lo
+[ 8793022 ms] cpu=0   RX        len=201    lo
+[ 8793022 ms] cpu=2   TX-QUEUE  len=143    lo
+[ 8793022 ms] cpu=2   TX-XMIT   len=143    lo
+[ 8793022 ms] cpu=2   RX        len=129    lo
+[ 8793022 ms] cpu=0   TX-QUEUE  len=215    lo
+[ 8793022 ms] cpu=0   TX-XMIT   len=215    lo
+[ 8793022 ms] cpu=0   RX        len=201    lo
+[ 8796348 ms] cpu=6   TX-QUEUE  len=62     ens34
+[ 8796348 ms] cpu=6   TX-XMIT   len=62     ens34
+[ 8797032 ms] cpu=2   TX-QUEUE  len=100    lo
+[ 8797032 ms] cpu=2   TX-XMIT   len=100    lo
+[ 8797032 ms] cpu=2   RX        len=86     lo
+[ 8797032 ms] cpu=2   TX-QUEUE  len=100    lo
+[ 8797032 ms] cpu=2   TX-XMIT   len=100    lo
+[ 8797032 ms] cpu=2   RX        len=86     lo
+[ 8797032 ms] cpu=0   TX-QUEUE  len=89     ens33
+[ 8797032 ms] cpu=0   TX-XMIT   len=89     ens33
+[ 8797032 ms] cpu=0   TX-QUEUE  len=89     ens33
+[ 8797032 ms] cpu=0   TX-XMIT   len=89     ens33
+
+# Linux Network Observability Report
+
+| 项目 | 值 |
+|------|----|
+| **日期** | Sat Jun  6 19:37:15 2026
+| **时长** | 15 seconds |
+| **CPU 数量** | 128 |
+
+## 1. Per-Interface 统计
+
+| Interface | RX Pkts | RX Bytes | GRO | TX-Q Pkts | TX-Q Bytes | TX-X Pkts | TX-X Bytes | DROP |
+|-----------|---------|----------|-----|-----------|------------|-----------|------------|------|
+| ens33     |      39 |     3174 |  39 |        35 |       3371 |        35 |       3371 |    0 |
+| ens34     |       4 |      584 |   0 |        16 |       2479 |        16 |       2479 |    0 |
+| lo        |      20 |     2767 |   0 |        20 |       3047 |        20 |       3047 |    0 |
+| <?>       |       0 |        0 |   0 |         0 |          0 |         0 |          0 |    2 |
+| **TOTAL** | **   63** |  | ** 39** | **     71** |  | **     71** |  | **   2** |
+
+### 1.1 DROP 原因分类
+
+| Interface | Drop Reason | Count |
+|-----------|-------------|-------|
+| <?>       | NOT_SPECIFIED |     2 |
+
+## 2. Per-CPU 分布
+
+| CPU | RX | GRO | TX-QUEUE | TX-XMIT | DROP | Total |
+|-----|----|-----|----------|---------|------|-------|
+|   0 |  7 |   0 |       13 |      13 |    0 |    33 |
+|   2 |  9 |   0 |        9 |       9 |    0 |    27 |
+|   3 | 39 |  39 |        2 |       2 |    1 |    83 |
+|   4 |  6 |   0 |        8 |       8 |    0 |    22 |
+|   5 |  0 |   0 |        4 |       4 |    1 |     9 |
+|   6 |  2 |   0 |        5 |       5 |    0 |    12 |
+|   7 |  0 |   0 |       30 |      30 |    0 |    60 |
+
+## 3. 路径分析
+
+| 不变量 | 值 | 比例 | 判定 |
+|--------|----|------|------|
+| RX → GRO | 63 → 39 | 61% | CHECK |
+| TX-QUEUE → TX-XMIT | 71 → 71 | 100% | OK |
+| DROP rate | 2 / 134 | 1.49% | INFO |
+
+## 4. 总结
+
+| Event | Count |
+|-------|-------|
+| RX | 63 |
+| GRO | 39 |
+| TX-QUEUE | 71 |
+| TX-XMIT | 71 |
+| DROP | 2 |
+
+**状态: 检测到 2 个丢包事件，详见 1.1 DROP 原因分类。**
+
+报告已保存到: /home/wq7/workspace/driver-lab/linux-driver-lab/track-ebpf-observability/project-linux-network-observability/reports/net-observe-20260606-193715.md
+RC=0

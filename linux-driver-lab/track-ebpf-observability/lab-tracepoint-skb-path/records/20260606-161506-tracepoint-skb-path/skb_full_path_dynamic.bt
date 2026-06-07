@@ -1,0 +1,40 @@
+tracepoint:net:netif_receive_skb
+{
+    @rx = count();
+    @rx_cpu[cpu] = count();
+    @rx_dev[args->name] = count();
+}
+
+tracepoint:net:napi_gro_receive_entry
+{
+    @gro = count();
+}
+
+tracepoint:net:net_dev_queue
+{
+    @txq = count();
+    @txq_cpu[cpu] = count();
+    @txq_dev[args->name] = count();
+}
+
+tracepoint:net:net_dev_start_xmit
+{
+    @tx = count();
+    @tx_dev[args->name] = count();
+    @tx_len = hist(args->len);
+}
+
+interval:s:1
+{
+    printf("\n=== skb full-path === @ %ds ===\n", elapsed);
+    print(@rx);
+    print(@rx_cpu);
+    print(@rx_dev);
+    print(@gro);
+    print(@txq);
+    print(@txq_cpu);
+    print(@txq_dev);
+    print(@tx);
+    print(@tx_dev);
+    print(@tx_len);
+}

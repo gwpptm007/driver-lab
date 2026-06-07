@@ -1,0 +1,26 @@
+tracepoint:net:net_dev_queue
+{
+    @tx_queue_total = count();
+    @tx_queue_by_cpu[cpu] = count();
+    @tx_queue_by_name[args->name] = count();
+}
+
+tracepoint:net:net_dev_start_xmit
+{
+    @tx_xmit_total = count();
+    @tx_xmit_by_cpu[cpu] = count();
+    @tx_xmit_by_name[args->name] = count();
+    @tx_xmit_len = hist(args->len);
+}
+
+interval:s:1
+{
+    printf("=== skb TX tracepoint === @ %ds ===\n", elapsed);
+    print(@tx_queue_total);
+    print(@tx_queue_by_cpu);
+    print(@tx_queue_by_name);
+    print(@tx_xmit_total);
+    print(@tx_xmit_by_cpu);
+    print(@tx_xmit_by_name);
+    print(@tx_xmit_len);
+}

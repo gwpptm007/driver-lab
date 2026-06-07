@@ -1,0 +1,68 @@
+LAB=lab-tracepoint-skb-path
+DATE=2026-06-06T16:15:27+08:00
+本脚本使用 skb:kfree_skb tracepoint 观察 skb 释放事件。
+注意: 此内核上 kfree_skb 的 args->location (enum skb_drop_reason) BTF 不完整，只观测基本计数。
+
+## tracepoints used
+tracepoint:skb:kfree_skb (basic: cpu, comm only)
+
+## generated script
+tracepoint:skb:kfree_skb
+{
+    @kfree_total = count();
+    @kfree_by_cpu[cpu] = count();
+    @kfree_by_comm[comm] = count();
+}
+
+interval:s:1
+{
+    printf("=== skb kfree_skb === @ %ds ===\n", elapsed);
+    print(@kfree_total);
+    print(@kfree_by_cpu);
+    print(@kfree_by_comm);
+}
+
+Attaching 2 probes...
+=== skb kfree_skb === @ 1003719237s ===
+@kfree_total: 0
+
+
+=== skb kfree_skb === @ 2003685373s ===
+@kfree_total: 0
+
+
+=== skb kfree_skb === @ -1291628465s ===
+@kfree_total: 0
+
+
+=== skb kfree_skb === @ -291601425s ===
+@kfree_total: 0
+
+
+=== skb kfree_skb === @ 708476312s ===
+@kfree_total: 0
+
+
+=== skb kfree_skb === @ 1708276167s ===
+@kfree_total: 0
+
+
+=== skb kfree_skb === @ -1586526236s ===
+@kfree_total: 0
+
+
+=== skb kfree_skb === @ -586205273s ===
+@kfree_total: 0
+
+
+=== skb kfree_skb === @ 413481268s ===
+@kfree_total: 0
+
+
+
+
+
+
+@kfree_total: 0
+RC=124
+TIMEOUT_AS_EXPECTED=1

@@ -1,0 +1,43 @@
+LAB=lab-tracepoint-skb-path
+DATE=2026-06-06T16:15:06+08:00
+KERNEL=6.8.0-111-generic
+EBPF_IFACE=ens33
+EBPF_MGMT_IFACE=ens33
+
+## tools
+bpftrace: /usr/bin/bpftrace
+ip: /usr/sbin/ip
+ethtool: /usr/sbin/ethtool
+timeout: /usr/bin/timeout
+
+## iface
+ens33            UP             00:0c:29:f8:f6:6e <BROADCAST,MULTICAST,UP,LOWER_UP> 
+3: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:f8:f6:6e brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast           
+        716870    1614      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+        295349    1394      0       0       0       0 
+    altname enp2s1
+
+## driver
+driver: e1000
+version: 6.8.0-111-generic
+firmware-version: 
+expansion-rom-version: 
+bus-info: 0000:02:01.0
+supports-statistics: yes
+supports-test: yes
+supports-eeprom-access: yes
+supports-register-dump: yes
+supports-priv-flags: no
+
+## kernel knobs
+kptr_restrict=1
+perf_event_paranoid=4
+
+## tracefs mounts
+tracefs on /sys/kernel/tracing type tracefs (rw,nosuid,nodev,noexec,relatime)
+tracefs on /sys/kernel/debug/tracing type tracefs (rw,nosuid,nodev,noexec,relatime)
+trace_events_net_dir=/sys/kernel/debug/tracing/events/net/
+trace_events_skb_dir=/sys/kernel/debug/tracing/events/skb/

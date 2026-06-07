@@ -1,0 +1,42 @@
+LAB=lab-tracepoint-skb-path
+DATE=2026-06-06T16:16:49+08:00
+
+## bpftrace version
+bpftrace v0.14.0
+
+## net tracepoints (rx/tx paths)
+# 这里列出与 skb RX/TX 路径相关的 net tracepoint。
+tracepoint:net:napi_gro_frags_entry
+tracepoint:net:napi_gro_frags_exit
+tracepoint:net:napi_gro_receive_entry
+tracepoint:net:napi_gro_receive_exit
+tracepoint:net:net_dev_queue
+tracepoint:net:net_dev_start_xmit
+tracepoint:net:netif_receive_skb
+tracepoint:net:netif_receive_skb_entry
+tracepoint:net:netif_receive_skb_exit
+tracepoint:net:netif_receive_skb_list_entry
+tracepoint:net:netif_receive_skb_list_exit
+
+## skb tracepoints (free/drop/consume)
+tracepoint:skb:consume_skb
+tracepoint:skb:kfree_skb
+tracepoint:skb:skb_copy_datagram_iovec
+
+## all net tracepoints raw (first 100)
+tracepoint:net:napi_gro_frags_entry
+tracepoint:net:napi_gro_frags_exit
+tracepoint:net:napi_gro_receive_entry
+tracepoint:net:napi_gro_receive_exit
+tracepoint:net:net_dev_queue
+tracepoint:net:net_dev_start_xmit
+tracepoint:net:net_dev_xmit
+tracepoint:net:net_dev_xmit_timeout
+tracepoint:net:netif_receive_skb
+tracepoint:net:netif_receive_skb_entry
+tracepoint:net:netif_receive_skb_exit
+tracepoint:net:netif_receive_skb_list_entry
+tracepoint:net:netif_receive_skb_list_exit
+tracepoint:net:netif_rx
+tracepoint:net:netif_rx_entry
+tracepoint:net:netif_rx_exit

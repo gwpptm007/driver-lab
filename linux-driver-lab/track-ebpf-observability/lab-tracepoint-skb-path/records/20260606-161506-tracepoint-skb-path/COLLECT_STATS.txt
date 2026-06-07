@@ -1,0 +1,71 @@
+LAB=lab-tracepoint-skb-path
+DATE=2026-06-06T16:15:38+08:00
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-ebpf-observability/lab-tracepoint-skb-path/records/20260606-161506-tracepoint-skb-path
+
+## generated files
+COLLECT_STATS.txt
+ENV_CHECK.txt
+skb_drop_trace_dynamic.bt
+SKB_DROP_TRACE.log
+skb_full_path_dynamic.bt
+SKB_FULL_PATH.log
+skb_rx_trace_dynamic.bt
+SKB_RX_TRACE.log
+skb_tx_trace_dynamic.bt
+SKB_TX_TRACE.log
+
+## iface stats: ens33
+3: ens33: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether 00:0c:29:f8:f6:6e brd ff:ff:ff:ff:ff:ff
+    RX:  bytes packets errors dropped  missed   mcast           
+        747376    1928      0       0       0       0 
+    TX:  bytes packets errors dropped carrier collsns           
+        327363    1712      0       0       0       0 
+    altname enp2s1
+
+## softnet_stat first 16 lines
+     1	0000001e 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+     2	0000003b 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000001 00000000 00000000
+     3	00000022 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000002 00000000 00000000
+     4	00000667 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000003 00000000 00000000
+     5	000000a3 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000004 00000000 00000000
+     6	0000004f 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000005 00000000 00000000
+     7	00000073 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000006 00000000 00000000
+     8	00000058 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000007 00000000 00000000
+
+## tracefs events/net (确认 tracepoint 是否暴露)
+enable
+filter
+napi_gro_frags_entry
+napi_gro_frags_exit
+napi_gro_receive_entry
+napi_gro_receive_exit
+net_dev_queue
+net_dev_start_xmit
+net_dev_xmit
+net_dev_xmit_timeout
+netif_receive_skb
+netif_receive_skb_entry
+netif_receive_skb_exit
+netif_receive_skb_list_entry
+netif_receive_skb_list_exit
+netif_rx
+netif_rx_entry
+netif_rx_exit
+
+## tracefs events/skb
+consume_skb
+enable
+filter
+kfree_skb
+skb_copy_datagram_iovec
+
+## dmesg bpf/bpftrace recent
+[    0.796915] ftrace: allocating 58286 entries in 228 pages
+[    0.809532] ftrace: allocated 228 pages with 4 groups
+[    0.814968] RCU Tasks Trace: Setting shift to 7 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=128.
+[    0.929650] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    5.544339] systemd[1]: Mounting Kernel Trace File System...
+[    5.567549] systemd[1]: Mounted Kernel Trace File System.
+[    5.625234] vmwgfx 0000:00:0f.0: [drm] Capabilities: rect copy, cursor, cursor bypass, cursor bypass 2, 8bit emulation, alpha cursor, extended fifo, multimon, pitchlock, irq mask, display topology, gmr, traces, gmr2, screen object 2, command buffers, command buffers 2, gbobject, dx, hp cmd queue, no bb restriction, cap2 register, 
+[    5.625242] vmwgfx 0000:00:0f.0: [drm] Capabilities2: grow otable, intra surface copy, dx2, gb memsize 2, screendma reg, otable ptdepth2, non ms to ms stretchblt, cursor mob, mshint, cb max size 4mb, dx3, frame type, trace full fb, extra regs, lo staging, 

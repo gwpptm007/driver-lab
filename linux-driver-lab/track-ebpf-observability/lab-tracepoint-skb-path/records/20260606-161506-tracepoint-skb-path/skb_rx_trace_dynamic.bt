@@ -1,0 +1,24 @@
+tracepoint:net:netif_receive_skb
+{
+    @rx_total = count();
+    @rx_by_cpu[cpu] = count();
+    @rx_by_name[args->name] = count();
+}
+
+tracepoint:net:napi_gro_receive_entry
+{
+    @gro_entry_total = count();
+    @gro_by_cpu[cpu] = count();
+    @gro_by_name[args->name] = count();
+}
+
+interval:s:1
+{
+    printf("=== skb RX tracepoint === @ %ds ===\n", elapsed);
+    print(@rx_total);
+    print(@rx_by_cpu);
+    print(@rx_by_name);
+    print(@gro_entry_total);
+    print(@gro_by_cpu);
+    print(@gro_by_name);
+}

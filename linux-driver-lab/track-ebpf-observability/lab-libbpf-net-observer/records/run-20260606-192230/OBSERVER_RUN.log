@@ -1,0 +1,140 @@
+LAB=lab-libbpf-net-observer
+DATE=2026-06-06T19:22:30+08:00
+DURATION=15
+
+[init] bpf_object__open OK
+[init] bpf_object__load OK
+[init] attached tp_netif_receive_skb
+[init] attached tp_napi_gro_receive_entry
+[init] attached tp_net_dev_queue
+[init] attached tp_net_dev_start_xmit
+[init] attached tp_kfree_skb
+[init] 5 programs attached
+[init] ringbuf ready, waiting events...
+
+[7897622 ms] cpu=3   GRO       len=0      ens33
+[7897622 ms] cpu=3   RX        len=84     ens33
+[7897757 ms] cpu=4   TX-QUEUE  len=98     ens33
+[7897757 ms] cpu=4   TX-XMIT   len=98     ens33
+[7897968 ms] cpu=4   TX-QUEUE  len=98     ens33
+[7897968 ms] cpu=4   TX-XMIT   len=98     ens33
+[7898034 ms] cpu=3   GRO       len=0      ens33
+[7898034 ms] cpu=3   RX        len=84     ens33
+[7898182 ms] cpu=4   TX-QUEUE  len=98     ens33
+[7898182 ms] cpu=4   TX-XMIT   len=98     ens33
+[7898395 ms] cpu=7   TX-QUEUE  len=98     ens33
+[7898395 ms] cpu=7   TX-XMIT   len=98     ens33
+[7898411 ms] cpu=3   GRO       len=0      ens33
+[7898411 ms] cpu=3   RX        len=84     ens33
+[7898439 ms] cpu=3   GRO       len=0      ens33
+[7898439 ms] cpu=3   RX        len=84     ens33
+[7898607 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7898607 ms] cpu=0   TX-XMIT   len=98     ens33
+[7898754 ms] cpu=3   GRO       len=0      ens33
+[7898754 ms] cpu=3   RX        len=84     ens33
+[7898819 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7898819 ms] cpu=0   TX-XMIT   len=98     ens33
+[7898865 ms] cpu=3   GRO       len=0      ens33
+[7898866 ms] cpu=3   RX        len=84     ens33
+[7899031 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7899031 ms] cpu=0   TX-XMIT   len=98     ens33
+[7899076 ms] cpu=3   GRO       len=0      ens33
+[7899076 ms] cpu=3   RX        len=84     ens33
+[7899245 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7899245 ms] cpu=0   TX-XMIT   len=98     ens33
+[7899289 ms] cpu=3   GRO       len=0      ens33
+[7899289 ms] cpu=3   RX        len=84     ens33
+[7899457 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7899458 ms] cpu=0   TX-XMIT   len=98     ens33
+[7899504 ms] cpu=3   GRO       len=0      ens33
+[7899504 ms] cpu=3   RX        len=84     ens33
+[7899670 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7899670 ms] cpu=0   TX-XMIT   len=98     ens33
+[7899782 ms] cpu=3   GRO       len=0      ens33
+[7899782 ms] cpu=3   RX        len=84     ens33
+[7899881 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7899881 ms] cpu=0   TX-XMIT   len=98     ens33
+[7899926 ms] cpu=3   GRO       len=0      ens33
+[7899926 ms] cpu=3   RX        len=84     ens33
+[7900092 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7900092 ms] cpu=0   TX-XMIT   len=98     ens33
+[7900198 ms] cpu=3   GRO       len=0      ens33
+[7900199 ms] cpu=3   RX        len=84     ens33
+[7900306 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7900306 ms] cpu=0   TX-XMIT   len=98     ens33
+[7900402 ms] cpu=3   GRO       len=0      ens33
+[7900402 ms] cpu=3   RX        len=84     ens33
+[7900519 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7900520 ms] cpu=0   TX-XMIT   len=98     ens33
+[7900608 ms] cpu=3   GRO       len=0      ens33
+[7900608 ms] cpu=3   RX        len=84     ens33
+[7900732 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7900732 ms] cpu=0   TX-XMIT   len=98     ens33
+[7900811 ms] cpu=3   GRO       len=0      ens33
+[7900811 ms] cpu=3   RX        len=84     ens33
+[7900944 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7900945 ms] cpu=0   TX-XMIT   len=98     ens33
+[7900988 ms] cpu=3   GRO       len=0      ens33
+[7900988 ms] cpu=3   RX        len=84     ens33
+[7901156 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7901156 ms] cpu=0   TX-XMIT   len=98     ens33
+[7901369 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7901369 ms] cpu=0   TX-XMIT   len=98     ens33
+[7901430 ms] cpu=3   GRO       len=0      ens33
+[7901430 ms] cpu=3   RX        len=84     ens33
+[7901580 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7901580 ms] cpu=0   TX-XMIT   len=98     ens33
+[7901626 ms] cpu=3   GRO       len=0      ens33
+[7901626 ms] cpu=3   RX        len=84     ens33
+[7901790 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7901790 ms] cpu=0   TX-XMIT   len=98     ens33
+[7901837 ms] cpu=3   GRO       len=0      ens33
+[7901837 ms] cpu=3   RX        len=84     ens33
+[7902003 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7902003 ms] cpu=0   TX-XMIT   len=98     ens33
+[7902068 ms] cpu=3   GRO       len=0      ens33
+[7902068 ms] cpu=3   RX        len=84     ens33
+[7902215 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7902215 ms] cpu=0   TX-XMIT   len=98     ens33
+[7902259 ms] cpu=3   GRO       len=0      ens33
+[7902259 ms] cpu=3   RX        len=84     ens33
+[7902429 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7902429 ms] cpu=0   TX-XMIT   len=98     ens33
+[7902474 ms] cpu=3   GRO       len=0      ens33
+[7902474 ms] cpu=3   RX        len=84     ens33
+[7902641 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7902641 ms] cpu=0   TX-XMIT   len=98     ens33
+[7902692 ms] cpu=3   GRO       len=0      ens33
+[7902692 ms] cpu=3   RX        len=84     ens33
+[7902852 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7902852 ms] cpu=0   TX-XMIT   len=98     ens33
+[7902896 ms] cpu=3   GRO       len=0      ens33
+[7902896 ms] cpu=3   RX        len=84     ens33
+[7903064 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7903064 ms] cpu=0   TX-XMIT   len=98     ens33
+[7903108 ms] cpu=3   GRO       len=0      ens33
+[7903108 ms] cpu=3   RX        len=84     ens33
+[7903277 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7903277 ms] cpu=0   TX-XMIT   len=98     ens33
+[7903383 ms] cpu=3   GRO       len=0      ens33
+[7903384 ms] cpu=3   RX        len=84     ens33
+[7903489 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7903489 ms] cpu=0   TX-XMIT   len=98     ens33
+[7903533 ms] cpu=3   GRO       len=0      ens33
+[7903533 ms] cpu=3   RX        len=84     ens33
+[7903702 ms] cpu=0   TX-QUEUE  len=98     ens33
+[7903703 ms] cpu=0   TX-XMIT   len=98     ens33
+[7903897 ms] cpu=3   GRO       len=0      ens33
+[7903897 ms] cpu=3   RX        len=84     ens33
+
+=== skb_observer summary ===
+duration: 15 seconds
+
+Event            Count
+----------  ----------
+RX                  28
+GRO                 28
+TX-QUEUE            29
+TX-XMIT             29
+DROP                 0
+RC=0

@@ -1,0 +1,14 @@
+tracepoint:skb:kfree_skb
+{
+    @kfree_total = count();
+    @kfree_by_cpu[cpu] = count();
+    @kfree_by_comm[comm] = count();
+}
+
+interval:s:1
+{
+    printf("=== skb kfree_skb === @ %ds ===\n", elapsed);
+    print(@kfree_total);
+    print(@kfree_by_cpu);
+    print(@kfree_by_comm);
+}

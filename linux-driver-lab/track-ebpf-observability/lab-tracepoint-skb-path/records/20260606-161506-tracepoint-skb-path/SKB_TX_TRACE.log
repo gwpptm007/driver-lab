@@ -1,0 +1,176 @@
+LAB=lab-tracepoint-skb-path
+DATE=2026-06-06T16:15:17+08:00
+本脚本使用稳定 tracepoint 观察 skb 发包路径（net_dev_queue + net_dev_start_xmit）。
+
+## tracepoints used
+tracepoint:net:net_dev_queue
+tracepoint:net:net_dev_start_xmit
+
+## generated script
+tracepoint:net:net_dev_queue
+{
+    @tx_queue_total = count();
+    @tx_queue_by_cpu[cpu] = count();
+    @tx_queue_by_name[args->name] = count();
+}
+
+tracepoint:net:net_dev_start_xmit
+{
+    @tx_xmit_total = count();
+    @tx_xmit_by_cpu[cpu] = count();
+    @tx_xmit_by_name[args->name] = count();
+    @tx_xmit_len = hist(args->len);
+}
+
+interval:s:1
+{
+    printf("=== skb TX tracepoint === @ %ds ===\n", elapsed);
+    print(@tx_queue_total);
+    print(@tx_queue_by_cpu);
+    print(@tx_queue_by_name);
+    print(@tx_xmit_total);
+    print(@tx_xmit_by_cpu);
+    print(@tx_xmit_by_name);
+    print(@tx_xmit_len);
+}
+
+Attaching 3 probes...
+=== skb TX tracepoint === @ 1007629790s ===
+@tx_queue_total: 9
+@tx_queue_by_cpu[1]: 9
+@tx_queue_by_name[-18738004189632]: 9
+@tx_xmit_total: 9
+@tx_xmit_by_cpu[1]: 9
+@tx_xmit_by_name[-18738004189592]: 9
+@tx_xmit_len: 
+[64, 128)              9 |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+
+=== skb TX tracepoint === @ 2007847641s ===
+@tx_queue_total: 19
+@tx_queue_by_cpu[0]: 7
+@tx_queue_by_cpu[1]: 12
+@tx_queue_by_name[-18738004713920]: 7
+@tx_queue_by_name[-18738004189632]: 12
+@tx_xmit_total: 19
+@tx_xmit_by_cpu[0]: 7
+@tx_xmit_by_cpu[1]: 12
+@tx_xmit_by_name[-18738004713880]: 7
+@tx_xmit_by_name[-18738004189592]: 12
+@tx_xmit_len: 
+[64, 128)             19 |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+
+=== skb TX tracepoint === @ -1287497042s ===
+@tx_queue_total: 29
+@tx_queue_by_cpu[1]: 12
+@tx_queue_by_cpu[0]: 17
+@tx_queue_by_name[-18738004189632]: 12
+@tx_queue_by_name[-18738004713920]: 17
+@tx_xmit_total: 29
+@tx_xmit_by_cpu[1]: 12
+@tx_xmit_by_cpu[0]: 17
+@tx_xmit_by_name[-18738004189592]: 12
+@tx_xmit_by_name[-18738004713880]: 17
+@tx_xmit_len: 
+[64, 128)             29 |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+
+=== skb TX tracepoint === @ -287606571s ===
+@tx_queue_total: 38
+@tx_queue_by_cpu[1]: 12
+@tx_queue_by_cpu[0]: 26
+@tx_queue_by_name[-18738004189632]: 12
+@tx_queue_by_name[-18738004713920]: 26
+@tx_xmit_total: 38
+@tx_xmit_by_cpu[1]: 12
+@tx_xmit_by_cpu[0]: 26
+@tx_xmit_by_name[-18738004189592]: 12
+@tx_xmit_by_name[-18738004713880]: 26
+@tx_xmit_len: 
+[64, 128)             38 |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+
+=== skb TX tracepoint === @ 712582940s ===
+@tx_queue_total: 48
+@tx_queue_by_cpu[1]: 16
+@tx_queue_by_cpu[0]: 32
+@tx_queue_by_name[-18738004189632]: 16
+@tx_queue_by_name[-18738004713920]: 32
+@tx_xmit_total: 48
+@tx_xmit_by_cpu[1]: 16
+@tx_xmit_by_cpu[0]: 32
+@tx_xmit_by_name[-18738004189592]: 16
+@tx_xmit_by_name[-18738004713880]: 32
+@tx_xmit_len: 
+[64, 128)             48 |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+
+=== skb TX tracepoint === @ 1712288367s ===
+@tx_queue_total: 57
+@tx_queue_by_cpu[1]: 25
+@tx_queue_by_cpu[0]: 32
+@tx_queue_by_name[-18738004189632]: 25
+@tx_queue_by_name[-18738004713920]: 32
+@tx_xmit_total: 57
+@tx_xmit_by_cpu[1]: 25
+@tx_xmit_by_cpu[0]: 32
+@tx_xmit_by_name[-18738004189592]: 25
+@tx_xmit_by_name[-18738004713880]: 32
+@tx_xmit_len: 
+[64, 128)             57 |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+
+=== skb TX tracepoint === @ -1582673501s ===
+@tx_queue_total: 67
+@tx_queue_by_cpu[0]: 32
+@tx_queue_by_cpu[1]: 35
+@tx_queue_by_name[-18738004713920]: 32
+@tx_queue_by_name[-18738004189632]: 35
+@tx_xmit_total: 67
+@tx_xmit_by_cpu[0]: 32
+@tx_xmit_by_cpu[1]: 35
+@tx_xmit_by_name[-18738004713880]: 32
+@tx_xmit_by_name[-18738004189592]: 35
+@tx_xmit_len: 
+[64, 128)             67 |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+
+=== skb TX tracepoint === @ -582669688s ===
+@tx_queue_total: 77
+@tx_queue_by_cpu[0]: 32
+@tx_queue_by_cpu[1]: 45
+@tx_queue_by_name[-18738004713920]: 32
+@tx_queue_by_name[-18738004189632]: 45
+@tx_xmit_total: 77
+@tx_xmit_by_cpu[0]: 32
+@tx_xmit_by_cpu[1]: 45
+@tx_xmit_by_name[-18738004713880]: 32
+@tx_xmit_by_name[-18738004189592]: 45
+@tx_xmit_len: 
+[64, 128)             77 |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+
+=== skb TX tracepoint === @ 417831200s ===
+@tx_queue_total: 86
+@tx_queue_by_cpu[0]: 37
+@tx_queue_by_cpu[1]: 49
+@tx_queue_by_name[-18738004713920]: 37
+@tx_queue_by_name[-18738004189632]: 49
+@tx_xmit_total: 86
+@tx_xmit_by_cpu[0]: 37
+@tx_xmit_by_cpu[1]: 49
+@tx_xmit_by_name[-18738004713880]: 37
+@tx_xmit_by_name[-18738004189592]: 49
+@tx_xmit_len: 
+[64, 128)             86 |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+
+
+
+@tx_queue_by_cpu[0]: 44
+@tx_queue_by_cpu[1]: 49
+@tx_queue_by_name[-18738004713920]: 44
+@tx_queue_by_name[-18738004189632]: 49
+@tx_queue_total: 93
+@tx_xmit_by_cpu[0]: 44
+@tx_xmit_by_cpu[1]: 49
+@tx_xmit_by_name[-18738004713880]: 44
+@tx_xmit_by_name[-18738004189592]: 49
+@tx_xmit_len: 
+[64, 128)             93 |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@|
+
+@tx_xmit_total: 93
+RC=124
+TIMEOUT_AS_EXPECTED=1

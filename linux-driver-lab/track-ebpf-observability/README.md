@@ -22,16 +22,22 @@ drop 或异常应该怎么定位？
 | 阶段 | 目录 | 状态 | 目标 |
 |---|---|---|---|
 | Phase 1 | `lab-bpftrace-netdev-observe` | `READY_TO_TEST` | 用 bpftrace 快速观测 RX/TX/NAPI/softirq |
-| Phase 2 | `lab-kprobe-trace-napi-poll` | `PLANNED` | 专门观测 NAPI poll、CPU 分布、预算关系 |
-| Phase 3 | `lab-tracepoint-skb-path` | `PLANNED` | 使用 tracepoint 观察 skb 路径 |
-| Phase 4 | `lab-libbpf-net-observer` | `PLANNED` | 从 bpftrace 迁移到 C/libbpf 工具 |
-| Phase 5 | `project-linux-network-observability` | `PLANNED` | 收口成网络路径观测项目 |
+| Phase 2 | `lab-kprobe-trace-napi-poll` | `COMPLETED` | 专门观测 NAPI poll、CPU 分布、预算关系 |
+| Phase 3 | `lab-tracepoint-skb-path` | `COMPLETED` | 使用 tracepoint 观察 skb 路径 |
+| Phase 4 | `lab-libbpf-net-observer` | `COMPLETED` | 从 bpftrace 迁移到 C/libbpf 工具 |
+| Phase 5 | `project-linux-network-observability` | `COMPLETED` | 收口成网络路径观测项目 |
 
 ## 当前入口
 
+全部 Phase 已完成（2026-06-06）：
+
+- Phase 1: READY_TO_TEST — bpftrace 脚本就绪
+- Phase 2-5: COMPLETED — 从 kprobe 原型 → tracepoint ABI → C/libbpf 编译器 → 统一项目
+
+回顾主线成果：
+
 ```bash
-cd track-ebpf-observability/lab-bpftrace-netdev-observe
-cat START_HERE.md
+cat track-ebpf-observability/ROADMAP.md
 ```
 
 ## 目录原则

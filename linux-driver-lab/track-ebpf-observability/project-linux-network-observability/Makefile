@@ -1,0 +1,62 @@
+# Makefile for project-linux-network-observability
+# Phase 5: 统一网络可观测性项目
+#
+# 3 步构建:
+#   1. bpftool gen vmlinux.h  — 从内核 BTF 生成类型头文件
+#   2. clang -target bpf      — 编译 BPF 内核程序
+#   3. gcc                    — 编译 userspace 加载器 (原生 libbpf API)
+
+CC       = gcc
+CLANG    = clang
+BPFTOOL  = bpftool
+
+CFLAGS     = -g -O2 -Wall
+BPF_CFLAGS = -g -O2 -target bpf -D__TARGET_ARCH_x86 \
+	-fno-jump-tables -fno-stack-protector
+LDFLAGS    = -lbpf -lelf -lz
+
+SRCDIR   = src
+BUILDDIR = build
+
+VMLINUX_H = $(BUILDDIR)/vmlinux.h
+BPF_OBJ   = $(BUILDDIR)/net_observer.bpf.o
+TARGET    = $(BUILDDIR)/net_observer
+
+.PHONY: all clean build_dir
+
+all: build_dir $(TARGET)
+
+build_dir:
+	mkdir -p $(BUILDDIR)
+
+# Step 1: 从内核 BTF 生成 vmlinux.h
+$(VMLINUX_H):
+	@echo "[1/3] bpftool gen vmlinux.h ..."
+	$(BPFTOOL) btf dump file /sys/kernel/btf/vmlinux format c > $@
+
+# Step 2: 编译 BPF 内核程序
+$(BPF_OBJ): $(SRCDIR)/net_observer.bpf.c $(VMLINUX_H) $(SRCDIR)/net_observer.h
+	@echo "[2/3] clang -target bpf ..."
+	$(CLANG) $(BPF_CFLAGS) \
+		-I $(BUILDDIR) \
+		-I $(SRCDIR) \
+		-c $< -o $@
+	@# 兼容 libbpf 0.5: 移除旧版不认识的 rodata section
+	@if readelf -S $@ 2>/dev/null | grep -q '.rodata.str'; then \
+		echo "[2a] strip .rodata.str* for libbpf 0.5 compat"; \
+		llvm-objcopy --remove-section=.rodata.str1.1 $@ 2>/dev/null || true; \
+	fi
+
+# Step 3: 编译 userspace 程序 (原生 libbpf API, 无 skeleton)
+$(TARGET): $(SRCDIR)/net_observer.c $(BPF_OBJ) $(SRCDIR)/net_observer.h
+	@echo "[3/3] gcc userspace ..."
+	$(CC) $(CFLAGS) \
+		-I $(BUILDDIR) \
+		-I $(SRCDIR) \
+		$< $(LDFLAGS) -o $@
+	@echo ""
+	@echo "Build OK → $(TARGET)"
+	@echo "Run: sudo $(TARGET) -v -d 10"
+
+clean:
+	rm -rf $(BUILDDIR)
