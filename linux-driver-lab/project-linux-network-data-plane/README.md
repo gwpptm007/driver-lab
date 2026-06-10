@@ -86,10 +86,11 @@ kernel netdev
 - 已完成 Linux 网络数据面多路径学习、实验、观测和作品化收口。
 - 已具备从教学驱动到真实驱动、从内核路径到用户态 fastpath、从转发到观测定位的系统理解。
 - DPDK media-gateway-lite 已验证 pcap PMD 路径下的 UDP traffic/forwarding/rewrite。
+- DPDK vmxnet3 PMD 已验证真网卡 TX 路径；RX 因当前 VMware + UIO 环境缺少 MSI-X 中断支持，先标记为 BLOCKED_RX，不作为当前完成项。
 - AF_XDP 已验证 XDP redirect、UMEM/rings 和 mini forwarder。
 
 不要夸大成：
 
 - 生产级 DPDK 媒体网关。
-- 完整真实网卡大规模性能压测。
+- 完整真实网卡双向转发或大规模性能压测。
 - 已覆盖所有 NIC offload、RSS、多线程调度、IOMMU/VFIO 生产部署。

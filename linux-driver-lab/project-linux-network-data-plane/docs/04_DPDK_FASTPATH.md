@@ -71,6 +71,18 @@ rewrite hit 非 0
 软件 stats 与 ethdev stats 对照
 ```
 
+在 vmxnet3 PMD 真网卡路径中，本轮验证到 TX 边界：
+
+```text
+pcap PMD -> fastpath-lite classify/forward -> vmxnet3 PMD TX
+PASS_INIT
+PASS_TX
+PASS_STATS_CONSISTENCY
+BLOCKED_RX
+```
+
+这里的结论是：DPDK 能初始化 vmxnet3 PMD，并通过真网卡 TX 发送 553 万包；RX 因当前 VMware + UIO 环境缺少 MSI-X 中断支持而延期，不作为当前完成项。
+
 ## 和其他路径的关系
 
 | 对比对象 | 差异 |
@@ -95,8 +107,9 @@ rewrite hit 非 0
 
 - 已完成 DPDK 用户态数据面主线和 media-gateway-lite 原型。
 - pcap PMD path 下 UDP traffic/forwarding/rewrite 已验证。
+- vmxnet3 PMD 真网卡 TX 路径已验证；RX 路径当前标记为 BLOCKED_RX，先不继续测试。
 
 不要夸大：
 
 - 不是生产级 DPDK 媒体网关。
-- 没有完成大规模吞吐压测、多线程调度、RSS、多队列生产优化、KNI 回注。
+- 没有完成真实网卡 RX、双向转发、大规模吞吐压测、多线程调度、RSS、多队列生产优化、KNI 回注。
