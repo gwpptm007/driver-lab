@@ -18,6 +18,11 @@
 - 不再继续扩成 stage15 stage16...
 - 改为：`track-real-driver/`、`track-virtual-net/`、`track-af-xdp/`、`track-dpdk/` 等
 
+### 第四阶段：network acceleration（规划中）
+- `project-linux-network-data-plane` 已用 `network-data-plane-v1` 标签封版
+- 当前后续主线调整为：`track-dpdk-advanced/` -> `track-rdma/` -> `track-smartnic-dpu/`
+- `track-block-io/` 先作为 P2 保留支线，不作为当前主线推进
+
 ---
 
 ## 各 Track 定位
@@ -27,8 +32,10 @@
 | `track-real-driver/` | 真实 Linux NIC 驱动源码与 patch | 4 labs + 1 project 完成 |
 | `track-virtual-net/` | vhost/kick/notify + tap/bridge 协同 | 3 labs + 1 project 完成 |
 | `track-dpdk/` | DPDK 用户态网络 | 9 phases, media-gateway-lite PASS_TRAFFIC/FORWARDING/REWRITE |
+| `track-dpdk-advanced/` | DPDK 进阶：mbuf/mempool、RSS、多队列、NUMA、VFIO/IOMMU | PLANNED |
 | `track-af-xdp/` | AF_XDP 快速路径 | 4 phases 全部 PASS (2026-06-07) |
 | `track-ebpf-observability/` | eBPF 可观测性 | 5 phases 全部 COMPLETED (2026-06-07) |
+| `track-block-io/` | block layer / storage I/O | PARKED_PLANNED, P2 支线 |
 
 ---
 
@@ -36,22 +43,24 @@
 
 ### 当前最推荐的下一步
 
-**`track-real-driver/lab-virtio-net-source-dive/`**
+**`track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/`**
 
-承接你已经完成的 `netdev/stage00~stage14`，把"自己写教学驱动"推进到"阅读真实 Linux NIC 驱动源码"。
+承接已经封版的 network data plane，把 DPDK 从“能跑通 fastpath”推进到“理解 mbuf/mempool、队列、RSS、NUMA、VFIO/IOMMU 和真实部署边界”。
 
-### 当前推荐的实验入口
+### 当前推荐的阅读入口
 
-- `track-real-driver/lab-virtio-net-runtime-observe/README.md` — 运行期观测基线
-- `track-real-driver/lab-virtio-net-ethtool-stats-mini-patch/README.md` — 第一个真实 ethtool/stats 小 patch
+- `docs/08_ACCELERATION_ROADMAP.md` — DPDK -> RDMA -> SmartNIC/DPU 总路线
+- `track-dpdk-advanced/README.md` — DPDK 进阶主线定位
+- `track-dpdk-advanced/START_HERE.md` — 第一阶段进入方式
+- `track-dpdk-advanced/docs/04_RDMA_SMARTNIC_BRIDGE.md` — 后续 RDMA / SmartNIC 衔接
 
 ### 进入方式
 
 ```
-track-real-driver/lab-virtio-net-source-dive/START_HERE.md
+track-dpdk-advanced/START_HERE.md
 ```
 
-先跑符号索引脚本，再看 probe/TX/RX，再做 stage 映射。
+先从 mbuf/mempool metadata 深挖开始，不急着做 RSS、多队列或 VFIO 环境改造。
 
 ---
 
@@ -67,6 +76,9 @@ track-real-driver/lab-virtio-net-source-dive/START_HERE.md
 | netdev stage00~stage14 | ✅ 完成，stage14 收口 |
 | track-real-driver | ✅ 第一轮完成 |
 | track-virtual-net | ✅ 完成 |
+| project-linux-network-data-plane | ✅ 已封版 network-data-plane-v1 |
+| track-dpdk-advanced | 🧭 已规划，待启动 |
+| track-block-io | 🅿️ 已规划，P2 保留 |
 
 ---
 

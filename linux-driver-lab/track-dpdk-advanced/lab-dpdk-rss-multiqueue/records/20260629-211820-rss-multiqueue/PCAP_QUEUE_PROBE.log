@@ -1,0 +1,45 @@
+# PCAP_QUEUE_PROBE
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue
+APP_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/app
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/app/build/dpdk-rss-queue-probe
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/records/20260629-211820-rss-multiqueue
+PCAP_FILE=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/records/20260629-211820-rss-multiqueue/rss_input.pcap
+RSS_LCORES=0-3
+RSS_MEMORY_CHANNELS=4
+RSS_FILE_PREFIX=dpdk_rss_queue_probe
+RSS_REQUEST_RX_QUEUES=2
+RSS_REQUEST_TX_QUEUES=0
+RSS_NB_MBUF=8192
+RSS_MBUF_CACHE=250
+RSS_RX_DESC=512
+RSS_TX_DESC=512
+RSS_PCAP_COUNT=64
+
+## command
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/app/build/dpdk-rss-queue-probe -l 0-3 -n 4 --file-prefix dpdk_rss_queue_probe --vdev net_pcap0\,rx_pcap=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/records/20260629-211820-rss-multiqueue/rss_input.pcap -- --rx-queues 2 --tx-queues 0 --rx-desc 512 --tx-desc 512 --nb-mbuf 8192 --mbuf-cache 250 --enable-rss 1 
+
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_rss_queue_probe/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+# DPDK_RSS_QUEUE_PROBE
+port_id=0 driver_name=net_pcap nb_ports=1
+requested_rx_queues=2 requested_tx_queues=0 enable_rss=1
+max_rx_queues=1 max_tx_queues=1 reta_size=0 hash_key_size=0
+rss_offloads_hex=0x0
+rss_offloads_ipv4=0
+rss_offloads_tcp=0
+rss_offloads_udp=0
+blocked_reason=no_rss_offloads_or_reta
+result_rss_query=BLOCKED_RSS
+# QUEUE_TO_CORE_MAP
+queue_map rxq=0 lcore=1
+queue_map rxq=1 lcore=2
+result_queue_to_core_doc=PASS_QUEUE_TO_CORE_DOC
+blocked_reason=max_rx_queues_lt_requested requested=2 max_rx_queues=1
+result_queue_config=BLOCKED_QUEUE_CONFIG

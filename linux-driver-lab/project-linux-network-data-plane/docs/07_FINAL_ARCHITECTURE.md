@@ -90,6 +90,8 @@ path invariant
 
 ## 横向对比
 
+详见 [10_CROSS_PATH_COMPARISON.md](10_CROSS_PATH_COMPARISON.md) — 完整对比报告（机制、数据、选型框架）。
+
 | 路径 | 包入口 | 核心机制 | 优势 | 边界 |
 |------|--------|----------|------|------|
 | Kernel netdev | 驱动 RX | skb/NAPI/ring | Linux 原生主路径 | 协议栈成本较高 |

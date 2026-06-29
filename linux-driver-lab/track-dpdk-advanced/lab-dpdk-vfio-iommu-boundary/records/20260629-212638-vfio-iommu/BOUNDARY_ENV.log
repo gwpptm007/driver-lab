@@ -1,0 +1,65 @@
+# BOUNDARY_ENV
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-vfio-iommu-boundary
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-vfio-iommu-boundary/records/20260629-212638-vfio-iommu
+DPDK_PCI=0000:0b:00.0
+DPDK_IF=ens192
+MGMT_PCI=0000:02:01.0
+MGMT_IF=ens33
+
+## uname
+Linux wq7-virtual-machine 6.8.0-124-generic #124~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue May 26 21:05:19 UTC  x86_64 x86_64 x86_64 GNU/Linux
+
+## cmdline
+BOOT_IMAGE=/boot/vmlinuz-6.8.0-124-generic root=UUID=b6dfcf48-79dd-42f6-867f-0e7878e613e9 ro quiet splash
+
+## cpu virtualization flags
+CPU(s):                                  8
+On-line CPU(s) list:                     0-7
+Vendor ID:                               AuthenticAMD
+Model name:                              AMD Ryzen 9 7945HX with Radeon Graphics
+Virtualization:                          AMD-V
+Virtualization type:                     full
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-7
+
+## iommu sysfs
+
+## modules
+vmxnet3                94208  0
+
+## hugepages
+/sys/kernel/mm/hugepages/hugepages-1048576kB/nr_hugepages:0
+/sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages:1024
+
+## dpdk-devbind
+
+Network devices using kernel driver
+===================================
+0000:02:01.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens33 drv=e1000 unused= *Active*
+0000:02:02.0 '82545EM Gigabit Ethernet Controller (Copper) 100f' if=ens34 drv=e1000 unused= 
+0000:0b:00.0 'VMXNET3 Ethernet Controller 07b0' if=ens192 drv=vmxnet3 unused= *Active*
+
+No 'Baseband' devices detected
+==============================
+
+No 'Crypto' devices detected
+============================
+
+No 'DMA' devices detected
+=========================
+
+No 'Eventdev' devices detected
+==============================
+
+No 'Mempool' devices detected
+=============================
+
+No 'Compress' devices detected
+==============================
+
+No 'Misc (rawdev)' devices detected
+===================================
+
+No 'Regex' devices detected
+===========================

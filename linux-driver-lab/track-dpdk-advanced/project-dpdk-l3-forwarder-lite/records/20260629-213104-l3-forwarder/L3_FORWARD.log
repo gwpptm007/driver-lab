@@ -1,0 +1,32 @@
+# L3_FORWARD
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite/app/build/dpdk-l3-forwarder-lite
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite/records/20260629-213104-l3-forwarder
+PCAP_FILE=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite/records/20260629-213104-l3-forwarder/l3_input.pcap
+L3_LCORES=0-1
+L3_MEMORY_CHANNELS=4
+L3_FILE_PREFIX=dpdk_l3_forwarder_lite
+L3_PCAP_COUNT=48
+L3_BURST_SIZE=16
+L3_MBUF_CACHE=250
+L3_MAX_IDLE_POLLS=100000
+
+++ date +%s
++ /home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite/app/build/dpdk-l3-forwarder-lite -l 0-1 -n 4 --no-pci --file-prefix dpdk_l3_forwarder_lite_1782739864 --vdev net_pcap0,rx_pcap=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite/records/20260629-213104-l3-forwarder/l3_input.pcap --vdev net_null1 -- --burst-size 16 --mbuf-cache 250 --max-idle-polls 100000
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_l3_forwarder_lite_1782739864/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+CONFIG in_port=0 out_port=1 burst=16 nb_mbuf=8192 mbuf_cache=250
+ROUTE[0] prefix=10.20.0.0/24 out_port=1
+ACL[0] action=drop udp_dst_port=9999
+enter l3 forwarder loop on lcore 0
+RESULT rx_packets=48 rx_bytes=3264 forwarded_packets=24 forwarded_bytes=1608 acl_drops=12 route_miss_drops=12 non_ipv4_drops=0 parse_drops=0 tx_failed=0 polls=100003 empty_polls=100000
+ROUTE_STATS[0] hits=24 bytes=1608
+ACL_STATS[0] drops=12 bytes=816
++ set +x

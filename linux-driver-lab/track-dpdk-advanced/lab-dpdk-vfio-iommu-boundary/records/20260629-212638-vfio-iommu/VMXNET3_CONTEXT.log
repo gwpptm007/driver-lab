@@ -1,0 +1,72 @@
+# VMXNET3_CONTEXT
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-vfio-iommu-boundary
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-vfio-iommu-boundary/records/20260629-212638-vfio-iommu
+DPDK_PCI=0000:0b:00.0
+DPDK_IF=ens192
+MGMT_PCI=0000:02:01.0
+MGMT_IF=ens33
+
+## ip link
+lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
+ens192           UP             00:0c:29:f8:f6:82 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+ens33            UP             00:0c:29:f8:f6:6e <BROADCAST,MULTICAST,UP,LOWER_UP> 
+ens34            UP             00:0c:29:f8:f6:78 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+
+## ip addr
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens192           UP             192.168.65.200/24 fe80::20c:29ff:fef8:f682/64 
+ens33            UP             192.168.65.135/24 fe80::6e4d:b76b:3e79:cf8d/64 
+ens34            UP             
+
+## lspci selected
+0b:00.0 Ethernet controller [0200]: VMware VMXNET3 Ethernet Controller [15ad:07b0] (rev 01)
+	DeviceName: Ethernet2
+	Subsystem: VMware VMXNET3 Ethernet Controller [15ad:07b0]
+	Kernel driver in use: vmxnet3
+	Kernel modules: vmxnet3
+
+02:01.0 Ethernet controller [0200]: Intel Corporation 82545EM Gigabit Ethernet Controller (Copper) [8086:100f] (rev 01)
+	DeviceName: Ethernet0
+	Subsystem: VMware PRO/1000 MT Single Port Adapter [15ad:0750]
+	Kernel driver in use: e1000
+	Kernel modules: e1000
+
+## ethtool driver
+driver: vmxnet3
+version: 1.7.0.0-k-NAPI
+firmware-version: 
+expansion-rom-version: 
+bus-info: 0000:0b:00.0
+supports-statistics: yes
+supports-test: no
+supports-eeprom-access: no
+supports-register-dump: yes
+supports-priv-flags: no
+
+driver: e1000
+version: 6.8.0-124-generic
+firmware-version: 
+expansion-rom-version: 
+bus-info: 0000:02:01.0
+supports-statistics: yes
+supports-test: yes
+supports-eeprom-access: yes
+supports-register-dump: yes
+supports-priv-flags: no
+
+## interrupts
+  19:          0          0          0      49027         56        845          0        128   IO-APIC   19-fasteoi   ehci_hcd:usb2, ens33
+  56:         18          0          0         12          0          0          0          3  PCI-MSIX-0000:0b:00.0    0-edge      ens192-rxtx-0
+  57:          0          2          0          0          0          0          0          0  PCI-MSIX-0000:0b:00.0    1-edge      ens192-rxtx-1
+  58:          0          0          0          0          0          0          0          0  PCI-MSIX-0000:0b:00.0    2-edge      ens192-rxtx-2
+  59:          0          0          0          6          0          0          0          0  PCI-MSIX-0000:0b:00.0    3-edge      ens192-rxtx-3
+  60:          0          0          0          0          1          0          0          0  PCI-MSIX-0000:0b:00.0    4-edge      ens192-rxtx-4
+  61:          0          0          0          0          0          0          0          0  PCI-MSIX-0000:0b:00.0    5-edge      ens192-rxtx-5
+  62:          0          0          0         42          0          3         15          0  PCI-MSIX-0000:0b:00.0    6-edge      ens192-rxtx-6
+  63:          0          0          0          7          0          0          0         10  PCI-MSIX-0000:0b:00.0    7-edge      ens192-rxtx-7
+  64:          0          0          0          0          0          0          0          0  PCI-MSIX-0000:0b:00.0    8-edge      ens192-event-8
+
+## prior evidence references
+track-dpdk basic: vmxnet3 PMD TX path exists in prior records
+network-data-plane-v1 boundary: vmxnet3 RX blocked under VMware + UIO when MSI-X/interrupt path is insufficient

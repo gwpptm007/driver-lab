@@ -1,0 +1,33 @@
+# ENV_CHECK
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive
+APP_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/app
+TOOLS_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/tools
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/app/build/dpdk-mbuf-inspect
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/records/20260629-210538-mbuf-mempool
+PCAP_FILE=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/records/20260629-210538-mbuf-mempool/udp_input.pcap
+MBUF_LCORES=0-1
+MBUF_MEMORY_CHANNELS=4
+MBUF_FILE_PREFIX=dpdk_mbuf_inspect
+MBUF_RUN_SECONDS=5
+MBUF_SAMPLE_LIMIT=8
+MBUF_BURST_SIZE=32
+MBUF_NB_MBUF=8192
+MBUF_CACHE=250
+MBUF_RX_DESC=1024
+MBUF_PCAP_COUNT=64
+
+## tools
+OK cc /usr/bin/cc
+OK make /usr/bin/make
+OK pkg-config /usr/bin/pkg-config
+OK python3 /usr/bin/python3
+
+## dpdk pkg-config
+OK libdpdk
+21.11.9
+-include rte_config.h -march=corei7 -I/usr/include/dpdk -I/usr/include/libnl3 -I/usr/include/dpdk/../x86_64-linux-gnu/dpdk -I/usr/include/dpdk
+
+## hugepages
+/sys/kernel/mm/hugepages/hugepages-1048576kB/nr_hugepages:0
+/sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages:1024

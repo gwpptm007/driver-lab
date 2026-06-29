@@ -135,6 +135,8 @@ path invariant
 
 ## 9. Cross-Path Comparison
 
+详见 [docs/10_CROSS_PATH_COMPARISON.md](../docs/10_CROSS_PATH_COMPARISON.md) — 完整横向对比报告，基于实验数据的机制、性能和选型分析。
+
 | 路径 | 数据入口 | 核心机制 | 价值 | 边界 |
 |------|----------|----------|------|------|
 | Kernel netdev | 驱动 RX | skb/NAPI/ring | Linux 原生主路径 | 协议栈成本较高 |
@@ -154,6 +156,10 @@ path invariant
 - `evidence/dpdk_evidence.md`
 - `evidence/af_xdp_evidence.md`
 - `evidence/ebpf_observability_evidence.md`
+
+交叉对比：
+
+- [docs/10_CROSS_PATH_COMPARISON.md](../docs/10_CROSS_PATH_COMPARISON.md)
 
 ## 11. Limitations
 

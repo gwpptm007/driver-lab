@@ -1,0 +1,19 @@
+# BUILD
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite/app/build/dpdk-l3-forwarder-lite
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite/records/20260629-213104-l3-forwarder
+PCAP_FILE=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite/records/20260629-213104-l3-forwarder/l3_input.pcap
+L3_LCORES=0-1
+L3_MEMORY_CHANNELS=4
+L3_FILE_PREFIX=dpdk_l3_forwarder_lite
+L3_PCAP_COUNT=48
+L3_BURST_SIZE=16
+L3_MBUF_CACHE=250
+L3_MAX_IDLE_POLLS=100000
+
+rm -rf build
+mkdir -p build
+cc -O2 -g -Wall -Wextra -include rte_config.h -march=corei7 -I/usr/include/dpdk -I/usr/include/libnl3 -I/usr/include/dpdk/../x86_64-linux-gnu/dpdk -I/usr/include/dpdk main.c -o build/dpdk-l3-forwarder-lite -Wl,--as-needed -lrte_node -lrte_graph -lrte_flow_classify -lrte_pipeline -lrte_table -lrte_pdump -lrte_port -lrte_fib -lrte_ipsec -lrte_vhost -lrte_stack -lrte_security -lrte_sched -lrte_reorder -lrte_rib -lrte_dmadev -lrte_regexdev -lrte_rawdev -lrte_power -lrte_pcapng -lrte_member -lrte_lpm -lrte_latencystats -lrte_kni -lrte_jobstats -lrte_ip_frag -lrte_gso -lrte_gro -lrte_gpudev -lrte_eventdev -lrte_efd -lrte_distributor -lrte_cryptodev -lrte_compressdev -lrte_cfgfile -lrte_bpf -lrte_bitratestats -lrte_bbdev -lrte_acl -lrte_timer -lrte_hash -lrte_metrics -lrte_cmdline -lrte_pci -lrte_ethdev -lrte_meter -lrte_net -lrte_mbuf -lrte_mempool -lrte_rcu -lrte_ring -lrte_eal -lrte_telemetry -lrte_kvargs -lbsd
+-rwxrwxr-x 1 wq7 wq7 77K  6月 29 21:31 /home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite/app/build/dpdk-l3-forwarder-lite
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite/app/build/dpdk-l3-forwarder-lite: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=d14b6bfcaef3d066fd0193a1c5731fb730ff0b0b, for GNU/Linux 3.2.0, with debug_info, not stripped

@@ -1,0 +1,32 @@
+# ENV_CHECK
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue
+APP_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/app
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/app/build/dpdk-rss-queue-probe
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/records/20260629-211820-rss-multiqueue
+PCAP_FILE=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/records/20260629-211820-rss-multiqueue/rss_input.pcap
+RSS_LCORES=0-3
+RSS_MEMORY_CHANNELS=4
+RSS_FILE_PREFIX=dpdk_rss_queue_probe
+RSS_REQUEST_RX_QUEUES=2
+RSS_REQUEST_TX_QUEUES=0
+RSS_NB_MBUF=8192
+RSS_MBUF_CACHE=250
+RSS_RX_DESC=512
+RSS_TX_DESC=512
+RSS_PCAP_COUNT=64
+
+## tools
+OK cc /usr/bin/cc
+OK make /usr/bin/make
+OK pkg-config /usr/bin/pkg-config
+OK python3 /usr/bin/python3
+
+## dpdk pkg-config
+OK libdpdk
+21.11.9
+
+## hugepages
+/sys/kernel/mm/hugepages/hugepages-1048576kB/nr_hugepages:0
+/sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages:1024
+drwxrwxrwt 2 root root 0  6月 29 21:05 /dev/hugepages

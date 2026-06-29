@@ -1,0 +1,150 @@
+## RUN burst=1 cache=0
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_1_1_0/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=1 mbuf_cache=0 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=104096 empty_polls=100000 duration_sec=0.002680 pps=1528523.61
+## RUN burst=1 cache=64
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_2_1_64/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=1 mbuf_cache=64 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=104096 empty_polls=100000 duration_sec=0.002394 pps=1711215.65
+## RUN burst=1 cache=250
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_3_1_250/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=1 mbuf_cache=250 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=104096 empty_polls=100000 duration_sec=0.002413 pps=1697373.55
+## RUN burst=4 cache=0
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_4_4_0/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=4 mbuf_cache=0 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=101024 empty_polls=100000 duration_sec=0.002427 pps=1688014.11
+## RUN burst=4 cache=64
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_5_4_64/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=4 mbuf_cache=64 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=101024 empty_polls=100000 duration_sec=0.003320 pps=1233794.40
+## RUN burst=4 cache=250
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_6_4_250/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=4 mbuf_cache=250 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=101024 empty_polls=100000 duration_sec=0.002465 pps=1661339.78
+## RUN burst=16 cache=0
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_7_16_0/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=16 mbuf_cache=0 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=100256 empty_polls=100000 duration_sec=0.002389 pps=1714790.49
+## RUN burst=16 cache=64
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_8_16_64/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=16 mbuf_cache=64 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=100256 empty_polls=100000 duration_sec=0.002463 pps=1662972.08
+## RUN burst=16 cache=250
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_9_16_250/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=16 mbuf_cache=250 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=100256 empty_polls=100000 duration_sec=0.002368 pps=1729970.82
+## RUN burst=32 cache=0
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_10_32_0/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=32 mbuf_cache=0 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=100128 empty_polls=100000 duration_sec=0.002371 pps=1727898.22
+## RUN burst=32 cache=64
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_11_32_64/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=32 mbuf_cache=64 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=100128 empty_polls=100000 duration_sec=0.002540 pps=1612585.73
+## RUN burst=32 cache=250
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_12_32_250/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=32 mbuf_cache=250 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=100128 empty_polls=100000 duration_sec=0.002390 pps=1714123.10
+## RUN burst=64 cache=0
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_13_64_0/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=64 mbuf_cache=0 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=100064 empty_polls=100000 duration_sec=0.002380 pps=1721008.40
+## RUN burst=64 cache=64
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_14_64_64/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=64 mbuf_cache=64 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=100064 empty_polls=100000 duration_sec=0.002347 pps=1745533.89
+## RUN burst=64 cache=250
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_burst_cache_probe_15_64_250/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+RESULT driver=net_pcap lcore=0 socket=0 burst_size=64 mbuf_cache=250 nb_mbuf=16384 rx_packets=4096 rx_bytes=274432 polls=100064 empty_polls=100000 duration_sec=0.002556 pps=1602196.76

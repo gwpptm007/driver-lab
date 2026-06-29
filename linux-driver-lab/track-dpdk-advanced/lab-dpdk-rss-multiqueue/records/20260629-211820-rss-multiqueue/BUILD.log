@@ -1,0 +1,26 @@
+# BUILD
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue
+APP_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/app
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/app/build/dpdk-rss-queue-probe
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/records/20260629-211820-rss-multiqueue
+PCAP_FILE=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/records/20260629-211820-rss-multiqueue/rss_input.pcap
+RSS_LCORES=0-3
+RSS_MEMORY_CHANNELS=4
+RSS_FILE_PREFIX=dpdk_rss_queue_probe
+RSS_REQUEST_RX_QUEUES=2
+RSS_REQUEST_TX_QUEUES=0
+RSS_NB_MBUF=8192
+RSS_MBUF_CACHE=250
+RSS_RX_DESC=512
+RSS_TX_DESC=512
+RSS_PCAP_COUNT=64
+
+## make clean all
+rm -rf build
+mkdir -p build
+cc -O2 -g -Wall -Wextra -include rte_config.h -march=corei7 -I/usr/include/dpdk -I/usr/include/libnl3 -I/usr/include/dpdk/../x86_64-linux-gnu/dpdk -I/usr/include/dpdk main.c -o build/dpdk-rss-queue-probe -Wl,--as-needed -lrte_node -lrte_graph -lrte_flow_classify -lrte_pipeline -lrte_table -lrte_pdump -lrte_port -lrte_fib -lrte_ipsec -lrte_vhost -lrte_stack -lrte_security -lrte_sched -lrte_reorder -lrte_rib -lrte_dmadev -lrte_regexdev -lrte_rawdev -lrte_power -lrte_pcapng -lrte_member -lrte_lpm -lrte_latencystats -lrte_kni -lrte_jobstats -lrte_ip_frag -lrte_gso -lrte_gro -lrte_gpudev -lrte_eventdev -lrte_efd -lrte_distributor -lrte_cryptodev -lrte_compressdev -lrte_cfgfile -lrte_bpf -lrte_bitratestats -lrte_bbdev -lrte_acl -lrte_timer -lrte_hash -lrte_metrics -lrte_cmdline -lrte_pci -lrte_ethdev -lrte_meter -lrte_net -lrte_mbuf -lrte_mempool -lrte_rcu -lrte_ring -lrte_eal -lrte_telemetry -lrte_kvargs -lbsd
+
+## binary
+-rwxrwxr-x 1 wq7 wq7 57K  6月 29 21:18 /home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/app/build/dpdk-rss-queue-probe
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue/app/build/dpdk-rss-queue-probe: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=eb5dbb1814d7f03e6fc39ee18be4b8c5c0684728, for GNU/Linux 3.2.0, with debug_info, not stripped

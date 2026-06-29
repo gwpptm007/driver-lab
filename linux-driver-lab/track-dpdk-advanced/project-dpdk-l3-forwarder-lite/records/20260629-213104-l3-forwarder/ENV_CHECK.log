@@ -1,0 +1,19 @@
+# ENV_CHECK
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite/app/build/dpdk-l3-forwarder-lite
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite/records/20260629-213104-l3-forwarder
+PCAP_FILE=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite/records/20260629-213104-l3-forwarder/l3_input.pcap
+L3_LCORES=0-1
+L3_MEMORY_CHANNELS=4
+L3_FILE_PREFIX=dpdk_l3_forwarder_lite
+L3_PCAP_COUNT=48
+L3_BURST_SIZE=16
+L3_MBUF_CACHE=250
+L3_MAX_IDLE_POLLS=100000
+
+Linux wq7-virtual-machine 6.8.0-124-generic #124~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue May 26 21:05:19 UTC  x86_64 x86_64 x86_64 GNU/Linux
+21.11.9
+Python 3.10.12
+/sys/kernel/mm/hugepages/hugepages-1048576kB/nr_hugepages:0
+/sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages:1024

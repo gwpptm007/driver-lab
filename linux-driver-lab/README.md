@@ -13,7 +13,9 @@ linux-driver-lab/
 ├── track-virtual-net/   虚拟化网络：tap/bridge/vhost
 ├── track-af-xdp/        AF_XDP 快速路径
 ├── track-dpdk/          DPDK 用户态网络
-└── track-ebpf-observability/  eBPF 可观测性
+├── track-dpdk-advanced/ DPDK 进阶：多队列/RSS/NUMA/VFIO/调优
+├── track-ebpf-observability/  eBPF 可观测性
+└── track-block-io/      P2 保留支线：block layer / storage I/O
 ```
 
 ## 快速导航
@@ -27,7 +29,9 @@ linux-driver-lab/
 | track-real-driver | `track-real-driver/README.md` | 真实驱动源码与 patch 线 |
 | track-virtual-net | `track-virtual-net/README.md` | vhost/kick/notify 机制 |
 | track-dpdk | `track-dpdk/README.md` | DPDK 用户态网络 fastpath |
+| track-dpdk-advanced | `track-dpdk-advanced/README.md` | DPDK 进阶：mbuf/mempool、RSS、多队列、NUMA、VFIO/IOMMU |
 | track-af-xdp | `track-af-xdp/README.md` | Linux 原生 XDP + AF_XDP socket（四阶段全部 PASS） |
 | track-ebpf-observability | `track-ebpf-observability/README.md` | 网络路径观测与定位 |
+| track-block-io | `track-block-io/README.md` | P2 保留支线：bio / request / blk-mq / fio / observability |
 
 详细说明 → `docs/01_PROGRAMS.md`

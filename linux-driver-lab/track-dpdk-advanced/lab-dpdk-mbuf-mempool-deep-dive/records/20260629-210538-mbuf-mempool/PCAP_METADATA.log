@@ -1,0 +1,55 @@
+# PCAP_METADATA
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive
+APP_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/app
+TOOLS_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/tools
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/app/build/dpdk-mbuf-inspect
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/records/20260629-210538-mbuf-mempool
+PCAP_FILE=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/records/20260629-210538-mbuf-mempool/udp_input.pcap
+MBUF_LCORES=0-1
+MBUF_MEMORY_CHANNELS=4
+MBUF_FILE_PREFIX=dpdk_mbuf_inspect
+MBUF_RUN_SECONDS=5
+MBUF_SAMPLE_LIMIT=8
+MBUF_BURST_SIZE=32
+MBUF_NB_MBUF=8192
+MBUF_CACHE=250
+MBUF_RX_DESC=1024
+MBUF_PCAP_COUNT=64
+
+## command
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/app/build/dpdk-mbuf-inspect -l 0-1 -n 4 --file-prefix dpdk_mbuf_inspect --vdev net_pcap0\,rx_pcap=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/records/20260629-210538-mbuf-mempool/udp_input.pcap -- --run-seconds 5 --sample-limit 8 --burst-size 32 --nb-mbuf 8192 --mbuf-cache 250 --rx-desc 1024 --promisc 1 
+
+EAL: Detected CPU lcores: 8
+EAL: Detected NUMA nodes: 1
+EAL: Detected shared linkage of DPDK
+EAL: Multi-process socket /run/user/1000/dpdk/dpdk_mbuf_inspect/mp_socket
+EAL: Physical addresses are unavailable, selecting IOVA as VA mode.
+EAL: Selected IOVA mode 'VA'
+EAL: No available 1048576 kB hugepages reported
+TELEMETRY: No legacy callbacks, legacy socket not created
+# DPDK_MBUF_INSPECT_CONFIG
+lcore=0 port_id=0
+nb_mbuf=8192 mbuf_cache=250 burst_size=32 rx_desc=1024 sample_limit=8 run_seconds=5 promisc=1
+mempool_name=mbuf_inspect_pool mempool_size=8192 mempool_cache_size=250 mempool_socket=0
+mempool_avail_start=8192 mempool_in_use_start=0
+driver_name=net_pcap max_rx_queues=1 max_tx_queues=0 min_rx_bufsize=0 max_rx_pktlen=4294967295
+
+MBUF_SAMPLE index=0 port=0 mbuf_port=0 buf_addr=0x10080cc40 buf_iova=0x10080cc40 data_off=128 data_len=67 pkt_len=67 nb_segs=1 ol_flags=0x800000 packet_type=0x0 rss_hash=0x0 refcnt=1
+MBUF_SAMPLE index=1 port=0 mbuf_port=0 buf_addr=0x10080c300 buf_iova=0x10080c300 data_off=128 data_len=67 pkt_len=67 nb_segs=1 ol_flags=0x800000 packet_type=0x0 rss_hash=0x0 refcnt=1
+MBUF_SAMPLE index=2 port=0 mbuf_port=0 buf_addr=0x10080b9c0 buf_iova=0x10080b9c0 data_off=128 data_len=67 pkt_len=67 nb_segs=1 ol_flags=0x800000 packet_type=0x0 rss_hash=0x0 refcnt=1
+MBUF_SAMPLE index=3 port=0 mbuf_port=0 buf_addr=0x10080b080 buf_iova=0x10080b080 data_off=128 data_len=67 pkt_len=67 nb_segs=1 ol_flags=0x800000 packet_type=0x0 rss_hash=0x0 refcnt=1
+MBUF_SAMPLE index=4 port=0 mbuf_port=0 buf_addr=0x10080a740 buf_iova=0x10080a740 data_off=128 data_len=67 pkt_len=67 nb_segs=1 ol_flags=0x800000 packet_type=0x0 rss_hash=0x0 refcnt=1
+MBUF_SAMPLE index=5 port=0 mbuf_port=0 buf_addr=0x100809e00 buf_iova=0x100809e00 data_off=128 data_len=67 pkt_len=67 nb_segs=1 ol_flags=0x800000 packet_type=0x0 rss_hash=0x0 refcnt=1
+MBUF_SAMPLE index=6 port=0 mbuf_port=0 buf_addr=0x1008094c0 buf_iova=0x1008094c0 data_off=128 data_len=67 pkt_len=67 nb_segs=1 ol_flags=0x800000 packet_type=0x0 rss_hash=0x0 refcnt=1
+MBUF_SAMPLE index=7 port=0 mbuf_port=0 buf_addr=0x100808b80 buf_iova=0x100808b80 data_off=128 data_len=67 pkt_len=67 nb_segs=1 ol_flags=0x800000 packet_type=0x0 rss_hash=0x0 refcnt=1
+mempool_avail_end=8192 mempool_in_use_end=0
+
+# FINAL_STATS
+software_rx_packets=32 software_rx_bytes=2144 samples_printed=8
+ethdev_ipackets=32 ethdev_ibytes=2144 ethdev_imissed=0 ethdev_ierrors=0
+stats_consistency=PASS_STATS_CONSISTENCY
+result_build=PASS_BUILD_RUNTIME_REACHED
+result_pcap_rx=PASS_PCAP_RX
+result_mbuf_metadata=PASS_MBUF_METADATA
+result_mempool_config=PASS_MEMPOOL_CONFIG

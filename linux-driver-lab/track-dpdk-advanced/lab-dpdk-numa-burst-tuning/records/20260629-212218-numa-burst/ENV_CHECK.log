@@ -1,0 +1,30 @@
+# ENV_CHECK
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-numa-burst-tuning
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-numa-burst-tuning/app/build/dpdk-burst-cache-probe
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-numa-burst-tuning/records/20260629-212218-numa-burst
+PCAP_FILE=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-numa-burst-tuning/records/20260629-212218-numa-burst/burst_input.pcap
+TUNE_LCORES=0-1
+TUNE_MEMORY_CHANNELS=4
+TUNE_FILE_PREFIX=dpdk_burst_cache_probe
+TUNE_NB_MBUF=16384
+TUNE_RX_DESC=1024
+TUNE_PCAP_COUNT=4096
+TUNE_BURST_LIST=1 4 16 32 64
+TUNE_CACHE_LIST=0 64 250
+
+OK cc /usr/bin/cc
+OK make /usr/bin/make
+OK pkg-config /usr/bin/pkg-config
+OK python3 /usr/bin/python3
+OK awk /usr/bin/awk
+OK sed /usr/bin/sed
+OK libdpdk
+21.11.9
+/sys/kernel/mm/hugepages/hugepages-1048576kB/nr_hugepages:0
+/sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages:1024
+CPU(s):                                  8
+On-line CPU(s) list:                     0-7
+Model name:                              AMD Ryzen 9 7945HX with Radeon Graphics
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-7

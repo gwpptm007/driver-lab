@@ -3,6 +3,7 @@
 ## 对应章节
 
 - `../docs/05_AF_XDP_PATH.md`
+- `../docs/10_CROSS_PATH_COMPARISON.md` (三种路径横向对比)
 
 ## 主入口
 

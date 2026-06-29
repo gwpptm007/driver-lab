@@ -38,6 +38,8 @@ driver-lab/
 - **W5：DMA / mmap / bench / perf / ftrace / stability**（day29 ~ day35）
 - **netdev 主线**（stage00 ~ stage14）：net_device / skb / NAPI / ring / XDP
 - **专题 track**：real-driver / virtual-net / DPDK / AF_XDP / eBPF observability
+- **下一主线规划**：DPDK Advanced → RDMA → SmartNIC/DPU
+- **P2 保留支线**：block I/O / storage I/O（bio / request / blk-mq / fio / observability）
 
 也就是说，仓库当前状态已经不再是“入门样例集合”，而是一条比较完整的驱动实验型学习路线。
 
@@ -91,7 +93,9 @@ driver-lab/
 
 > 当前仓库已经完成从字符设备基础，到 platform/DT/IRQ，再到 PCIe/DMA/性能分析与稳定性验证的主线闭环；
 > AF_XDP 四阶段实验（XDP redirect → socket/rings → zero-copy → mini forwarder）全部复测通过（2026-06-07）；
-> 现在更适合作为”阶段性完整作品”来评审，而不是继续把它当成零散 demo 仓库来看。
+> network data plane 作品集已通过 `network-data-plane-v1` 标签封版；
+> 下一阶段主线调整为 DPDK Advanced → RDMA → SmartNIC/DPU，面向高性能网络、RDMA 和数据中心网络加速方向；
+> block I/O / storage I/O 规划先作为 P2 支线保留。
 
 ---
 

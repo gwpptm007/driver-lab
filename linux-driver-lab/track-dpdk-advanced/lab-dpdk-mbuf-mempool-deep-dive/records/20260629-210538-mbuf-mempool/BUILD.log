@@ -1,0 +1,27 @@
+# BUILD
+
+PROJECT_ROOT=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive
+APP_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/app
+TOOLS_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/tools
+APP_BIN=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/app/build/dpdk-mbuf-inspect
+RECORD_DIR=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/records/20260629-210538-mbuf-mempool
+PCAP_FILE=/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/records/20260629-210538-mbuf-mempool/udp_input.pcap
+MBUF_LCORES=0-1
+MBUF_MEMORY_CHANNELS=4
+MBUF_FILE_PREFIX=dpdk_mbuf_inspect
+MBUF_RUN_SECONDS=5
+MBUF_SAMPLE_LIMIT=8
+MBUF_BURST_SIZE=32
+MBUF_NB_MBUF=8192
+MBUF_CACHE=250
+MBUF_RX_DESC=1024
+MBUF_PCAP_COUNT=64
+
+## make clean all
+rm -rf build
+mkdir -p build
+cc -O2 -g -Wall -Wextra -include rte_config.h -march=corei7 -I/usr/include/dpdk -I/usr/include/libnl3 -I/usr/include/dpdk/../x86_64-linux-gnu/dpdk -I/usr/include/dpdk main.c -o build/dpdk-mbuf-inspect -Wl,--as-needed -lrte_node -lrte_graph -lrte_flow_classify -lrte_pipeline -lrte_table -lrte_pdump -lrte_port -lrte_fib -lrte_ipsec -lrte_vhost -lrte_stack -lrte_security -lrte_sched -lrte_reorder -lrte_rib -lrte_dmadev -lrte_regexdev -lrte_rawdev -lrte_power -lrte_pcapng -lrte_member -lrte_lpm -lrte_latencystats -lrte_kni -lrte_jobstats -lrte_ip_frag -lrte_gso -lrte_gro -lrte_gpudev -lrte_eventdev -lrte_efd -lrte_distributor -lrte_cryptodev -lrte_compressdev -lrte_cfgfile -lrte_bpf -lrte_bitratestats -lrte_bbdev -lrte_acl -lrte_timer -lrte_hash -lrte_metrics -lrte_cmdline -lrte_pci -lrte_ethdev -lrte_meter -lrte_net -lrte_mbuf -lrte_mempool -lrte_rcu -lrte_ring -lrte_eal -lrte_telemetry -lrte_kvargs -lbsd
+
+## binary
+-rwxrwxr-x 1 wq7 wq7 83K  6月 29 21:05 /home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/app/build/dpdk-mbuf-inspect
+/home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/app/build/dpdk-mbuf-inspect: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=1c93a40b26ca4061fa809e9ef396e5c862dd1b75, for GNU/Linux 3.2.0, with debug_info, not stripped

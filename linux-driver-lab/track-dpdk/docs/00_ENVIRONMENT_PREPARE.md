@@ -405,6 +405,38 @@ cat /sys/class/net/ens192/queues/tx-0/tx_queue
 - **ethernet1 (ens34)**：hostonly，备用
 - **ethernet2 (ens35/ens192)**：VMnet3，改为 VMXNET3 用于 DPDK
 
+### 4.1. safe-bind：防止误绑 ens33 管理口
+
+> ⚠️ **真实事故**：2026-06-29，dpdk-devbind 误将 ens33 (02:01.0) 当作测试口绑定，导致 SSH 断开，只能通过 VMware 控制台恢复。
+
+ens33 和 ens34 都是 e1000 网卡，PCI 地址只差一位（`02:01.0` vs `02:02.0`），极易手误。在 `~/.bashrc` 中加入 `safe-bind` 函数做保护：
+
+```bash
+# === DPDK safe bind: 防止误绑 ens33 (管理口 02:01.0) ===
+safe-bind() {
+    local pci="$1"
+    local drv="${2:-vfio-pci}"
+    if [ -z "$pci" ]; then
+        echo "用法: safe-bind <PCI> [driver]"
+        dpdk-devbind.py --status 2>/dev/null | grep -E 'ens33|ens34|ens192'
+        return 1
+    fi
+    case "$pci" in
+        0000:02:01.0) echo "❌ ens33 是管理口，禁止 bind!"; return 1 ;;
+        0000:0b:00.0) echo "→ bind ens192 (vmxnet3) to $drv"; sudo dpdk-devbind.py -b "$drv" "$pci" ;;
+        *) echo "⚠️  非标准 DPDK 设备: $pci，确认后请手动执行"; return 1 ;;
+    esac
+}
+```
+
+| PCI 地址 | 网卡 | safe-bind 行为 |
+|----------|------|---------------|
+| `0000:02:01.0` | ens33 (e1000) | ❌ 直接拒绝 |
+| `0000:0b:00.0` | ens192 (vmxnet3) | ✅ 允许 bind |
+| 其他 | — | ⚠️ 警告，需手动确认 |
+
+不带参数运行 `safe-bind` 会直接显示三张网卡的 dpdk 状态。
+
 ### 5. PCI Slot Number 会变化
 
 修改 VMXNET3 后，`ethernet2.pciSlotNumber` 从 `35` 变为 `192`，这是正常的（VMXNET3 使用不同的 PCI 位置）。

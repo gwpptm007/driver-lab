@@ -23,6 +23,7 @@
 ../README.md
 ../reports/final_report.md
 ../docs/07_FINAL_ARCHITECTURE.md
+../docs/10_CROSS_PATH_COMPARISON.md   ← 横向对比（DPDK vs AF_XDP vs Kernel）
 ```
 
 需要核验证据时，再进入本目录对应文件。
