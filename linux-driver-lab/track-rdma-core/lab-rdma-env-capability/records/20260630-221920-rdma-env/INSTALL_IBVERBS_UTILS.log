@@ -1,0 +1,18 @@
+# Install ibverbs-utils
+record_dir=/home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/lab-rdma-env-capability/records/20260630-221920-rdma-env
+timestamp=2026-06-30T22:58:21+08:00
+
+===== dpkg package status before =====
+$ sh -c dpkg\ -l\ \|\ grep\ -E\ \'rdma-core\|libibverbs\|ibverbs-providers\|ibverbs-utils\'\ \|\|\ true
+ii  ibverbs-providers:amd64                    39.0-1                                            amd64        User space provider drivers for libibverbs
+ii  libibverbs-dev:amd64                       39.0-1                                            amd64        Development files for the libibverbs library
+ii  libibverbs1:amd64                          39.0-1                                            amd64        Library for direct userspace use of RDMA (InfiniBand/iWARP)
+ii  rdma-core                                  39.0-1                                            amd64        RDMA core userspace infrastructure and documentation
+
+===== command status before =====
+$ sh -c command\ -v\ ibv_devices\ \|\|\ true\;\ command\ -v\ ibv_devinfo\ \|\|\ true\;\ command\ -v\ rdma\ \|\|\ true
+/usr/bin/rdma
+
+BLOCKED_DPKG_LOCK: unattended-upgrade is running.
+1118 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+Do not kill it automatically. Retry this script after the package manager is free.

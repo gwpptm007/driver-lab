@@ -1,0 +1,162 @@
+# RDMA env check
+record_dir=/home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/lab-rdma-env-capability/records/20260630-221920-rdma-env
+timestamp=2026-06-30T22:19:20+08:00
+
+===== whoami =====
+$ whoami
+wq7
+
+===== hostname =====
+$ hostname
+wq7-virtual-machine
+
+===== uname =====
+$ uname -a
+Linux wq7-virtual-machine 6.8.0-124-generic #124~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Tue May 26 21:05:19 UTC  x86_64 x86_64 x86_64 GNU/Linux
+
+===== os-release =====
+$ sh -c cat\ /etc/os-release\ 2\>/dev/null\ \|\|\ true
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+VERSION_ID="22.04"
+VERSION="22.04.5 LTS (Jammy Jellyfish)"
+VERSION_CODENAME=jammy
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=jammy
+
+===== kernel cmdline =====
+$ sh -c cat\ /proc/cmdline\ 2\>/dev/null\ \|\|\ true
+BOOT_IMAGE=/boot/vmlinuz-6.8.0-124-generic root=UUID=b6dfcf48-79dd-42f6-867f-0e7878e613e9 ro quiet splash
+
+===== cpu summary =====
+$ lscpu
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           45 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  8
+On-line CPU(s) list:                     0-7
+Vendor ID:                               AuthenticAMD
+Model name:                              AMD Ryzen 9 7945HX with Radeon Graphics
+CPU family:                              25
+Model:                                   97
+Thread(s) per core:                      1
+Core(s) per socket:                      4
+Socket(s):                               2
+Stepping:                                2
+BogoMIPS:                                4990.62
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext ssbd ibrs ibpb ibrs_enhanced vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves user_shstk avx512_bf16 clzero wbnoinvd arat npt svm_lock nrip_save vmcb_clean flushbyasid decodeassists avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid overflow_recov succor fsrm flush_l1d
+Virtualization:                          AMD-V
+Hypervisor vendor:                       VMware
+Virtualization type:                     full
+L1d cache:                               256 KiB (8 instances)
+L1i cache:                               256 KiB (8 instances)
+L2 cache:                                8 MiB (8 instances)
+L3 cache:                                64 MiB (2 instances)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-7
+Vulnerability Gather data sampling:      Not affected
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             Not affected
+Vulnerability L1tf:                      Not affected
+Vulnerability Mds:                       Not affected
+Vulnerability Meltdown:                  Not affected
+Vulnerability Mmio stale data:           Not affected
+Vulnerability Reg file data sampling:    Not affected
+Vulnerability Retbleed:                  Not affected
+Vulnerability Spec rstack overflow:      Vulnerable: Safe RET, no microcode
+Vulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP disabled; PBRSB-eIBRS Not affected; BHI Not affected
+Vulnerability Srbds:                     Not affected
+Vulnerability Tsa:                       Vulnerable: Clear CPU buffers attempted, no microcode
+Vulnerability Tsx async abort:           Not affected
+Vulnerability Vmscape:                   Not affected
+
+===== pci ethernet/infiniband =====
+$ sh -c lspci\ -nn\ 2\>/dev/null\ \|\ grep\ -Ei\ \'ethernet\|network\|infiniband\|mellanox\|broadcom\|intel\|chelsio\|qlogic\'\ \|\|\ true
+00:00.0 Host bridge [0600]: Intel Corporation 440BX/ZX/DX - 82443BX/ZX/DX Host bridge [8086:7190] (rev 01)
+00:01.0 PCI bridge [0604]: Intel Corporation 440BX/ZX/DX - 82443BX/ZX/DX AGP bridge [8086:7191] (rev 01)
+00:07.0 ISA bridge [0601]: Intel Corporation 82371AB/EB/MB PIIX4 ISA [8086:7110] (rev 08)
+00:07.1 IDE interface [0101]: Intel Corporation 82371AB/EB/MB PIIX4 IDE [8086:7111] (rev 01)
+00:07.3 Bridge [0680]: Intel Corporation 82371AB/EB/MB PIIX4 ACPI [8086:7113] (rev 08)
+00:10.0 SCSI storage controller [0100]: Broadcom / LSI 53c1030 PCI-X Fusion-MPT Dual Ultra320 SCSI [1000:0030] (rev 01)
+02:01.0 Ethernet controller [0200]: Intel Corporation 82545EM Gigabit Ethernet Controller (Copper) [8086:100f] (rev 01)
+02:02.0 Ethernet controller [0200]: Intel Corporation 82545EM Gigabit Ethernet Controller (Copper) [8086:100f] (rev 01)
+0b:00.0 Ethernet controller [0200]: VMware VMXNET3 Ethernet Controller [15ad:07b0] (rev 01)
+
+===== ip brief link =====
+$ ip -br link
+lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
+ens192           UP             00:0c:29:f8:f6:82 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+ens33            UP             00:0c:29:f8:f6:6e <BROADCAST,MULTICAST,UP,LOWER_UP> 
+ens34            UP             00:0c:29:f8:f6:78 <BROADCAST,MULTICAST,UP,LOWER_UP> 
+
+===== ip brief addr =====
+$ ip -br addr
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens192           UP             192.168.65.200/24 fe80::20c:29ff:fef8:f682/64 
+ens33            UP             192.168.65.135/24 fe80::6e4d:b76b:3e79:cf8d/64 
+ens34            UP             
+
+===== loaded rdma modules =====
+$ sh -c lsmod\ \|\ grep\ -Ei\ \'\(\^ib_\|rdma\|mlx\|rxe\|iw_cxgb\|irdma\|bnxt_re\)\'\ \|\|\ true
+
+===== rdma_rxe modinfo =====
+$ sh -c modinfo\ rdma_rxe\ 2\>/dev/null\ \|\|\ true
+filename:       /lib/modules/6.8.0-124-generic/kernel/drivers/infiniband/sw/rxe/rdma_rxe.ko
+alias:          rdma-link-rxe
+license:        Dual BSD/GPL
+description:    Soft RDMA transport
+author:         Bob Pearson, Frank Zago, John Groves, Kamal Heib
+srcversion:     8C571F4537FC7DE0FD3A73A
+depends:        ib_uverbs,ib_core,udp_tunnel,ip6_udp_tunnel
+retpoline:      Y
+intree:         Y
+name:           rdma_rxe
+vermagic:       6.8.0-124-generic SMP preempt mod_unload modversions 
+sig_id:         PKCS#7
+signer:         Build time autogenerated kernel key
+sig_key:        74:3C:7E:F0:8D:91:49:95:D3:52:6A:EB:DC:71:5D:D4:5E:12:43:FC
+sig_hashalgo:   sha512
+signature:      9D:BF:39:28:3C:47:B7:07:44:E7:C8:66:96:A3:C7:4A:03:F2:97:B2:
+		99:D1:47:B7:CD:97:C2:E0:8D:D3:BC:C9:CD:C3:67:49:A4:53:90:38:
+		CA:D2:C5:C8:DF:7F:31:80:90:95:37:F7:31:7A:C9:47:EA:1F:AC:8C:
+		77:1C:9D:E4:8A:1F:85:54:32:DC:3A:A0:B5:37:84:30:0A:A9:5A:25:
+		56:57:7E:02:D9:C5:B7:0F:A8:C0:47:B3:01:0A:84:2B:96:CA:59:F3:
+		F6:D4:72:5F:05:6F:C3:FE:DB:76:66:5F:46:35:9F:0C:DF:75:89:73:
+		29:EE:12:EB:E7:C3:0D:DC:95:B0:5F:B0:92:65:C3:CD:9E:3F:8A:89:
+		5E:BF:94:D8:89:13:18:08:3A:A2:6B:03:64:4E:25:58:74:93:D9:C8:
+		91:D6:54:0A:20:BF:AE:DD:39:25:EA:04:B9:69:C8:96:C7:65:9B:D3:
+		39:CA:F0:F9:FF:A7:FF:A8:53:8A:6E:B0:A4:FB:C3:46:7E:C6:B8:3B:
+		C9:A5:5B:83:E0:4C:55:B2:84:EF:1E:49:05:98:C0:B6:BA:59:14:E4:
+		8B:39:A1:4D:87:AD:22:F4:59:11:67:1B:7A:18:A7:00:D3:11:D2:ED:
+		F9:59:D4:B2:7C:A5:A7:43:D4:B8:96:89:2A:13:FB:24:EA:38:D0:3B:
+		1A:00:8B:A2:AB:FF:C4:60:20:C4:07:41:FE:86:B5:B9:E7:EE:3D:46:
+		4D:C7:38:4F:86:05:BA:DA:1A:0C:1C:B5:4E:34:93:1A:C3:B8:6F:8C:
+		01:56:BD:4C:EB:E3:63:E8:31:3F:25:C1:8F:D3:88:DA:CB:54:D6:B3:
+		1D:DB:A5:9F:3E:2F:34:6B:BC:DB:F3:AE:AD:56:67:34:04:54:2D:AD:
+		73:3E:4A:A8:B9:A7:FF:1D:0A:E8:F1:42:6D:57:76:F2:C4:D6:7E:1B:
+		B4:AD:11:31:61:17:E9:3F:F6:50:62:FD:63:03:9D:AE:00:84:95:DF:
+		DC:73:92:6F:A2:25:C0:A7:EA:23:3C:8A:8D:9F:6F:F3:28:C5:61:DC:
+		60:FD:BB:84:57:85:D8:58:51:01:67:FE:CB:54:4A:0C:76:B2:77:13:
+		2E:E2:EB:E5:32:B0:8D:97:60:2C:A7:B3:47:AB:CC:4A:E0:DE:95:CE:
+		87:2B:2D:6E:2B:14:95:8A:9D:F2:1E:46:65:BE:13:A4:0A:5D:CF:18:
+		F7:36:9B:61:4E:7E:94:F6:9B:40:49:44:B4:82:7C:70:E1:89:2F:66:
+		1F:D0:E3:7A:A5:1F:86:A7:47:91:42:2F:35:93:20:67:2C:FF:CE:0C:
+		F4:B1:29:77:92:D6:35:D2:87:C2:01:23
+
+===== command availability =====
+CMD_MISSING ibv_devices
+CMD_MISSING ibv_devinfo
+CMD_PRESENT rdma /usr/bin/rdma
+CMD_MISSING rxe_cfg
+CMD_PRESENT ethtool /usr/sbin/ethtool
+CMD_PRESENT lspci /usr/bin/lspci
+CMD_PRESENT modinfo /usr/sbin/modinfo
+CMD_PRESENT lsmod /usr/sbin/lsmod

@@ -1,6 +1,9 @@
-﻿# 02_TEST_AND_VERIFY - 娴嬭瘯鍛戒护涓庢墽琛岃褰?
-> 杩欑瘒璁板綍 Phase 5 鍦?`192.168.65.135` 娴嬭瘯鏈轰笂鐨勫疄闄呮墽琛屽懡浠ゃ€佹棩蹇椾綅缃€佸叧閿緭鍑哄拰楠屾敹鍒ゆ柇銆?
-## 1. 娴嬭瘯鏈虹幆澧?
+# 02_TEST_AND_VERIFY - 测试命令与执行记录
+
+> 本文记录 Phase 5 在 `192.168.65.135` 测试机上的实际执行命令、日志位置、关键输出和验收判断。
+
+## 1. 测试环境
+
 ```text
 Host: 192.168.65.135
 User: wq7
@@ -9,12 +12,14 @@ Project: linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite
 Record: records/20260629-213104-l3-forwarder/
 ```
 
-鐜鏃ュ織锛?
+环境日志：
+
 ```text
 records/20260629-213104-l3-forwarder/ENV_CHECK.log
 ```
 
-鍏抽敭杈撳嚭锛?
+关键输出：
+
 ```text
 DPDK version: 21.11.9
 Python: 3.10.12
@@ -23,7 +28,7 @@ CPU lcores detected by EAL: 8
 NUMA nodes detected by EAL: 1
 ```
 
-## 2. 瀹屾暣鎵ц鍛戒护
+## 2. 完整执行命令
 
 ```bash
 cd /home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/project-dpdk-l3-forwarder-lite
@@ -36,82 +41,93 @@ export RECORD_DIR="$PWD/records/$(date +%Y%m%d-%H%M%S)-l3-forwarder"
 cat "$RECORD_DIR/SUMMARY.md"
 ```
 
-鏈瀹為檯璁板綍鐩綍锛?
+本次实际记录目录：
+
 ```text
 records/20260629-213104-l3-forwarder/
 ```
 
-## 3. Step 0: 鐜妫€鏌?
-鍛戒护锛?
+## 3. Step 0: 环境检查
+
 ```bash
 ./scripts/00_check_env.sh
 ```
 
-鐢熸垚锛?
+生成：
+
 ```text
 ENV_CHECK.log
 ```
 
-鐢ㄩ€旓細
+用途：
 
-- 璁板綍 kernel銆?- 璁板綍 DPDK 鐗堟湰銆?- 璁板綍 Python 鐗堟湰銆?- 璁板綍 hugepage 鐘舵€併€?
-## 4. Step 1: 鏋勫缓绋嬪簭
+- 记录 kernel。
+- 记录 DPDK 版本。
+- 记录 Python 版本。
+- 记录 hugepage 状态。
 
-鍛戒护锛?
+## 4. Step 1: 构建程序
+
 ```bash
 ./scripts/01_build.sh
 ```
 
-鐢熸垚锛?
+生成：
+
 ```text
 BUILD.log
 ```
 
-鍏抽敭杈撳嚭锛?
+关键输出：
+
 ```text
 cc -O2 -g -Wall -Wextra ... main.c -o build/dpdk-l3-forwarder-lite ...
 build/dpdk-l3-forwarder-lite: ELF 64-bit LSB pie executable
 ```
 
-楠屾敹锛?
+验收：
+
 ```text
 PASS_BUILD
 ```
 
-## 5. Step 2: 鐢熸垚 pcap
+## 5. Step 2: 生成 pcap
 
-鍛戒护鐢辫剼鏈唴閮ㄦ墽琛岋細
+脚本内部执行：
 
 ```bash
 python3 tools/gen_l3_pcap.py "$PCAP_FILE" "$L3_PCAP_COUNT"
 ```
 
-鐢熸垚锛?
+生成：
+
 ```text
 l3_input.pcap
 PCAP_GENERATE.log
 ```
 
-鍏抽敭杈撳嚭锛?
+关键输出：
+
 ```text
 Generated 48 mixed IPv4/UDP packets -> .../l3_input.pcap
 ```
 
-娴侀噺姣斾緥锛?
+流量比例：
+
 ```text
 12 packets: 10.20.0.77:9999 -> ACL drop
 12 packets: 10.99.0.77:9000 -> route miss
 24 packets: 10.20.0.77:9000 -> forward
 ```
 
-## 6. Step 3: 杩愯 L3 forwarder
+## 6. Step 3: 运行 L3 forwarder
 
-鑴氭湰锛?
 ```bash
 ./scripts/02_run_pcap_l3_forward.sh
 ```
 
-瀹為檯 DPDK 鍛戒护锛?
+实际 DPDK 命令：
+
 ```bash
 app/build/dpdk-l3-forwarder-lite \
   -l 0-1 -n 4 --no-pci \
@@ -124,22 +140,28 @@ app/build/dpdk-l3-forwarder-lite \
   --max-idle-polls 100000
 ```
 
-涓轰粈涔堢敤 `--no-pci`锛?
+为什么用 `--no-pci`：
+
 ```text
-鏈祴璇曞彧楠岃瘉杞欢鏁版嵁闈紝閬垮厤鎵弿鎴栨搷浣滅湡瀹炵綉鍗°€?```
+本测试只验证软件数据面，避免扫描或操作真实网卡。
+```
 
-涓轰粈涔堢敤 `net_null1`锛?
+为什么用 `net_null1`：
+
 ```text
-瀹冧綔涓?TX sink锛岃兘楠岃瘉 tx_burst 鎴愬姛锛屼笉闇€瑕佺湡瀹為摼璺绔€?```
+它作为 TX sink，能验证 tx_burst 成功，不需要真实链路对端。
+```
 
-## 7. Step 4: 杩愯缁撴灉
+## 7. Step 4: 运行结果
 
-鏃ュ織锛?
+日志：
+
 ```text
 L3_FORWARD.log
 ```
 
-鍏抽敭杈撳嚭锛?
+关键输出：
+
 ```text
 CONFIG in_port=0 out_port=1 burst=16 nb_mbuf=8192 mbuf_cache=250
 ROUTE[0] prefix=10.20.0.0/24 out_port=1
@@ -149,25 +171,27 @@ ROUTE_STATS[0] hits=24 bytes=1608
 ACL_STATS[0] drops=12 bytes=816
 ```
 
-瑙ｉ噴锛?
-| 瀛楁 | 鍊?| 鍚箟 |
-|---|---:|---|
-| `rx_packets` | 48 | pcap 涓墍鏈夊寘閮借 RX 鍒?|
-| `forwarded_packets` | 24 | route hit 涓?TX 鎴愬姛 |
-| `acl_drops` | 12 | 鍛戒腑 UDP dst port 9999 |
-| `route_miss_drops` | 12 | 涓嶅懡涓?`10.20.0.0/24` |
-| `tx_failed` | 0 | net_null TX 娌℃湁澶辫触 |
-| `ROUTE_STATS[0].hits` | 24 | per-route stats 涓?forward 瀵归綈 |
-| `ACL_STATS[0].drops` | 12 | per-ACL stats 涓?drop 瀵归綈 |
+解释：
 
-## 8. Step 5: 姹囨€婚獙鏀?
-鍛戒护锛?
+| 字段 | 值 | 含义 |
+|---|---:|---|
+| `rx_packets` | 48 | pcap 中所有包都被 RX 到 |
+| `forwarded_packets` | 24 | route hit 且 TX 成功 |
+| `acl_drops` | 12 | 命中 UDP dst port 9999 |
+| `route_miss_drops` | 12 | 不命中 `10.20.0.0/24` |
+| `tx_failed` | 0 | net_null TX 没有失败 |
+| `ROUTE_STATS[0].hits` | 24 | per-route stats 与 forward 对齐 |
+| `ACL_STATS[0].drops` | 12 | per-ACL stats 与 drop 对齐 |
+
+## 8. Step 5: 汇总验收
+
 ```bash
 ./scripts/03_collect_report.sh
 cat records/20260629-213104-l3-forwarder/SUMMARY.md
 ```
 
-楠屾敹缁撴灉锛?
+验收结果：
+
 ```text
 PASS_BUILD
 PASS_ROUTE_CONFIG
@@ -177,16 +201,18 @@ PASS_PER_RULE_STATS
 PASS_PCAP_EVIDENCE
 ```
 
-瀵瑰簲鏂囦欢锛?
+对应文件：
+
 ```text
 records/20260629-213104-l3-forwarder/SUMMARY.md
 ```
 
-## 9. 鏁呴殰鎺掓煡
+## 9. 故障排查
 
 ### `need at least 2 DPDK ports`
 
-妫€鏌?`--vdev` 鏄惁鍚屾椂鍖呭惈锛?
+检查 `--vdev` 是否同时包含：
+
 ```text
 net_pcap0
 net_null1
@@ -194,18 +220,25 @@ net_null1
 
 ### `rx_packets=0`
 
-妫€鏌ワ細
+检查：
 
-- pcap 鏂囦欢鏄惁瀛樺湪銆?- `rx_pcap=` 璺緞鏄惁姝ｇ‘銆?- `tools/gen_l3_pcap.py` 鏄惁鎴愬姛鎵ц銆?
+- pcap 文件是否存在。
+- `rx_pcap=` 路径是否正确。
+- `tools/gen_l3_pcap.py` 是否成功执行。
+
 ### `forwarded_packets=0`
 
-妫€鏌ワ細
+检查：
 
-- route 鏄惁鎵撳嵃锛歚ROUTE[0] prefix=10.20.0.0/24 out_port=1`
-- pcap 涓槸鍚︽湁鐩殑 IP `10.20.0.77`
-- ACL 鏄惁鎶婃祦閲忔彁鍓?drop銆?
+- route 是否打印：`ROUTE[0] prefix=10.20.0.0/24 out_port=1`
+- pcap 中是否有目的 IP `10.20.0.77`
+- ACL 是否把流量提前 drop。
+
 ### `tx_failed>0`
 
-妫€鏌ワ細
+检查：
 
-- `net_null1` 鏄惁鍒涘缓鎴愬姛銆?- TX queue 鏄惁鍒濆鍖栨垚鍔熴€?- app 鏄惁浣跨敤浜嗘纭殑 `out_port=1`銆?
+- `net_null1` 是否创建成功。
+- TX queue 是否初始化成功。
+- app 是否使用了正确的 `out_port=1`。
+

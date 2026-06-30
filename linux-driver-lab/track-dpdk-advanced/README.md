@@ -24,9 +24,10 @@ COMPLETED_WITH_BOUNDARIES
 ## 推荐入口
 
 ```text
+START_HERE.md
+docs/04_ARCHITECTURE_PRINCIPLES.md
 project-dpdk-advanced-summary/reports/DPDK_ADVANCED_FINAL_REPORT.md
 project-dpdk-advanced-summary/reports/EVIDENCE_INDEX.md
-project-dpdk-l3-forwarder-lite/README.md
 ```
 
 ## 能力结构
@@ -42,17 +43,9 @@ mbuf / mempool
 
 ## 当前边界
 
-准确表述：
-
 - pcap PMD 能证明软件数据面逻辑。
 - net_null PMD 能作为 TX sink 验证转发路径和统计。
 - 当前 pcap PMD 不能证明真实 RSS 多队列。
 - 当前 VMware 启动参数没有 IOMMU，不能证明真实 VFIO/IOMMU 隔离。
 - 当前结果不等于真实 100G NIC 线速调优。
-
-不要夸大：
-
-- 不说完成生产级 DPDK 网关。
-- 不说完成真实硬件 RSS/VFIO 全量验证。
-- 不说当前 VMware 环境覆盖所有部署形态。
 

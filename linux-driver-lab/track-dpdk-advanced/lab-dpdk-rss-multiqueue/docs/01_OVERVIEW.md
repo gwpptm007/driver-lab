@@ -1,48 +1,45 @@
-﻿# lab-dpdk-rss-multiqueue Overview
+# 01_OVERVIEW - RSS / Multi-Queue capability probe
 
-## 瀹為獙闂
+## 实验问题
 
-```text
-褰撳墠 PMD 鏀寔澶氬皯 RX/TX queue锛?RSS capability 鏄惁鍙煡璇紵
-RETA / hash_key / rss_hf 鏄惁瀛樺湪锛?璇锋眰 2 涓?RX queue 鏃讹紝PMD 鏄?PASS 杩樻槸 BLOCKED锛?queue-to-core mapping 搴旇濡備綍鎻忚堪锛?```
-
-## 瀹為獙璺緞
+这个 lab 用来回答：
 
 ```text
-pcap PMD
+当前 PMD 支持多少 RX/TX queue？
+RSS capability 是否可查询？
+RETA / hash key / rss_hf 是否存在？
+请求 2 个 RX queue 时，PMD 是 PASS 还是 BLOCKED？
+queue-to-core mapping 应该如何描述？
+```
+
+## 实验路径
+
+```text
+pcap input
+  -> net_pcap PMD
   -> rte_eth_dev_info_get()
-  -> max_rx_queues / max_tx_queues
-  -> flow_type_rss_offloads / reta_size
-  -> rte_eth_dev_configure(rxq=2)
-  -> PASS_QUEUE_CONFIG or BLOCKED_QUEUE_CONFIG
+  -> 检查 max_rx_queues / reta_size / rss_offloads
+  -> 输出 PASS 或 BLOCKED evidence
 ```
 
-## 鐩綍
+## 验收项
 
 ```text
-lab-dpdk-rss-multiqueue/
-鈹溾攢鈹€ app/
-鈹溾攢鈹€ docs/
-鈹溾攢鈹€ records/
-鈹溾攢鈹€ reports/
-鈹溾攢鈹€ scripts/
-鈹斺攢鈹€ tools/
+PASS_BUILD
+QUEUE_CONFIG
+RSS_QUERY
+QUEUE_TO_CORE_DOC
 ```
 
-## 楠屾敹
+## 文档入口
 
-```text
-PASS_QUEUE_CONFIG or BLOCKED_QUEUE_CONFIG
-PASS_RSS_QUERY or BLOCKED_RSS
-PASS_QUEUE_TO_CORE_DOC
-```
+- `02_TEST_AND_VERIFY.md`：逐步测试命令与执行记录。
+- `03_RESULT_ANALYSIS.md`：测试结果分析。
+- `04_DEEP_LEARNING.md`：RSS/queue 原理、能力边界和 queue-to-core 模型。
 
-## 鏂囨。鍏ュ彛
+## 当前边界
 
-- `04_DEEP_LEARNING.md`
-- `02_TEST_AND_VERIFY.md`
-- `03_RESULT_ANALYSIS.md`
+Phase 2 是 capability probe，不是生产级 RSS 调优。
 
-## 杈圭晫
+如果 pcap PMD 或 VMware/vmxnet3 不支持目标能力，结果应该写成 `BLOCKED_*`，而不是伪造 PASS。
 
-Phase 2 鏄?capability probe锛屼笉鏄敓浜х骇 RSS 璋冧紭銆傚鏋?pcap PMD 鎴?VMware/vmxnet3 涓嶆敮鎸佺洰鏍囪兘鍔涳紝瑕佹槑纭啓鎴?BLOCKED evidence銆?

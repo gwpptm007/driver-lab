@@ -1,0 +1,12 @@
+# build rdma-object-lifecycle
+record_dir=/home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/lab-rdma-verbs-object-lifecycle/records/20260630-233918-verbs-object
+timestamp=2026-06-30T23:39:19+08:00
+
+===== make clean =====
+$ make clean
+rm -f rdma-object-lifecycle
+
+===== make =====
+$ make
+cc -O2 -g -Wall -Wextra -I/usr/include/libnl3  -o rdma-object-lifecycle main.c -libverbs
+BUILD_PASS binary=/home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/lab-rdma-verbs-object-lifecycle/app/rdma-object-lifecycle

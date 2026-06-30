@@ -1,0 +1,37 @@
+# run rdma-object-lifecycle
+record_dir=/home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/lab-rdma-verbs-object-lifecycle/records/20260630-233328-verbs-object
+timestamp=2026-06-30T23:33:28+08:00
+
+===== rdma dev before =====
+$ sh -c rdma\ dev\ 2\>/dev/null\ \|\|\ true
+0: rxe0: node_type ca node_guid 020c:29ff:fef8:f678 sys_image_guid 020c:29ff:fef8:f678 
+
+===== rdma resource before =====
+$ sh -c rdma\ resource\ show\ 2\>/dev/null\ \|\|\ true
+0: rxe0: pd 1 cq 1 qp 1 cm_id 0 mr 0 ctx 0 srq 0 
+
+===== object lifecycle app =====
+$ /home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/lab-rdma-verbs-object-lifecycle/app/rdma-object-lifecycle
+RDMA_OBJECT_LIFECYCLE_START
+GET_DEVICE_LIST_OK count=1
+DEVICE[0] name=rxe0 dev_name=uverbs0 dev_path=/sys/class/infiniband_verbs/uverbs0 ibdev_path=/sys/class/infiniband/rxe0
+OPEN_DEVICE_OK name=rxe0
+QUERY_DEVICE_OK max_qp=1048560 max_cq=1048576 max_mr=524287 max_qp_wr=1048576 max_sge=32 phys_port_cnt=1
+QUERY_PORT_OK port=1 state=4 max_mtu=5 active_mtu=3 lid=0 gid_tbl_len=1024
+ALLOC_PD_OK
+ALLOC_BUFFER_OK addr=0x5a94f8c0c000 length=4096
+REG_MR_OK addr=0x5a94f8c0c000 length=4096 lkey=0x2d6 rkey=0x2d6
+CREATE_CQ_OK depth=16
+CREATE_QP_OK qp_num=17 qp_type=RC max_send_wr=31 max_recv_wr=31 max_send_sge=1 max_recv_sge=1
+OBJECT_LIFECYCLE_PASS
+DESTROY_QP_OK
+DESTROY_CQ_OK
+DEREG_MR_OK
+FREE_BUFFER_OK
+DEALLOC_PD_OK
+CLOSE_DEVICE_OK
+RDMA_OBJECT_LIFECYCLE_END status=PASS
+
+===== rdma resource after =====
+$ sh -c rdma\ resource\ show\ 2\>/dev/null\ \|\|\ true
+0: rxe0: pd 1 cq 1 qp 1 cm_id 0 mr 0 ctx 0 srq 0 

@@ -1,46 +1,32 @@
-﻿# lab-dpdk-numa-burst-tuning
+# lab-dpdk-numa-burst-tuning
 
-> track-dpdk-advanced Phase 3锛歜urst size / mempool cache / lcore 鍙傛暟璁板綍鏂规硶銆?
-## 鐩爣
+Phase 3：burst size / mempool cache / CPU / NUMA 调优方法。
 
-寤虹珛 DPDK 璋冧紭瀹為獙鐨勫彉閲忔帶鍒舵柟娉曪細
+## 目标
 
-```text
-burst size matrix
-  -> mempool cache matrix
-  -> lcore record
-  -> pps / rx_packets / duration
-  -> limitation doc
-```
+建立 DPDK 调优实验的变量控制方法：
 
-## 褰撳墠鐘舵€?
+- burst size 对比。
+- mempool cache size 对比。
+- CPU / NUMA / lcore 记录。
+- pcap PMD 方法验证边界。
+
+## 状态
+
 ```text
 PASS_TUNING_METHOD
 ```
 
-宸插湪娴嬭瘯鏈?`192.168.65.135` 瀹屾垚鐭╅樀娴嬭瘯锛?
+正式记录：
+
 ```text
-record: records/20260629-212218-numa-burst
-PASS_BUILD
-PASS_BURST_MATRIX
-PASS_CACHE_MATRIX
-PASS_CPU_RECORD
-PASS_LIMITATION_DOC
+records/20260629-212218-numa-burst/
 ```
 
-## 楠屾敹椤?
-```text
-PASS_BURST_MATRIX
-PASS_CACHE_MATRIX
-PASS_CPU_RECORD
-PASS_LIMITATION_DOC
-```
-
-## 澶嶆祴鍛戒护
+## 快速复测
 
 ```bash
 cd linux-driver-lab/track-dpdk-advanced/lab-dpdk-numa-burst-tuning
-chmod +x scripts/*.sh tools/*.py
 export RECORD_DIR="$PWD/records/$(date +%Y%m%d-%H%M%S)-numa-burst"
 ./scripts/00_check_env.sh
 ./scripts/01_build.sh
@@ -49,13 +35,14 @@ export RECORD_DIR="$PWD/records/$(date +%Y%m%d-%H%M%S)-numa-burst"
 cat "$RECORD_DIR/SUMMARY.md"
 ```
 
-## 鏂囨。鍏ュ彛
+## 文档入口
 
 - `docs/01_OVERVIEW.md`
-- `docs/04_DEEP_LEARNING.md`
 - `docs/02_TEST_AND_VERIFY.md`
 - `docs/03_RESULT_ANALYSIS.md`
+- `docs/04_DEEP_LEARNING.md`
 
-## 杈圭晫
+## 边界
 
-褰撳墠浣跨敤 pcap PMD 鍜屽浐瀹?pcap 鏂囦欢寤虹珛璋冧紭鏂规硶锛屼笉鎶婄粨鏋滃じ澶ф垚鐪熷疄 NIC 鎬ц兘銆傜湡瀹炲悶鍚愯皟浼橀渶瑕佺湡瀹?PMD銆丷SS銆佸闃熷垪銆丯UMA 鎷撴墤鍜岀ǔ瀹氬帇娴嬪伐鍏枫€?
+当前使用 pcap PMD 和固定 pcap 文件建立调优方法，不把结果夸大成真实 NIC 性能。真实性能调优需要真实 PMD、RSS、多队列、NUMA 拓扑和稳定压测工具。
+

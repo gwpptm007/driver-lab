@@ -1,11 +1,12 @@
-﻿# 02_TEST_AND_VERIFY - 娴嬭瘯鍛戒护涓庢墽琛岃褰?
-## 娴嬭瘯璁板綍
+# 02_TEST_AND_VERIFY - 测试命令与执行记录
+
+## 测试记录
 
 ```text
 records/20260629-212218-numa-burst/
 ```
 
-## 瀹屾暣鍛戒护
+## 完整命令
 
 ```bash
 cd /home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-numa-burst-tuning
@@ -17,7 +18,7 @@ export RECORD_DIR="$PWD/records/$(date +%Y%m%d-%H%M%S)-numa-burst"
 cat "$RECORD_DIR/SUMMARY.md"
 ```
 
-## 鐢熸垚鏂囦欢
+## 生成文件
 
 ```text
 ENV_CHECK.log
@@ -29,7 +30,7 @@ SUMMARY.md
 burst_input.pcap
 ```
 
-## 鍏抽敭杈撳嚭
+## 关键输出
 
 ```text
 PASS_BURST_MATRIX
@@ -41,16 +42,18 @@ burst_values=5
 cache_values=3
 ```
 
-CSV 琛ㄥご锛?
+CSV 表头：
+
 ```text
 burst_size,mbuf_cache,rx_packets,rx_bytes,duration_sec,pps,polls,empty_polls
 ```
 
-## 楠屾敹瑙ｉ噴
+## 验收解释
 
-| 椤?| 瑙ｉ噴 |
+| 项 | 解释 |
 |---|---|
-| `PASS_BURST_MATRIX` | 瑕嗙洊 5 涓?burst size |
-| `PASS_CACHE_MATRIX` | 瑕嗙洊 3 涓?mempool cache size |
-| `PASS_CPU_RECORD` | 璁板綍 CPU/NUMA 淇℃伅 |
-| `PASS_LIMITATION_DOC` | 鏄庣‘ pcap PMD 涓嶄唬琛ㄧ湡瀹?NIC pps |
+| `PASS_BURST_MATRIX` | 覆盖 5 个 burst size |
+| `PASS_CACHE_MATRIX` | 覆盖 3 个 mempool cache size |
+| `PASS_CPU_RECORD` | 记录 CPU/NUMA 信息 |
+| `PASS_LIMITATION_DOC` | 明确 pcap PMD 不代表真实 NIC pps |
+

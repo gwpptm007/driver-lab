@@ -1,0 +1,32 @@
+# Object lifecycle run
+timestamp=2026-06-30T23:44:17+08:00
+
+===== rdma resource before =====
+$ sh -c rdma\ resource\ show\ 2\>/dev/null\ \|\|\ true
+0: rxe0: pd 1 cq 1 qp 1 cm_id 0 mr 0 ctx 0 srq 0 
+
+===== rdma-object-lifecycle =====
+$ /home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/lab-rdma-verbs-object-lifecycle/app/rdma-object-lifecycle
+RDMA_OBJECT_LIFECYCLE_START
+STEP 00 GET_DEVICE_LIST_OK count=1
+STEP 01 DEVICE[0] name=rxe0 dev_name=uverbs0 dev_path=/sys/class/infiniband_verbs/uverbs0 ibdev_path=/sys/class/infiniband/rxe0
+STEP 02 OPEN_DEVICE_OK name=rxe0
+STEP 03 QUERY_DEVICE_OK max_qp=1048560 max_cq=1048576 max_mr=524287 max_qp_wr=1048576 max_sge=32 phys_port_cnt=1
+STEP 04 QUERY_PORT_OK port=1 state=4 max_mtu=5 active_mtu=3 lid=0 gid_tbl_len=1024
+STEP 05 ALLOC_PD_OK
+STEP 06 ALLOC_BUFFER_OK addr=0x627f23381000 length=4096
+STEP 07 REG_MR_OK addr=0x627f23381000 length=4096 lkey=0x4c5 rkey=0x4c5
+STEP 08 CREATE_CQ_OK depth=16
+STEP 09 CREATE_QP_OK qp_num=19 qp_type=RC max_send_wr=31 max_recv_wr=31 max_send_sge=1 max_recv_sge=1
+OBJECT_LIFECYCLE_PASS
+STEP 10 DESTROY_QP_OK
+STEP 10 DESTROY_CQ_OK
+STEP 10 DEREG_MR_OK
+STEP 10 FREE_BUFFER_OK
+STEP 10 DEALLOC_PD_OK
+STEP 10 CLOSE_DEVICE_OK
+RDMA_OBJECT_LIFECYCLE_END status=PASS
+
+===== rdma resource after =====
+$ sh -c rdma\ resource\ show\ 2\>/dev/null\ \|\|\ true
+0: rxe0: pd 1 cq 1 qp 1 cm_id 0 mr 0 ctx 0 srq 0 

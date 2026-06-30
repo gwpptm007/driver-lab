@@ -1,0 +1,21 @@
+# RDMA capability check
+record_dir=/home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/lab-rdma-env-capability/records/20260630-221920-rdma-env
+timestamp=2026-06-30T22:19:20+08:00
+
+===== command availability =====
+CMD_MISSING ibv_devices
+CMD_MISSING ibv_devinfo
+CMD_PRESENT rdma /usr/bin/rdma
+
+SKIP ibv_devices: command missing
+
+SKIP ibv_devinfo: command missing
+
+===== rdma link =====
+$ rdma link
+
+===== rdma dev =====
+$ rdma dev
+
+===== rdma resource show =====
+$ rdma resource show

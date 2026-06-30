@@ -1,10 +1,10 @@
-﻿# DPDK Advanced Final Report
+# DPDK Advanced Final Report
 
-## 鑼冨洿
+## 范围
 
-鏈姤鍛婃敹鏁?`track-dpdk-advanced` 鐨?6 涓樁娈碉細
+本报告收敛 `track-dpdk-advanced` 的 6 个阶段：
 
-| Phase | 鐩綍 | 缁撴灉 |
+| Phase | 目录 | 结果 |
 |---|---|---|
 | Phase 1 | `lab-dpdk-mbuf-mempool-deep-dive` | `PASS_PCAP_METADATA` |
 | Phase 2 | `lab-dpdk-rss-multiqueue` | `BLOCKED_PCAP_RSS` |
@@ -13,27 +13,28 @@
 | Phase 5 | `project-dpdk-l3-forwarder-lite` | `PASS_L3_FORWARDER_LITE` |
 | Phase 6 | `project-dpdk-advanced-summary` | `PASS_ADVANCED_REPORT` |
 
-## 宸茶瘉鏄庣殑鑳藉姏
+## 已证明的能力
 
 ### 1. mbuf / mempool
 
-Phase 1 鐨?`dpdk-mbuf-inspect` 璇诲彇 pcap PMD 杈撳叆鍖咃紝鎵撳嵃骞舵牎楠岋細
+Phase 1 的 `dpdk-mbuf-inspect` 读取 pcap PMD 输入包，打印并校验：
 
 - `pkt_len`
 - `data_len`
 - `data_off`
 - `nb_segs`
 - `ol_flags`
-- mempool 閰嶇疆
+- mempool 配置
 
-姝ｅ紡璁板綍锛?
+正式记录：
+
 ```text
 lab-dpdk-mbuf-mempool-deep-dive/records/20260629-210538-mbuf-mempool/
 ```
 
 ### 2. RSS / multi-queue boundary
 
-Phase 2 鐨?`dpdk-rss-queue-probe` 璇佹槑褰撳墠 pcap PMD 鍙毚闇诧細
+Phase 2 的 `dpdk-rss-queue-probe` 证明当前 pcap PMD 只暴露：
 
 ```text
 max_rx_queues=1
@@ -41,15 +42,17 @@ reta_size=0
 rss_offloads=0x0
 ```
 
-鍥犳褰撳墠鐜涓嶈兘浼鎴愮湡瀹?RSS 澶氶槦鍒楃‖浠讹紝鍙兘淇濈暀 queue-to-core 妯″瀷鍜?boundary evidence銆?
-姝ｅ紡璁板綍锛?
+因此当前环境不能伪装成真实 RSS 多队列硬件，只能保留 queue-to-core 模型和 boundary evidence。
+
+正式记录：
+
 ```text
 lab-dpdk-rss-multiqueue/records/20260629-211820-rss-multiqueue/
 ```
 
 ### 3. burst / cache / NUMA tuning method
 
-Phase 3 寤虹珛浜?burst size 鍜?mempool cache size 鐨勫姣旂煩闃碉細
+Phase 3 建立了 burst size 和 mempool cache size 的对比矩阵：
 
 ```text
 burst: 1, 4, 16, 32, 64
@@ -57,14 +60,15 @@ cache: 0, 64, 250
 matrix rows: 15
 ```
 
-姝ｅ紡璁板綍锛?
+正式记录：
+
 ```text
 lab-dpdk-numa-burst-tuning/records/20260629-212218-numa-burst/
 ```
 
 ### 4. VFIO / IOMMU boundary
 
-Phase 4 璁板綍褰撳墠娴嬭瘯鏈猴細
+Phase 4 记录当前测试机：
 
 ```text
 kernel cmdline: ro quiet splash
@@ -74,27 +78,31 @@ uio_module_loaded=no
 ens192: vmxnet3 kernel driver
 ```
 
-缁撹鏄綋鍓嶇幆澧冧笉婊¤冻 VFIO/IOMMU 鐪熷疄楠岃瘉鍓嶇疆鏉′欢锛岄」鐩彧澹版槑 boundary 鍜?checklist銆?
-姝ｅ紡璁板綍锛?
+结论是当前环境不满足 VFIO/IOMMU 真实验证前置条件，项目只声明 boundary 和 checklist。
+
+正式记录：
+
 ```text
 lab-dpdk-vfio-iommu-boundary/records/20260629-212638-vfio-iommu/
 ```
 
 ### 5. L3 forwarding / ACL / stats
 
-Phase 5 鐨?`dpdk-l3-forwarder-lite` 瀹炵幇锛?
+Phase 5 的 `dpdk-l3-forwarder-lite` 实现：
+
 ```text
 pcap PMD input -> IPv4/UDP parse -> ACL -> route lookup -> net_null TX
 ```
 
-娣卞害瑙ｉ噴鍜屾祴璇曞懡浠よ褰曪細
+深度解释和测试命令记录：
 
 ```text
 project-dpdk-l3-forwarder-lite/docs/04_DEEP_LEARNING.md
 project-dpdk-l3-forwarder-lite/docs/02_TEST_AND_VERIFY.md
 ```
 
-姝ｅ紡缁撴灉锛?
+正式结果：
+
 ```text
 rx_packets=48
 forwarded_packets=24
@@ -103,11 +111,15 @@ route_miss_drops=12
 tx_failed=0
 ```
 
-姝ｅ紡璁板綍锛?
+正式记录：
+
 ```text
 project-dpdk-l3-forwarder-lite/records/20260629-213104-l3-forwarder/
 ```
 
-## 鏈€缁堝畾浣?
-杩欎釜 track 鍙互琚〃杩颁负锛?
-> 鎴戜笉鏄彧璺戣繃 DPDK hello world 鎴?testpmd锛岃€屾槸鎶?mbuf/mempool銆乹ueue/RSS銆乥urst/cache/NUMA銆乂FIO/IOMMU 杈圭晫鍜屼竴涓皬鍨?L3 forwarding 鏁版嵁闈㈤兘鍋氭垚浜嗗彲澶嶇幇瀹為獙銆傚褰撳墠 VMware 鐜涓嶈兘瑕嗙洊鐨?RSS/VFIO/鐪熷疄 NIC 绾块€熼儴鍒嗭紝鎴戜繚鐣欎簡鏄庣‘ boundary evidence锛屾病鏈夋妸妯℃嫙鐜澶稿ぇ鎴愮敓浜х‖浠堕獙璇併€?
+## 最终定位
+
+这个 track 可以被表述为：
+
+> 我不是只跑过 DPDK hello world 或 testpmd，而是把 mbuf/mempool、queue/RSS、burst/cache/NUMA、VFIO/IOMMU 边界和一个小型 L3 forwarding 数据面都做成了可复现实验。对当前 VMware 环境不能覆盖的 RSS/VFIO/真实 NIC 线速部分，我保留了明确 boundary evidence，没有把模拟环境夸大成生产硬件验证。
+

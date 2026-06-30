@@ -1,37 +1,32 @@
-﻿# lab-dpdk-vfio-iommu-boundary
+# lab-dpdk-vfio-iommu-boundary
 
-> track-dpdk-advanced Phase 4锛歎IO / VFIO / IOMMU / MSI-X 鐜杈圭晫銆?
-## 鐩爣
+Phase 4：UIO / VFIO / IOMMU / MSI-X 环境边界。
 
-鎶婂綋鍓嶆祴璇曟満涓婄殑 DPDK 璁惧鎺ョ杈圭晫璁叉竻妤氾細
+## 目标
+
+把当前测试机上的 DPDK 设备接管边界讲清楚：
+
+- UIO 和 VFIO 的差异。
+- VFIO 对 IOMMU group 的依赖。
+- vmxnet3 / VMware 环境边界。
+- 管理网卡不能随意 bind/unbind。
+
+## 状态
 
 ```text
-kernel cmdline
-  -> IOMMU status
-  -> vfio/uio modules
-  -> dpdk-devbind status
-  -> vmxnet3 context
-  -> UIO/VFIO matrix
-  -> checklist
+PASS_VFIO_IOMMU_BOUNDARY
 ```
 
-## 褰撳墠鐘舵€?
+正式记录：
+
 ```text
-READY_TO_TEST
+records/20260629-212638-vfio-iommu/
 ```
 
-## 楠屾敹椤?
-```text
-PASS_UIO_VFIO_MATRIX
-PASS_VMXNET3_BOUNDARY
-PASS_IOMMU_CHECKLIST
-```
-
-## 澶嶆祴鍛戒护
+## 快速复测
 
 ```bash
 cd linux-driver-lab/track-dpdk-advanced/lab-dpdk-vfio-iommu-boundary
-chmod +x scripts/*.sh
 export RECORD_DIR="$PWD/records/$(date +%Y%m%d-%H%M%S)-vfio-iommu"
 ./scripts/00_collect_boundary.sh
 ./scripts/01_collect_vmxnet3_context.sh
@@ -39,13 +34,14 @@ export RECORD_DIR="$PWD/records/$(date +%Y%m%d-%H%M%S)-vfio-iommu"
 cat "$RECORD_DIR/SUMMARY.md"
 ```
 
-## 鏂囨。鍏ュ彛
+## 文档入口
 
 - `docs/01_OVERVIEW.md`
-- `docs/04_DEEP_LEARNING.md`
 - `docs/02_TEST_AND_VERIFY.md`
 - `docs/03_RESULT_ANALYSIS.md`
+- `docs/04_DEEP_LEARNING.md`
 
-## 杈圭晫
+## 边界
 
-鏈?Lab 涓嶅己琛屽垏鎹㈢綉鍗?driver锛屼笉鑷姩 bind/unbind 绠＄悊鍙ｏ紝涔熶笉淇敼 GRUB銆傚彧鏀堕泦褰撳墠鐘舵€佸苟褰㈡垚鍙俊杈圭晫鏂囨。銆?
+本 lab 不强行切换网卡 driver，不自动 bind/unbind 管理口，也不修改 GRUB。它只收集当前状态并形成可信边界文档。
+

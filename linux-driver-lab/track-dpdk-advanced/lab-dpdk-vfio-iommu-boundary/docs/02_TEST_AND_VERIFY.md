@@ -1,11 +1,12 @@
-﻿# 02_TEST_AND_VERIFY - 娴嬭瘯鍛戒护涓庢墽琛岃褰?
-## 娴嬭瘯璁板綍
+# 02_TEST_AND_VERIFY - 测试命令与执行记录
+
+## 测试记录
 
 ```text
 records/20260629-212638-vfio-iommu/
 ```
 
-## 瀹屾暣鍛戒护
+## 完整命令
 
 ```bash
 cd /home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-vfio-iommu-boundary
@@ -16,7 +17,7 @@ export RECORD_DIR="$PWD/records/$(date +%Y%m%d-%H%M%S)-vfio-iommu"
 cat "$RECORD_DIR/SUMMARY.md"
 ```
 
-## 鐢熸垚鏂囦欢
+## 生成文件
 
 ```text
 BOUNDARY_ENV.log
@@ -24,7 +25,7 @@ VMXNET3_CONTEXT.log
 SUMMARY.md
 ```
 
-## 鍏抽敭杈撳嚭
+## 关键输出
 
 ```text
 cmdline=BOOT_IMAGE=... ro quiet splash
@@ -34,17 +35,23 @@ uio_module_loaded=no
 vmxnet3_line=Kernel driver in use: vmxnet3
 ```
 
-## 楠屾敹瑙ｉ噴
+## 验收解释
 
-| 椤?| 缁撴灉 | 瑙ｉ噴 |
+| 项 | 结果 | 解释 |
 |---|---|---|
-| `PASS_UIO_VFIO_MATRIX` | PASS | UIO/VFIO/IOMMU 宸紓宸叉垚鐭╅樀 |
-| `PASS_VMXNET3_BOUNDARY` | PASS | vmxnet3 褰撳墠鐘舵€佸拰杈圭晫宸茶褰?|
-| `PASS_IOMMU_CHECKLIST` | PASS | VFIO 鍓嶇疆鏉′欢 checklist 宸插舰鎴?|
+| `PASS_UIO_VFIO_MATRIX` | PASS | UIO/VFIO/IOMMU 差异已成矩阵 |
+| `PASS_VMXNET3_BOUNDARY` | PASS | vmxnet3 当前状态和边界已记录 |
+| `PASS_IOMMU_CHECKLIST` | PASS | VFIO 前置条件 checklist 已形成 |
 
-## 娉ㄦ剰
+## 注意
 
-杩欎釜闃舵娌℃湁鎵ц鍗遍櫓鐨勭湡瀹?NIC bind/unbind銆?
-鍘熷洜锛?
+这个阶段没有执行危险的真实 NIC bind/unbind。
+
+原因：
+
 ```text
-褰撳墠鏈哄櫒渚濊禆 SSH 绠＄悊缃戝崱锛?IOMMU group 涓虹┖锛?璐哥劧 bind VFIO 鏃㈠彲鑳芥柇杩烇紝涔熶笉鑳借瘉鏄?VFIO 闅旂鑳藉姏銆?```
+当前机器依赖 SSH 管理网卡；
+IOMMU group 为空；
+贸然 bind VFIO 既可能断连，也不能证明 VFIO 隔离能力。
+```
+

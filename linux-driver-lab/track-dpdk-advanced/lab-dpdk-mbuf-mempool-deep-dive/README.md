@@ -1,47 +1,45 @@
-﻿# lab-dpdk-mbuf-mempool-deep-dive
+# lab-dpdk-mbuf-mempool-deep-dive
 
-> track-dpdk-advanced Phase 1锛歮buf / mempool / metadata 娣辨寲銆?
-## 鐩爣
+Phase 1：mbuf / mempool / metadata 深挖。
 
-鐞嗚В DPDK packet memory model锛屽苟鐢ㄥ彲澶嶇幇娴侀噺璇佹槑 mbuf metadata 濡備綍璐┛鐢ㄦ埛鎬?fastpath锛?
-```text
-pcap PMD
-  -> rte_eth_rx_burst()
-  -> rte_mbuf
-  -> inspect metadata
-  -> mempool state
-  -> ethdev/software stats compare
-```
+## 目标
 
-## 璁″垝鏂囦欢
+理解 DPDK packet memory model，并用可复现 pcap 流量证明 mbuf metadata 如何贯穿用户态 fastpath。
 
-- `docs/01_OVERVIEW.md`
-- `docs/04_DEEP_LEARNING.md`
-- `docs/02_TEST_AND_VERIFY.md`
-- `docs/03_RESULT_ANALYSIS.md`
-- `../docs/01_TRACK_OVERVIEW.md`
-- `../docs/04_ARCHITECTURE_PRINCIPLES.md`
-- `../docs/02_ACCEPTANCE.md`
+## 状态
 
-## 褰撳墠鐘舵€?
 ```text
 PASS_PCAP_METADATA
 ```
 
-褰撳墠宸茶惤鍦版渶灏忓疄鐜帮細
+正式记录：
 
 ```text
-app/dpdk-mbuf-inspect
-scripts/00_check_env.sh
-scripts/01_build.sh
-scripts/02_run_pcap_metadata.sh
-scripts/03_collect_report.sh
-tools/gen_udp_pcap.py
+records/20260629-210538-mbuf-mempool/
 ```
 
-宸插湪娴嬭瘯鏈?`192.168.65.135` 瀹屾垚 pcap PMD 璺緞楠岃瘉锛?
+## 快速复测
+
+```bash
+cd linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive
+export RECORD_DIR="$PWD/records/$(date +%Y%m%d-%H%M%S)-mbuf-mempool"
+./scripts/00_check_env.sh
+./scripts/01_build.sh
+./scripts/02_run_pcap_metadata.sh
+./scripts/03_collect_report.sh "$RECORD_DIR"
+cat "$RECORD_DIR/SUMMARY.md"
+```
+
+## 文档入口
+
+- `docs/01_OVERVIEW.md`
+- `docs/02_TEST_AND_VERIFY.md`
+- `docs/03_RESULT_ANALYSIS.md`
+- `docs/04_DEEP_LEARNING.md`
+
+## 验收项
+
 ```text
-record: records/20260629-210538-mbuf-mempool
 PASS_BUILD
 PASS_PCAP_RX
 PASS_MBUF_METADATA
@@ -49,22 +47,3 @@ PASS_MEMPOOL_CONFIG
 PASS_STATS_CONSISTENCY
 ```
 
-澶嶆祴鍛戒护锛?
-```bash
-cd linux-driver-lab/track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive
-chmod +x scripts/*.sh tools/*.py
-./scripts/00_check_env.sh
-./scripts/01_build.sh
-./scripts/02_run_pcap_metadata.sh
-./scripts/03_collect_report.sh "$(find records -maxdepth 1 -type d -name '*-mbuf-mempool' | sort | tail -1)"
-```
-
-楠屾敹椤癸細
-
-```text
-PASS_BUILD
-PASS_PCAP_RX
-PASS_MBUF_METADATA
-PASS_MEMPOOL_CONFIG
-PASS_STATS_CONSISTENCY or CHECK_STATS_CONSISTENCY
-```

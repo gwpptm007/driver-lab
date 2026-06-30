@@ -1,11 +1,12 @@
-﻿# 02_TEST_AND_VERIFY - 娴嬭瘯鍛戒护涓庢墽琛岃褰?
-## 娴嬭瘯璁板綍
+# 02_TEST_AND_VERIFY - 测试命令与执行记录
+
+## 测试记录
 
 ```text
 records/20260629-211820-rss-multiqueue/
 ```
 
-## 瀹屾暣鍛戒护
+## 完整命令
 
 ```bash
 cd /home/wq7/workspace/driver-lab/linux-driver-lab/track-dpdk-advanced/lab-dpdk-rss-multiqueue
@@ -17,7 +18,7 @@ export RECORD_DIR="$PWD/records/$(date +%Y%m%d-%H%M%S)-rss-multiqueue"
 cat "$RECORD_DIR/SUMMARY.md"
 ```
 
-## 鐢熸垚鏂囦欢
+## 生成文件
 
 ```text
 ENV_CHECK.log
@@ -28,7 +29,7 @@ SUMMARY.md
 rss_input.pcap
 ```
 
-## 鍏抽敭杈撳嚭
+## 关键输出
 
 ```text
 driver_name=net_pcap
@@ -39,11 +40,12 @@ blocked_reason=no_rss_offloads_or_reta
 blocked_reason=max_rx_queues_lt_requested requested=2 max_rx_queues=1
 ```
 
-## 楠屾敹瑙ｉ噴
+## 验收解释
 
-| 椤?| 缁撴灉 | 瑙ｉ噴 |
+| 项 | 结果 | 解释 |
 |---|---|---|
-| `PASS_BUILD` | PASS | 绋嬪簭鏋勫缓鎴愬姛 |
-| `QUEUE_CONFIG` | BLOCKED | pcap PMD 涓嶆敮鎸佽姹傜殑澶?RX queue |
-| `RSS_QUERY` | BLOCKED | 娌℃湁 RETA / RSS offload |
-| `QUEUE_TO_CORE_DOC` | PASS | queue-to-core 妯″瀷宸茶褰?|
+| `PASS_BUILD` | PASS | 程序构建成功 |
+| `QUEUE_CONFIG` | BLOCKED | pcap PMD 不支持请求的多 RX queue |
+| `RSS_QUERY` | BLOCKED | 没有 RETA / RSS offload |
+| `QUEUE_TO_CORE_DOC` | PASS | queue-to-core 模型已记录 |
+
