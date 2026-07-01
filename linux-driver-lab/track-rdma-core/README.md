@@ -11,12 +11,12 @@
 | Phase 0 | `docs/02_RDMA_CORE_MODEL.md` | RDMA core 原理、verbs 对象模型、QP/CQ/MR 学习 | 已补充 |
 | Phase 1 | `lab-rdma-env-capability` | RDMA 工具、设备、内核模块、Soft-RoCE 边界采集 | PASS，`rxe0` 已创建 |
 | Phase 2 | `lab-rdma-verbs-object-lifecycle` | device/context/PD/MR/CQ/QP 对象生命周期 | PASS |
-| Phase 3 | `lab-rdma-memory-region-deep-dive` | MR、lkey/rkey、access flags | 规划中 |
-| Phase 4 | `lab-rdma-qp-state-machine` | RC QP 状态迁移 | 规划中 |
-| Phase 5 | `lab-rdma-rc-pingpong` | RC send/recv 与 CQ completion | 规划中 |
-| Phase 6 | `lab-rdma-one-sided-read-write` | RDMA READ/WRITE one-sided 语义 | 规划中 |
-| Phase 7 | `lab-rdma-ud-rocev2-model` | UD/RoCEv2 报文路径与封装模型 | 规划中 |
-| Phase 8 | `project-rdma-core-summary` | 汇总报告、面试材料、DPDK 到 RDMA 对照 | 规划中 |
+| Phase 3 | `lab-rdma-memory-region-deep-dive` | MR、lkey/rkey、access flags | PASS |
+| Phase 4 | `lab-rdma-qp-state-machine` | RC QP 状态迁移 | PASS |
+| Phase 5 | `lab-rdma-rc-pingpong` | RC send/recv 与 CQ completion | PASS |
+| Phase 6 | `lab-rdma-one-sided-read-write` | RDMA READ/WRITE one-sided 语义 | PASS |
+| Phase 7 | `lab-rdma-ud-rocev2-model` | UD/RoCEv2 报文路径与封装模型 | PASS |
+| Phase 8 | `project-rdma-core-summary` | 汇总报告、面试材料、DPDK 到 RDMA 对照 | PASS |
 
 ## 学习重点
 
@@ -36,27 +36,25 @@ ROADMAP.md                       # 后续每个实验阶段怎么推进
 START_HERE.md                    # 实际执行命令入口
 ```
 
-Phase 1 实验入口：
+最终总结入口：
 
 ```text
-lab-rdma-env-capability/README.md
+project-rdma-core-summary/README.md
 ```
 
-## 最新 Phase 1 结论
+## 最终结论
 
 测试机 `192.168.65.135` 第一轮采集结果：
 
 - `ibverbs-utils` 已补齐，`ibv_devices` / `ibv_devinfo` 可用。
 - Soft-RoCE `rxe0` 已通过 `ens34` 创建。
 - `rdma link` 显示 `rxe0/1 state ACTIVE physical_state LINK_UP netdev ens34`。
-- Phase 2 程序 `rdma-object-lifecycle` 已编译运行，`ibv_get_device_list()` 返回 `count=1`。
-- context/PD/MR/CQ/QP 创建和销毁已通过。
+- Phase 2-7 六个代码项目最终 `make test` 全部通过。
+- 已验证 verbs 对象、MR、QP 状态机、RC ping-pong、one-sided READ/WRITE、UD/GRH。
+- 总结报告、证据索引、面试笔记、简历材料和 DPDK/RDMA 对比已完成。
 
-操作过程已记录：
+证据总入口：
 
 ```text
-lab-rdma-env-capability/records/20260630-221920-rdma-env/OPERATION_LOG.md
-lab-rdma-env-capability/records/20260630-233244-rdma-env/SUMMARY.md
-lab-rdma-verbs-object-lifecycle/records/20260630-232844-verbs-object/SUMMARY.md
-lab-rdma-verbs-object-lifecycle/records/20260630-233328-verbs-object/SUMMARY.md
+project-rdma-core-summary/EVIDENCE_INDEX.md
 ```

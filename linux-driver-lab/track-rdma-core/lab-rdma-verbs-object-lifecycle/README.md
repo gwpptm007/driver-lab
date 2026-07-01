@@ -1,113 +1,118 @@
-# lab-rdma-verbs-object-lifecycle
+# RDMA Verbs Object Lifecycle
 
-这个目录只学一件事：
+这是一个按真实 C 工程方式组织的 RDMA 基础项目。它只解决一个问题：
 
-```text
-RDMA verbs 的基础对象生命周期
-```
+> 一个用户态 RDMA 程序怎样发现设备，并安全地创建、使用和销毁 verbs 基础对象？
 
-也就是这条链：
+项目覆盖以下对象链：
 
 ```text
-device -> context -> PD -> MR -> CQ -> QP -> destroy
+device list -> device -> context -> PD -> buffer/MR -> CQ -> RC QP
 ```
 
-先把这条链看懂，再学 QP 状态机、RC ping-pong、RDMA READ/WRITE。
+QP 状态迁移、Send/Recv 和 RDMA READ/WRITE 属于后续项目，不在这里混杂实现。
 
-## 先看哪个文件
+## 阅读顺序
 
-先看：
+1. `include/rdma_resources.h`：先看全部资源和模块接口。
+2. `src/main.c`：看程序如何编排完整生命周期。
+3. `src/rdma_device.c`：理解 device、context、port。
+4. `src/rdma_memory.c`：理解 PD、buffer、MR、lkey/rkey。
+5. `src/rdma_queue.c`：理解 CQ、QP 和初始 RESET 状态。
+6. `docs/ARCHITECTURE.md`：理解工程边界和 Linux RDMA 软件栈。
+7. `docs/VERBS_OBJECT_MODEL.md`：深入理解 verbs 对象依赖和数据面语义。
+
+## 工程结构
 
 ```text
-app/main.c
+.
+|-- Makefile
+|-- include/rdma_resources.h
+|-- src/
+|   |-- main.c
+|   |-- rdma_device.c
+|   |-- rdma_memory.c
+|   `-- rdma_queue.c
+|-- tests/lifecycle_test.sh
+`-- docs/
+    |-- ARCHITECTURE.md
+    `-- VERBS_OBJECT_MODEL.md
 ```
 
-这个文件就是本 lab 的主体。代码已经按 `STEP 00` 到 `STEP 10` 分段，每一步都有中文注释。
+`build/` 是 `make` 自动生成的构建目录，不属于源码。
 
-不要一开始就钻 `scripts/`。脚本只是帮你编译、运行、保存结果。
-
-## 只跑一个命令
-
-在测试机上执行：
+## 构建与运行
 
 ```bash
-cd /home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/lab-rdma-verbs-object-lifecycle
-bash scripts/run_all.sh
+make
+build/rdma-lifecycle --list
+build/rdma-lifecycle --device rxe0 --port 1
 ```
 
-运行成功后看：
+完整测试：
 
 ```bash
-cat records/latest/SUMMARY.md
-cat records/latest/OBJECT_LIFECYCLE.log
+make test
 ```
 
-## 目录到底是干嘛的
-
-| 目录 | 作用 | 你应该怎么看 |
-| --- | --- | --- |
-| `app/` | 学习代码 | 重点看 `main.c` |
-| `scripts/` | 一键运行工具 | 只需要跑 `run_all.sh` |
-| `docs/` | 解释文档 | 看不懂代码时再读 |
-| `records/` | 每次运行的真实输出 | 用来证明你真的跑过 |
-| `reports/` | 阶段总结 | 最后复盘和面试材料用 |
-
-现在 `scripts/` 只保留一个入口：
+完整的测试环境、逐步命令和真实输出记录：
 
 ```text
-scripts/run_all.sh
+tests/TEST_RECORD_20260701.md
 ```
 
-旧的 `00_check_env.sh`、`01_build.sh`、`02_run_object_lifecycle.sh`、`03_generate_summary.sh` 已经删掉，避免入口太多。
+清理构建产物：
 
-## 你要学会什么
+```bash
+make clean
+```
 
-| STEP | API / 动作 | 要理解的问题 |
-| --- | --- | --- |
-| 00 | `ibv_get_device_list()` | 当前有几个 RDMA verbs 设备 |
-| 01 | 打印 device | `rxe0` 是怎么被 verbs 看见的 |
-| 02 | `ibv_open_device()` | context 是什么 |
-| 03 | `ibv_query_device()` | device 能力上限怎么看 |
-| 04 | `ibv_query_port()` | port 状态、MTU、GID 表怎么看 |
-| 05 | `ibv_alloc_pd()` | PD 为什么是隔离边界 |
-| 06 | 分配 buffer | RDMA 操作的内存从哪里来 |
-| 07 | `ibv_reg_mr()` | MR、`lkey`、`rkey` 是什么 |
-| 08 | `ibv_create_cq()` | CQ 为什么是完成通知队列 |
-| 09 | `ibv_create_qp()` | QP 为什么是后续收发核心 |
-| 10 | 反向销毁 | 为什么资源要按反向顺序释放 |
-
-## 当前已经跑通
-
-当前测试机已经启用 Soft-RoCE：
+## 命令行接口
 
 ```text
-rxe0 -> ens34
+usage: rdma-lifecycle [--list] [--device NAME] [--port N]
 ```
 
-最新成功结果类似：
+| 参数 | 含义 |
+| --- | --- |
+| `--list` | 列出 libibverbs/provider 可见的 RDMA 设备 |
+| `--device NAME` | 选择设备；省略时选择第一个设备 |
+| `--port N` | 选择物理端口，默认是 1 |
+| `--help` | 显示帮助 |
+
+成功输出示例：
 
 ```text
-BUILD_PASS
-OBJECT_LIFECYCLE_PASS
+device=rxe0
+port=1 state=4 active_mtu=3
+context=ready
+pd=ready
+mr=ready address=0x... length=4096 lkey=0x... rkey=0x...
+cq=ready depth=16
+qp=ready qp_num=... qp_type=RC
+qp_state=RESET
+cleanup=complete
+result=pass
 ```
 
-关键输出类似：
+这里最重要的不是记住数字，而是理解：谁创建它、谁依赖它、何时销毁它。
 
-```text
-STEP 00 GET_DEVICE_LIST_OK count=1
-STEP 01 DEVICE[0] name=rxe0
-STEP 02 OPEN_DEVICE_OK name=rxe0
-STEP 07 REG_MR_OK ... lkey=... rkey=...
-STEP 09 CREATE_QP_OK qp_num=...
-OBJECT_LIFECYCLE_PASS
-```
+## 当前边界
 
-## 下一步
+本项目已经完成：
 
-下一步不是继续堆脚本，而是在新 lab 里学习：
+- provider device 枚举与选择。
+- context、port 和 device capability 查询。
+- PD、页对齐 buffer、MR 创建。
+- CQ、RC QP 创建与 RESET 状态查询。
+- 任意失败点的统一逆序清理。
+- CLI 与真实 verbs device 自动测试。
 
-```text
-QP: RESET -> INIT -> RTR -> RTS
-```
+本项目有意不做：
 
-也就是把现在创建出来的 QP，真正切到可以收发的状态。
+- `RESET -> INIT -> RTR -> RTS`。
+- GID、QPN、PSN 等连接参数交换。
+- `ibv_post_recv()`、`ibv_post_send()` 和 CQ polling。
+- RDMA READ、WRITE、atomic。
+
+下一项目将复用这里的资源模型，专门实现 QP 状态机。

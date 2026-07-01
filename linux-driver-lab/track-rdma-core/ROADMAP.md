@@ -160,6 +160,14 @@ lab-rdma-memory-region-deep-dive/
 - 故意缺权限时捕获失败或后续 WR error。
 - 文档说明 `lkey/rkey` 的用途差异。
 
+当前状态（2026-07-01）：
+
+```text
+PASS
+```
+
+已完成 5 个真实 RXE MR case：本地写、远端读、缺少本地写的远端写、完整权限、非页对齐地址，并保存完整编译和执行记录。
+
 ## Phase 4: QP state machine
 
 计划目录：
@@ -188,6 +196,14 @@ lab-rdma-qp-state-machine/
 - 故意缺参数时记录失败点。
 - Mermaid state diagram 和实际命令结果对应。
 
+当前状态（2026-07-01）：
+
+```text
+PASS
+```
+
+已在 `rxe0` 上创建两个 RC QP，验证非法 `RESET -> RTR` 被拒绝，并完成双方 `RESET -> INIT -> RTR -> RTS`。测试同时记录了错误 GID index 导致 RTR 超时的边界。
+
 ## Phase 5: RC ping-pong
 
 计划目录：
@@ -210,6 +226,8 @@ lab-rdma-rc-pingpong/
 - 记录 send CQE 和 recv CQE。
 - 记录 `byte_len/status/opcode/wr_id`。
 
+当前状态（2026-07-01）：`PASS`。两个本地 RC QP 完成双向 ping/pong，SEND/RECV CQE 与 payload 均验证成功。
+
 ## Phase 6: one-sided RDMA model
 
 计划目录：
@@ -231,6 +249,8 @@ lab-rdma-one-sided-read-write/
 - READ 后本地 buffer 内容变化。
 - 文档说明 Send/Recv 与 RDMA WRITE/READ 的差异。
 
+当前状态（2026-07-01）：`PASS`。已验证 RDMA WRITE 直接修改远端 MR、RDMA READ 拉回远端 MR，并记录 address/rkey、本地 CQE 和 payload。
+
 ## Phase 7: UD/RoCEv2 model
 
 计划目录：
@@ -250,6 +270,8 @@ lab-rdma-ud-rocev2-model/
 
 - 如果环境支持，跑 UD send/recv。
 - 如果不支持，保留 packet model、命令边界和源码阅读证据。
+
+当前状态（2026-07-01）：`PASS`。RXE 已跑通 UD datagram，验证 AH、Q_Key、remote QPN、40 字节 GRH 偏移和 SEND/RECV CQE，并补充 RoCEv2 UDP/IP packet model。
 
 ## Phase 8: summary and interview material
 
@@ -273,9 +295,11 @@ project-rdma-core-summary/
 DPDK packet fastpath -> RDMA object model -> MR/QP/CQ -> RC ping-pong -> one-sided semantics -> RoCEv2 model
 ```
 
+当前状态（2026-07-01）：`PASS`。总报告、证据索引、面试笔记、简历材料和 DPDK/RDMA 对比均已完成，Phase 2-7 最终自动测试全部通过。
+
 ## 收敛原则
 
 - 每个 lab 的 `docs/` 不超过 4 个文件。
 - `04_DEEP_LEARNING.md` 必须保留原理图、UML/Mermaid 和学习解释。
-- 每个测试动作都要进 `records/`。
+- 每个项目在 `tests/` 下保留自动测试脚本和可复现的完整测试记录。
 - 没有真实硬件时，明确写成 boundary，不包装成硬件 RDMA。
