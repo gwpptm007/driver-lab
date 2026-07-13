@@ -20,7 +20,7 @@
 
 ### 第四阶段：network acceleration（规划中）
 - `project-linux-network-data-plane` 已用 `network-data-plane-v1` 标签封版
-- 当前后续主线调整为：`track-dpdk-advanced/` -> `track-rdma/` -> `track-smartnic-dpu/`
+- 当前高性能网络主线已经推进到：DPDK flow pipeline、RDMA one-sided KV 与 `project-dpdk-rdma-gateway` Phase 1-4 当前环境收口
 - `track-block-io/` 先作为 P2 保留支线，不作为当前主线推进
 
 ---
@@ -32,7 +32,9 @@
 | `track-real-driver/` | 真实 Linux NIC 驱动源码与 patch | 4 labs + 1 project 完成 |
 | `track-virtual-net/` | vhost/kick/notify + tap/bridge 协同 | 3 labs + 1 project 完成 |
 | `track-dpdk/` | DPDK 用户态网络 | 9 phases, media-gateway-lite PASS_TRAFFIC/FORWARDING/REWRITE |
-| `track-dpdk-advanced/` | DPDK 进阶：mbuf/mempool、RSS、多队列、NUMA、VFIO/IOMMU | PLANNED |
+| `track-dpdk-advanced/` | DPDK 进阶：mbuf/mempool、RSS、多队列、NUMA、VFIO/IOMMU | COMPLETED_WITH_BOUNDARIES |
+| `track-rdma-core/` | RDMA core：verbs、MR、QP、RC、one-sided、UD/RoCEv2 | Phase 1~8 PASS，RC client/server 单机 PASS |
+| `projects/project-dpdk-rdma-gateway/` | DPDK ingress + RDMA egress 综合 capstone | `DPDK_RDMA_GATEWAY_CURRENT_ENV_COMPLETE` |
 | `track-af-xdp/` | AF_XDP 快速路径 | 4 phases 全部 PASS (2026-06-07) |
 | `track-ebpf-observability/` | eBPF 可观测性 | 5 phases 全部 COMPLETED (2026-06-07) |
 | `track-block-io/` | block layer / storage I/O | PARKED_PLANNED, P2 支线 |
@@ -43,24 +45,25 @@
 
 ### 当前最推荐的下一步
 
-**`track-dpdk-advanced/lab-dpdk-mbuf-mempool-deep-dive/`**
+**`track-rdma-core/project-rdma-rc-client-server/` 后续故障边界与双机 RoCEv2**
 
-承接已经封版的 network data plane，把 DPDK 从“能跑通 fastpath”推进到“理解 mbuf/mempool、队列、RSS、NUMA、VFIO/IOMMU 和真实部署边界”。
+第一版已经在 `192.168.65.135` 单机 Soft-RoCE 跑通。下一步把能力从“基础工程化可跑”推进到“更完整故障边界、双机 RoCEv2、抓包和性能调优”。
 
 ### 当前推荐的阅读入口
 
 - `docs/08_ACCELERATION_ROADMAP.md` — DPDK -> RDMA -> SmartNIC/DPU 总路线
-- `track-dpdk-advanced/README.md` — DPDK 进阶主线定位
-- `track-dpdk-advanced/START_HERE.md` — 第一阶段进入方式
-- `track-dpdk-advanced/docs/04_RDMA_SMARTNIC_BRIDGE.md` — 后续 RDMA / SmartNIC 衔接
+- `track-rdma-core/README.md` — RDMA core 当前进度
+- `track-rdma-core/ROADMAP.md` — Phase 1~9 路线
+- `track-rdma-core/docs/05_NEXT_PROJECT_RC_CLIENT_SERVER_PLAN.md` — 下一工程项目计划
+- `track-rdma-core/project-rdma-core-summary/EVIDENCE_INDEX.md` — 已完成实验的证据索引
 
 ### 进入方式
 
 ```
-track-dpdk-advanced/START_HERE.md
+track-rdma-core/docs/05_NEXT_PROJECT_RC_CLIENT_SERVER_PLAN.md
 ```
 
-先从 mbuf/mempool metadata 深挖开始，不急着做 RSS、多队列或 VFIO 环境改造。
+先在 `192.168.65.135` 单机用两个进程跑通 RC server/client，再迁移到双机 RoCEv2。
 
 ---
 
@@ -77,7 +80,8 @@ track-dpdk-advanced/START_HERE.md
 | track-real-driver | ✅ 第一轮完成 |
 | track-virtual-net | ✅ 完成 |
 | project-linux-network-data-plane | ✅ 已封版 network-data-plane-v1 |
-| track-dpdk-advanced | 🧭 已规划，待启动 |
+| track-dpdk-advanced | ✅ 已收敛，保留 RSS/VFIO 边界 |
+| track-rdma-core | ✅ Phase 1~9 PASS_SINGLE_HOST，下一步双机/故障/性能 |
 | track-block-io | 🅿️ 已规划，P2 保留 |
 
 ---

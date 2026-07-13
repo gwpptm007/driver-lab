@@ -23,5 +23,5 @@ KNI 在旧版本里常用于把 DPDK 用户态路径和 Linux 内核协议栈连
 ## 被追问不足
 
 ```text
-我会明确区分验收等级。当前 media-gateway-lite 是 PASS_SMOKE 和 UDP-only drop path 验证，还没有把真实 UDP forwarding/rewrite records 补齐。我不会把 smoke 说成完整转发通过，后续会用 pcap PMD、vhost/virtio-user 或真实 vmxnet3 外部发包补 PASS_TRAFFIC/PASS_FORWARDING/PASS_REWRITE。
+我会明确区分验收等级。media-gateway-lite 已完成 pcap + null PMD 下的 `PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE`，证明软件 parser、rule、rewrite 和 ownership 路径；它不等于外部 wire、真实 NIC 或性能验证，后续分别补 `PASS_EXTERNAL_TRAFFIC`、`PASS_REAL_NIC_FORWARDING` 和 `PASS_PERFORMANCE`。
 ```

@@ -14,7 +14,7 @@ lab-vmxnet3-testpmd
   -> project-dpdk-media-gateway-lite
 ```
 
-其中 `project-dpdk-media-gateway-lite` 当前先达到 `PASS_SMOKE`，真实 UDP、转发、rewrite 后续继续补。
+其中 `project-dpdk-media-gateway-lite` 已达到 `PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE`；外部 wire、真实 NIC 和性能证据后续继续补。
 
 本项目的目标不是继续加 C 功能，而是做一次经验复盘：把过去 DPDK v17 项目经验和当前 modern DPDK track 对齐。
 

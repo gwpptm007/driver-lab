@@ -1,5 +1,7 @@
 # 01_OVERVIEW
 
+> 本文是项目路线与环境概览。第一次学习或需要恢复 DPDK 原理时，请先从 [`fundamentals/00_10_MINUTE_MENTAL_MODEL.md`](fundamentals/00_10_MINUTE_MENTAL_MODEL.md) 开始，再回到本文选择项目。
+
 ## 目标
 
 从 vmxnet3/testpmd 起步，逐步进入 vhost-user、virtio-user、自写 L2 forwarding C app，最终收成 user-space fastpath / media gateway lite 项目。
@@ -39,7 +41,7 @@ DPDK版本: 21.11.9
 
 当前仅证明 C app 初始化、进入 loop、打印 stats；真实双口转发仍需后续流量验证。
 
-### Phase 5: `project-user-space-fastpath` - PASS_SMOKE
+### Phase 5: `project-user-space-fastpath` - PASS_PCAP_FUNCTIONAL
 
 整合 vmxnet3/testpmd、vhost-user、virtio-user、L2 forwarding 成 fastpath-lite 原型。
 
@@ -59,7 +61,7 @@ PASS_REWRITE: rewrite 非 0
 PASS_FORWARDING: 双端口或虚拟拓扑 rx/tx 非 0
 ```
 
-### Phase 7: `project-dpdk-media-gateway-lite` - PASS_SMOKE
+### Phase 7: `project-dpdk-media-gateway-lite` - PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE
 
 当前已完成项目型骨架和双 vdev smoke，真实 UDP / forwarding / rewrite 后续补。
 

@@ -5,11 +5,25 @@
 RDMA 这条线先读原理，再跑命令：
 
 ```text
+docs/fundamentals/README.md
+docs/fundamentals/00_15_MINUTE_MENTAL_MODEL.md
+docs/fundamentals/01_HARDWARE_KERNEL_USERSPACE_STACK.md
+docs/fundamentals/02_VERBS_OBJECTS_LIFECYCLE.md
+docs/fundamentals/03_MEMORY_REGISTRATION_DMA_KEYS.md
+docs/fundamentals/04_QP_STATE_MACHINE_CONTROL_PLANE.md
+docs/fundamentals/05_WR_WQE_CQE_DATA_PATH.md
+docs/fundamentals/06_TRANSPORTS_ROCE_NETWORK.md
+docs/fundamentals/07_ONE_SIDED_ATOMIC_CONSISTENCY.md
+docs/fundamentals/08_PERFORMANCE_TUNING_NUMA.md
+docs/fundamentals/09_RELIABILITY_SECURITY_FAILURES.md
+docs/fundamentals/10_PROJECT_KNOWLEDGE_MAP.md
+docs/fundamentals/11_DEBUGGING_PLAYBOOK.md
+docs/fundamentals/12_RECALL_CARDS.md
 docs/01_TRACK_OVERVIEW.md
 docs/02_RDMA_CORE_MODEL.md
 docs/04_DPDK_TO_RDMA_BRIDGE.md
-lab-rdma-env-capability/docs/04_DEEP_LEARNING.md
 ROADMAP.md
+README.md
 ```
 
 重点先搞清楚：
@@ -18,66 +32,122 @@ ROADMAP.md
 - device/context/PD/MR/CQ/QP/WR/CQE 的关系。
 - `lkey/rkey` 的意义。
 - Soft-RoCE 能学习什么，不能证明什么。
+- performance tuning 里 batch、inline、selective signaling、CQ polling、CPU affinity/NUMA 各自影响什么。
+- one-sided completion、数据可见、业务提交和持久化为什么是四个不同层次。
+- wrong-rkey、RNR、retry exceeded、flush error 应该从哪一层开始定位。
+
+先执行文档审计，确认知识入口、相对链接和 Mermaid 围栏完整：
+
+```bash
+bash tests/check_fundamentals.sh
+```
+
+审计通过 marker：`RDMA_FUNDAMENTALS_COMPLETE`。
 
 ## 再跑什么
 
-### Phase 1: capability boundary
-
-在测试机上进入仓库：
+### 1. RDMA 基础实验总验收
 
 ```bash
-cd /home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/lab-rdma-env-capability
-bash scripts/00_collect_env.sh
-bash scripts/01_collect_rdma_capability.sh
-bash scripts/02_try_soft_roce_boundary.sh
-bash scripts/04_install_ibverbs_utils.sh
-bash scripts/03_generate_summary.sh
+base=/home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core
+for lab in \
+  lab-rdma-verbs-object-lifecycle \
+  lab-rdma-memory-region-deep-dive \
+  lab-rdma-qp-state-machine \
+  lab-rdma-rc-pingpong \
+  lab-rdma-one-sided-read-write \
+  lab-rdma-ud-rocev2-model; do
+    make -C "$base/$lab" test || exit 1
+done
 ```
 
-默认脚本只做采集，不会改网卡、不加载模块、不创建 rxe 设备。
-
-### Phase 2: verbs object lifecycle
-
-```bash
-cd /home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/lab-rdma-verbs-object-lifecycle
-REUSE_LATEST_RECORD=0 bash scripts/00_check_env.sh
-bash scripts/01_build.sh
-bash scripts/02_run_object_lifecycle.sh
-bash scripts/03_generate_summary.sh
-```
-
-当前 `rxe0` 已创建后，预期输出是：
+预期：
 
 ```text
-BUILD_PASS
-OBJECT_LIFECYCLE_PASS
+object lifecycle: pass
+MR suite: pass
+QP state machine: pass
+RC ping-pong: pass
+one-sided READ/WRITE: pass
+UD/GRH: pass
 ```
 
-如果后续确认要尝试 Soft-RoCE，再显式执行：
+### 2. RC client/server 工程项目
 
 ```bash
-ENABLE_RXE_SETUP=1 RXE_NETDEV=ens192 bash scripts/02_try_soft_roce_boundary.sh
+cd /home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/project-rdma-rc-client-server
+SUDO_PASSWORD='<sudo-password>' make test
+RDMA_SERVER_CPUSET=0 RDMA_CLIENT_CPUSET=1 make envcheck
 ```
 
-当前测试机已经使用 `ens34` 创建了 Soft-RoCE device `rxe0`。
+预期：
+
+```text
+TCP_CONTROL_PLANE_PASS
+RC_QP_RTS_PASS
+RC_SEND_RECV_PASS
+RDMA_WRITE_PASS
+RDMA_READ_PASS
+WRONG_RKEY_BOUNDARY_PASS
+app_runtime_binding role=server ...
+app_runtime_binding role=client ...
+```
+
+### 3. RDMA performance tuning
+
+```bash
+cd /home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/project-rdma-performance-tuning
+PERF_SERVER_CPUSET=0 PERF_CLIENT_CPUSET=1 \
+PERF_SERVER_NUMA_NODE=0 PERF_CLIENT_NUMA_NODE=0 \
+SUDO_PASSWORD='<sudo-password>' \
+make test
+```
+
+预期：
+
+```text
+PASS: RDMA SEND latency + batch WR smoke test inline=0 signal_interval=1 poll_budget=16 enable_rtt=0
+perf_binding role=server requested_cpuset=0 requested_numa_node=0 ...
+perf_binding role=client requested_cpuset=1 requested_numa_node=0 ...
+```
 
 ## 看什么结果
 
-优先看最新 records：
+优先看最终总结和证据索引：
 
-```bash
-ls -td records/20* | head -1
-cat "$(ls -td records/20* | head -1)/SUMMARY.md"
+```text
+project-rdma-core-summary/README.md
+project-rdma-core-summary/EVIDENCE_INDEX.md
+project-rdma-core-summary/RDMA_CORE_FINAL_REPORT.md
 ```
 
-再看三类证据：
+关键测试记录：
 
-- `ENV_CHECK.log`：操作系统、内核、网卡、模块、命令是否存在。
-- `RDMA_CAPABILITY.log`：`ibv_devices`、`ibv_devinfo`、`rdma link/dev/resource` 的实际输出。
-- `SOFT_ROCE_BOUNDARY.log`：`rdma_rxe` 模块和 Soft-RoCE 尝试边界。
-- `INSTALL_IBVERBS_UTILS.log`：补齐 `ibv_devices` / `ibv_devinfo` 的过程和阻塞原因。
-- `OPERATION_LOG.md`：每一步操作的学习解释。
+```text
+project-rdma-rc-client-server/tests/TEST_RECORD_20260712_AFFINITY.md
+project-rdma-performance-tuning/tests/TEST_RECORD_20260711.md
+project-rdma-performance-tuning/tests/TEST_RECORD_20260712.md
+project-rdma-performance-tuning/tests/TEST_RECORD_20260712_CPU_AFFINITY.md
+project-rdma-performance-tuning/tests/TEST_RECORD_20260713_NUMACTL_NODE0.md
+```
 
-## 本阶段验收口径
+## 当前验收边界
 
-Phase 1 成功不等于机器一定有 RDMA 硬件。成功的定义是：把硬件、工具、内核模块、Soft-RoCE 的真实状态记录完整，并能解释下一阶段能不能进入 verbs 编程。
+当前验收口径是：
+
+- Soft-RoCE 能验证 RDMA verbs 对象、状态机、协议语义、控制面/数据面流程。
+- `project-rdma-rc-client-server` 已补工程结构、错误边界、CPU affinity/NUMA 记录。
+- `project-rdma-performance-tuning` 已补 SEND latency、batch WR、inline、selective signaling、CQ polling、RTT、`numactl node0` 绑定。
+- 135 只有 `node0`，不能形成跨 NUMA 性能结论。
+- 134 登录仍失败，双机 fresh perf 验证暂时受环境阻塞。
+- 没有真实 RNIC 时，不把 RXE 结果包装成硬件性能。
+
+## 下一步
+
+当前最自然的主线下一步是：
+
+```text
+projects/project-network-acceleration-portfolio
+```
+
+目标是把 DPDK、RDMA、eBPF、tc、SmartNIC/DPU 的学习结果整理成作品集、面试讲述和简历材料。

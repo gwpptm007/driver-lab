@@ -5,9 +5,21 @@
 建议阅读顺序：
 
 ```text
-1. ROADMAP.md — 整体路线和当前状态
-2. docs/ — track 级别文档
-3. project-af-xdp-track-summary/ — 阶段总收口（报告/面试/简历素材）
+1. docs/fundamentals/README.md — 完整项目前知识层
+2. docs/fundamentals/00_15_MINUTE_MENTAL_MODEL.md — 快速心智模型
+3. docs/fundamentals/01_KERNEL_RX_AND_XDP_POSITION.md — 内核 RX/XDP 位置
+4. docs/fundamentals/03_SOCKET_UMEM_AND_FRAME_LAYOUT.md — UMEM/frame
+5. docs/fundamentals/04_FOUR_RINGS_AND_OWNERSHIP.md — 四环 ownership
+6. docs/fundamentals/06_COPY_ZEROCOPY_AND_DRIVER_DMA.md — COPY/ZC 边界
+7. docs/fundamentals/12_PROJECT_MAP_AND_RECALL_CARDS.md — 项目映射
+8. ROADMAP.md — 整体路线和当前状态
+9. project-af-xdp-track-summary/ — 阶段总收口
+```
+
+知识层审计 marker：`AF_XDP_FUNDAMENTALS_COMPLETE`。
+
+```bash
+bash tests/check_fundamentals.sh
 ```
 
 快速进入任意 Phase：

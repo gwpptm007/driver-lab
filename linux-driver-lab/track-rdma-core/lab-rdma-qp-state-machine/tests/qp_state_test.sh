@@ -13,7 +13,9 @@ if [[ -z "${device}" ]]; then
     exit 0
 fi
 
-output="$(${BIN} --device "${device}" --port 1 --gid-index 1)" || {
+# GID 表会随 netdev 地址和 RXE 重建变化，允许环境覆盖并默认选择稳定存在的 index 0。
+gid_index="${RDMA_GID_INDEX:-0}"
+output="$(${BIN} --device "${device}" --port 1 --gid-index "${gid_index}")" || {
     printf '%s\n' "${output}"
     exit 1
 }

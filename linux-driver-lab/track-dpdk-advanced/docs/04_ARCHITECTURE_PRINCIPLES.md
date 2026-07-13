@@ -2,6 +2,8 @@
 
 > 这篇是 `track-dpdk-advanced` 的总原理图。它用 Mermaid 串起项目分层、数据路径、mbuf 生命周期、RSS 边界、VFIO/IOMMU 边界和 L3 forwarder lite。
 
+> 系统学习入口已拆分到 `fundamentals/00_ADVANCED_MENTAL_MODEL.md`；本文继续作为旧链接兼容的总体架构索引。
+
 ## 1. 能力地图
 
 ```mermaid
@@ -247,4 +249,3 @@ flowchart TD
 环境不能证明的写 boundary。
 不把模拟环境包装成生产硬件结果。
 ```
-

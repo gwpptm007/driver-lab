@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 #===============================================================================
-# 06_run_pcap_rx_test.sh - pcap PMD real UDP traffic test
+# 06_run_pcap_rx_test.sh - pcap PMD 确定性 UDP 功能回归
 #
 # Topology:
 #   net_pcap0 (rx from pcap) -> media-gateway-lite -> net_null0 (tx discard)
 #
-# This test provides the first real UDP input path, achieving:
-#   PASS_TRAFFIC:     rx>0, ipv4>0, udp>0
-#   PASS_FORWARDING:  tx>0, rule_hit>0  (via auto bidirectional rules)
+# 历史 parser marker 保持兼容；按 track 证据口径应解释为：
+#   PASS_PCAP_FUNCTIONAL: rx>0, ipv4>0, udp>0
+#   PASS_PCAP_FORWARDING: tx>0, rule_hit>0  (via auto bidirectional rules)
 #
-# To also get PASS_REWRITE, the script supports optional --rewrite flag
+# To also get PASS_PCAP_REWRITE, the script supports optional rewrite rules
 # which adds explicit rules with dst_port matching and IP/MAC/Port rewrite.
 #===============================================================================
 set -euo pipefail

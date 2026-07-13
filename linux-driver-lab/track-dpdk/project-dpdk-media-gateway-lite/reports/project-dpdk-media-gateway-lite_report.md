@@ -15,9 +15,11 @@ TESTED (2026-06-07, pcap PMD path).
 | PASS_BUILD | ✅ | meson build 成功, 见 `records/20260607-pcap-traffic-test/BUILD.log` |
 | PASS_SMOKE | ✅ | 程序启动, 端口发现, 进入 loop, 正常退出 |
 | PASS_RULE_CONFIG | ✅ | rule 0 正确加载: dir=0:1, match_dst_port=9000, rewrite 字段完整 |
-| PASS_TRAFFIC | ✅ | rx=161830784, ipv4=161830784, udp=161830784 (port 0, pcap PMD) |
-| PASS_FORWARDING | ✅ | port 1 tx=161830784, rule 0 hit=161830784 |
-| PASS_REWRITE | ✅ | rewrite=161830784, rule 0 rewrite=161830784 |
+| PASS_PCAP_FUNCTIONAL | ✅ | rx=161830784, ipv4=161830784, udp=161830784 (port 0, infinite pcap replay) |
+| PASS_PCAP_FORWARDING | ✅ | port 1 null PMD tx=161830784, rule 0 hit=161830784 |
+| PASS_PCAP_REWRITE | ✅ | rewrite=161830784, rule 0 rewrite=161830784 |
+
+这些计数证明软件功能路径和所有权闭环，不代表外部 wire 流量、真实 NIC 转发或线速性能。
 
 详见:
 - `records/20260607-pcap-traffic-test/TEST_COMMAND.md`

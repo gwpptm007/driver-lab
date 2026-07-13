@@ -44,7 +44,7 @@
 - **socket buffer** → `copy_to_user()` 拷贝到用户态
 - **系统调用开销**（`recvmsg` / `sendmsg` 的上下文切换）
 
-对于一个 10Gbps 线速、每包 64 字节的 UDP 流（约 14.88 Mpps），内核根本处理不过来——大量 CPU 时间消耗在中断、拷贝和协议栈中，而非实际业务逻辑。
+对于 10 GbE 最小 64-byte frame，计入 preamble/SFD 和 IFG 后线速约为 14.88 Mpps。通用内核 socket 路径在这类小包高包速场景下可能消耗大量 CPU；是否达到瓶颈取决于硬件、内核配置、XDP/AF_XDP、协议和业务处理，不能绝对化表述为“内核一定处理不过来”。
 
 ### 1.2 DPDK 的解法：内核旁路 (Kernel Bypass)
 
@@ -130,7 +130,7 @@ TLB 条目:
   2MB 页 → 1 个 TLB 条目 (覆盖 2MB)
 ```
 
-DPDK 把所有 mbuf 和 mempool 分配在 hugepages 上，确保 NIC DMA 可以直接读写这些物理连续的页面。`--no-huge` 模式（测试用）用普通 `malloc` 代替，功能等价但性能差。
+典型真实 NIC DPDK 路径使用 hugepage-backed memory，扩大 TLB 覆盖并便于稳定的 DMA/IOVA 映射。每个 hugepage 是大粒度页，但不能假设整个 mempool 是单一物理连续块。`--no-huge` 适合部分 vdev 功能测试，不能据此推断真实 NIC DMA 配置或性能等价。
 
 ### 2.3 mbuf (Message Buffer)
 
@@ -800,7 +800,7 @@ if (sent == 1) {
 }
 ```
 
-**原理**：`rte_eth_tx_burst()` 成功后，mbuf 被 PMD 接管放入 NIC 的 TX descriptor ring。NIC 随时可能 DMA 读取该 mbuf 的内存区域发送报文，或者发送完成后 mbuf 被硬件回收到新的 RX ring。任何后续访问都是竞争条件。
+**原理**：`rte_eth_tx_burst()` 成功后，mbuf 被 PMD 接管并关联到 TX descriptor。NIC 可能继续 DMA 读取该 buffer；TX 完成后由 PMD 回收，最终返回 mempool，之后才可能被重新用于其他 RX/TX 工作。应用在所有权移交后继续访问属于竞争或 use-after-free 风险。
 
 类比 C++ 的 `std::move`：移动后不应再访问源对象。mbuf 的所有权转移同理。
 

@@ -71,3 +71,19 @@
 - resume material。
 - RDMA transition notes。
 
+## Phase 7: project-dpdk-flow-pipeline
+
+状态：`DPDK_FLOW_PIPELINE_CURRENT_ENV_COMPLETE`
+
+交付：
+
+- 16-byte stable flow key 与 `rte_hash` exact lookup。
+- DROP/FORWARD/MARK action 与 mbuf ownership。
+- add/update/delete/aging/generation 规则生命周期。
+- shared/sharded table 软件模型。
+- 双 worker、SP/SC ring、stop/drain 回收。
+- burst/cache/rule-count 调优矩阵与 p50/p99/max。
+- RSS、`rte_flow`、真实硬件 capability boundary。
+- 完整记录：`project-dpdk-flow-pipeline/tests/` 与 `reports/`。
+
+当前完成不包含控制面与 worker 并发 add/delete 的 RCU/QSBR，也不包含真实 NIC RSS/RETA 或 hardware `rte_flow` rule；这些作为硬件/并发扩展分支。

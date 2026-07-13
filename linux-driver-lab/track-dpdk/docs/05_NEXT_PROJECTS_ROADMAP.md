@@ -51,7 +51,7 @@ PASS_FORWARDING:
 
 定位：简化版用户态媒体网关。
 
-原前置条件是 `project-fastpath-traffic-test` 至少达到 `PASS_TRAFFIC`，但当前选择先推进 v17 legacy review；media gateway 真实流量后续补。
+`project-fastpath-traffic-test` 与 media gateway 的 pcap 功能路径已经达到 `PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE`。后续只补外部流量、真实 NIC 与性能证据。
 
 功能方向：
 

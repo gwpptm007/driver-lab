@@ -13,4 +13,4 @@ docs/    架构、规则、验收、面试讲法
 reports/ 执行看板与报告模板
 ```
 
-当前版本目标是 `PASS_PROJECT_SMOKE`，真实流量证据仍建议复用前一站 `project-fastpath-traffic-test` 的拓扑推进。
+当前版本已使用前一站拓扑完成 `PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE`；外部流量、真实 NIC 与性能证据按独立等级推进。

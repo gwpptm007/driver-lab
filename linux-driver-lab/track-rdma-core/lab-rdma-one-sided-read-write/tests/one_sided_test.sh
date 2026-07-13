@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -uo pipefail
 R="$(cd "$(dirname "${BASH_SOURCE[0]}")/.."&&pwd)"
-out="$($R/build/rdma-one-sided --device rxe0 --port 1 --gid-index 1)" || {
+# 不依赖历史临时地址生成的固定 GID index，测试机可通过环境变量覆盖。
+gid_index="${RDMA_GID_INDEX:-0}"
+out="$($R/build/rdma-one-sided --device rxe0 --port 1 --gid-index "${gid_index}")" || {
     echo "$out"
     exit 1
 }

@@ -1,5 +1,7 @@
 # project-user-space-fastpath_report
 
+> 状态更新：本报告保留最初的 VMXNET3 smoke 记录；后续 `project-fastpath-traffic-test` 已使用同一 fastpath binary 完成 `PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE`。
+
 ## 目标
 
 把 `track-dpdk` 的 lab 收口成一个项目型用户态 fastpath：

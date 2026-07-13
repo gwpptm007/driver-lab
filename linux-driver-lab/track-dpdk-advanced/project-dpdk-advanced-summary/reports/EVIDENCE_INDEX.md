@@ -106,3 +106,27 @@ project-dpdk-advanced-summary/reports/INTERVIEW_NOTES.md
 project-dpdk-advanced-summary/reports/RESUME_MATERIAL.md
 project-dpdk-advanced-summary/reports/RDMA_TRANSITION_NOTES.md
 ```
+
+## Phase 7: flow pipeline and knowledge layer
+
+```text
+project-dpdk-flow-pipeline/tests/TEST_RECORD_20260713_PHASE1.md
+project-dpdk-flow-pipeline/tests/TEST_RECORD_20260713_PHASE2_LIFECYCLE.md
+project-dpdk-flow-pipeline/tests/TEST_RECORD_20260713_PHASE3_WORKER.md
+project-dpdk-flow-pipeline/tests/TEST_RECORD_20260713_PHASE4_CAPABILITY_BOUNDARY.md
+project-dpdk-flow-pipeline/tests/TEST_RECORD_20260713_PHASE5_TUNING.md
+project-dpdk-flow-pipeline/tests/TEST_RECORD_20260713_PHASE6_CLOSEOUT.md
+project-dpdk-flow-pipeline/reports/DPDK_FLOW_PIPELINE_FINAL_REPORT.md
+docs/fundamentals/
+tests/TEST_RECORD_20260713_ADVANCED_KNOWLEDGE.md
+```
+
+Key evidence:
+
+```text
+DPDK_FLOW_PIPELINE_CURRENT_ENV_COMPLETE
+DPDK_ADVANCED_DOC_AUDIT_PASS
+DPDK_ADVANCED_KNOWLEDGE_AND_SOFTWARE_REGRESSION_PASS
+RSS_MULTI_QUEUE_BOUNDARY_BLOCKED
+RTE_FLOW_BOUNDARY_BLOCKED
+```

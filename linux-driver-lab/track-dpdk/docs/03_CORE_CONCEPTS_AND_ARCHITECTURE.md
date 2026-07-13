@@ -1,5 +1,7 @@
 # 03_CORE_CONCEPTS_AND_ARCHITECTURE
 
+> 兼容入口：本文保留原有概念汇总和旧链接。系统学习请从 [`fundamentals/00_10_MINUTE_MENTAL_MODEL.md`](fundamentals/00_10_MINUTE_MENTAL_MODEL.md) 开始；内存、数据路径、并发和项目映射已分别拆成专题文档。
+
 ## 1. 为什么需要 DPDK 用户态数据面
 
 传统 Linux kernel 网络路径存在以下开销：
@@ -9,20 +11,20 @@ NIC 收包
   ↓
 中断触发 (interrupt)
   ↓
-内核驱动复制 (copy)
+内核驱动/NAPI 消费 RX descriptor
   ↓
-skb 分配 (allocation)
+构造或关联 skb metadata/buffer
   ↓
 TCP/IP 协议栈处理 (protocol stack)
   ↓
-socket API 复制到用户态 (copy to userspace)
+socket 接收队列（是否复制取决于协议与 API 路径）
 ```
 
 **DPDK 用户态数据面的价值**：
 
-- **零拷贝**：mbuf 直接在用户态访问网卡的 RX/TX 队列
-- **零中断**：轮询模式（poll-mode），避免中断开销
-- **零 syscall**：绕过内核，直接调用 DPDK API
+- **减少数据复制**：应用直接处理与 mbuf 关联的 DMA buffer，避免典型 socket 数据路径
+- **数据面轮询**：PMD 持续 poll queue，避免每包中断/唤醒；设备事件仍可能使用中断
+- **减少 fast-path syscall**：稳态收发调用 DPDK burst API，初始化和系统治理仍依赖内核
 - **批处理**：burst 模式减少 per-packet 开销
 
 适合场景：
@@ -50,7 +52,7 @@ rte_eal_init(argc, argv);  // DPDK 程序第一个调用
 
 ### 2.2 Hugepage
 
-kernel 默认 page size = 4KB，访问效率低。
+常见 kernel base page size 为 4KB；大工作集会需要更多页表项和 TLB entry。
 
 DPDK 使用 2MB hugepages：
 
@@ -62,8 +64,9 @@ mount -t hugetlbfs hugetlbfs /mnt/huge
 
 **优势**：
 - 减少 TLB miss（2MB vs 4KB）
-- 大块连续物理内存（mbuf pool 需要）
-- 用户态直接访问，无需 kernel 介入
+- 提供大粒度、预留的内存区域，便于 EAL 管理 DMA/IOVA 映射
+- 每个 hugepage 大粒度连续，但不要假设整个 mempool 必然是单一物理连续块
+- 应用可直接访问映射后的内存；页表、hugetlbfs 和设备映射仍由 kernel 管理
 
 ### 2.3 UIO / VFIO
 
@@ -209,8 +212,8 @@ NIC 硬件
 ```
 
 **特点**：
-- 轮询模式（零中断）
-- 零拷贝（mbuf 直接访问）
+- 数据面 queue 采用轮询模式，避免每包中断/唤醒
+- 应用直接访问 mbuf 关联的数据 buffer，减少典型 socket 路径复制
 - 可选协议处理（可完全绕过 TCP/IP）
 
 ### 3.3 数据流对比

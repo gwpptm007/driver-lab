@@ -8,7 +8,7 @@
 READY_TO_REVIEW
 ```
 
-说明：`project-dpdk-media-gateway-lite` 当前先收到了 `PASS_SMOKE`，真实 UDP / forwarding / rewrite 闭环后面再补。本项目先继续推进“经验复盘与作品化表达”，不阻塞主线。
+说明：本文最初写于 media gateway 只有 `PASS_SMOKE` 的阶段；2026-06-07 已补齐 `PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE`。外部 wire、真实 NIC 与性能证据仍需独立补验。
 
 ## 为什么要做这一站
 

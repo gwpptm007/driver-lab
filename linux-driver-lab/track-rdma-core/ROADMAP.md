@@ -14,11 +14,12 @@ flowchart LR
     F --> G[Phase 6: one-sided RDMA model]
     G --> H["Phase 7: UD/RoCEv2 model"]
     H --> I[Phase 8: summary and interview material]
+    I --> J["Phase 9: RC client/server project"]
 ```
 
 ## Phase 0: RDMA theory primer
 
-目标：先建立脑内模型，不写代码。
+目标：先建立从硬件、内核、verbs 对象到系统一致性的完整脑内模型，不写数据面业务代码。
 
 | 学习点 | 必须会解释 |
 | --- | --- |
@@ -29,14 +30,41 @@ flowchart LR
 | Completion Queue | CQE 的 `status/wr_id/opcode/byte_len` 怎么用于验证 |
 | Transport | RC/UD/RoCEv2 的基本区别 |
 | Soft-RoCE | 能学习什么，不能证明什么 |
+| WR 数据路径 | WR/WQE/doorbell/CQE 的分层和异步完成 |
+| One-sided consistency | completion、可见性、提交、持久化的边界 |
+| Performance | batch/inline/signaling/polling/NUMA 的成本模型 |
+| Reliability | RNR、retry、wrong-rkey、断连和 generation 恢复 |
 
 当前文档入口：
 
 ```text
+docs/fundamentals/README.md
+docs/fundamentals/00_15_MINUTE_MENTAL_MODEL.md
+docs/fundamentals/01_HARDWARE_KERNEL_USERSPACE_STACK.md
+docs/fundamentals/02_VERBS_OBJECTS_LIFECYCLE.md
+docs/fundamentals/03_MEMORY_REGISTRATION_DMA_KEYS.md
+docs/fundamentals/04_QP_STATE_MACHINE_CONTROL_PLANE.md
+docs/fundamentals/05_WR_WQE_CQE_DATA_PATH.md
+docs/fundamentals/06_TRANSPORTS_ROCE_NETWORK.md
+docs/fundamentals/07_ONE_SIDED_ATOMIC_CONSISTENCY.md
+docs/fundamentals/08_PERFORMANCE_TUNING_NUMA.md
+docs/fundamentals/09_RELIABILITY_SECURITY_FAILURES.md
+docs/fundamentals/10_PROJECT_KNOWLEDGE_MAP.md
+docs/fundamentals/11_DEBUGGING_PLAYBOOK.md
+docs/fundamentals/12_RECALL_CARDS.md
 docs/02_RDMA_CORE_MODEL.md
 docs/04_DPDK_TO_RDMA_BRIDGE.md
 lab-rdma-env-capability/docs/04_DEEP_LEARNING.md
 ```
+
+验收入口：
+
+```bash
+bash tests/check_fundamentals.sh
+bash tests/software_regression.sh
+```
+
+当前状态（2026-07-14）：`RDMA_FUNDAMENTALS_COMPLETE`。
 
 ## Phase 1: RDMA 环境能力边界
 
@@ -74,19 +102,19 @@ records/<timestamp>/OPERATION_LOG.md
 records/<timestamp>/SUMMARY.md
 ```
 
-当前第一轮结果：
+当前最终结果（2026-07-01）：
 
 ```text
-BLOCKED_RDMA_TOOLS_MISSING
-BLOCKED_NO_RDMA_DEVICE
+PASS_RDMA_TOOLS_PRESENT
+PASS_RDMA_DEVICE_PRESENT
 PASS_SOFT_ROCE_AVAILABLE
+rxe0/1 ACTIVE on ens34
 ```
 
-下一动作：
+复现入口：
 
 ```bash
 cd /home/wq7/workspace/driver-lab/linux-driver-lab/track-rdma-core/lab-rdma-env-capability
-bash scripts/04_install_ibverbs_utils.sh
 REUSE_LATEST_RECORD=0 bash scripts/00_collect_env.sh
 bash scripts/01_collect_rdma_capability.sh
 bash scripts/02_try_soft_roce_boundary.sh
@@ -296,6 +324,132 @@ DPDK packet fastpath -> RDMA object model -> MR/QP/CQ -> RC ping-pong -> one-sid
 ```
 
 当前状态（2026-07-01）：`PASS`。总报告、证据索引、面试笔记、简历材料和 DPDK/RDMA 对比均已完成，Phase 2-7 最终自动测试全部通过。
+
+## Phase 9: RC client/server engineering project
+
+计划目录：
+
+```text
+project-rdma-rc-client-server/
+```
+
+学习目标：
+
+- 把同进程里的两个 QP 拆成两个独立进程：`rdma-rc-server` 和 `rdma-rc-client`。
+- 使用 TCP 控制面交换 `gid/qpn/psn/address/rkey`。
+- 使用 RC 数据面验证 SEND/RECV、RDMA WRITE、RDMA READ。
+- 记录断连、超时、错误 rkey、CQE error、资源回收。
+- 单机 `192.168.65.135` 跑通后，再迁移到双机 RoCEv2。
+
+项目计划文档：
+
+```text
+docs/05_NEXT_PROJECT_RC_CLIENT_SERVER_PLAN.md
+```
+
+当前状态（2026-07-11）：`PASS_SINGLE_HOST`。已在 `192.168.65.135` 单机 Soft-RoCE 上跑通两个独立进程，覆盖 TCP 控制面、QP RTS、RC SEND/RECV、RDMA WRITE、RDMA READ 和 wrong-rkey boundary。
+
+第一版验收结果：
+
+```text
+TCP_CONTROL_PLANE_PASS
+RC_QP_RTS_PASS
+RC_SEND_RECV_PASS
+RDMA_WRITE_PASS
+RDMA_READ_PASS
+WRONG_RKEY_BOUNDARY_PASS
+RESOURCE_CLEANUP_PASS
+```
+
+证据入口：
+
+```text
+project-rdma-rc-client-server/tests/TEST_RECORD_20260711.md
+```
+
+## Phase 10: RDMA performance tuning
+
+计划目录：
+
+```text
+project-rdma-performance-tuning/
+```
+
+学习目标：
+
+- 从“功能跑通”进入“性能可测量”。
+- 建立 SEND completion latency 基线。
+- 明确 latency、bandwidth、CQ polling、batch、inline、selective signaling 的测量边界。
+- 保留 Soft-RoCE 与真实 RNIC 的结论边界，不把 RXE 数据包装成硬件性能。
+
+当前状态（2026-07-13）：`PASS_NUMACTL_NODE0_BINDING`。已在 `192.168.65.135` 上完成：
+
+- SEND completion latency baseline
+- batch WR
+- inline data
+- selective signaling
+- signal interval matrix
+- client-side CQ polling budget matrix
+- 可选 RTT phase
+- 双机脚本入口（`make dual-server` / `make dual-client`）
+- CPU affinity 记录入口
+- `numactl` node0 同节点绑定路径验证
+
+第一版验收结果：
+
+```text
+TCP_CONTROL_PLANE_PASS
+RC_QP_RTS_PASS
+PERF_SEND_LATENCY_SERVER_PASS
+PERF_SEND_LATENCY_CLIENT_PASS
+perf_result test=send_latency iterations=100 avg_ns=7450 min_ns=5009 p50_ns=5681 p95_ns=11801 p99_ns=46625 max_ns=57194
+```
+
+证据入口：
+
+```text
+project-rdma-performance-tuning/tests/TEST_RECORD_20260711.md
+project-rdma-performance-tuning/tests/TEST_RECORD_20260712.md
+project-rdma-performance-tuning/tests/TEST_RECORD_20260712_CPU_AFFINITY.md
+project-rdma-performance-tuning/tests/TEST_RECORD_20260713_NUMACTL_NODE0.md
+```
+
+下一步：
+
+- 真实 `134 -> 135` 双机执行（当前会话对 `134` 登录仍是 `Permission denied`）
+- 多 NUMA node 环境下补同节点 / 跨节点对比（135 当前只有 `node0`）
+
+## Phase 11: one-sided KV
+
+目录：
+
+```text
+project-rdma-one-sided-kv/
+```
+
+Phase 1-6 状态（2026-07-13）：`ONE_SIDED_KV_CURRENT_ENV_COMPLETE`。
+
+- server 将 8 个固定 KV record 注册为一个可远程 READ/WRITE 的 MR。
+- client 用 `remote.addr + slot * sizeof(record)` 对 slot 2 执行 RDMA WRITE 与 READ。
+- client CQE 证明两个 264 字节 one-sided WR 完成；server 在 TCP ACK 后检查被远端改写的 MR。
+- MR re-register 后新 rkey WRITE/READ 成功，旧 rkey 返回 `remote access error`。
+- server 授予 4 个应用层 credit，client 链式提交 4 个 WRITE 和 4 个 READ WR，两个链尾 CQE 成功。
+- client 使用 remote fetch-and-add 原子减 4 获取 credit，batch 后原子加 4 归还，server counter 恢复为 4。
+- CAS 验证 holder 成功、逻辑 contender 拒绝、归还后重试成功和最终 counter 恢复。
+- FNV-1a 动态 key directory 完成 PUT/GET，并拒绝同 bucket 的不同完整 key 覆盖。
+
+证据入口：
+
+```text
+project-rdma-one-sided-kv/tests/TEST_RECORD_20260713_PHASE1.md
+project-rdma-one-sided-kv/tests/TEST_RECORD_20260713_PHASE2_CREDIT_BATCH.md
+project-rdma-one-sided-kv/tests/TEST_RECORD_20260713_PHASE3_REMOTE_ATOMIC.md
+project-rdma-one-sided-kv/tests/TEST_RECORD_20260713_PHASE4_CAS_CONTENTION.md
+project-rdma-one-sided-kv/tests/TEST_RECORD_20260713_PHASE5_DYNAMIC_DIRECTORY.md
+project-rdma-one-sided-kv/tests/TEST_RECORD_20260713_PHASE6_RKEY_ROTATION.md
+```
+
+当前环境项目已收口。真实双 client、多 QP、断线重连、双机、RNIC 和多 NUMA 性能矩阵作为后续硬件/拓扑扩展，不计入当前完成状态。
 
 ## 收敛原则
 

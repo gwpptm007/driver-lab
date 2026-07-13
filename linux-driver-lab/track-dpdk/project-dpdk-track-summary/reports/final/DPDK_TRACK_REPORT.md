@@ -34,7 +34,7 @@ HugePage: 1024 x 2MB
 | 3 | `lab-virtio-user-vhost` | PASS_WITH_WARN | virtio-user frontend + vhost-user backend 本机对接 |
 | 4 | `lab-dpdk-l2-forwarding` | PASS_SMOKE | 从 testpmd 过渡到自写 DPDK C 程序 |
 | 5 | `project-user-space-fastpath` | PASS_SMOKE | fastpath-lite：协议分类、UDP-only、rewrite 框架、软件统计 |
-| 6 | `project-fastpath-traffic-test` | READY_TO_TEST | 为真实 UDP 流量、rewrite、统计对照准备测试框架 |
+| 6 | `project-fastpath-traffic-test` | PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE | pcap + null PMD 下协议、转发、rewrite 计数闭环 |
 | 7 | `project-dpdk-media-gateway-lite` | **PASS_TRAFFIC / PASS_FORWARDING / PASS_REWRITE** | 媒体网关原型：pcap PMD 真实 UDP 流量、转发、rewrite 全部验证通过 (2026-06-07) |
 | 8 | `project-dpdk-v17-legacy-review` | PASS_REVIEW | v17 经验复盘、现代 DPDK 对照、面试/简历材料 |
 

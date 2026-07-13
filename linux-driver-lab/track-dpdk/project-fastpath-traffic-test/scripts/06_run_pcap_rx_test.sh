@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #===============================================================================
-# 06_run_pcap_rx_test.sh - pcap PMD real UDP traffic test for fastpath-lite
+# 06_run_pcap_rx_test.sh - pcap PMD 确定性 UDP 功能回归
 #
 # Topology:
 #   net_pcap0 (rx from pcap, infinite replay) -> fastpath-lite -> net_null0 (tx discard)
@@ -9,10 +9,10 @@
 #   - port 0 RX from pcap, classify, forward to port 1
 #   - port 1 TX to null (accepts & discards)
 #
-# This test achieves:
-#   PASS_TRAFFIC:    rx>0, ipv4>0, udp>0
-#   PASS_FORWARDING: tx>0 (port 1 tx to null)
-#   PASS_REWRITE:    rewrite>0 (when --rewrite flag is set)
+# 历史 parser marker 保持兼容；按 track 证据口径应解释为：
+#   PASS_PCAP_FUNCTIONAL: rx>0, ipv4>0, udp>0
+#   PASS_PCAP_FORWARDING: tx>0 (port 1 tx to null)
+#   PASS_PCAP_REWRITE: rewrite>0 (when --rewrite flag is set)
 #===============================================================================
 set -euo pipefail
 

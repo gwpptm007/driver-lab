@@ -35,7 +35,7 @@ KNI 在旧 DPDK 项目里常用于把一部分报文从用户态 DPDK 路径送�
 ## 6. 当前不足怎么坦诚讲
 
 ```text
-当前 media-gateway-lite 已经完成项目型骨架、双端口 vdev smoke 和 UDP-only drop 路径验证；真实 UDP traffic、forwarding、rewrite 的完整 records 还在后续补测计划里。这个我会分 PASS_SMOKE、PASS_TRAFFIC、PASS_FORWARDING、PASS_REWRITE 几个等级管理，不会把 smoke 结果包装成完整转发通过。
+当前 media-gateway-lite 已完成项目骨架和 pcap + null PMD 下的 UDP、forwarding、rewrite records，对应 `PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE`。我不会把 vdev replay 包装成外部 wire、真实 NIC 或线速性能；这些证据按独立等级管理。
 ```
 
 ## 7. 面试亮点

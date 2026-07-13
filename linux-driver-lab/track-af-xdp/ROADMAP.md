@@ -1,5 +1,37 @@
 # track-af-xdp ROADMAP
 
+## Phase 0: AF_XDP fundamentals
+
+状态：`AF_XDP_FUNDAMENTALS_COMPLETE`（2026-07-14）。
+
+目标：在运行项目之前完整理解 XDP hook、eBPF/XSKMAP、UMEM、四环 ownership、COPY/ZC、TX completion、多队列、内存序、NUMA 和排障边界。
+
+入口：
+
+```text
+docs/fundamentals/README.md
+docs/fundamentals/00_15_MINUTE_MENTAL_MODEL.md
+docs/fundamentals/01_KERNEL_RX_AND_XDP_POSITION.md
+docs/fundamentals/02_EBPF_VERIFIER_MAPS_AND_LOADER.md
+docs/fundamentals/03_SOCKET_UMEM_AND_FRAME_LAYOUT.md
+docs/fundamentals/04_FOUR_RINGS_AND_OWNERSHIP.md
+docs/fundamentals/05_XSKMAP_REDIRECT_AND_QUEUE_BINDING.md
+docs/fundamentals/06_COPY_ZEROCOPY_AND_DRIVER_DMA.md
+docs/fundamentals/07_TX_REFLECT_AND_NEED_WAKEUP.md
+docs/fundamentals/08_MULTIQUEUE_RSS_AND_SHARED_UMEM.md
+docs/fundamentals/09_CONCURRENCY_AND_MEMORY_ORDER.md
+docs/fundamentals/10_PERFORMANCE_NUMA_AND_MEASUREMENT.md
+docs/fundamentals/11_DEBUGGING_PLAYBOOK.md
+docs/fundamentals/12_PROJECT_MAP_AND_RECALL_CARDS.md
+```
+
+验收：
+
+```bash
+bash tests/check_fundamentals.sh
+bash tests/software_regression.sh
+```
+
 ## Phase 1: lab-xdp-redirect-basics
 
 状态：**PASS_BASIC=YES, PASS_ACTION=YES, REDIRECT_MODEL_READY=YES**（2026-06-07 复测通过）。
@@ -74,4 +106,3 @@
 不把 summary 文档散放在 track-af-xdp 根目录；
 summary 作为独立 project，自己维护 docs/reports/scripts/records。
 ```
-

@@ -14,7 +14,9 @@ linux-driver-lab/
 ├── track-af-xdp/        AF_XDP 快速路径
 ├── track-dpdk/          DPDK 用户态网络
 ├── track-dpdk-advanced/ DPDK 进阶：多队列/RSS/NUMA/VFIO/调优
+├── track-rdma-core/     RDMA core：verbs/MR/QP/RC、性能调优与 one-sided KV
 ├── track-ebpf-observability/  eBPF 可观测性
+├── projects/        跨 track 综合项目与作品集
 └── track-block-io/      P2 保留支线：block layer / storage I/O
 ```
 
@@ -30,8 +32,11 @@ linux-driver-lab/
 | track-virtual-net | `track-virtual-net/README.md` | vhost/kick/notify 机制 |
 | track-dpdk | `track-dpdk/README.md` | DPDK 用户态网络 fastpath |
 | track-dpdk-advanced | `track-dpdk-advanced/README.md` | DPDK 进阶：mbuf/mempool、RSS、多队列、NUMA、VFIO/IOMMU |
+| track-rdma-core | `track-rdma-core/README.md` | Phase 1-11 当前环境收口，one-sided KV Phase 1-6 完成 |
 | track-af-xdp | `track-af-xdp/README.md` | Linux 原生 XDP + AF_XDP socket（四阶段全部 PASS） |
 | track-ebpf-observability | `track-ebpf-observability/README.md` | 网络路径观测与定位 |
+| network-acceleration-portfolio | `projects/project-network-acceleration-portfolio/README.md` | 已验证证据、面试材料与真实硬件复验路线 |
+| dpdk-rdma-gateway | `projects/project-dpdk-rdma-gateway/README.md` | DPDK ingress + RXE RDMA egress capstone，Phase 1-4 当前环境完成 |
 | track-block-io | `track-block-io/README.md` | P2 保留支线：bio / request / blk-mq / fio / observability |
 
 详细说明 → `docs/01_PROGRAMS.md`

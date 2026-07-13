@@ -2,7 +2,7 @@
 
 ## 范围
 
-本报告收敛 `track-dpdk-advanced` 的 6 个阶段：
+本报告收敛 `track-dpdk-advanced` 的 7 个阶段：
 
 | Phase | 目录 | 结果 |
 |---|---|---|
@@ -12,6 +12,9 @@
 | Phase 4 | `lab-dpdk-vfio-iommu-boundary` | `PASS_VFIO_IOMMU_BOUNDARY` |
 | Phase 5 | `project-dpdk-l3-forwarder-lite` | `PASS_L3_FORWARDER_LITE` |
 | Phase 6 | `project-dpdk-advanced-summary` | `PASS_ADVANCED_REPORT` |
+| Phase 7 | `project-dpdk-flow-pipeline` | `DPDK_FLOW_PIPELINE_CURRENT_ENV_COMPLETE` |
+
+Phase 7 在原报告后续新增，完成 `rte_hash` exact flow、DROP/FORWARD/MARK、规则生命周期、双 worker/SP-SC ring、调优矩阵和错误边界。真实 RSS/RETA、hardware `rte_flow` 与并发 RCU/QSBR 仍保持 capability boundary。
 
 ## 已证明的能力
 
@@ -122,4 +125,3 @@ project-dpdk-l3-forwarder-lite/records/20260629-213104-l3-forwarder/
 这个 track 可以被表述为：
 
 > 我不是只跑过 DPDK hello world 或 testpmd，而是把 mbuf/mempool、queue/RSS、burst/cache/NUMA、VFIO/IOMMU 边界和一个小型 L3 forwarding 数据面都做成了可复现实验。对当前 VMware 环境不能覆盖的 RSS/VFIO/真实 NIC 线速部分，我保留了明确 boundary evidence，没有把模拟环境夸大成生产硬件验证。
-

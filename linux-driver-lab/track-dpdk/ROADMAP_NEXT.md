@@ -1,6 +1,6 @@
 # ROADMAP_NEXT - track-dpdk 后续推进路线
 
-> 当前决策：`project-dpdk-media-gateway-lite` 的真实流量、forwarding、rewrite 暂时放入 backlog；当前先完成 `project-dpdk-track-summary/project-dpdk-track-summary/reports/final/DPDK_TRACK_REPORT.md`，把 DPDK track 收成一套作品化材料。
+> 当前决策：pcap PMD 功能流量、forwarding、rewrite 已完成；下一阶段只补外部流量、真实 NIC 和性能证据，不把 vdev replay 称为真实 NIC 验证。
 
 ## 当前状态
 
@@ -11,8 +11,8 @@
 | 3 | `lab-virtio-user-vhost` | `PASS_WITH_WARN` | virtio-user + vhost-user 本机对接已跑通，按记录保留 warning |
 | 4 | `lab-dpdk-l2-forwarding` | `PASS_SMOKE` | l2fwd-lite C app 能编译、启动、打印 stats；未证明真实转发 |
 | 5 | `project-user-space-fastpath` | `PASS_SMOKE` | fastpath-lite 能编译、启动、初始化端口、打印软件 stats |
-| 6 | `project-fastpath-traffic-test` | `PASS_TRAFFIC` `PASS_FORWARDING` `PASS_REWRITE` | pcap PMD 测试通过 (2026-06-07), rx/ipv4/udp/tx/rewrite 全部非零 |
-| 7 | `project-dpdk-media-gateway-lite` | `PASS_TRAFFIC` `PASS_FORWARDING` `PASS_REWRITE` | pcap PMD 测试通过 (2026-06-07), rx/ipv4/udp/tx/rewrite 全部非零 |
+| 6 | `project-fastpath-traffic-test` | `PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE` | pcap PMD 测试通过 (2026-06-07)，软件路径计数非零 |
+| 7 | `project-dpdk-media-gateway-lite` | `PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE` | pcap PMD 测试通过 (2026-06-07)，rule/rewrite 闭环 |
 | 8 | `project-dpdk-v17-legacy-review` | `PASS_REVIEW` | 旧 DPDK v17 经验与 modern DPDK 对照、面试/简历材料 |
 | 9 | `project-dpdk-track-summary/project-dpdk-track-summary/reports/final/DPDK_TRACK_REPORT.md` | `READY` | track 总结、作品线、简历素材、后续 backlog |
 
@@ -35,7 +35,7 @@ DPDK track 已经形成了完整学习与项目路径：
 PMD 接管 -> vhost-user -> virtio-user -> 自写 l2fwd -> fastpath -> traffic-test -> media-gateway-lite -> v17 迁移复盘
 ```
 
-即使 `media-gateway-lite` 的真实流量闭环还没补完，当前也已经具备：
+在明确 pcap/vdev 证据边界后，当前已经具备：
 
 ```text
 1. 可运行 DPDK 测试机环境

@@ -1,5 +1,20 @@
 # 02_ACCEPTANCE
 
+## 证据范围命名
+
+历史脚本输出的 `PASS_TRAFFIC/PASS_FORWARDING/PASS_REWRITE` 必须结合流量源解释。当前 pcap PMD + null PMD 结果统一映射为：
+
+| 当前名称 | 条件 | 能证明 | 不能证明 |
+|---|---|---|---|
+| `PASS_PCAP_FUNCTIONAL` | pcap 输入使协议计数非零 | parser 与 action 数据路径工作 | 外部 wire/NIC 收包 |
+| `PASS_PCAP_FORWARDING` | pcap RX 与 null TX 守恒 | mbuf ownership 和 TX 提交闭环 | 真实链路成功发送 |
+| `PASS_PCAP_REWRITE` | rewrite/rule counters 非零 | rewrite 分支被执行 | 线端报文字节已抓包确认 |
+| `PASS_EXTERNAL_TRAFFIC` | 独立发包源进入端口 | 外部拓扑与输入路径成立 | 双口转发与性能 |
+| `PASS_REAL_NIC_FORWARDING` | 真实 NIC 双口计数/抓包守恒 | 真实 DMA/PMD/链路功能 | 达到性能目标 |
+| `PASS_PERFORMANCE` | 固定方法下重复测量 | 指定环境吞吐/延迟 | 跨硬件泛化 |
+
+旧 marker 保留用于历史记录兼容，新文档和最终状态必须标注 evidence scope。
+
 ## 验收等级
 
 ### 最低通过 (PASS_SMOKE)
@@ -84,7 +99,7 @@
 
 ### project-dpdk-media-gateway-lite
 
-当前状态：`PASS_SMOKE`。真实 `PASS_TRAFFIC / PASS_FORWARDING / PASS_REWRITE` 后续补。
+当前状态：pcap + null PMD 已完成 `PASS_PCAP_FUNCTIONAL / PASS_PCAP_FORWARDING / PASS_PCAP_REWRITE`。外部 wire、真实 NIC 和性能按独立等级后续补验。
 
 通过标准：
 
@@ -103,4 +118,3 @@
 - 完成 v17 到 modern DPDK 对照；
 - 完成媒体面数据路径迁移说明；
 - 完成面试讲法和简历项目描述。
-

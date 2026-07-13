@@ -7,20 +7,20 @@
 #
 # 目的：
 #   探测网卡和驱动是否支持 AF_XDP zero-copy。
- *   zero-copy 依赖：
- *     - 网卡驱动支持 native XDP（XDP_FLAGS_DRV_MODE）
- *     - 驱动实现 AF_XDP zero-copy（不是所有驱动都有）
- *     - 队列、UMEM 参数满足要求
- *
- * VMware vmxnet3 很可能不支持，失败本身也是有效记录。
- * 失败时检查日志中的 xsk_socket__create 错误信息。
- *
- * 使用：
- *   sudo ./scripts/05_probe_zero_copy.sh
+#   zero-copy 依赖：
+#     - 网卡驱动支持 native XDP（XDP_FLAGS_DRV_MODE）
+#     - 驱动实现 AF_XDP zero-copy（不是所有驱动都有）
+#     - 队列、UMEM 参数满足要求
 #
- * 输出：
- *   - ZERO_COPY_PROBE.log
- *   - ZERO_COPY_PROBE.rc
+# VMware vmxnet3 很可能不支持，失败本身也是有效记录。
+# 失败时检查日志中的 xsk_socket__create 错误信息。
+#
+# 使用：
+#   sudo ./scripts/05_probe_zero_copy.sh
+#
+# 输出：
+#   - ZERO_COPY_PROBE.log
+#   - ZERO_COPY_PROBE.rc
 #============================================================
 
 set -euo pipefail

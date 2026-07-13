@@ -13,6 +13,7 @@
 ## 当前版本重点
 
 - 明确 `PASS_SMOKE` 与 `PASS_TRAFFIC` 区别
+- 当前 pcap 结果统一解释为 `PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE`，真实 NIC 另行验收
 - 提供外部发包说明
 - 提供 stats 对照和 review bundle
 - 为后续 `project-dpdk-media-gateway-lite` 做前置验收

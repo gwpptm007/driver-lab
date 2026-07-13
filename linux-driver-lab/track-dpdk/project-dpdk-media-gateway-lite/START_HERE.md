@@ -45,6 +45,6 @@ sudo ./scripts/03_run_single_port_smoke.sh
 
 单口环境下 `tx=0` 是正常的，重点是端口初始化、poll loop、stats 输出。
 
-## 后续
+## 当前证据边界
 
-如果 `project-fastpath-traffic-test` 已经能打出真实 UDP 流量，可以把同样的发包路径接到本项目上，推进到 `PASS_TRAFFIC / PASS_REWRITE / PASS_FORWARDING`。
+pcap PMD 功能流量已经完成 `PASS_PCAP_FUNCTIONAL / PASS_PCAP_REWRITE / PASS_PCAP_FORWARDING`。后续只补 `PASS_EXTERNAL_TRAFFIC / PASS_REAL_NIC_FORWARDING / PASS_PERFORMANCE`，不能把无限 pcap replay 计数表述为 NIC 线速。

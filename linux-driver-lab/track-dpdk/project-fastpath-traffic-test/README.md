@@ -9,9 +9,11 @@
 ## 当前状态
 
 - ✅ `PASS_SMOKE` - 已验证（2026-05-07, vmxnet3）
-- ✅ `PASS_TRAFFIC` - pcap PMD 测试已准备, `./scripts/06_run_pcap_rx_test.sh`
-- ⏳ `PASS_REWRITE` - `REWRITE_ENABLE=1 ./scripts/06_run_pcap_rx_test.sh`
-- ✅ `PASS_FORWARDING` - pcap+null 双 vdev 拓扑已满足
+- ✅ `PASS_PCAP_FUNCTIONAL` - pcap PMD 协议计数已验证
+- ✅ `PASS_PCAP_REWRITE` - `REWRITE_ENABLE=1` rewrite 计数已验证
+- ✅ `PASS_PCAP_FORWARDING` - pcap+null 双 vdev 所有权/计数闭环
+
+旧脚本仍输出 `PASS_TRAFFIC/PASS_FORWARDING/PASS_REWRITE`；这些 marker 在本项目中只表示 pcap/vdev scope，不表示外部 wire 或真实 NIC 性能。
 
 ## 测试拓扑
 

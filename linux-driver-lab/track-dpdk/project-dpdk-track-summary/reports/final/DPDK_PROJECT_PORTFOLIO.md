@@ -25,7 +25,7 @@ vmxnet3/testpmd
 | lab-virtio-user-vhost | PASS_WITH_WARN | virtio-user + vhost-user 对接 |
 | lab-dpdk-l2-forwarding | PASS_SMOKE | 自写 l2fwd-lite |
 | project-user-space-fastpath | PASS_SMOKE | fastpath-lite 框架 |
-| project-fastpath-traffic-test | READY_TO_TEST | traffic/rewrite 验证入口 |
+| project-fastpath-traffic-test | PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE | pcap + null PMD 功能/rewrite 验证 |
 | project-dpdk-media-gateway-lite | **PASS_TRAFFIC / FORWARDING / REWRITE** | pcap PMD 真实流量验证通过 (2026-06-07) |
 | project-dpdk-v17-legacy-review | PASS_REVIEW | 旧经验迁移和面试材料 |
 | DPDK_TRACK_REPORT | READY | 总结收口与作品化材料 |

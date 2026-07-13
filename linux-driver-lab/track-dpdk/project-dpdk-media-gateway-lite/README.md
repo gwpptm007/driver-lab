@@ -5,16 +5,19 @@
 ## 当前状态
 
 ```text
-READY_TO_TEST / PROJECT_SMOKE ✅ (2026-05-07 vdev_null_pair PASS_SMOKE)
+PASS_PCAP_FUNCTIONAL/FORWARDING/REWRITE ✅（2026-06-07 pcap + null PMD）
 ```
 
 | 级别 | 状态 | 说明 |
 |------|------|------|
 | `PASS_BUILD` | ✅ | 编译成功 |
 | `PASS_SMOKE` | ✅ | EAL/port/rule/poll/stats 跑通 |
-| `PASS_RULE_CONFIG` | ⏳ | 需真实流量验证 |
-| `PASS_TRAFFIC` | ⏳ | 需外部 UDP 发包 |
-| `PASS_REWRITE` | ⏳ | 需流量 + rewrite=1 |
+| `PASS_RULE_CONFIG` | ✅ | rule 配置和命中已验证 |
+| `PASS_PCAP_FUNCTIONAL` | ✅ | pcap UDP 输入和协议计数已验证 |
+| `PASS_PCAP_FORWARDING` | ✅ | pcap RX 到 null TX 已验证 |
+| `PASS_PCAP_REWRITE` | ✅ | rewrite/rule_rewrite 计数已验证 |
+
+上述结果是软件 vdev 功能证据，不是外部 wire、真实 NIC 或性能证据。
 
 本项目承接前面的：
 

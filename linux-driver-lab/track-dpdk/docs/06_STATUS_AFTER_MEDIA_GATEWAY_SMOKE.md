@@ -1,5 +1,7 @@
 # 06_STATUS_AFTER_MEDIA_GATEWAY_SMOKE
 
+> 历史阶段快照：后续 2026-06-07 pcap PMD 回归已经完成 parser/forward/rewrite 软件路径。当前状态以 `07_DPDK_TRACK_FINAL_STATUS.md` 为准。
+
 ## 当前决策
 
 `project-dpdk-media-gateway-lite` 当前不继续补真实流量，先进入：

@@ -2,7 +2,7 @@
 
 ## 目标
 
-验证 `fastpath-lite` 真实流量处理能力。
+验证 `fastpath-lite` 的确定性 pcap PMD 功能流量处理能力。
 
 ## 当前状态
 
@@ -10,7 +10,7 @@ TESTED (2026-06-07, pcap PMD path).
 
 ## 实测结果
 
-### Test 1: PASS_TRAFFIC + PASS_FORWARDING
+### Test 1: PASS_PCAP_FUNCTIONAL + PASS_PCAP_FORWARDING
 
 ```bash
 ./scripts/06_run_pcap_rx_test.sh
@@ -24,7 +24,7 @@ TESTED (2026-06-07, pcap PMD path).
 | port 1 tx | 111,709,760 |
 | rte_eth_stats port0 opackets | 111,709,760 |
 
-**verdict: PASS_SMOKE PASS_TRAFFIC PASS_FORWARDING**
+**verdict: PASS_SMOKE PASS_PCAP_FUNCTIONAL PASS_PCAP_FORWARDING**
 
 ### Test 2: + PASS_REWRITE
 
@@ -41,7 +41,9 @@ REWRITE_ENABLE=1 ./scripts/06_run_pcap_rx_test.sh
 | port 1 tx | 77,210,432 |
 | rte_eth_stats port0 opackets | 77,210,432 |
 
-**verdict: PASS_SMOKE PASS_TRAFFIC PASS_FORWARDING PASS_REWRITE**
+**verdict: PASS_SMOKE PASS_PCAP_FUNCTIONAL PASS_PCAP_FORWARDING PASS_PCAP_REWRITE**
+
+> 历史解析器 marker 为 `PASS_TRAFFIC/PASS_FORWARDING/PASS_REWRITE`。本报告按 pcap/vdev scope 重命名；数字来自 infinite replay，不能解释为外部流量或真实 NIC 性能。
 
 ## 测试拓扑
 

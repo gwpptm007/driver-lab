@@ -5,7 +5,7 @@
 把 `project-user-space-fastpath` 从 `PASS_SMOKE` 推进到：
 
 ```text
-PASS_TRAFFIC / PASS_REWRITE / PASS_FORWARDING
+PASS_PCAP_FUNCTIONAL / PASS_PCAP_REWRITE / PASS_PCAP_FORWARDING
 ```
 
 ## 当前状态
@@ -13,9 +13,9 @@ PASS_TRAFFIC / PASS_REWRITE / PASS_FORWARDING
 | 等级 | 状态 | 说明 |
 |------|------|------|
 | `PASS_SMOKE` | ✅ 已验证 | fastpath-lite 启动、stats 打印正常 |
-| `PASS_TRAFFIC` | ⏳ 待验证 | 需要外部 UDP 流量 |
-| `PASS_REWRITE` | ⏳ 待验证 | 需要流量 + rewrite=1 |
-| `PASS_FORWARDING` | ⏳ 待验证 | 需要双端口/vhost 拓扑 |
+| `PASS_PCAP_FUNCTIONAL` | ✅ 已验证 | pcap PMD 输入，IPv4/UDP 计数非零 |
+| `PASS_PCAP_REWRITE` | ✅ 已验证 | pcap 输入 + rewrite=1，rewrite 计数非零 |
+| `PASS_PCAP_FORWARDING` | ✅ 已验证 | net_pcap RX 到 net_null TX 计数闭环 |
 
 ## 推荐测试路径（pcap PMD — 无需物理网卡）
 

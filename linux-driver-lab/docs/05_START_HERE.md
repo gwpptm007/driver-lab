@@ -44,8 +44,10 @@ chmod +x build.sh
 
 ### 第三阶段专题研究
 
-- `track-real-driver/lab-virtio-net-source-dive/` — 当前最推荐的下一个 Lab
-- `track-virtual-net/README.md` — 虚拟化网络已完成
+- `track-dpdk-advanced/README.md` — DPDK 进阶已收敛
+- `track-rdma-core/README.md` — RDMA core Phase 1~8 已完成
+- `projects/project-network-acceleration-portfolio/README.md` — 当前作品集入口与真实硬件复验路线
+- `projects/project-dpdk-rdma-gateway/README.md` — DPDK + RDMA 综合 capstone，Phase 1-4 当前环境完成
 
 ---
 
@@ -60,18 +62,26 @@ chmod +x build.sh
 1. `docs/01_PROGRAMS.md`
 2. `docs/02_EXPERT_REVIEW.md`
 3. `docs/03_PROGRESS.md`
-4. `foundation/day21/FINAL_SUBMISSION.md`
-5. `foundation/day28/README.md`
-6. `foundation/day35/README.md`
-7. `netdev/README.md`
+4. `track-rdma-core/README.md`
+5. `track-rdma-core/project-rdma-core-summary/EVIDENCE_INDEX.md`
+6. `track-rdma-core/project-rdma-performance-tuning/tests/TEST_RECORD_20260713_NUMACTL_NODE0.md`
+7. `projects/project-network-acceleration-portfolio/README.md`
+8. `projects/project-network-acceleration-portfolio/tests/EVIDENCE_INDEX.md`
+9. `track-dpdk-advanced/project-dpdk-advanced-summary/reports/DPDK_ADVANCED_FINAL_REPORT.md`
+10. `projects/project-dpdk-rdma-gateway/tests/TEST_RECORD_20260713_PHASE1_CONTRACT.md`
+11. `projects/project-dpdk-rdma-gateway/tests/TEST_RECORD_20260713_PHASE2_INGRESS.md`
+12. `projects/project-dpdk-rdma-gateway/tests/TEST_RECORD_20260713_PHASE3_RDMA.md`
+13. `projects/project-dpdk-rdma-gateway/tests/TEST_RECORD_20260713_PHASE4_E2E.md`
 
 ### 情况 C：你想开始做代码评审
 
-1. `docs/03_PROGRESS.md` 中的"当前开放项"
-2. W4/W5 的 records、脚本、输出物
+1. `projects/project-network-acceleration-portfolio/docs/01_PORTFOLIO_MAP.md`
+2. `projects/project-network-acceleration-portfolio/tests/EVIDENCE_INDEX.md`
+3. `track-rdma-core/project-rdma-core-summary/EVIDENCE_INDEX.md`
+4. `track-dpdk-advanced/project-dpdk-advanced-summary/reports/EVIDENCE_INDEX.md`
 
 ---
 
 ## 项目一句话定位
 
-> 这不是"学几个驱动 API"的目录，而是一套从最小驱动骨架、平台/PCIe/DMA、netdev 主线，一直推进到真实驱动源码专题研究的实验型驱动学习项目。
+> 这不是"学几个驱动 API"的目录，而是一套从最小驱动骨架、平台/PCIe/DMA、netdev 主线，一直推进到 DPDK、AF_XDP、eBPF、RDMA 和后续 SmartNIC/DPU 的实验型驱动学习项目。
