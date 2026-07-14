@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-scene-marker="EBPF_VISUAL_SCENE_READY">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>eBPF 内核对象与生命周期</title>
+  <link rel="stylesheet" href="visual-core.css">
+</head>
+<body>
+  <main class="visual-shell">
+    <header class="visual-header">
+      <div class="chapter-number" style="background:#3973a6">01</div>
+      <div>
+        <h1>prog、map、link、FD 与 Pinning</h1>
+        <p class="subtitle">关闭一个 FD 后，对象为什么可能仍然存在</p>
+      </div>
+      <div class="context-badge" data-context-badge>对象创建上下文</div>
+    </header>
+
+    <section class="visual-main">
+      <div class="canvas-panel">
+        <div class="canvas-wrap">
+          <canvas data-visual-canvas aria-label="eBPF 对象引用与销毁动画"></canvas>
+          <div class="canvas-legend">
+            <span class="legend-item">FD：进程引用</span>
+            <span class="legend-item">link：附着引用</span>
+            <span class="legend-item">bpffs：pin 引用</span>
+            <span class="legend-item">引用归零：释放</span>
+          </div>
+        </div>
+        <div class="controls" aria-label="动画控制">
+          <button type="button" data-action="play" title="播放">▶</button>
+          <button type="button" data-action="pause" title="暂停">Ⅱ</button>
+          <button type="button" data-action="step" title="单步">›</button>
+          <button type="button" data-action="reset" title="复位">↺</button>
+          <div class="progress" aria-hidden="true"><i data-progress></i></div>
+          <span class="step-counter" data-step-counter>1 / 6</span>
+        </div>
+      </div>
+
+      <aside class="knowledge-panel">
+        <div class="knowledge-head"><small>当前引用变化</small><h2 data-step-title>创建对象 FD</h2></div>
+        <div class="knowledge-body">
+          <div class="knowledge-item"><b>执行上下文</b><span data-step-context></span></div>
+          <div class="knowledge-item"><b>内核意义</b><span data-step-meaning></span></div>
+          <div class="knowledge-item source"><b>源码锚点</b><code data-step-source></code></div>
+          <div class="knowledge-item warning"><b>常见误判</b><span data-step-risk></span></div>
+          <div class="knowledge-item source"><b>验证命令</b><code data-step-command></code></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    window.EBPF_VISUAL_SCENE = {
+      canvasTitle: "FD / refcount / bpf_link / bpffs pin 生命周期",
+      stepDuration: 1650,
+      nodes: [
+        { label: "Create FD", sub: "prog + map", kind: "userspace" },
+        { label: "Objects", sub: "bpf_prog/map", kind: "kernel" },
+        { label: "Attach", sub: "bpf_link", kind: "hook" },
+        { label: "Pin", sub: "bpffs", kind: "data" },
+        { label: "Close FD", sub: "put reference", kind: "userspace" },
+        { label: "Free", sub: "refcount = 0", kind: "kernel" }
+      ],
+      steps: [
+        {
+          phase: "创建：内核对象通过匿名 inode FD 返回进程",
+          title: "创建 prog/map FD",
+          context: "用户进程系统调用上下文",
+          meaning: "成功创建的 bpf_prog 与 bpf_map 分别获得对象引用，FD 是进程持有该引用的句柄。",
+          source: "kernel/bpf/syscall.c: bpf_prog_new_fd / bpf_map_new_fd",
+          risk: "把 FD 当对象本体；FD 只是当前进程的一个引用入口。",
+          command: "bpftool prog show; bpftool map show"
+        },
+        {
+          phase: "对象：prog 可引用 map/BTF，引用关系形成有向图",
+          title: "建立 bpf_prog / bpf_map 引用",
+          context: "Verifier 与对象发布阶段",
+          meaning: "verifier 解析 map relocation 后，prog aux 保存关联对象；对象释放必须遵守引用关系。",
+          source: "include/linux/bpf.h: bpf_map; include/linux/filter.h: bpf_prog_aux",
+          risk: "只计算用户 FD，忽略 program、BTF 或 link 持有的内核引用。",
+          command: "bpftool prog show id <id>; bpftool map show id <id>"
+        },
+        {
+          phase: "附着：link 独立表达 program 与 hook 的关联",
+          title: "bpf_link 持有附着关系",
+          context: "Attach 系统调用与 Hook 管理路径",
+          meaning: "bpf_link 通常持有 prog 引用；关闭 prog FD 不必然解除仍存活的 link。",
+          source: "include/linux/bpf.h: struct bpf_link / bpf_link_ops",
+          risk: "关闭 loader 就假定所有 hook 已自动解除。",
+          command: "bpftool link show; ls -l /proc/<pid>/fd"
+        },
+        {
+          phase: "持久化：bpffs pin 给对象增加文件系统可达引用",
+          title: "Pin 到 bpffs",
+          context: "用户进程调用 BPF_OBJ_PIN",
+          meaning: "pin 把对象暴露为 bpffs 路径，使对象可以越过创建进程生命周期并被其他进程重新打开。",
+          source: "kernel/bpf/inode.c: bpf_obj_pin_user / bpffs",
+          risk: "把 pin 理解成复制对象；它增加的是可达引用。",
+          command: "bpftool prog pin id <id> /sys/fs/bpf/demo; find /sys/fs/bpf -maxdepth 2"
+        },
+        {
+          phase: "关闭：FD 引用减少，但 link 或 pin 仍可保持对象存活",
+          title: "Close FD 不等于 Free",
+          context: "进程 close/exit 路径",
+          meaning: "FD release 执行 put；只要 link、pin 或其他对象仍持有引用，prog/map 不会释放。",
+          source: "kernel/bpf/syscall.c: bpf_prog_release / bpf_map_release",
+          risk: "排障时只看进程是否退出，不检查 bpffs 与 link。",
+          command: "bpftool link show; bpftool prog show; find /sys/fs/bpf"
+        },
+        {
+          phase: "销毁：解除 attach、unpin、关闭最后 FD 后引用归零",
+          title: "最后引用归零并延迟释放",
+          context: "对象 put、RCU/workqueue 延迟回收路径",
+          meaning: "引用归零后，内核按对象类型执行安全释放；部分资源需要等待 RCU grace period 或异步 work。",
+          source: "kernel/bpf/syscall.c; kernel/bpf/inode.c; refcount_t / RCU",
+          risk: "把用户态 unpin 返回当成所有 CPU 已立即完成物理内存释放。",
+          command: "rm /sys/fs/bpf/demo; bpftool prog show; bpftool link show"
+        }
+      ]
+    };
+  </script>
+  <script src="visual-core.js"></script>
+</body>
+</html>

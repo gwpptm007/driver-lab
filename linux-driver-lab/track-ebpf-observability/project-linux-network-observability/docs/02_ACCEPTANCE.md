@@ -85,7 +85,7 @@ ssh wq7@192.168.65.135 "cd .../project-linux-network-observability && make"
 
 # 运行+报告
 ssh wq7@192.168.65.135 "
-    echo 'wq123456!' | sudo -S bash -c '
+    sudo bash -c '
         cd .../project-linux-network-observability &&
         ping -c 30 -i 0.2 8.8.8.8 -I ens33 > /dev/null 2>&1 &
         EBPF_DURATION=15 bash scripts/03_generate_report.sh

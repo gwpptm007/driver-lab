@@ -88,7 +88,7 @@ $ readelf -S build/skb_observer.bpf.o | grep -E 'BTF|rodata'
 ```bash
 ssh wq7@192.168.65.135
 cd /home/wq7/workspace/driver-lab/linux-driver-lab/track-ebpf-observability/lab-libbpf-net-observer
-echo 'wq123456!' | sudo -S build/skb_observer -v -d 15
+sudo build/skb_observer -v -d 15
 ```
 
 **关键输出**:
@@ -314,12 +314,12 @@ ssh wq7@192.168.65.135 "readelf -S .../build/skb_observer.bpf.o | grep BTF"
 ssh wq7@192.168.65.135 "
     cd .../lab-libbpf-net-observer &&
     ping -c 30 -i 0.2 8.8.8.8 -I ens33 > /dev/null 2>&1 &
-    echo 'wq123456!' | sudo -S build/skb_observer -v -d 15
+    sudo build/skb_observer -v -d 15
 "
 
 # 5. 官方脚本运行
 ssh wq7@192.168.65.135 "
-    echo 'wq123456!' | sudo -S bash -c '
+    sudo bash -c '
         cd .../lab-libbpf-net-observer &&
         ping -c 30 -i 0.2 8.8.8.8 -I ens33 > /dev/null 2>&1 &
         EBPF_DURATION=15 bash scripts/02_run_observer.sh

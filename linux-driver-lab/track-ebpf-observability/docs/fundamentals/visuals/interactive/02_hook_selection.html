@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-scene-marker="EBPF_VISUAL_SCENE_READY">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>eBPF Program Type 与 Hook 选择</title>
+  <link rel="stylesheet" href="visual-core.css">
+</head>
+<body>
+  <main class="visual-shell">
+    <header class="visual-header">
+      <div class="chapter-number" style="background:#a16620">02</div>
+      <div>
+        <h1>从观测问题反推 Program Type 与 Hook</h1>
+        <p class="subtitle">同一个包经过多个 Hook，但上下文、稳定性和开销完全不同</p>
+      </div>
+      <div class="context-badge" data-context-badge>驱动 RX / NAPI 上下文</div>
+    </header>
+
+    <div class="goal-picker" aria-label="观测目标">
+      <button type="button" class="active" data-goal="early-drop">最早丢包</button>
+      <button type="button" data-goal="stable-events">稳定事件</button>
+      <button type="button" data-goal="function-detail">函数细节</button>
+      <button type="button" data-goal="process-context">进程关联</button>
+    </div>
+
+    <section class="visual-main">
+      <div class="canvas-panel">
+        <div class="canvas-wrap">
+          <canvas data-visual-canvas aria-label="数据包经过 XDP、TC、Socket 与应用的动画"></canvas>
+          <div class="canvas-legend">
+            <span class="legend-item">XDP：驱动 RX 最前沿</span>
+            <span class="legend-item">TC：skb/qdisc 语义</span>
+            <span class="legend-item">tracepoint/fentry/kprobe：内核函数事件</span>
+          </div>
+        </div>
+        <div class="controls" aria-label="动画控制">
+          <button type="button" data-action="play" title="播放">▶</button>
+          <button type="button" data-action="pause" title="暂停">Ⅱ</button>
+          <button type="button" data-action="step" title="单步">›</button>
+          <button type="button" data-action="reset" title="复位">↺</button>
+          <div class="progress" aria-hidden="true"><i data-progress></i></div>
+          <span class="step-counter" data-step-counter>1 / 5</span>
+        </div>
+      </div>
+
+      <aside class="knowledge-panel">
+        <div class="knowledge-head"><small>当前 Hook</small><h2 data-step-title>NIC 与驱动入口</h2></div>
+        <div class="knowledge-body">
+          <div class="knowledge-item"><b>执行上下文</b><span data-step-context></span></div>
+          <div class="knowledge-item"><b>可见数据与用途</b><span data-step-meaning></span></div>
+          <div class="knowledge-item source"><b>源码锚点</b><code data-step-source></code></div>
+          <div class="knowledge-item warning"><b>选择风险</b><span data-step-risk></span></div>
+          <div class="knowledge-item source"><b>Capability/验证</b><code data-step-command></code></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    window.EBPF_VISUAL_SCENE = {
+      canvasTitle: "NIC -> XDP -> TC -> Socket -> App",
+      stepDuration: 1500,
+      defaultGoal: "early-drop",
+      nodes: [
+        { label: "NIC/Driver", sub: "RX completion", kind: "kernel" },
+        { label: "XDP", sub: "xdp_buff", kind: "hook" },
+        { label: "TC", sub: "sk_buff", kind: "hook" },
+        { label: "Socket", sub: "protocol ctx", kind: "kernel" },
+        { label: "App", sub: "process", kind: "userspace" }
+      ],
+      steps: [
+        {
+          phase: "设备完成 DMA，驱动/NAPI 开始处理 RX buffer",
+          title: "NIC 与驱动 RX 入口",
+          context: "硬中断唤醒后通常在 NAPI/softirq 中处理",
+          meaning: "此处最接近设备 completion、RX ring 和 buffer ownership，但还没有完整 skb/协议语义。",
+          source: "drivers/net/*; include/linux/netdevice.h: napi_struct",
+          risk: "不同驱动路径差异大，不能把某个函数名当稳定 ABI。",
+          command: "ethtool -i <if>; grep <if> /proc/interrupts"
+        },
+        {
+          phase: "XDP 在驱动构造完整 skb 前处理 xdp_buff",
+          title: "XDP Program Type",
+          context: "驱动 RX/NAPI 上下文，不可睡眠，高包率",
+          meaning: "能最早 DROP/PASS/TX/REDIRECT，适合驱动前沿统计和快速处理；可见的是 packet data/meta 边界。",
+          source: "net/core/filter.c; include/uapi/linux/bpf.h: BPF_PROG_TYPE_XDP",
+          risk: "依赖驱动 native/generic 支持；每包复杂逻辑会直接进入热路径。",
+          command: "ip -details link show dev <if>; bpftool feature probe dev <if>"
+        },
+        {
+          phase: "TC ingress/egress 面向 sk_buff 和 qdisc 语义",
+          title: "TC Classifier/Action",
+          context: "网络 softirq/qdisc 路径，不可任意睡眠",
+          meaning: "可以读取 skb metadata、mark、协议字段并执行 redirect/drop，适合 ingress/egress 策略与观测。",
+          source: "net/sched/cls_bpf.c; BPF_PROG_TYPE_SCHED_CLS",
+          risk: "方向、优先级、chain 和 offload 会改变实际执行位置。",
+          command: "tc filter show dev <if> ingress; bpftool net"
+        },
+        {
+          phase: "协议栈与函数 Hook 提供更细语义",
+          title: "tracepoint / fentry / kprobe",
+          context: "继承被观测事件上下文；fentry/kprobe 可能位于任意内核路径",
+          meaning: "tracepoint 提供相对稳定事件字段；fentry 基于 BTF 低开销进入函数；kprobe 覆盖广但更依赖符号和版本。",
+          source: "kernel/trace/bpf_trace.c; tracepoint; fentry; kprobe",
+          risk: "函数能 attach 不代表语义稳定；entry 看不到返回值，return 需处理配对与并发。",
+          command: "bpftrace -l 'tracepoint:net:*'; bpftool btf dump file /sys/kernel/btf/vmlinux"
+        },
+        {
+          phase: "Socket/进程层可关联 PID、cgroup 与应用语义",
+          title: "Socket 与进程上下文",
+          context: "由 socket/cgroup/LSM/系统调用 hook 决定",
+          meaning: "更容易关联进程和 cgroup，但已错过驱动前沿丢包；适合连接、策略和应用边界问题。",
+          source: "BPF_PROG_TYPE_CGROUP_SKB; BPF_PROG_TYPE_SOCK_OPS; cgroup",
+          risk: "namespace/cgroup 层级和 hook 方向会造成可见性误判。",
+          command: "bpftool cgroup tree; bpftool prog show; ss -tpn"
+        }
+      ],
+      onGoalChange: function (goal, state) {
+        const target = {
+          "early-drop": 1,
+          "stable-events": 3,
+          "function-detail": 3,
+          "process-context": 4
+        };
+        state.index = target[goal] || 0;
+        state.elapsed = 0;
+      }
+    };
+  </script>
+  <script src="visual-core.js"></script>
+</body>
+</html>

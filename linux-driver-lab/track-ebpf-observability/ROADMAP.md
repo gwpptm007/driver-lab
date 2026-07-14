@@ -1,8 +1,44 @@
 # ROADMAP
 
+## Phase 0：eBPF observability fundamentals
+
+状态：`EBPF_OBSERVABILITY_FUNDAMENTALS_COMPLETE`（2026-07-14）。
+
+目标：在运行 probe 前理解 program/map/link/BTF 对象、hook 稳定性、verifier、map 并发、事件 backpressure、CO-RE、网络路径关联和生产开销边界。
+
+入口：
+
+```text
+docs/fundamentals/README.md
+docs/fundamentals/00_15_MINUTE_MENTAL_MODEL.md
+docs/fundamentals/01_EBPF_KERNEL_ARCHITECTURE.md
+docs/fundamentals/02_PROGRAM_TYPES_AND_HOOK_SELECTION.md
+docs/fundamentals/03_VERIFIER_MEMORY_AND_SAFETY.md
+docs/fundamentals/04_MAPS_STATE_AND_CONCURRENCY.md
+docs/fundamentals/05_BPFTRACE_EXPLORATION_WORKFLOW.md
+docs/fundamentals/06_KPROBE_FENTRY_AND_FUNCTION_TRACING.md
+docs/fundamentals/07_TRACEPOINTS_AND_STABLE_EVENTS.md
+docs/fundamentals/08_BTF_CORE_LIBBPF_AND_SKELETON.md
+docs/fundamentals/09_RINGBUF_PERFBUF_AND_EVENT_TRANSPORT.md
+docs/fundamentals/10_NETWORK_PATH_CORRELATION.md
+docs/fundamentals/11_OVERHEAD_SAMPLING_AND_PRODUCTION.md
+docs/fundamentals/12_DEBUGGING_PROJECT_MAP_AND_RECALL.md
+docs/fundamentals/13_STACKS_SYMBOLIZATION_AND_FLAMEGRAPHS.md
+docs/fundamentals/14_SECURITY_CAPABILITIES_AND_CONTAINERS.md
+```
+
+验收：
+
+```bash
+bash tests/check_fundamentals.sh
+bash tests/software_regression.sh
+```
+
 ## 总体顺序
 
 ```text
+docs/fundamentals
+    ↓
 lab-bpftrace-netdev-observe
     ↓
 lab-kprobe-trace-napi-poll

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-scene-marker="EBPF_VISUAL_SCENE_READY">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>eBPF 一次事件的完整旅程</title>
+  <link rel="stylesheet" href="visual-core.css">
+</head>
+<body>
+  <main class="visual-shell">
+    <header class="visual-header">
+      <div class="chapter-number">00</div>
+      <div>
+        <h1>一次 eBPF 事件的完整旅程</h1>
+        <p class="subtitle">从 ELF 到内核执行，再把观测结果带回用户态</p>
+      </div>
+      <div class="context-badge" data-context-badge>用户进程上下文</div>
+    </header>
+
+    <section class="visual-main">
+      <div class="canvas-panel">
+        <div class="canvas-wrap">
+          <canvas data-visual-canvas aria-label="eBPF 加载、附着与事件导出动画"></canvas>
+          <div class="canvas-legend">
+            <span class="legend-item">绿色：用户态准备</span>
+            <span class="legend-item">蓝色：内核对象</span>
+            <span class="legend-item">橙色：运行 Hook</span>
+            <span class="legend-item">紫色：数据导出</span>
+          </div>
+        </div>
+        <div class="controls" aria-label="动画控制">
+          <button type="button" data-action="play" title="播放">▶</button>
+          <button type="button" data-action="pause" title="暂停">Ⅱ</button>
+          <button type="button" data-action="step" title="单步">›</button>
+          <button type="button" data-action="reset" title="复位">↺</button>
+          <div class="progress" aria-hidden="true"><i data-progress></i></div>
+          <span class="step-counter" data-step-counter>1 / 7</span>
+        </div>
+      </div>
+
+      <aside class="knowledge-panel">
+        <div class="knowledge-head"><small>当前步骤</small><h2 data-step-title>解析 ELF/BTF</h2></div>
+        <div class="knowledge-body">
+          <div class="knowledge-item"><b>执行上下文</b><span data-step-context></span></div>
+          <div class="knowledge-item"><b>内核意义</b><span data-step-meaning></span></div>
+          <div class="knowledge-item source"><b>源码锚点</b><code data-step-source></code></div>
+          <div class="knowledge-item warning"><b>常见误判</b><span data-step-risk></span></div>
+          <div class="knowledge-item source"><b>验证命令</b><code data-step-command></code></div>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    window.EBPF_VISUAL_SCENE = {
+      canvasTitle: "Load -> Verify -> Attach -> Trigger -> Export",
+      stepDuration: 1450,
+      nodes: [
+        { label: "ELF/BTF", sub: "libbpf", kind: "userspace" },
+        { label: "bpf()", sub: "sys_bpf", kind: "kernel" },
+        { label: "Verifier", sub: "bpf_check", kind: "kernel" },
+        { label: "Program", sub: "bpf_prog", kind: "kernel" },
+        { label: "Attach", sub: "bpf_link", kind: "kernel" },
+        { label: "Hook", sub: "event context", kind: "hook" },
+        { label: "Map/Event", sub: "ringbuf", kind: "data" }
+      ],
+      steps: [
+        {
+          phase: "准备阶段：用户态描述程序、map 与 BTF 关系",
+          title: "解析 ELF 与 BTF",
+          context: "用户进程上下文，可睡眠",
+          meaning: "libbpf 读取 section、relocation、map 定义和 BTF，不会因为 ELF 能解析就自动获得内核对象。",
+          source: "tools/lib/bpf/libbpf.c: bpf_object__open*",
+          risk: "把 open 成功误认为程序已经 load 或 attach。",
+          command: "bpftool btf dump file app.bpf.o format raw"
+        },
+        {
+          phase: "加载阶段：bpf() 系统调用进入内核",
+          title: "进入 sys_bpf",
+          context: "用户进程的系统调用上下文",
+          meaning: "sys_bpf 根据 command 分派到 prog/map/link 创建路径，检查属性长度、权限和对象类型。",
+          source: "kernel/bpf/syscall.c: sys_bpf / __sys_bpf",
+          risk: "只看 errno，不保留 verifier log 和 command 参数。",
+          command: "strace -e bpf ./loader"
+        },
+        {
+          phase: "验证阶段：证明所有可达路径满足安全约束",
+          title: "Verifier 执行 bpf_check",
+          context: "加载进程上下文，不是事件触发上下文",
+          meaning: "verifier 跟踪寄存器类型、标量范围、指针边界和控制流；它做抽象解释，不是发送几个测试包。",
+          source: "kernel/bpf/verifier.c: bpf_check",
+          risk: "把 verifier 通过等同于运行逻辑正确或开销可接受。",
+          command: "bpftool prog load app.bpf.o /sys/fs/bpf/app -d"
+        },
+        {
+          phase: "对象阶段：创建 bpf_prog，按配置解释或 JIT",
+          title: "形成 bpf_prog 对象",
+          context: "内核对象创建路径",
+          meaning: "验证后的指令、aux 信息和引用形成 bpf_prog；JIT 把指令翻译为目标架构机器码。",
+          source: "include/linux/filter.h: struct bpf_prog; kernel/bpf/core.c",
+          risk: "看到 jited=yes 就忽略 helper、map 和 cache miss 成本。",
+          command: "bpftool prog show; sysctl net.core.bpf_jit_enable"
+        },
+        {
+          phase: "附着阶段：link 把 program 生命周期连接到 hook",
+          title: "创建 bpf_link 并 Attach",
+          context: "用户进程发起，内核建立持久关联",
+          meaning: "加载成功的 prog 只有 attach 后才会被目标事件调用；link FD/pin 影响关联能活多久。",
+          source: "include/linux/bpf.h: struct bpf_link; kernel/bpf/syscall.c",
+          risk: "prog 已存在但 link 未建立，流量再多也不会触发。",
+          command: "bpftool link show; bpftool prog show pinned /sys/fs/bpf/app"
+        },
+        {
+          phase: "运行阶段：事件在 Hook 的原始上下文触发程序",
+          title: "Hook 触发 eBPF",
+          context: "由 Hook 决定：NAPI/softirq、tracepoint、进程上下文等",
+          meaning: "program type 与 attach type 决定 ctx 形状、可用 helper、是否允许睡眠以及每事件开销。",
+          source: "kernel/trace/bpf_trace.c; net/core/filter.c",
+          risk: "忽略 Hook 上下文，在不可睡眠路径做阻塞式思考。",
+          command: "bpftrace -l 'tracepoint:net:*'; bpftool feature probe kernel"
+        },
+        {
+          phase: "导出阶段：内核聚合，用户态读取",
+          title: "Map 与 Ringbuf 导出结果",
+          context: "BPF 侧写入 + 用户进程读取",
+          meaning: "map 保存状态，ringbuf 传递有序事件；高频路径应先过滤和聚合，避免逐事件打印。",
+          source: "kernel/bpf/ringbuf.c: bpf_ringbuf_*; include/linux/bpf.h: bpf_map",
+          risk: "没有处理 ringbuf 满、用户态消费慢和丢事件指标。",
+          command: "bpftool map show; bpftool map dump pinned /sys/fs/bpf/app_map"
+        }
+      ]
+    };
+  </script>
+  <script src="visual-core.js"></script>
+</body>
+</html>

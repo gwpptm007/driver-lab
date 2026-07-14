@@ -42,7 +42,12 @@ main() {
     cd "${PROJ_DIR}"
     set +e
     if [[ "${EUID}" != "0" ]]; then
-        echo "wq123456!" | sudo -S "${bin}" -v -d "${EBPF_DURATION}" >> "${out}" 2>&1
+        # 凭据只从调用环境传入；未提供时由 sudo 正常交互，禁止写死在仓库中。
+        if [[ -n "${SUDO_PASSWORD:-}" ]]; then
+            printf '%s\n' "${SUDO_PASSWORD}" | sudo -S "${bin}" -v -d "${EBPF_DURATION}" >> "${out}" 2>&1
+        else
+            sudo "${bin}" -v -d "${EBPF_DURATION}" >> "${out}" 2>&1
+        fi
     else
         "${bin}" -v -d "${EBPF_DURATION}" >> "${out}" 2>&1
     fi

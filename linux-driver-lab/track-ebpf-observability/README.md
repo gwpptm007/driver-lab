@@ -17,10 +17,17 @@ drop 或异常应该怎么定位？
 最后如何沉淀成 libbpf 小工具？
 ```
 
+## 第一次进入先读这里
+
+先打开 [docs/fundamentals/README.md](docs/fundamentals/README.md)，按“内核架构 -> hook 选型 -> verifier -> maps -> bpftrace -> tracepoint/fentry -> CO-RE -> event transport -> 路径关联 -> 生产安全”建立完整模型，再进入 Phase 1。00-02 章同时提供 [GIF、PNG 与可单步操作的 Canvas 视觉层](docs/fundamentals/visuals/README.md)，适合先恢复路径感，再追源码细节。
+
+知识层包含 15 个主题，状态：`EBPF_OBSERVABILITY_FUNDAMENTALS_COMPLETE`。
+
 ## 阶段列表
 
 | 阶段 | 目录 | 状态 | 目标 |
 |---|---|---|---|
+| Phase 0 | `docs/fundamentals/` | `COMPLETED` | eBPF 可观测性原理、图示、排障与项目映射 |
 | Phase 1 | `lab-bpftrace-netdev-observe` | `COMPLETED` | 用 bpftrace 快速观测 RX/TX/NAPI/softirq |
 | Phase 2 | `lab-kprobe-trace-napi-poll` | `COMPLETED` | 专门观测 NAPI poll、CPU 分布、预算关系 |
 | Phase 3 | `lab-tracepoint-skb-path` | `COMPLETED` | 使用 tracepoint 观察 skb 路径 |
@@ -41,6 +48,13 @@ drop 或异常应该怎么定位？
 
 ```bash
 cat track-ebpf-observability/ROADMAP.md
+```
+
+知识层与测试记录：
+
+```text
+docs/fundamentals/README.md
+tests/TEST_RECORD_20260714_EBPF_FUNDAMENTALS.md
 ```
 
 ## 目录原则
