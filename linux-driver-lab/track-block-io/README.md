@@ -1,5 +1,9 @@
 # track-block-io
 
+## 知识基础文档
+
+本支线启动前，先阅读 [docs/fundamentals/README.md](docs/fundamentals/README.md)。该目录补齐 block stack、bio、现代 blk-mq、ramdisk 生命周期、完成/持久性、性能、观测和安全实验的基础；它只提供 Markdown 设计材料，不改变本 track 仍为 PARKED_PLANNED 的状态。
+
 > P2 保留支线：Linux block layer / storage I/O 驱动与高性能 I/O。
 
 当前状态：`PARKED_PLANNED`。

@@ -2,6 +2,18 @@
 
 把虚拟化网络路径串起来：guest driver → hypervisor backend → host virtual device → host switching → host NIC / another guest
 
+## 第一次进入先读这里
+
+先阅读 [docs/fundamentals/README.md](docs/fundamentals/README.md)。它从 virtio-net、virtqueue、TAP、Linux bridge、vhost_net 到双 guest FDB 转发建立统一模型，再进入各 Lab。基础文档只解释机制、验证边界和可扩展方向；具体命令、records 和验收仍以 Lab 为准。
+
+```text
+fundamentals
+  -> lab-virtio-tap-bridge-path
+  -> lab-virtio-vhost-kick-notify
+  -> lab-two-guest-bridge-flow
+  -> project-virtual-net-end-to-end
+```
+
 ## 四个阶段
 
 | 阶段 | 目录 | 目标 |

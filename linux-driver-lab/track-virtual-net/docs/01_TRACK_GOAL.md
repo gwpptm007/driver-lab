@@ -33,6 +33,8 @@ guest driver
 
 ## 推荐顺序
 
+开始 Lab 前，先按 [fundamentals/README.md](fundamentals/README.md) 建立 TAP、bridge、virtio、virtqueue 与 vhost 的边界模型。基础文档不替代下面的执行步骤；它解释每一步为什么存在、应留下什么证据，以及哪些结论不能仅由 ping 推出。
+
 1. `lab-virtio-tap-bridge-path/` — 基础路径：guest → tap → bridge → host
 2. `lab-virtio-vhost-kick-notify/` — backend 从 userspace 扩到 vhost
 3. `lab-two-guest-bridge-flow/` — 单 guest 扩到双 guest L2 转发
